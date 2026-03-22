@@ -27,7 +27,8 @@ export default async function handler(request: Request, context: Context) {
   const html = await response.text()
 
   const pageTitle = `${tool.name} — DevKit`
-  const pageDesc = `${tool.description}. Free online tool, no sign-up required.`
+  const rawDesc = `${tool.description}. Free DevKit tool — no account needed, no data sent to servers, works instantly in any browser.`
+  const pageDesc = rawDesc.length > 160 ? rawDesc.slice(0, 157) + '...' : rawDesc
   const pageUrl = `${BASE_URL}/tool/${toolId}`
   const ogImage = `${BASE_URL}/og/${toolId}.png`
 
@@ -47,6 +48,10 @@ export default async function handler(request: Request, context: Context) {
 <meta name="twitter:description" content="${pageDesc}" />
 <meta name="twitter:image" content="${ogImage}" />
 </head>`
+    )
+    .replace(
+      '<div id="root"></div>',
+      `<div id="root"><h1>${pageTitle}</h1><p>${pageDesc}</p><nav aria-label="Site navigation"><a href="/">Home — DevKit</a> <a href="/all-tools">All Developer Tools</a></nav></div>`
     )
 
   return new Response(injected, {

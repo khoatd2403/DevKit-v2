@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useMemo, useEffect } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { tools, categories } from '../tools-registry'
 import type { Tool } from '../types'
 import { Star, Zap, Clock, X } from 'lucide-react'
@@ -16,12 +16,18 @@ interface HomeProps {
 export default function Home({ searchQuery: _searchQuery }: HomeProps) {
   const { t } = useLang()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const { recent } = useRecentTools()
   const recentTools = recent.map(id => tools.find(t => t.id === id)).filter(Boolean) as Tool[]
   const { favorites, toggle } = useFavorites()
   const { explored } = useToolStats()
   const [favEditMode, setFavEditMode] = useState(false)
-  const [activeCategory, setActiveCategory] = useState('all')
+  const [activeCategory, setActiveCategory] = useState(() => searchParams.get('cat') ?? 'all')
+
+  useEffect(() => {
+    const cat = searchParams.get('cat')
+    if (cat) setActiveCategory(cat)
+  }, [searchParams])
 
   const todayTool = useMemo(() => {
     const seed = new Date().toDateString()
@@ -289,6 +295,78 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
         )}
 
       </div>
+
+      {/* ── SEO Content Section ── */}
+      <section className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50">
+        <div className="max-w-6xl mx-auto px-6 py-10">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">What is DevKit?</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6 max-w-3xl">
+            DevKit is a free collection of {tools.length}+ online developer tools built for software engineers, web developers,
+            and digital creators. Every tool runs entirely in your browser — no sign-up required, no data leaves your
+            device, and no tracking. Whether you need to format JSON, beautify SQL queries online, decode a JWT token, or
+            generate a QR code, DevKit has you covered instantly.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">📋 JSON Tools</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                Format, validate, minify, and diff JSON data online. Convert JSON to C# classes, TypeScript interfaces,
+                CSV, or YAML in one click.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">🗄️ SQL Tools</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                Free SQL formatter online for SELECT, INSERT, UPDATE, and DDL. Convert SQL to LINQ, visualize execution
+                plans, and generate ERD diagrams from CREATE TABLE scripts.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">🔐 Encoding &amp; Crypto</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                Encode and decode Base64, URLs, and HTML entities online. Generate MD5, SHA-256, SHA-512, BCrypt hashes.
+                AES-256 encryption and JWT decoder — all client-side.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">🌐 Web &amp; Network</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                DNS lookup, SSL certificate checker, HTTP headers, IP geolocation, CIDR subnet calculator, user-agent
+                parser, and cURL-to-code converter — all online, no install.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">✨ Code Formatters</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                Format XML, YAML, HTML, CSS, and Markdown online. Minify JavaScript and CSS for production. Preview
+                Mermaid diagrams and build ERD schemas in your browser.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">⚡ Generators</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                Generate UUIDs, NanoIDs, secure passwords, QR codes, barcodes, favicon sets, fake test data, and
+                TOTP 2FA codes — free, online, no account needed.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">🎨 Color &amp; CSS</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                Convert HEX, RGB, HSL colors online. Build CSS gradients, box shadows, and filters. Check WCAG contrast
+                ratios and extract color palettes from images.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">🔒 Privacy First</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                All DevKit tools run entirely client-side in your browser. No servers receive your data, no accounts
+                required, no usage tracked. Your data stays private at all times.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>

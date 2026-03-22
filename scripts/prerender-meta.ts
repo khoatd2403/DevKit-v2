@@ -11,7 +11,8 @@ const baseHtml = readFileSync(join(distDir, 'index.html'), 'utf-8')
 
 for (const tool of tools) {
   const pageTitle = `${tool.name} — DevKit`
-  const pageDesc = `${tool.description}. Free online tool, no sign-up required.`
+  const rawDesc = `${tool.description}. Free DevKit tool — no account needed, no data sent to servers, works instantly in any browser.`
+  const pageDesc = rawDesc.length > 160 ? rawDesc.slice(0, 157) + '...' : rawDesc
   const pageUrl = `${BASE_URL}/tool/${tool.id}`
   const ogImage = `${BASE_URL}/og/${tool.id}.png`
 
