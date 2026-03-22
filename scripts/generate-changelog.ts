@@ -1,5 +1,6 @@
 import { execSync } from 'child_process'
 import { writeFileSync } from 'fs'
+import process from 'node:process'
 
 type ChangeType = 'new' | 'fix' | 'improvement' | 'design'
 
@@ -71,7 +72,7 @@ try {
     .trim()
     .split('\n')
     .filter(t => /^v\d/.test(t))
-} catch {}
+} catch { /* no git tags found */ }
 
 if (tags.length === 0) {
   console.log('No version tags found. Create one with: git tag v1.0')

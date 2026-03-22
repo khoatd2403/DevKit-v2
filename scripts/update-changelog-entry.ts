@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs'
+import process from 'node:process'
 
 type ChangeType = 'new' | 'fix' | 'improvement' | 'design'
 

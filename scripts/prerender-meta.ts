@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'fs'
+import process from 'node:process'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { tools } from '../src/tools-registry'

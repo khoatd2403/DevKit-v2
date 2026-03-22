@@ -4,6 +4,15 @@
     "changes": [
       {
         "type": "fix",
+        "text": "add node:process import and fix empty catch blocks in scripts"
+      }
+    ]
+  },
+  {
+    "date": "March 2026",
+    "changes": [
+      {
+        "type": "fix",
         "text": "resolve deno lint errors in setup-hooks and App.tsx"
       }
     ]
