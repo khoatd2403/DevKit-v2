@@ -8,6 +8,7 @@
     "build": "tsx scripts/generate-version.ts && tsx scripts/export-tools-data.ts && tsx scripts/generate-sitemap.ts && tsx scripts/generate-og.ts && tsc -b && vite build && tsx scripts/prerender-meta.ts",
     "setup-hooks": "tsx scripts/setup-hooks.ts",
     "generate-og": "tsx scripts/generate-og.ts",
+    "test": "tsc -b",
     "lint": "eslint .",
     "preview": "vite preview"
   },
