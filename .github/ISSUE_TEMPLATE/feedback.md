@@ -1,6 +1,6 @@
 ---
 name: Feedback
-about: General feedback about DevKit
+about: General feedback about DevTools Online
 title: "Feedback: "
 labels: feedback
 assignees: ''

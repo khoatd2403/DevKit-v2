@@ -1,6 +1,6 @@
 {
-  "name": "DevKit — Free Developer Tools",
-  "short_name": "DevKit",
+  "name": "DevTools Online — Free Developer Tools",
+  "short_name": "DevTools Online",
   "description": "87+ free online developer tools — JSON formatter, Base64, regex tester, hash generator, UUID, password generator and more. All in your browser.",
   "start_url": "/",
   "scope": "/",

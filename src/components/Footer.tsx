@@ -50,7 +50,7 @@ export default function Footer() {
               <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
                 <Wrench size={15} className="text-white" />
               </div>
-              <span className="font-bold text-gray-900 dark:text-white">DevKit</span>
+              <span className="font-bold text-gray-900 dark:text-white">DevTools Online</span>
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
               A free, fast, and privacy-friendly developer toolkit. Everything runs in your browser — no sign-up, no tracking.
@@ -62,7 +62,7 @@ export default function Footer() {
               className="inline-flex items-center gap-1.5 mt-4 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               <Github size={15} />
-              DevKit on GitHub
+              DevTools Online on GitHub
             </a>
           </div>
 
@@ -101,7 +101,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-6 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400 dark:text-gray-600">
-          <p>© {year} DevKit. Open source under MIT License.</p>
+          <p>© {year} DevTools Online. Open source under MIT License.</p>
           <p className="flex items-center gap-1">
             Built with <Heart size={11} className="text-red-400 fill-red-400" /> for developers.
           </p>

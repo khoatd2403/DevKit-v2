@@ -3,7 +3,7 @@ import { X } from 'lucide-react'
 
 const STEPS = [
   {
-    title: 'Welcome to DevKit! 🔧',
+    title: 'Welcome to DevTools Online! 🔧',
     description: '87+ free developer tools — JSON formatter, Base64, regex tester, hash generator and more. All running in your browser. No sign-up needed.',
     emoji: '👋',
   },

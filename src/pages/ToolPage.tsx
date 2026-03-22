@@ -24,10 +24,10 @@ const PRO_TIPS: Record<string, { tip: string; tipId: string }> = {
   'regex-tester': { tipId: 'regex-flags', tip: 'Use the g flag to find all matches, and i for case-insensitive matching.' },
   'text-diff': { tipId: 'diff-side', tip: 'Switch to Side-by-Side view for easier comparison of long texts.' },
   'hash-generator': { tipId: 'hash-file', tip: 'Drop any file onto the input to compute its hash — great for verifying file integrity.' },
-  'jwt-decoder': { tipId: 'jwt-exp', tip: 'DevKit automatically highlights expired JWTs and shows the expiry time in human-readable format.' },
+  'jwt-decoder': { tipId: 'jwt-exp', tip: 'DevTools Online automatically highlights expired JWTs and shows the expiry time in human-readable format.' },
   'color-converter': { tipId: 'color-picker', tip: 'Click the color swatch to open the native color picker for precise color selection.' },
   'sql-formatter': { tipId: 'sql-enter', tip: 'Press Ctrl+Enter to format your SQL query instantly.' },
-  'url-encode-decode': { tipId: 'url-drag', tip: 'Paste a full URL with query params — DevKit will encode/decode each component correctly.' },
+  'url-encode-decode': { tipId: 'url-drag', tip: 'Paste a full URL with query params — DevTools Online will encode/decode each component correctly.' },
   'csv-viewer': { tipId: 'csv-sort', tip: 'Click any column header to sort. Click again to reverse the order.' },
   'qr-generator': { tipId: 'qr-types', tip: 'Switch between URL, WiFi, Email, Phone, SMS, and vCard modes for different QR code types.' },
   'aes-encrypt': { tipId: 'aes-gcm', tip: 'Use GCM mode for authenticated encryption — it detects tampering automatically.' },
@@ -57,7 +57,7 @@ export default function ToolPage({ onFeedback }: ToolPageProps) {
   }, [toolId])
 
   useEffect(() => {
-    return () => { document.title = 'DevKit — Free Online Developer Tools' }
+    return () => { document.title = 'DevTools Online — Free Online Developer Tools' }
   }, [])
 
   useEffect(() => {
@@ -94,8 +94,8 @@ export default function ToolPage({ onFeedback }: ToolPageProps) {
 
   const BASE_URL = SITE_URL
   const pageUrl = `${BASE_URL}/tool/${toolId}`
-  const pageTitle = `${toolMeta.name} — DevKit`
-  const rawDesc = `${toolMeta.description}. Free DevKit tool — no account needed, no data sent to servers, works instantly in any browser.`
+  const pageTitle = `${toolMeta.name} — DevTools Online`
+  const rawDesc = `${toolMeta.description}. Free DevTools Online tool — no account needed, no data sent to servers, works instantly in any browser.`
   const pageDesc = rawDesc.length > 160 ? rawDesc.slice(0, 157) + '...' : rawDesc
   const ogImage = `${BASE_URL}/og/${toolId}.png`
 

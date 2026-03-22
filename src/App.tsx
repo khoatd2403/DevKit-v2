@@ -207,7 +207,7 @@ function AppInner() {
               <div className="flex items-center gap-3">
                 <span className="text-xl">🔧</span>
                 <div>
-                  <p className="text-sm font-medium">Install DevKit</p>
+                  <p className="text-sm font-medium">Install DevTools Online</p>
                   <p className="text-xs text-primary-200">Add to your desktop for faster access</p>
                 </div>
               </div>
