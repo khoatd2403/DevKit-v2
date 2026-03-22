@@ -22,11 +22,12 @@ import { usePwaInstall } from './hooks/usePwaInstall'
 import { useEditorSettings } from './hooks/useEditorSettings'
 import { useAppearance } from './hooks/useAppearance'
 import { LanguageProvider } from './context/LanguageContext'
+import { FavoritesProvider } from './hooks/useFavorites'
 import { LATEST_VERSION } from './version'
 import { X } from 'lucide-react'
 
 function getSystemDark() {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
+  return globalThis.matchMedia('(prefers-color-scheme: dark)').matches
 }
 
 function AppInner() {
@@ -54,7 +55,7 @@ function AppInner() {
 
   useEffect(() => {
     if (theme !== 'system') return
-    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+    const mq = globalThis.matchMedia('(prefers-color-scheme: dark)')
     const handler = (e: MediaQueryListEvent) => setSystemDark(e.matches)
     mq.addEventListener('change', handler)
     return () => mq.removeEventListener('change', handler)
@@ -100,8 +101,8 @@ function AppInner() {
   // Listen for changelog open event from Footer
   useEffect(() => {
     const handler = () => setChangelogOpen(true)
-    window.addEventListener('open-changelog', handler)
-    return () => window.removeEventListener('open-changelog', handler)
+    globalThis.addEventListener('open-changelog', handler)
+    return () => globalThis.removeEventListener('open-changelog', handler)
   }, [])
 
   const handleDismissBanner = () => {
@@ -131,17 +132,17 @@ function AppInner() {
       // Ctrl+Enter — run/process (dispatch devkit:run)
       if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
         e.preventDefault()
-        window.dispatchEvent(new CustomEvent('devkit:run'))
+        globalThis.dispatchEvent(new CustomEvent('devkit:run'))
       }
       // Ctrl+Shift+C — copy output (dispatch devkit:copy-output)
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'C') {
         e.preventDefault()
-        window.dispatchEvent(new CustomEvent('devkit:copy-output'))
+        globalThis.dispatchEvent(new CustomEvent('devkit:copy-output'))
       }
       // Alt+L — toggle live mode (dispatch devkit:toggle-live)
       if (e.altKey && e.key === 'l') {
         e.preventDefault()
-        window.dispatchEvent(new CustomEvent('devkit:toggle-live'))
+        globalThis.dispatchEvent(new CustomEvent('devkit:toggle-live'))
       }
       // ? — open shortcuts modal (? = Shift+/ on most keyboards, so shiftKey is expected)
       if (e.key === '?' && !e.ctrlKey && !e.metaKey && !e.altKey) {
@@ -155,16 +156,16 @@ function AppInner() {
       // Ctrl+[ — go back
       if ((e.ctrlKey || e.metaKey) && e.key === '[') {
         e.preventDefault()
-        window.history.back()
+        globalThis.history.back()
       }
       // Ctrl+] — go forward
       if ((e.ctrlKey || e.metaKey) && e.key === ']') {
         e.preventDefault()
-        window.history.forward()
+        globalThis.history.forward()
       }
     }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
+    globalThis.addEventListener('keydown', handler)
+    return () => globalThis.removeEventListener('keydown', handler)
   }, [])
 
   return (
@@ -238,7 +239,9 @@ export default function App() {
     <HelmetProvider>
       <ToastProvider>
         <LanguageProvider>
-          <AppInner />
+          <FavoritesProvider>
+            <AppInner />
+          </FavoritesProvider>
         </LanguageProvider>
       </ToastProvider>
     </HelmetProvider>

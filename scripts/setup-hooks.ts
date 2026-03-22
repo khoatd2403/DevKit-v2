@@ -1,5 +1,6 @@
 import { writeFileSync, chmodSync, existsSync } from 'fs'
 import { join } from 'path'
+import process from 'node:process'
 
 if (!existsSync('.git') || !existsSync('.git/hooks')) {
   console.log('No .git/hooks directory found, skipping hooks setup')
@@ -24,5 +25,5 @@ rm -f "$LOCK"
 
 const hookPath = join('.git', 'hooks', 'post-commit')
 writeFileSync(hookPath, hook)
-try { chmodSync(hookPath, 0o755) } catch {}
+try { chmodSync(hookPath, 0o755) } catch { /* chmod not supported on this platform */ }
 console.log('Git post-commit hook installed')
