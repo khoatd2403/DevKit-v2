@@ -114,4 +114,10 @@ export const lazyToolComponents: Record<string, React.LazyExoticComponent<React.
   'national-id-generator': lazy(() => import('./tools/NationalIdGenerator')),
   'xml-minifier': lazy(() => import('./tools/XmlMinifier')),
   'sql-syntax': lazy(() => import('./tools/SqlSyntax')),
+  'ai-token-counter': lazy(() => import('./tools/AiTokenCounter')),
+  'ai-cost-calculator': lazy(() => import('./tools/AiCostCalculator')),
+  'ai-prompt-builder': lazy(() => import('./tools/AiPromptBuilder')),
+  'ai-model-comparison': lazy(() => import('./tools/AiModelComparison')),
+  'ai-json-to-prompt': lazy(() => import('./tools/AiJsonToPrompt')),
+  'ai-system-prompt': lazy(() => import('./tools/AiSystemPrompt')),
 }

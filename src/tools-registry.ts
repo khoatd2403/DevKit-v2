@@ -15,6 +15,7 @@ export const categories: Category[] = [
   { id: 'misc', name: 'Misc', icon: '🔧', color: 'slate' },
   { id: 'converter', name: 'Converter', icon: '🔄', color: 'violet' },
   { id: 'dotnet', name: '.NET / C#', icon: '💜', color: 'purple' },
+  { id: 'ai', name: 'AI Tools', icon: '🤖', color: 'violet' },
 ]
 
 export const tools: Tool[] = [
@@ -667,4 +668,12 @@ export const tools: Tool[] = [
 
   // SQL Reference
   { id: 'sql-syntax', name: 'SQL Syntax Reference', description: 'Complete SQL syntax reference with copy-ready examples — DDL, SELECT, JOINs, CTEs, Window Functions, DML, Transactions', category: 'dotnet', icon: '📖', tags: ['sql', 'syntax', 'reference', 'select', 'join', 'ddl', 'dml', 'cte', 'window', 'functions', 'tsql'], popular: true, new: true },
+
+  // AI Tools
+  { id: 'ai-token-counter', name: 'Token Counter', description: 'Estimate token count for GPT, Claude and Gemini models — track context usage and cost before calling the API', category: 'ai', icon: '🪙', tags: ['ai', 'token', 'gpt', 'claude', 'gemini', 'openai', 'anthropic', 'count', 'context'], new: true, popular: true },
+  { id: 'ai-cost-calculator', name: 'AI Cost Calculator', description: 'Calculate API cost for any AI model — enter input/output tokens and get exact pricing for GPT-4o, Claude, Gemini and more', category: 'ai', icon: '💰', tags: ['ai', 'cost', 'price', 'gpt', 'claude', 'gemini', 'openai', 'anthropic', 'token', 'calculator'], new: true },
+  { id: 'ai-prompt-builder', name: 'Prompt Builder', description: 'Build structured AI prompts with System / User / Assistant roles — export as OpenAI JSON or plain text', category: 'ai', icon: '🧱', tags: ['ai', 'prompt', 'system', 'user', 'assistant', 'openai', 'chatgpt', 'builder', 'json'], new: true },
+  { id: 'ai-model-comparison', name: 'Model Comparison', description: 'Compare GPT, Claude, Gemini and open-source models — context window, pricing, strengths side by side', category: 'ai', icon: '⚖️', tags: ['ai', 'model', 'compare', 'gpt', 'claude', 'gemini', 'llama', 'context', 'price'], new: true },
+  { id: 'ai-json-to-prompt', name: 'JSON → Prompt', description: 'Convert JSON data into a natural language prompt — describe objects, arrays and values in readable sentences', category: 'ai', icon: '🔀', tags: ['ai', 'json', 'prompt', 'convert', 'natural', 'language', 'describe'], new: true },
+  { id: 'ai-system-prompt', name: 'System Prompt Generator', description: 'Generate system prompts for AI assistants — choose use case, tone and constraints to get a ready-to-use prompt', category: 'ai', icon: '⚙️', tags: ['ai', 'system', 'prompt', 'generator', 'assistant', 'chatbot', 'instruction'], new: true },
 ]

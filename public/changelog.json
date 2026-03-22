@@ -4,6 +4,10 @@
     "changes": [
       {
         "type": "new",
+        "text": "add AI Tools category with 6 tools (token counter, cost calculator, prompt builder, model comparison, JSON to"
+      },
+      {
+        "type": "new",
         "text": "Auto-generate changelog entries from git commits"
       },
       {
