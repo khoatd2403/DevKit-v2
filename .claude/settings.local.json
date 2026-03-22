@@ -21,7 +21,11 @@
       "Bash(chmod:*)",
       "Bash(find /d/Setup/Projects/all-dev-tools-v2/src -type f -name *version* -o -name *changelog*)",
       "Bash(grep -r \"1\\\\.7\\\\|v1\\\\.7\\\\|LATEST_VERSION\" /d/Setup/Projects/all-dev-tools-v2/src --include=*.ts --include=*.tsx --include=*.json)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json\")",
+      "Bash(for model:*)",
+      "Bash(do echo:*)"
     ]
   }
 }

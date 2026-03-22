@@ -72,7 +72,7 @@ export default function Header({ onMenuClick, onSearchChange: _onSearchChange, o
         </button>
 
         <a
-          href="https://github.com"
+          href="https://github.com/khoatd2403/DevKit-v2"
           target="_blank"
           rel="noopener noreferrer"
           className="btn-ghost p-2"

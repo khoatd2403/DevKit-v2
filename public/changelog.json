@@ -4,6 +4,15 @@
     "changes": [
       {
         "type": "new",
+        "text": "fetch realtime AI pricing from LiteLLM, fix github links"
+      }
+    ]
+  },
+  {
+    "date": "March 2026",
+    "changes": [
+      {
+        "type": "new",
         "text": "add AI Tools category with 6 tools (token counter, cost calculator, prompt builder, model comparison, JSON to"
       },
       {

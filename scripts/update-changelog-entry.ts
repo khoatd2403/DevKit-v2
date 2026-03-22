@@ -37,11 +37,7 @@ if (alreadyExists) {
   process.exit(0)
 }
 
-if (changelog.length > 0 && changelog[0].date === currentDate) {
-  changelog[0].changes.unshift(change)
-} else {
-  changelog.unshift({ date: currentDate, changes: [change] })
-}
+changelog.unshift({ date: currentDate, changes: [change] })
 
 writeFileSync(changelogPath, JSON.stringify(changelog, null, 2))
 console.log(`Changelog updated: [${change.type}] ${change.text}`)

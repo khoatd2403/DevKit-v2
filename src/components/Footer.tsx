@@ -27,9 +27,9 @@ export default function Footer() {
     {
       title: 'Project',
       items: [
-        { label: 'GitHub', href: 'https://github.com', external: true },
-        { label: 'Report a Bug', href: 'https://github.com', external: true },
-        { label: 'Feature Request', href: 'https://github.com', external: true },
+        { label: 'GitHub', href: 'https://github.com/khoatd2403/DevKit-v2', external: true },
+        { label: 'Report a Bug', href: 'https://github.com/khoatd2403/DevKit-v2/issues/new', external: true },
+        { label: 'Feature Request', href: 'https://github.com/khoatd2403/DevKit-v2/issues/new', external: true },
         { label: 'Changelog', href: '#changelog' },
       ],
     },
@@ -51,7 +51,7 @@ export default function Footer() {
               A free, fast, and privacy-friendly developer toolkit. Everything runs in your browser — no sign-up, no tracking.
             </p>
             <a
-              href="https://github.com"
+              href="https://github.com/khoatd2403/DevKit-v2"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 mt-4 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"

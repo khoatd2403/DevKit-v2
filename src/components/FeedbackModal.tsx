@@ -138,7 +138,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
               </p>
             </div>
             <a
-              href="https://github.com"
+              href="https://github.com/khoatd2403/DevKit-v2/issues"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm text-primary-600 dark:text-primary-400 hover:underline"

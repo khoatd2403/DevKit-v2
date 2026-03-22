@@ -1,64 +1,118 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-interface Model {
-  provider: string
-  name: string
-  inputPer1M: number
-  outputPer1M: number
+const LITELLM_URL = 'https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json'
+
+const PROVIDER_MAP: Record<string, string> = {
+  openai: 'OpenAI',
+  anthropic: 'Anthropic',
+  'vertex_ai-language-models': 'Google',
+  gemini: 'Google',
+  cohere_chat: 'Cohere',
+  mistral: 'Mistral',
+  together_ai: 'Together AI',
 }
 
-const MODELS: Model[] = [
-  { provider: 'OpenAI', name: 'GPT-4o', inputPer1M: 2.5, outputPer1M: 10 },
-  { provider: 'OpenAI', name: 'GPT-4o mini', inputPer1M: 0.15, outputPer1M: 0.6 },
-  { provider: 'OpenAI', name: 'GPT-4 Turbo', inputPer1M: 10, outputPer1M: 30 },
-  { provider: 'OpenAI', name: 'o1', inputPer1M: 15, outputPer1M: 60 },
-  { provider: 'OpenAI', name: 'o1-mini', inputPer1M: 3, outputPer1M: 12 },
-  { provider: 'OpenAI', name: 'o3-mini', inputPer1M: 1.1, outputPer1M: 4.4 },
-  { provider: 'Anthropic', name: 'Claude 3.5 Sonnet', inputPer1M: 3, outputPer1M: 15 },
-  { provider: 'Anthropic', name: 'Claude 3.5 Haiku', inputPer1M: 0.8, outputPer1M: 4 },
-  { provider: 'Anthropic', name: 'Claude 3 Opus', inputPer1M: 15, outputPer1M: 75 },
-  { provider: 'Anthropic', name: 'Claude 3 Haiku', inputPer1M: 0.25, outputPer1M: 1.25 },
-  { provider: 'Google', name: 'Gemini 1.5 Pro', inputPer1M: 1.25, outputPer1M: 5 },
-  { provider: 'Google', name: 'Gemini 1.5 Flash', inputPer1M: 0.075, outputPer1M: 0.3 },
-  { provider: 'Google', name: 'Gemini 2.0 Flash', inputPer1M: 0.1, outputPer1M: 0.4 },
-  { provider: 'Meta', name: 'Llama 3.1 70B', inputPer1M: 0.59, outputPer1M: 0.79 },
-  { provider: 'Meta', name: 'Llama 3.1 8B', inputPer1M: 0.1, outputPer1M: 0.1 },
-]
+const PROVIDER_ORDER = ['OpenAI', 'Anthropic', 'Google', 'Mistral', 'Cohere', 'Together AI']
 
-const PROVIDERS = ['All', ...Array.from(new Set(MODELS.map(m => m.provider)))]
+interface ModelInfo {
+  key: string
+  provider: string
+  displayName: string
+  inputPer1M: number
+  outputPer1M: number
+  maxInputTokens: number
+}
+
+function toDisplayName(key: string): string {
+  return key
+    .replace(/-\d{4}-\d{2}-\d{2}$/, '')
+    .replace(/-\d{8}$/, '')
+    .replace(/^(anthropic|openai|google)\//, '')
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, c => c.toUpperCase())
+    .replace(/Gpt/g, 'GPT')
+    .replace(/\bO(\d)/g, 'o$1')
+}
 
 function fmt(n: number): string {
   if (n === 0) return '$0.000000'
-  if (n < 0.000001) return `$${n.toFixed(8)}`
-  if (n < 0.001) return `$${n.toFixed(6)}`
-  if (n < 1) return `$${n.toFixed(4)}`
+  if (n < 0.0001) return `$${n.toFixed(6)}`
+  if (n < 0.01) return `$${n.toFixed(4)}`
   return `$${n.toFixed(4)}`
 }
 
+const PROVIDERS_ALL = ['All', ...PROVIDER_ORDER]
+
 export default function AiCostCalculator() {
+  const [models, setModels] = useState<ModelInfo[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
   const [modelIdx, setModelIdx] = useState(0)
   const [inputTokens, setInputTokens] = useState('1000')
   const [outputTokens, setOutputTokens] = useState('500')
   const [calls, setCalls] = useState('1')
   const [provider, setProvider] = useState('All')
 
-  const filtered = provider === 'All' ? MODELS : MODELS.filter(m => m.provider === provider)
+  useEffect(() => {
+    fetch(LITELLM_URL)
+      .then(r => r.json())
+      .then((data: Record<string, Record<string, unknown>>) => {
+        const list: ModelInfo[] = []
+        for (const [key, val] of Object.entries(data)) {
+          const p = PROVIDER_MAP[val.litellm_provider as string]
+          if (!p) continue
+          if (val.mode !== 'chat') continue
+          if (!val.input_cost_per_token || !val.output_cost_per_token) continue
+          if (key.includes('/')) continue
+          list.push({
+            key,
+            provider: p,
+            displayName: toDisplayName(key),
+            inputPer1M: (val.input_cost_per_token as number) * 1_000_000,
+            outputPer1M: (val.output_cost_per_token as number) * 1_000_000,
+            maxInputTokens: (val.max_input_tokens as number) ?? 0,
+          })
+        }
+        list.sort((a, b) => {
+          const pi = PROVIDER_ORDER.indexOf(a.provider) - PROVIDER_ORDER.indexOf(b.provider)
+          return pi !== 0 ? pi : a.inputPer1M - b.inputPer1M
+        })
+        setModels(list)
+        setLoading(false)
+      })
+      .catch(() => { setError('Failed to load pricing data'); setLoading(false) })
+  }, [])
+
+  const filtered = provider === 'All' ? models : models.filter(m => m.provider === provider)
   const model = filtered[Math.min(modelIdx, filtered.length - 1)]
 
   const inp = parseInt(inputTokens) || 0
   const out = parseInt(outputTokens) || 0
   const n = parseInt(calls) || 1
 
-  const inputCost = (inp / 1_000_000) * model.inputPer1M
-  const outputCost = (out / 1_000_000) * model.outputPer1M
+  const inputCost = model ? (inp / 1_000_000) * model.inputPer1M : 0
+  const outputCost = model ? (out / 1_000_000) * model.outputPer1M : 0
   const perCall = inputCost + outputCost
   const total = perCall * n
+
+  if (loading) return (
+    <div className="flex items-center justify-center h-48 text-gray-400 dark:text-gray-600">
+      <div className="text-center space-y-2">
+        <div className="w-6 h-6 border-2 border-primary-400 border-t-transparent rounded-full animate-spin mx-auto" />
+        <p className="text-sm">Loading latest pricing…</p>
+      </div>
+    </div>
+  )
+
+  if (error) return (
+    <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">{error}</div>
+  )
 
   return (
     <div className="space-y-5">
       {/* Provider filter */}
       <div className="flex flex-wrap gap-2">
-        {PROVIDERS.map(p => (
+        {PROVIDERS_ALL.map(p => (
           <button
             key={p}
             onClick={() => { setProvider(p); setModelIdx(0) }}
@@ -67,18 +121,19 @@ export default function AiCostCalculator() {
             {p}
           </button>
         ))}
+        <span className="ml-auto text-xs text-gray-400 dark:text-gray-600 self-center">{filtered.length} models</span>
       </div>
 
       {/* Model select */}
       <div>
         <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Model</label>
         <select
-          className="tool-select w-full"
+          className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
           value={modelIdx}
           onChange={e => setModelIdx(Number(e.target.value))}
         >
           {filtered.map((m, i) => (
-            <option key={m.name} value={i}>{m.provider} — {m.name} (${m.inputPer1M} / ${m.outputPer1M} per 1M)</option>
+            <option key={m.key} value={i}>{m.provider} — {m.key} (${m.inputPer1M.toFixed(3)} / ${m.outputPer1M.toFixed(3)} per 1M)</option>
           ))}
         </select>
       </div>
@@ -93,9 +148,8 @@ export default function AiCostCalculator() {
           <div key={f.label}>
             <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">{f.label}</label>
             <input
-              type="number"
-              min="0"
-              className="tool-input w-full"
+              type="number" min="0"
+              className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
               value={f.value}
               onChange={e => f.set(e.target.value)}
               placeholder="0"
@@ -120,16 +174,19 @@ export default function AiCostCalculator() {
         ))}
       </div>
 
-      <div className="bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">Pricing for {model.name}</p>
-        <div className="flex gap-6 text-sm">
-          <span className="text-gray-600 dark:text-gray-400">Input: <span className="font-semibold text-gray-800 dark:text-gray-200">${model.inputPer1M}/1M tokens</span></span>
-          <span className="text-gray-600 dark:text-gray-400">Output: <span className="font-semibold text-gray-800 dark:text-gray-200">${model.outputPer1M}/1M tokens</span></span>
+      {model && (
+        <div className="bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">Pricing for {model.key}</p>
+          <div className="flex flex-wrap gap-6 text-sm">
+            <span className="text-gray-600 dark:text-gray-400">Input: <span className="font-semibold text-gray-800 dark:text-gray-200">${model.inputPer1M.toFixed(4)}/1M tokens</span></span>
+            <span className="text-gray-600 dark:text-gray-400">Output: <span className="font-semibold text-gray-800 dark:text-gray-200">${model.outputPer1M.toFixed(4)}/1M tokens</span></span>
+            {model.maxInputTokens > 0 && <span className="text-gray-600 dark:text-gray-400">Context: <span className="font-semibold text-gray-800 dark:text-gray-200">{model.maxInputTokens.toLocaleString()} tokens</span></span>}
+          </div>
         </div>
-      </div>
+      )}
 
       <p className="text-xs text-gray-400 dark:text-gray-600 text-center">
-        * Prices are approximate and may change. Always verify with the provider's official pricing page.
+        * Pricing data from <a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener noreferrer" className="underline">LiteLLM</a> — fetched live from GitHub.
       </p>
     </div>
   )

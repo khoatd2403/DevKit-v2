@@ -126,7 +126,7 @@ export default function ChangelogModal({ open, onClose }: ChangelogModalProps) {
         {/* Footer */}
         <div className="px-5 py-3 border-t border-gray-100 dark:border-gray-800 shrink-0 flex items-center justify-between">
           <a
-            href="https://github.com"
+            href="https://github.com/khoatd2403/DevKit-v2"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-primary-600 dark:text-primary-400 hover:underline"
