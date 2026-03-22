@@ -1,8 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext, createContext, createElement } from 'react'
+import type { ReactNode } from 'react'
 
 const KEY = 'devkit-favorites'
 
-export function useFavorites() {
+interface FavoritesContextValue {
+  favorites: string[]
+  toggle: (id: string) => void
+  isFavorite: (id: string) => boolean
+}
+
+export const FavoritesContext = createContext<FavoritesContextValue | null>(null)
+
+export function FavoritesProvider({ children }: { children: ReactNode }) {
   const [favorites, setFavorites] = useState<string[]>(() => {
     try {
       return JSON.parse(localStorage.getItem(KEY) ?? '[]')
@@ -18,5 +27,11 @@ export function useFavorites() {
 
   const isFavorite = (id: string) => favorites.includes(id)
 
-  return { favorites, toggle, isFavorite }
+  return createElement(FavoritesContext.Provider, { value: { favorites, toggle, isFavorite } }, children)
+}
+
+export function useFavorites() {
+  const ctx = useContext(FavoritesContext)
+  if (!ctx) throw new Error('useFavorites must be used within FavoritesProvider')
+  return ctx
 }

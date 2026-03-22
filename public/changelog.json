@@ -4,6 +4,15 @@
     "changes": [
       {
         "type": "fix",
+        "text": "resolve deno lint errors in setup-hooks and App.tsx"
+      }
+    ]
+  },
+  {
+    "date": "March 2026",
+    "changes": [
+      {
+        "type": "fix",
         "text": "remove prepare script to prevent Netlify deploy failure"
       }
     ]
