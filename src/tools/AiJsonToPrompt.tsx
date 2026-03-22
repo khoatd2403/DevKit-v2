@@ -10,7 +10,7 @@ const EXAMPLE = JSON.stringify({
     active: true
   },
   project: {
-    name: 'DevKit',
+    name: 'DevTools Online',
     deadline: '2026-06-01',
     priority: 'high'
   }

@@ -116,7 +116,7 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
         setImportStatus('success')
         setImportError('')
       } catch {
-        setImportError('Could not parse file. Make sure it is a valid DevKit JSON export.')
+        setImportError('Could not parse file. Make sure it is a valid DevTools Online JSON export.')
         setImportStatus('error')
       }
     }

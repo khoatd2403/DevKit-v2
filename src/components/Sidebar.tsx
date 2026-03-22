@@ -53,7 +53,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
           <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
             <Wrench size={16} className="text-white" />
           </div>
-          <span className="font-bold text-gray-900 dark:text-white text-sm">DevKit</span>
+          <span className="font-bold text-gray-900 dark:text-white">DevTools Online</span>
           <button onClick={onClose} className="ml-auto btn-ghost p-1 lg:hidden">
             <X size={16} />
           </button>

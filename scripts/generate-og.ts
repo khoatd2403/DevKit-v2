@@ -93,7 +93,7 @@ async function generateOG(id: string, name: string, description: string, icon: s
                   type: 'span',
                   props: {
                     style: { fontSize: '22px', color: '#94a3b8', fontWeight: 600 },
-                    children: 'DevKit',
+                    children: 'DevTools Online',
                   },
                 },
               ],

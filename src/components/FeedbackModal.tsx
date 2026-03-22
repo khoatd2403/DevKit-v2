@@ -100,7 +100,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
 
   const labelMap: Record<FeedbackType, string> = { bug: 'bug', feature: 'enhancement', ux: 'ux', general: 'feedback' }
   const githubTitle = `${current.label}${selectedTool ? ` — ${selectedTool}` : ''}: `
-  const githubBody = `**Type:** ${current.label}\n${selectedTool ? `**Tool:** ${selectedTool}\n` : ''}\n## Message\n\n${message}\n\n---\n*Submitted via DevKit feedback form*`
+  const githubBody = `**Type:** ${current.label}\n${selectedTool ? `**Tool:** ${selectedTool}\n` : ''}\n## Message\n\n${message}\n\n---\n*Submitted via DevTools Online feedback form*`
   const githubUrl = `https://github.com/khoatd2403/DevKit-v2/issues/new?assignees=khoatd2403&labels=${labelMap[type]}&title=${encodeURIComponent(githubTitle)}&body=${encodeURIComponent(githubBody)}`
 
   const copyMarkdown = async () => {
@@ -139,7 +139,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
             <div>
               <h3 className="font-semibold text-gray-900 dark:text-white text-lg">Thanks for the feedback!</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 max-w-xs">
-                Your input helps make DevKit better. If you have a screenshot, feel free to attach it in a GitHub issue.
+                Your input helps make DevTools Online better. If you have a screenshot, feel free to attach it in a GitHub issue.
               </p>
             </div>
             <a

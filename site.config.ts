@@ -1,2 +1,2 @@
 export const SITE_URL = 'https://devtoolsonline.dev'
-export const SITE_NAME = 'DevKit'
+export const SITE_NAME = 'DevTools Online'

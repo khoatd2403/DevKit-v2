@@ -299,12 +299,12 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
       {/* ── SEO Content Section ── */}
       <section className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50">
         <div className="max-w-6xl mx-auto px-6 py-10">
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">What is DevKit?</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">What is DevTools Online?</h2>
           <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6 max-w-3xl">
-            DevKit is a free collection of {tools.length}+ online developer tools built for software engineers, web developers,
+            DevTools Online is a free collection of {tools.length}+ online developer tools built for software engineers, web developers,
             and digital creators. Every tool runs entirely in your browser — no sign-up required, no data leaves your
             device, and no tracking. Whether you need to format JSON, beautify SQL queries online, decode a JWT token, or
-            generate a QR code, DevKit has you covered instantly.
+            generate a QR code, DevTools Online has you covered instantly.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -360,7 +360,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
             <div>
               <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">🔒 Privacy First</h3>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                All DevKit tools run entirely client-side in your browser. No servers receive your data, no accounts
+                All DevTools Online tools run entirely client-side in your browser. No servers receive your data, no accounts
                 required, no usage tracked. Your data stays private at all times.
               </p>
             </div>

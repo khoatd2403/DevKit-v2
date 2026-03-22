@@ -1,4 +1,4 @@
-# DevKit — 120+ Free Online Developer Tools
+# DevTools Online — 120+ Free Online Developer Tools
 
 A fast, private, all-in-one developer toolbox that runs entirely in your browser. No sign-up, no tracking, no server calls (except optional API-powered tools like DNS, IP lookup, and SSL checker).
 

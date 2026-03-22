@@ -72,7 +72,7 @@ export default function ChangelogModal({ open, onClose }: ChangelogModalProps) {
             <span className="text-xl">🎉</span>
             <div>
               <h2 className="font-semibold text-gray-900 dark:text-white">What's New</h2>
-              <p className="text-xs text-gray-400">DevKit changelog</p>
+              <p className="text-xs text-gray-400">DevTools Online changelog</p>
             </div>
           </div>
           <button onClick={onClose} className="btn-ghost p-1.5"><X size={16} /></button>
