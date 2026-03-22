@@ -1,9 +1,271 @@
 [
   {
-    "version": "v1.7",
     "date": "March 2026",
-    "badge": "latest",
     "changes": [
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
+      {
+        "type": "new",
+        "text": "auto-generate changelog and version from git commits"
+      },
       {
         "type": "new",
         "text": "Dynamic changelog from git commits"
@@ -23,9 +285,7 @@
     ]
   },
   {
-    "version": "v1.6",
     "date": "March 2026",
-    "badge": "recent",
     "changes": [
       {
         "type": "design",
@@ -50,7 +310,6 @@
     ]
   },
   {
-    "version": "v1.5",
     "date": "March 2026",
     "changes": [
       {
@@ -80,7 +339,6 @@
     ]
   },
   {
-    "version": "v1.4",
     "date": "February 2026",
     "changes": [
       {
@@ -106,7 +364,6 @@
     ]
   },
   {
-    "version": "v1.3",
     "date": "February 2026",
     "changes": [
       {
@@ -132,7 +389,6 @@
     ]
   },
   {
-    "version": "v1.2",
     "date": "January 2026",
     "changes": [
       {

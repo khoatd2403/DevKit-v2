@@ -14,9 +14,7 @@ interface ChangeEntry {
 }
 
 interface Version {
-  version: string
   date: string
-  badge?: 'latest' | 'recent'
   changes: ChangeEntry[]
 }
 
@@ -82,17 +80,20 @@ export default function ChangelogModal({ open, onClose }: ChangelogModalProps) {
 
         {/* Content */}
         <div className="overflow-y-auto flex-1 px-5 py-4 space-y-6">
-          {changelog.map(v => (
-            <div key={v.version}>
+          {changelog.map((v, i) => {
+            const version = `v1.${changelog.length - i + 1}`
+            const badge = i === 0 ? 'latest' : i === 1 ? 'recent' : null
+            return (
+            <div key={i}>
               {/* Version header */}
               <div className="flex items-center gap-2 mb-3">
-                <span className="font-bold text-gray-900 dark:text-white">{v.version}</span>
-                {v.badge === 'latest' && (
+                <span className="font-bold text-gray-900 dark:text-white">{version}</span>
+                {badge === 'latest' && (
                   <span className="text-xs bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-400 px-2 py-0.5 rounded-full border border-primary-200 dark:border-primary-800 font-medium">
                     Latest
                   </span>
                 )}
-                {v.badge === 'recent' && (
+                {badge === 'recent' && (
                   <span className="text-xs bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 px-2 py-0.5 rounded-full">
                     Recent
                   </span>
@@ -118,7 +119,8 @@ export default function ChangelogModal({ open, onClose }: ChangelogModalProps) {
               {/* Divider */}
               <div className="h-px bg-gray-100 dark:bg-gray-800 mt-5" />
             </div>
-          ))}
+            )
+          })}
         </div>
 
         {/* Footer */}
