@@ -1,6 +1,7 @@
 import satori from 'satori'
 import { Resvg } from '@resvg/resvg-js'
 import { readFileSync, mkdirSync, writeFileSync } from 'fs'
+import process from 'node:process'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { tools } from '../src/tools-registry'
