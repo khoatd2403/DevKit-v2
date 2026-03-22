@@ -1,7 +1,7 @@
 import { execSync } from 'child_process'
 import { writeFileSync } from 'fs'
 
-let version = 'v1.0'
+let version = 'v1.7'
 try {
   version = execSync('git describe --tags --abbrev=0', { encoding: 'utf-8' }).trim()
 } catch {}
