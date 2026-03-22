@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    @apply text-gray-900 dark:text-gray-100;
+  }
+
+  :root {
+    --editor-font-size: 13px;
+
+    /* Accent color palette — blue (default) */
+    --p50:  239 246 255;
+    --p100: 219 234 254;
+    --p200: 191 219 254;
+    --p300: 147 197 253;
+    --p400: 96  165 250;
+    --p500: 59  130 246;
+    --p600: 37  99  235;
+    --p700: 29  78  216;
+    --p800: 30  64  175;
+    --p900: 30  58  138;
+
+    /* Background shade — default (gray) */
+    --bg-main:  249 250 251;
+    --bg-dark:  3   7   18;
+  }
+
+  body {
+    background-color: rgb(var(--bg-main));
+  }
+  .dark body {
+    background-color: rgb(var(--bg-dark));
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-gray-600;
+  }
+}
+
+@layer utilities {
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-slide-up {
+    animation: slide-up 0.2s ease-out;
+  }
+
+  .editor-nowrap .tool-textarea,
+  .editor-nowrap .tool-textarea-output {
+    white-space: pre;
+    overflow-x: auto;
+  }
+}
+
+@layer components {
+  .tool-textarea {
+    @apply w-full font-mono text-sm bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700
+           rounded-lg p-3 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500
+           text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-600;
+  }
+
+  .tool-textarea-output {
+    @apply w-full font-mono text-sm bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700
+           rounded-lg p-3 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500
+           text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-600;
+  }
+
+  .tool-textarea,
+  .tool-textarea-output {
+    font-size: var(--editor-font-size) !important;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium
+           text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700
+           text-gray-700 dark:text-gray-300 rounded-lg font-medium text-sm transition-colors
+           focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply px-3 py-1.5 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200
+           hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-sm transition-colors;
+  }
+
+  .tool-card {
+    @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800
+           rounded-xl p-4 hover:shadow-md hover:border-primary-300 dark:hover:border-primary-700
+           transition-all cursor-pointer;
+  }
+
+  .section-title {
+    @apply text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 px-3 py-2;
+  }
+
+  .sidebar-item {
+    @apply flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-gray-600 dark:text-gray-400
+           hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100
+           transition-colors cursor-pointer;
+  }
+
+  .sidebar-item.active {
+    @apply bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300
+           font-medium border border-primary-200 dark:border-primary-800;
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "DevKit — Free Developer Tools",
+  "short_name": "DevKit",
+  "description": "87+ free online developer tools — JSON formatter, Base64, regex tester, hash generator, UUID, password generator and more. All in your browser.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "lang": "en",
+  "categories": ["developer", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "JSON Formatter",
+      "url": "/tool/json-formatter",
+      "description": "Format and validate JSON"
+    },
+    {
+      "name": "Base64 Encoder",
+      "url": "/tool/base64-encode-decode",
+      "description": "Encode and decode Base64"
+    },
+    {
+      "name": "Hash Generator",
+      "url": "/tool/hash-generator",
+      "description": "Generate MD5, SHA-256 hashes"
+    },
+    {
+      "name": "UUID Generator",
+      "url": "/tool/uuid-generator",
+      "description": "Generate UUID v4 and v7"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.all-dev-tools.com)",
+      "WebSearch",
+      "Bash(npm create:*)",
+      "Bash(npx:*)",
+      "Bash(npm --version)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(node:*)",
+      "Bash(find D:/Setup/Projects/all-dev-tools/node_modules/lucide-react -name *.js)",
+      "WebFetch(domain:npmx.dev)",
+      "WebFetch(domain:www.thesvg.org)",
+      "WebFetch(domain:api.iconify.design)",
+      "Bash(\"D:\\\\Setup\\\\Projects\\\\all-dev-tools\\\\README.md\":*)",
+      "WebFetch(domain:rdap.org)",
+      "WebFetch(domain:rdap.identitydigital.services)",
+      "WebFetch(domain:pubapi.registry.google)",
+      "WebFetch(domain:rdap.centralnic.com)",
+      "Bash(chmod:*)"
+    ]
+  }
+}

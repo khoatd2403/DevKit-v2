@@ -1,0 +1,160 @@
+[
+  {
+    "version": "v1.7",
+    "date": "March 2026",
+    "badge": "latest",
+    "changes": [
+      {
+        "type": "new",
+        "text": "Dynamic changelog from git commits"
+      },
+      {
+        "type": "improvement",
+        "text": "Auto-generate sitemap from tools registry"
+      },
+      {
+        "type": "improvement",
+        "text": "SEO — prerender meta tags per tool page"
+      },
+      {
+        "type": "new",
+        "text": "Dynamic OG images per tool for social sharing"
+      }
+    ]
+  },
+  {
+    "version": "v1.6",
+    "date": "March 2026",
+    "badge": "recent",
+    "changes": [
+      {
+        "type": "design",
+        "text": "Shift+? shortcut to open feedback from anywhere"
+      },
+      {
+        "type": "improvement",
+        "text": "Sidebar categories now collapsible with auto-expand on active tool"
+      },
+      {
+        "type": "new",
+        "text": "What's New changelog modal"
+      },
+      {
+        "type": "new",
+        "text": "Feedback modal with Bug / Feature / UX / General types"
+      },
+      {
+        "type": "new",
+        "text": "Command palette (Ctrl+K) with fuzzy search and keyboard navigation"
+      }
+    ]
+  },
+  {
+    "version": "v1.5",
+    "date": "March 2026",
+    "changes": [
+      {
+        "type": "new",
+        "text": "BCrypt Hash tool"
+      },
+      {
+        "type": "new",
+        "text": "QR Code Generator"
+      },
+      {
+        "type": "new",
+        "text": "Color Palette Generator"
+      },
+      {
+        "type": "new",
+        "text": "Meta Tag Generator with Open Graph & Twitter Card support"
+      },
+      {
+        "type": "new",
+        "text": "Cron Expression Parser with human-readable description"
+      },
+      {
+        "type": "new",
+        "text": "JSON Diff tool — compare two JSON objects visually"
+      }
+    ]
+  },
+  {
+    "version": "v1.4",
+    "date": "February 2026",
+    "changes": [
+      {
+        "type": "fix",
+        "text": "Base64 decode now handles UTF-8 characters correctly"
+      },
+      {
+        "type": "improvement",
+        "text": "Hash Generator now uses SubtleCrypto for SHA family"
+      },
+      {
+        "type": "improvement",
+        "text": "Password generator — strength meter & bulk generation"
+      },
+      {
+        "type": "new",
+        "text": "UUID v7 (time-ordered) generator"
+      },
+      {
+        "type": "new",
+        "text": "Dark mode with system preference detection"
+      }
+    ]
+  },
+  {
+    "version": "v1.3",
+    "date": "February 2026",
+    "changes": [
+      {
+        "type": "design",
+        "text": "Redesigned tool cards with category badges"
+      },
+      {
+        "type": "improvement",
+        "text": "Case Converter now supports 12 formats including dot.case"
+      },
+      {
+        "type": "new",
+        "text": "JWT Decoder with expiry detection"
+      },
+      {
+        "type": "new",
+        "text": "Text Diff with line-by-line comparison"
+      },
+      {
+        "type": "new",
+        "text": "Regex Tester with live match highlighting"
+      }
+    ]
+  },
+  {
+    "version": "v1.2",
+    "date": "January 2026",
+    "changes": [
+      {
+        "type": "design",
+        "text": "Sidebar navigation with tool categories"
+      },
+      {
+        "type": "new",
+        "text": "SQL & XML Formatter, Markdown Preview"
+      },
+      {
+        "type": "new",
+        "text": "Unix Timestamp, Color Converter, Lorem Ipsum"
+      },
+      {
+        "type": "new",
+        "text": "JSON Formatter, Base64, URL Encoder, Hash Generator"
+      },
+      {
+        "type": "new",
+        "text": "Initial release with 20 core developer tools"
+      }
+    ]
+  }
+]
