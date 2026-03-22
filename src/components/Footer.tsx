@@ -85,8 +85,8 @@ export default function Footer() {
                     ) : (
                     <a
                       href={item.href}
-                      target={item.external ? '_blank' : undefined}
-                      rel={item.external ? 'noopener noreferrer' : undefined}
+                      target={'external' in item && item.external ? '_blank' : undefined}
+                      rel={'external' in item && item.external ? 'noopener noreferrer' : undefined}
                       className="text-sm text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                     >
                       {item.label}
