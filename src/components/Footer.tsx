@@ -1,5 +1,11 @@
 import { Wrench, Github, Heart } from 'lucide-react'
 
+const REPO = 'https://github.com/khoatd2403/DevKit-v2'
+
+
+const BUG_URL = `${REPO}/issues/new?template=bug_report.md`
+const FEATURE_URL = `${REPO}/issues/new?template=feature_request.md`
+
 export default function Footer() {
   const year = new Date().getFullYear()
 
@@ -27,9 +33,9 @@ export default function Footer() {
     {
       title: 'Project',
       items: [
-        { label: 'GitHub', href: 'https://github.com/khoatd2403/DevKit-v2', external: true },
-        { label: 'Report a Bug', href: 'https://github.com/khoatd2403/DevKit-v2/issues/new', external: true },
-        { label: 'Feature Request', href: 'https://github.com/khoatd2403/DevKit-v2/issues/new', external: true },
+        { label: 'GitHub', href: REPO, external: true },
+        { label: 'Report a Bug', href: BUG_URL, external: true },
+        { label: 'Feature Request', href: FEATURE_URL, external: true },
         { label: 'Changelog', href: '#changelog' },
       ],
     },

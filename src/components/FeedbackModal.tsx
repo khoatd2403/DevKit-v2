@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { X, Bug, Lightbulb, Palette, MessageSquare, Copy, Check, ExternalLink, ChevronDown, Wrench } from 'lucide-react'
 import { tools } from '../tools-registry'
 
@@ -138,7 +138,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
               </p>
             </div>
             <a
-              href="https://github.com/khoatd2403/DevKit-v2/issues"
+              href="https://github.com/khoatd2403/DevKit-v2/issues/new?template=feedback.md"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm text-primary-600 dark:text-primary-400 hover:underline"
