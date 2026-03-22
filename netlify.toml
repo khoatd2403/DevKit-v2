@@ -1,6 +1,6 @@
 [[redirects]]
   from = "https://www.alldevtool.netlify.app/*"
-  to = "https://alldevtool.netlify.app/:splat"
+  to = "https://devtoolsonline.dev/:splat"
   status = 301
   force = true
 

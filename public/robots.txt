@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://alldevtool.netlify.app/sitemap.xml
+Sitemap: https://devtoolsonline.dev/sitemap.xml

@@ -2,7 +2,7 @@
 
 A fast, private, all-in-one developer toolbox that runs entirely in your browser. No sign-up, no tracking, no server calls (except optional API-powered tools like DNS, IP lookup, and SSL checker).
 
-Live: https://alldevkit.netlify.app/
+Live: https://devtoolsonline.dev/
 
 ## Features
 
