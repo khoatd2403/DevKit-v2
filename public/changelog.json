@@ -4,6 +4,15 @@
     "changes": [
       {
         "type": "fix",
+        "text": "remove prepare script to prevent Netlify deploy failure"
+      }
+    ]
+  },
+  {
+    "date": "March 2026",
+    "changes": [
+      {
+        "type": "fix",
         "text": "changelog link in footer now opens the changelog modal"
       }
     ]

@@ -1,8 +1,8 @@
 import { writeFileSync, chmodSync, existsSync } from 'fs'
 import { join } from 'path'
 
-if (!existsSync('.git')) {
-  console.log('Not a git repo, skipping hooks setup')
+if (!existsSync('.git') || !existsSync('.git/hooks')) {
+  console.log('No .git/hooks directory found, skipping hooks setup')
   process.exit(0)
 }
 
