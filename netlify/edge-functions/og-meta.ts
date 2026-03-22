@@ -1,6 +1,6 @@
 import type { Context } from 'https://edge.netlify.com'
 
-const BASE_URL = 'https://alldevtool.netlify.app'
+const BASE_URL = 'https://devtoolsonline.dev'
 
 export default async function handler(request: Request, context: Context) {
   const url = new URL(request.url)
