@@ -29,6 +29,14 @@ const changelogPath = 'public/changelog.json'
 const changelog = JSON.parse(readFileSync(changelogPath, 'utf-8'))
 const currentDate = new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })
 
+const alreadyExists = changelog[0]?.changes?.some(
+  (c: { type: string; text: string }) => c.text === change.text
+)
+if (alreadyExists) {
+  console.log('Skipping changelog: entry already exists')
+  process.exit(0)
+}
+
 if (changelog.length > 0 && changelog[0].date === currentDate) {
   changelog[0].changes.unshift(change)
 } else {

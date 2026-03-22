@@ -20,7 +20,8 @@
       "WebFetch(domain:rdap.centralnic.com)",
       "Bash(chmod:*)",
       "Bash(find /d/Setup/Projects/all-dev-tools-v2/src -type f -name *version* -o -name *changelog*)",
-      "Bash(grep -r \"1\\\\.7\\\\|v1\\\\.7\\\\|LATEST_VERSION\" /d/Setup/Projects/all-dev-tools-v2/src --include=*.ts --include=*.tsx --include=*.json)"
+      "Bash(grep -r \"1\\\\.7\\\\|v1\\\\.7\\\\|LATEST_VERSION\" /d/Setup/Projects/all-dev-tools-v2/src --include=*.ts --include=*.tsx --include=*.json)",
+      "Bash(cd:*)"
     ]
   }
 }

@@ -7,12 +7,19 @@ if (!existsSync('.git')) {
 }
 
 const hook = `#!/bin/sh
+LOCK=".git/changelog-hook.lock"
+if [ -f "$LOCK" ]; then exit 0; fi
+touch "$LOCK"
+
 MSG=$(git log -1 --pretty=%B)
 npx tsx scripts/update-changelog-entry.ts "$MSG"
+
 if [ -n "$(git diff public/changelog.json)" ]; then
   git add public/changelog.json
   git commit --amend --no-edit --no-verify
 fi
+
+rm -f "$LOCK"
 `
 
 const hookPath = join('.git', 'hooks', 'post-commit')
