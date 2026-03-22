@@ -98,6 +98,11 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
 
   const markdownFallback = `**[${current.label}]${selectedTool ? ` — ${selectedTool}` : ''}**\n\n${message}`
 
+  const labelMap: Record<FeedbackType, string> = { bug: 'bug', feature: 'enhancement', ux: 'ux', general: 'feedback' }
+  const githubTitle = `${current.label}${selectedTool ? ` — ${selectedTool}` : ''}: `
+  const githubBody = `**Type:** ${current.label}\n${selectedTool ? `**Tool:** ${selectedTool}\n` : ''}\n## Message\n\n${message}\n\n---\n*Submitted via DevKit feedback form*`
+  const githubUrl = `https://github.com/khoatd2403/DevKit-v2/issues/new?assignees=khoatd2403&labels=${labelMap[type]}&title=${encodeURIComponent(githubTitle)}&body=${encodeURIComponent(githubBody)}`
+
   const copyMarkdown = async () => {
     await navigator.clipboard.writeText(markdownFallback)
     setCopied(true)
@@ -138,12 +143,12 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
               </p>
             </div>
             <a
-              href="https://github.com/khoatd2403/DevKit-v2/issues/new?template=feedback.md"
+              href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm text-primary-600 dark:text-primary-400 hover:underline"
             >
-              <ExternalLink size={13} /> Open a GitHub issue with screenshot
+              <ExternalLink size={13} /> Open on GitHub (with your message pre-filled)
             </a>
             <div className="flex gap-2 mt-2">
               <button onClick={reset} className="btn-secondary text-sm">Send another</button>

@@ -97,6 +97,13 @@ function AppInner() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Listen for changelog open event from Footer
+  useEffect(() => {
+    const handler = () => setChangelogOpen(true)
+    window.addEventListener('open-changelog', handler)
+    return () => window.removeEventListener('open-changelog', handler)
+  }, [])
+
   const handleDismissBanner = () => {
     setBannerDismissed(true)
     localStorage.setItem('devkit-pwa-banner-dismissed', 'true')

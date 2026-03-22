@@ -2,9 +2,8 @@ import { Wrench, Github, Heart } from 'lucide-react'
 
 const REPO = 'https://github.com/khoatd2403/DevKit-v2'
 
-
-const BUG_URL = `${REPO}/issues/new?template=bug_report.md`
-const FEATURE_URL = `${REPO}/issues/new?template=feature_request.md`
+const BUG_URL = `${REPO}/issues/new?assignees=khoatd2403&labels=bug&title=${encodeURIComponent('Bug: ')}&body=${encodeURIComponent('## Describe the bug\n\n## Steps to reproduce\n1. \n2. \n\n## Expected behavior\n\n## Screenshots (if any)\n')}`
+const FEATURE_URL = `${REPO}/issues/new?assignees=khoatd2403&labels=enhancement&title=${encodeURIComponent('Feature: ')}&body=${encodeURIComponent('## What problem does this solve?\n\n## Describe the feature\n\n## Additional context\n')}`
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -36,7 +35,7 @@ export default function Footer() {
         { label: 'GitHub', href: REPO, external: true },
         { label: 'Report a Bug', href: BUG_URL, external: true },
         { label: 'Feature Request', href: FEATURE_URL, external: true },
-        { label: 'Changelog', href: '#changelog' },
+        { label: 'Changelog', href: '#', onClick: () => window.dispatchEvent(new CustomEvent('open-changelog')) },
       ],
     },
   ]
@@ -76,6 +75,14 @@ export default function Footer() {
               <ul className="space-y-2">
                 {group.items.map(item => (
                   <li key={item.label}>
+                    {'onClick' in item && item.onClick ? (
+                      <button
+                        onClick={item.onClick}
+                        className="text-sm text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      >
+                        {item.label}
+                      </button>
+                    ) : (
                     <a
                       href={item.href}
                       target={item.external ? '_blank' : undefined}
@@ -84,6 +91,7 @@ export default function Footer() {
                     >
                       {item.label}
                     </a>
+                    )}
                   </li>
                 ))}
               </ul>
