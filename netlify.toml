@@ -1,4 +1,10 @@
 [[redirects]]
+  from = "https://www.alldevtool.netlify.app/*"
+  to = "https://alldevtool.netlify.app/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

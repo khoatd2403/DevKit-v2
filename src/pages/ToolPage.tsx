@@ -1,5 +1,5 @@
 import { Suspense, useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { SITE_URL } from '../../site.config'
 import { tools } from '../tools-registry'
@@ -95,7 +95,8 @@ export default function ToolPage({ onFeedback }: ToolPageProps) {
   const BASE_URL = SITE_URL
   const pageUrl = `${BASE_URL}/tool/${toolId}`
   const pageTitle = `${toolMeta.name} — DevKit`
-  const pageDesc = `${toolMeta.description}. Free online tool, no sign-up required.`
+  const rawDesc = `${toolMeta.description}. Free DevKit tool — no account needed, no data sent to servers, works instantly in any browser.`
+  const pageDesc = rawDesc.length > 160 ? rawDesc.slice(0, 157) + '...' : rawDesc
   const ogImage = `${BASE_URL}/og/${toolId}.png`
 
   return (
@@ -247,14 +248,14 @@ export default function ToolPage({ onFeedback }: ToolPageProps) {
           <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">Related Tools</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {relatedTools.map(tool => (
-              <div
+              <Link
                 key={tool.id}
-                onClick={() => navigate(`/tool/${tool.id}`)}
-                className="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-primary-400 dark:hover:border-primary-600 cursor-pointer transition-colors bg-white dark:bg-gray-900 hover:bg-primary-50 dark:hover:bg-primary-950/30"
+                to={`/tool/${tool.id}`}
+                className="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-primary-400 dark:hover:border-primary-600 transition-colors bg-white dark:bg-gray-900 hover:bg-primary-50 dark:hover:bg-primary-950/30"
               >
                 <span className="text-lg shrink-0">{tool.icon}</span>
                 <span className="text-xs font-medium text-gray-700 dark:text-gray-300 line-clamp-2">{tool.name}</span>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

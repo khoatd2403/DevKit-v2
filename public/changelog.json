@@ -3,6 +3,15 @@
     "date": "March 2026",
     "changes": [
       {
+        "type": "new",
+        "text": "fetch realtime AI pricing from LiteLLM, fix github links"
+      }
+    ]
+  },
+  {
+    "date": "March 2026",
+    "changes": [
+      {
         "type": "fix",
         "text": "add node:process import and fix empty catch blocks in scripts"
       }

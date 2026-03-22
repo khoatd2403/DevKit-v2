@@ -10,6 +10,7 @@ import ShortcutsModal from './components/ShortcutsModal'
 import SettingsModal from './components/SettingsModal'
 import OnboardingTour from './components/OnboardingTour'
 import ToastContainer from './components/ToastContainer'
+import CookieBanner from './components/CookieBanner'
 import Home from './pages/Home'
 import ToolPage from './pages/ToolPage'
 import SplitPage from './pages/SplitPage'
@@ -228,6 +229,7 @@ function AppInner() {
           <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
           <OnboardingTour />
           <ToastContainer />
+          <CookieBanner />
         </BrowserRouter>
       </LiveModeProvider>
     </ThemeContext.Provider>

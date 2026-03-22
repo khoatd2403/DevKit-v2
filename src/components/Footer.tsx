@@ -22,11 +22,11 @@ export default function Footer() {
     {
       title: 'Categories',
       items: [
-        { label: 'JSON Tools', href: '/#json' },
-        { label: 'Encoding', href: '/#encoding' },
-        { label: 'Crypto & Hash', href: '/#crypto' },
-        { label: 'Color Tools', href: '/#color' },
-        { label: 'Formatters', href: '/#formatter' },
+        { label: 'JSON Tools', href: '/?cat=json' },
+        { label: 'Encoding', href: '/?cat=encoding' },
+        { label: 'Crypto & Hash', href: '/?cat=crypto' },
+        { label: 'Color Tools', href: '/?cat=color' },
+        { label: 'Formatters', href: '/?cat=formatter' },
       ],
     },
     {
