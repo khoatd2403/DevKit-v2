@@ -102,9 +102,20 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-6 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400 dark:text-gray-600">
           <p>© {year} DevTools Online. Open source under MIT License.</p>
-          <p className="flex items-center gap-1">
-            Built with <Heart size={11} className="text-red-400 fill-red-400" /> for developers.
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="flex items-center gap-1">
+              Built with <Heart size={11} className="text-red-400 fill-red-400" /> for developers.
+            </p>
+            <a
+              href="https://paypal.me/tranphu0ng"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-500 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors text-xs font-medium"
+            >
+              <Heart size={11} className="fill-blue-500 dark:fill-blue-400" />
+              Support
+            </a>
+          </div>
         </div>
       </div>
     </footer>
