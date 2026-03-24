@@ -23,7 +23,7 @@ export default function CaseConverter() {
   return (
     <div className="space-y-4">
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Input Text</label>
+        <label className="tool-label block mb-1">Input Text</label>
         <FileDropTextarea className="h-24" placeholder="Enter your text here..." value={input} onChange={setInput} accept="text/*" />
       </div>
 
@@ -34,7 +34,7 @@ export default function CaseConverter() {
             <div key={label} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-3">
               <div className="flex items-center justify-between mb-1.5">
                 <span className="text-xs font-semibold text-primary-600 dark:text-primary-400 font-mono">{label}</span>
-                <CopyButton text={result} />
+                <CopyButton text={result} toast={`${label} copied`} />
               </div>
               <p className="font-mono text-sm text-gray-700 dark:text-gray-300 break-all min-h-[20px]">{result}</p>
             </div>

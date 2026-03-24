@@ -150,7 +150,7 @@ export default function SvgToPng() {
     <div className="space-y-4">
       {/* SVG Input */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">SVG Code</label>
+        <label className="tool-label block mb-1">SVG Code</label>
         <textarea
           className="tool-textarea h-40"
           placeholder='<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">…</svg>'
@@ -189,7 +189,7 @@ export default function SvgToPng() {
       {/* SVG preview */}
       {svgDataUrl && (
         <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">SVG Preview</label>
+          <label className="tool-label block mb-2">SVG Preview</label>
           <div className="flex justify-center bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
             <img
               src={svgDataUrl}
@@ -210,14 +210,14 @@ export default function SvgToPng() {
       )}
 
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           {error}
-        </div>
+        </p>
       )}
 
       {/* Output format */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Output Format</label>
+        <label className="tool-label block mb-1">Output Format</label>
         <div className="flex gap-2">
           {(['png', 'jpg'] as OutputFormat[]).map(f => (
             <button
@@ -237,7 +237,7 @@ export default function SvgToPng() {
 
       {/* Scale factor */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Scale Factor</label>
+        <label className="tool-label block mb-1">Scale Factor</label>
         <div className="flex gap-2">
           {scales.map(s => (
             <button
@@ -257,7 +257,7 @@ export default function SvgToPng() {
 
       {/* Custom width override */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+        <label className="tool-label block mb-1">
           Custom Width Override (optional)
         </label>
         <div className="flex items-center gap-2">
@@ -279,7 +279,7 @@ export default function SvgToPng() {
       {/* Background color (JPG only) */}
       {format === 'jpg' && (
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+          <label className="tool-label block mb-1">
             Background Color (JPG has no transparency)
           </label>
           <div className="flex items-center gap-3">
@@ -309,7 +309,7 @@ export default function SvgToPng() {
       {/* Result */}
       {resultUrl && resultDims && (
         <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 space-y-3">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block">Result</label>
+          <label className="tool-label block">Result</label>
           <div className="flex justify-center bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
             <img
               src={resultUrl}

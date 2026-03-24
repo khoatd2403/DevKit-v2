@@ -379,7 +379,7 @@ export default function BarcodeGenerator() {
     <div className="space-y-5">
       {/* Type selector */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">Barcode Type</label>
+        <label className="tool-label block mb-2">Barcode Type</label>
         <div className="flex flex-wrap gap-1.5">
           {TYPE_OPTIONS.map(opt => (
             <button
@@ -399,7 +399,7 @@ export default function BarcodeGenerator() {
 
       {/* Data input */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Barcode Data</label>
+        <label className="tool-label block mb-1">Barcode Data</label>
         <input
           type="text"
           value={data}
@@ -428,17 +428,17 @@ export default function BarcodeGenerator() {
       {/* Options */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Bar Width: {barWidth}px</label>
+          <label className="tool-label block mb-1">Bar Width: {barWidth}px</label>
           <input type="range" min={1} max={6} value={barWidth} onChange={e => setBarWidth(Number(e.target.value))}
             className="w-full accent-primary-600" />
         </div>
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Bar Height: {barHeight}px</label>
+          <label className="tool-label block mb-1">Bar Height: {barHeight}px</label>
           <input type="range" min={30} max={200} value={barHeight} onChange={e => setBarHeight(Number(e.target.value))}
             className="w-full accent-primary-600" />
         </div>
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Font Size: {textFontSize}px</label>
+          <label className="tool-label block mb-1">Font Size: {textFontSize}px</label>
           <input type="range" min={8} max={24} value={textFontSize} onChange={e => setTextFontSize(Number(e.target.value))}
             disabled={!showText} className="w-full accent-primary-600 disabled:opacity-40" />
         </div>
@@ -451,7 +451,7 @@ export default function BarcodeGenerator() {
 
       {/* Canvas preview */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">Preview</label>
+        <label className="tool-label block mb-2">Preview</label>
         <div className="bg-white dark:bg-white rounded-xl border border-gray-200 dark:border-gray-700 p-4 overflow-x-auto">
           <canvas
             ref={canvasRef}

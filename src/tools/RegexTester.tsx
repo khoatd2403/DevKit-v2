@@ -55,7 +55,7 @@ export default function RegexTester() {
     <div className="space-y-4">
       {/* Pattern */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Regular Expression</label>
+        <label className="tool-label block mb-1">Regular Expression</label>
         <div className="flex items-center bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-primary-500">
           <span className="pl-3 text-gray-400 text-lg select-none">/</span>
           <input
@@ -92,8 +92,8 @@ export default function RegexTester() {
 
       {/* Test string */}
       <div>
-        <div className="flex items-center justify-between mb-1">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Test String</label>
+        <div className="tool-output-header">
+          <label className="tool-label">Test String</label>
           {result && <span className="text-xs text-primary-600 dark:text-primary-400 font-medium">{result.length} match{result.length !== 1 ? 'es' : ''}</span>}
         </div>
         <FileDropTextarea className="h-32" placeholder="Enter text to test against the pattern..." value={testString} onChange={setTestString} accept="text/*" />
@@ -102,7 +102,7 @@ export default function RegexTester() {
       {/* Highlighted */}
       {highlighted && (
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Matches Highlighted</label>
+          <label className="tool-label block mb-1">Matches Highlighted</label>
           <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-3 font-mono text-sm whitespace-pre-wrap break-all text-gray-700 dark:text-gray-300">
             {highlighted.map((p, i) =>
               p.match
@@ -116,7 +116,7 @@ export default function RegexTester() {
       {/* Match details */}
       {result && result.length > 0 && (
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Match Details</label>
+          <label className="tool-label block mb-1">Match Details</label>
           <div className="space-y-1.5 max-h-48 overflow-y-auto">
             {result.map((m, i) => (
               <div key={i} className="flex items-center gap-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm">

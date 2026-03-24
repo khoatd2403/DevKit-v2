@@ -131,7 +131,7 @@ export default function CsvToExcel() {
     <div className="space-y-4">
       {/* File Upload */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+        <label className="tool-label block mb-1">
           Upload CSV File
         </label>
         <div
@@ -161,7 +161,7 @@ export default function CsvToExcel() {
 
       {/* CSV Textarea */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+        <label className="tool-label block mb-1">
           Or paste CSV data
         </label>
         <textarea
@@ -180,7 +180,7 @@ export default function CsvToExcel() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {/* Delimiter selector */}
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+          <label className="tool-label block mb-1">
             Delimiter
           </label>
           <select
@@ -198,7 +198,7 @@ export default function CsvToExcel() {
 
         {/* Sheet name */}
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+          <label className="tool-label block mb-1">
             Sheet Name
           </label>
           <input
@@ -241,9 +241,9 @@ export default function CsvToExcel() {
 
       {/* Error */}
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           {error}
-        </div>
+        </p>
       )}
 
       {/* Convert button */}
@@ -258,7 +258,7 @@ export default function CsvToExcel() {
       {/* Preview */}
       {parsed.length > 0 && (
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">
+          <label className="tool-label block mb-2">
             Preview (first {dataRows.length} data row{dataRows.length !== 1 ? 's' : ''})
           </label>
           <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">

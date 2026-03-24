@@ -371,15 +371,15 @@ export default function CurlToCode() {
 
       {/* Error */}
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           {error}
-        </div>
+        </p>
       )}
 
       {/* Output */}
       <div>
-        <div className="flex items-center justify-between mb-2">
-          <label className="label-text">Generated Code</label>
+        <div className="tool-output-header">
+          <label className="tool-label">Generated Code</label>
           <button onClick={copy} disabled={!output} className="btn-primary text-xs py-1.5 px-3 flex items-center gap-1 disabled:opacity-50">
             {copied ? <><Check size={13} /> Copied</> : <><Copy size={13} /> Copy</>}
           </button>
@@ -388,7 +388,7 @@ export default function CurlToCode() {
           readOnly
           value={output}
           placeholder="Generated code will appear here..."
-          className="tool-textarea font-mono text-sm h-64"
+          className="tool-textarea-output font-mono text-sm h-64"
         />
       </div>
     </div>

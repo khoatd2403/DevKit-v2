@@ -41,10 +41,10 @@ export default function CssMinifier() {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+        <div className="tool-tabs">
           {(['minify', 'format'] as const).map(m => (
             <button key={m} onClick={() => setMode(m)}
-              className={`px-4 py-1.5 capitalize transition-colors ${mode === m ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+              className={`tool-tab capitalize ${mode === m ? 'active' : ''}`}>
               {m}
             </button>
           ))}
@@ -53,18 +53,20 @@ export default function CssMinifier() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Input CSS</label>
+          <div className="tool-output-header">
+            <label className="tool-label">Input CSS</label>
+          </div>
           <FileDropTextarea className="h-72" placeholder=".selector {\n  color: red;\n  background: blue;\n}" value={input} onChange={setInput} accept=".css,text/css,text/*" />
         </div>
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Output</label>
+          <div className="tool-output-header">
+            <label className="tool-label">Output</label>
             <div className="flex items-center gap-2">
               {savings > 0 && <span className="text-xs text-green-600 dark:text-green-400">-{savings}%</span>}
-              <CopyButton text={output} />
+              <CopyButton text={output} toast="CSS copied" />
             </div>
           </div>
-          <textarea className="tool-textarea h-72" readOnly value={output} placeholder="Output will appear here..." />
+          <textarea className="tool-textarea-output h-72" readOnly value={output} placeholder="Output will appear here..." />
         </div>
       </div>
     </div>

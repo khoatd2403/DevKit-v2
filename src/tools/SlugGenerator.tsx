@@ -54,7 +54,7 @@ export default function SlugGenerator() {
   return (
     <div className="space-y-4">
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+        <label className="tool-label block mb-1">
           Input Text
         </label>
         <textarea
@@ -135,15 +135,15 @@ export default function SlugGenerator() {
       </div>
 
       <div>
-        <div className="flex items-center justify-between mb-1">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+        <div className="tool-output-header">
+          <label className="tool-label">
             Slug Output
           </label>
           <div className="flex items-center gap-2">
             <span className="text-xs text-gray-400 dark:text-gray-500">
               {slug.length} char{slug.length !== 1 ? 's' : ''}
             </span>
-            <CopyButton text={slug} />
+            <CopyButton text={slug} toast="Slug copied" />
           </div>
         </div>
         <input

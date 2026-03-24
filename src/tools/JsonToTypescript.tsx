@@ -143,7 +143,7 @@ export default function JsonToTypescript() {
       {/* Options row */}
       <div className="flex flex-wrap gap-4 items-end">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Interface Name</label>
+          <label className="tool-label block mb-1">Interface Name</label>
           <input
             type="text"
             className="px-3 py-1.5 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 w-36"
@@ -154,7 +154,7 @@ export default function JsonToTypescript() {
         </div>
 
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Keyword</label>
+          <label className="tool-label block mb-1">Keyword</label>
           <div className="flex gap-1">
             <button onClick={() => setUseInterface(true)} className={toggleClass(useInterface)}>interface</button>
             <button onClick={() => setUseInterface(false)} className={toggleClass(!useInterface)}>type</button>
@@ -162,14 +162,14 @@ export default function JsonToTypescript() {
         </div>
 
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Optional nulls</label>
+          <label className="tool-label block mb-1">Optional nulls</label>
           <button onClick={() => setOptionalNulls(v => !v)} className={toggleClass(optionalNulls)}>
             {optionalNulls ? 'On' : 'Off'}
           </button>
         </div>
 
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Export</label>
+          <label className="tool-label block mb-1">Export</label>
           <button onClick={() => setExportKeyword(v => !v)} className={toggleClass(exportKeyword)}>
             {exportKeyword ? 'On' : 'Off'}
           </button>
@@ -178,7 +178,9 @@ export default function JsonToTypescript() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">JSON Input</label>
+          <div className="tool-output-header">
+            <label className="tool-label">JSON Input</label>
+          </div>
           <FileDropTextarea
             className="h-80"
             placeholder={'{\n  "name": "Alice",\n  "age": 30,\n  "active": true,\n  "address": {\n    "city": "NY"\n  }\n}'}
@@ -189,12 +191,12 @@ export default function JsonToTypescript() {
         </div>
 
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block">TypeScript Output</label>
-            <CopyButton text={output} />
+          <div className="tool-output-header">
+            <label className="tool-label">TypeScript Output</label>
+            <CopyButton text={output} toast="TypeScript copied" />
           </div>
           <textarea
-            className="tool-textarea h-80 font-mono text-xs"
+            className="tool-textarea-output h-80 font-mono text-xs"
             readOnly
             value={output}
             placeholder="TypeScript interfaces will appear here..."
@@ -203,9 +205,9 @@ export default function JsonToTypescript() {
       </div>
 
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           {error}
-        </div>
+        </p>
       )}
     </div>
   )

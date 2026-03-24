@@ -28,6 +28,24 @@ const CATEGORY_COLORS: Record<string, string> = {
   misc: '#64748b',
   converter: '#8b5cf6',
   dotnet: '#a855f7',
+  ai: '#10b981',
+}
+
+const CATEGORY_LABEL: Record<string, string> = {
+  json: 'JSON',
+  encoding: 'ENC',
+  crypto: 'SEC',
+  string: 'STR',
+  number: 'NUM',
+  datetime: 'DATE',
+  web: 'WEB',
+  color: 'CLR',
+  generator: 'GEN',
+  formatter: 'FMT',
+  misc: 'MISC',
+  converter: 'CVT',
+  dotnet: '.NET',
+  ai: 'AI',
 }
 
 async function generateOG(id: string, name: string, description: string, icon: string, category: string) {
@@ -73,27 +91,67 @@ async function generateOG(id: string, name: string, description: string, icon: s
                 marginBottom: '60px',
               },
               children: [
+                // Terminal icon
                 {
                   type: 'div',
                   props: {
                     style: {
-                      width: '40px',
-                      height: '40px',
-                      background: accentColor,
+                      width: '44px',
+                      height: '44px',
+                      background: '#111827',
                       borderRadius: '10px',
+                      border: '1.5px solid #374151',
                       display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '20px',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      justifyContent: 'space-between',
+                      padding: '6px 8px',
                     },
-                    children: '🔧',
+                    children: [
+                      // Traffic lights row
+                      {
+                        type: 'div',
+                        props: {
+                          style: { display: 'flex', gap: '4px', alignItems: 'center' },
+                          children: [
+                            { type: 'div', props: { style: { width: '7px', height: '7px', borderRadius: '50%', background: '#ff5f57' } } },
+                            { type: 'div', props: { style: { width: '7px', height: '7px', borderRadius: '50%', background: '#febc2e' } } },
+                            { type: 'div', props: { style: { width: '7px', height: '7px', borderRadius: '50%', background: '#28c840' } } },
+                          ],
+                        },
+                      },
+                      // Prompt
+                      {
+                        type: 'span',
+                        props: {
+                          style: { fontSize: '13px', fontWeight: 700, color: '#4ade80' },
+                          children: '>_',
+                        },
+                      },
+                    ],
                   },
                 },
+                // Brand text
                 {
-                  type: 'span',
+                  type: 'div',
                   props: {
-                    style: { fontSize: '22px', color: '#94a3b8', fontWeight: 600 },
-                    children: 'DevTools Online',
+                    style: { display: 'flex', alignItems: 'baseline', gap: '0' },
+                    children: [
+                      {
+                        type: 'span',
+                        props: {
+                          style: { fontSize: '22px', color: '#f1f5f9', fontWeight: 700 },
+                          children: 'DevTools ',
+                        },
+                      },
+                      {
+                        type: 'span',
+                        props: {
+                          style: { fontSize: '22px', color: '#4ade80', fontWeight: 700 },
+                          children: 'Online',
+                        },
+                      },
+                    ],
                   },
                 },
               ],
@@ -103,24 +161,37 @@ async function generateOG(id: string, name: string, description: string, icon: s
           {
             type: 'div',
             props: {
-              style: { display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '28px' },
+              style: { display: 'flex', alignItems: 'center', gap: '28px', marginBottom: '28px' },
               children: [
                 {
                   type: 'div',
                   props: {
-                    style: { fontSize: '72px', lineHeight: '1' },
-                    children: icon,
+                    style: {
+                      width: '88px',
+                      height: '88px',
+                      background: accentColor + '22',
+                      border: `3px solid ${accentColor}66`,
+                      borderRadius: '20px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '38px',
+                      fontWeight: 800,
+                      color: accentColor,
+                      flexShrink: 0,
+                    },
+                    children: CATEGORY_LABEL[category] ?? category.slice(0, 3).toUpperCase(),
                   },
                 },
                 {
                   type: 'h1',
                   props: {
                     style: {
-                      fontSize: '62px',
+                      fontSize: '58px',
                       fontWeight: 700,
                       color: '#f1f5f9',
                       margin: '0',
-                      lineHeight: '1.1',
+                      lineHeight: '1.15',
                     },
                     children: name,
                   },

@@ -64,8 +64,8 @@ export default function UrlParser() {
   return (
     <div className="space-y-4">
       <div>
-        <div className="flex items-center justify-between mb-1">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block">URL</label>
+        <div className="tool-output-header">
+          <label className="tool-label">URL</label>
           {input && (
             <button
               onClick={() => setInput('')}
@@ -87,9 +87,9 @@ export default function UrlParser() {
       </div>
 
       {hasError && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           Invalid URL. Make sure to include the protocol (e.g. <code className="font-mono">https://</code>).
-        </div>
+        </p>
       )}
 
       {parsed && (
@@ -115,7 +115,7 @@ export default function UrlParser() {
                         <span className="text-xs text-gray-300 dark:text-gray-600 italic">empty</span>
                       )}
                     </div>
-                    {value && <CopyButton text={value} />}
+                    {value && <CopyButton text={value} toast="Value copied" />}
                   </div>
                 )
               })}
@@ -141,7 +141,7 @@ export default function UrlParser() {
                     <div className="flex-1 min-w-0">
                       <span className="font-mono text-sm text-gray-800 dark:text-gray-200 break-all">{value}</span>
                     </div>
-                    <CopyButton text={value} />
+                    <CopyButton text={value} toast="Value copied" />
                   </div>
                 ))}
               </div>

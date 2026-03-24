@@ -307,22 +307,16 @@ export default function YamlJson() {
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-2">
+      <div className="tool-tabs w-fit">
         {(['yaml2json', 'json2yaml'] as Mode[]).map(m => (
-          <button
-            key={m}
-            onClick={() => { setMode(m); setInput(''); setOutput(''); setError('') }}
-            className={m === mode ? 'btn-primary' : 'btn-secondary'}
-          >
+          <button key={m} onClick={() => { setMode(m); setInput(''); setOutput(''); setError('') }} className={`tool-tab ${m === mode ? 'active' : ''}`}>
             {m === 'yaml2json' ? 'YAML → JSON' : 'JSON → YAML'}
           </button>
         ))}
       </div>
 
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
-          {mode === 'yaml2json' ? 'YAML Input' : 'JSON Input'}
-        </label>
+        <label className="tool-label block mb-1">{mode === 'yaml2json' ? 'YAML Input' : 'JSON Input'}</label>
         <FileDropTextarea
           className="h-64"
           placeholder={mode === 'yaml2json' ? 'key: value\nlist:\n  - item1\n  - item2' : '{"key": "value", "list": ["item1", "item2"]}'}
@@ -333,26 +327,17 @@ export default function YamlJson() {
       </div>
 
       <div>
-        <div className="flex items-center justify-between mb-1">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block">
+        <div className="tool-output-header">
+          <label className="tool-label">
             {mode === 'yaml2json' ? 'JSON Output' : 'YAML Output'}
             {output && <span className="ml-2 text-gray-400 dark:text-gray-500">({output.length} chars)</span>}
           </label>
-          <CopyButton text={output} />
+          <CopyButton text={output} toast={mode === 'yaml2json' ? 'JSON copied' : 'YAML copied'} />
         </div>
-        <textarea
-          className="tool-textarea h-64"
-          readOnly
-          value={output}
-          placeholder="Output will appear here..."
-        />
+        <textarea className="tool-textarea-output h-64" readOnly value={output} placeholder="Output will appear here..." />
       </div>
 
-      {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
-          {error}
-        </div>
-      )}
+      {error && <p className="tool-msg tool-msg--error">{error}</p>}
     </div>
   )
 }

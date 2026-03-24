@@ -183,7 +183,7 @@ export default function ChmodCalculator() {
     <div className="space-y-4">
       {/* Presets */}
       <div className="flex items-center gap-2 flex-wrap">
-        <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Presets:</span>
+        <span className="tool-label">Presets:</span>
         {PRESETS.map(p => (
           <button key={p.label} onClick={() => applyPreset(p.octal)} className="btn-secondary text-xs px-2 py-1">
             {p.label}
@@ -234,7 +234,7 @@ export default function ChmodCalculator() {
             <code className="font-mono text-sm text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded px-3 py-1 flex-1">
               {value}
             </code>
-            <CopyButton text={value} />
+            <CopyButton text={value} toast={`${label} copied`} />
           </div>
         ))}
         <div className="mt-2 text-sm text-gray-600 dark:text-gray-400 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-900/40 rounded-lg px-3 py-2">
@@ -245,7 +245,7 @@ export default function ChmodCalculator() {
       {/* Reverse inputs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Parse Octal (e.g. 755)</label>
+          <label className="tool-label block mb-1">Parse Octal (e.g. 755)</label>
           <input
             type="text"
             className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm font-mono text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
@@ -254,13 +254,13 @@ export default function ChmodCalculator() {
             onChange={e => handleOctalInput(e.target.value)}
           />
           {octalError && (
-            <div className="text-sm px-3 py-2 mt-1 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+            <p className="tool-msg tool-msg--error">
               {octalError}
-            </div>
+            </p>
           )}
         </div>
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Parse Symbolic (e.g. rwxr-xr-x)</label>
+          <label className="tool-label block mb-1">Parse Symbolic (e.g. rwxr-xr-x)</label>
           <input
             type="text"
             className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm font-mono text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
@@ -269,9 +269,9 @@ export default function ChmodCalculator() {
             onChange={e => handleSymbolicInput(e.target.value)}
           />
           {symbolicError && (
-            <div className="text-sm px-3 py-2 mt-1 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+            <p className="tool-msg tool-msg--error">
               {symbolicError}
-            </div>
+            </p>
           )}
         </div>
       </div>

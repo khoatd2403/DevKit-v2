@@ -59,7 +59,7 @@ export default function CronParser() {
   return (
     <div className="space-y-4">
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Cron Expression</label>
+        <label className="tool-label block mb-1">Cron Expression</label>
         <input
           type="text"
           className="tool-textarea h-auto py-2 text-lg font-mono"
@@ -81,9 +81,7 @@ export default function CronParser() {
 
       {/* Human description */}
       {valid && (
-        <div className="bg-primary-50 dark:bg-primary-950 border border-primary-200 dark:border-primary-800 rounded-xl px-4 py-3">
-          <p className="text-sm text-primary-700 dark:text-primary-300 font-medium">📅 {parseCron(expr)}</p>
-        </div>
+        <p className="tool-msg tool-msg--info font-medium">📅 {parseCron(expr)}</p>
       )}
 
       {/* Examples */}

@@ -28,6 +28,8 @@ export const tools: Tool[] = [
     icon: '📋',
     tags: ['json', 'format', 'validate', 'beautify', 'online'],
     popular: true,
+    seoTitle: 'Free JSON Formatter & Validator Online | DevTools Online',
+    seoDescription: 'Free online JSON formatter, validator & beautifier. Paste JSON to auto-format, detect errors, collapse nodes — no signup, 100% client-side, works instantly.',
   },
   {
     id: 'json-minifier',
@@ -36,6 +38,8 @@ export const tools: Tool[] = [
     category: 'json',
     icon: '📉',
     tags: ['json', 'minify', 'compress', 'online'],
+    seoTitle: 'Free JSON Minifier & Compressor Online | DevTools Online',
+    seoDescription: 'Minify and compress JSON data online — remove whitespace, reduce file size instantly. Free, no signup, 100% client-side, works in any browser.',
   },
   {
     id: 'json-to-csv',
@@ -44,6 +48,8 @@ export const tools: Tool[] = [
     category: 'json',
     icon: '📊',
     tags: ['json', 'csv', 'convert', 'online'],
+    seoTitle: 'Free JSON to CSV Converter Online | DevTools Online',
+    seoDescription: 'Convert JSON arrays to CSV format online — instant, free, no signup. Handles nested objects, custom delimiters, download as .csv file directly.',
   },
   {
     id: 'json-diff',
@@ -53,6 +59,8 @@ export const tools: Tool[] = [
     icon: '🔍',
     tags: ['json', 'diff', 'compare', 'online'],
     new: true,
+    seoTitle: 'Free JSON Diff Tool — Compare JSON Objects Online | DevTools Online',
+    seoDescription: 'Compare two JSON objects and highlight differences online. Visual diff with added, removed and changed keys — free, no signup, runs in browser.',
   },
 
   // Encoding
@@ -64,6 +72,8 @@ export const tools: Tool[] = [
     icon: '🔐',
     tags: ['base64', 'encode', 'decode', 'online'],
     popular: true,
+    seoTitle: 'Free Base64 Encode & Decode Online | DevTools Online',
+    seoDescription: 'Encode text or files to Base64 and decode Base64 strings online — free, instant, no upload to server. Drag & drop files, copy output in one click.',
   },
   {
     id: 'url-encode-decode',
@@ -73,6 +83,8 @@ export const tools: Tool[] = [
     icon: '🔗',
     tags: ['url', 'encode', 'decode', 'percent', 'online'],
     popular: true,
+    seoTitle: 'Free URL Encode & Decode Online — Percent Encoding | DevTools Online',
+    seoDescription: 'URL-encode and percent-decode strings online. Encode special characters for query params or decode %XX sequences — free, instant, no login needed.',
   },
   {
     id: 'html-encode-decode',
@@ -81,6 +93,8 @@ export const tools: Tool[] = [
     category: 'encoding',
     icon: '🏷️',
     tags: ['html', 'encode', 'decode', 'entities', 'online'],
+    seoTitle: 'Free HTML Encode & Decode — HTML Entities Online | DevTools Online',
+    seoDescription: 'Encode HTML special characters to entities and decode HTML entities back to text online. Free, instant, supports all standard HTML5 entities.',
   },
   {
     id: 'jwt-decoder',
@@ -90,6 +104,8 @@ export const tools: Tool[] = [
     icon: '🎫',
     tags: ['jwt', 'token', 'decode', 'auth', 'online'],
     popular: true,
+    seoTitle: 'Free JWT Decoder Online — Decode JSON Web Tokens | DevTools Online',
+    seoDescription: 'Decode and inspect JSON Web Tokens online. View header, payload & signature, check expiry, validate structure — no key required, runs in browser.',
   },
 
   // Crypto & Hash
@@ -101,6 +117,8 @@ export const tools: Tool[] = [
     icon: '🔒',
     tags: ['hash', 'md5', 'sha1', 'sha256', 'sha512', 'crypto', 'online'],
     popular: true,
+    seoTitle: 'Free Hash Generator Online — MD5, SHA256, SHA512 | DevTools Online',
+    seoDescription: 'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes online. Hash text or drop files to compute checksums — 100% client-side, no data sent to servers.',
   },
   {
     id: 'password-generator',
@@ -110,6 +128,8 @@ export const tools: Tool[] = [
     icon: '🔑',
     tags: ['password', 'generator', 'security', 'random', 'online'],
     popular: true,
+    seoTitle: 'Free Strong Password Generator Online | DevTools Online',
+    seoDescription: 'Generate strong, random passwords online. Customize length (4–128 chars), uppercase, lowercase, numbers & symbols — 100% local, never sent to server.',
   },
   {
     id: 'bcrypt',
@@ -119,6 +139,8 @@ export const tools: Tool[] = [
     icon: '🛡️',
     tags: ['bcrypt', 'hash', 'password', 'security', 'online'],
     new: true,
+    seoTitle: 'Free BCrypt Hash Generator & Verifier Online | DevTools Online',
+    seoDescription: 'Generate and verify BCrypt password hashes online. Configurable salt rounds, instant hash comparison — 100% client-side, no data leaves your browser.',
   },
 
   // String
@@ -130,6 +152,8 @@ export const tools: Tool[] = [
     icon: '🔤',
     tags: ['string', 'case', 'camel', 'snake', 'pascal', 'kebab', 'online'],
     popular: true,
+    seoTitle: 'Free String Case Converter Online — camelCase, snake_case & More | DevTools Online',
+    seoDescription: 'Convert strings between camelCase, snake_case, PascalCase, kebab-case, SCREAMING_SNAKE and more — free online tool, instant bulk conversion.',
   },
   {
     id: 'text-diff',
@@ -138,6 +162,8 @@ export const tools: Tool[] = [
     category: 'string',
     icon: '📝',
     tags: ['text', 'diff', 'compare', 'online'],
+    seoTitle: 'Free Text Diff Tool Online — Compare Two Texts | DevTools Online',
+    seoDescription: 'Find and highlight differences between two text blocks online. Side-by-side or inline diff view, line-by-line comparison — free, no signup needed.',
   },
   {
     id: 'lorem-ipsum',
@@ -146,6 +172,8 @@ export const tools: Tool[] = [
     category: 'string',
     icon: '📃',
     tags: ['lorem', 'ipsum', 'placeholder', 'text', 'generator', 'online'],
+    seoTitle: 'Free Lorem Ipsum Generator Online — Placeholder Text | DevTools Online',
+    seoDescription: 'Generate Lorem Ipsum placeholder text online — choose paragraphs, sentences or words, customize amount. Free, instant, no signup, copy with one click.',
   },
   {
     id: 'string-inspector',
@@ -154,6 +182,8 @@ export const tools: Tool[] = [
     category: 'string',
     icon: '🔎',
     tags: ['string', 'analyze', 'count', 'inspect', 'online'],
+    seoTitle: 'Free String Inspector & Analyzer Online | DevTools Online',
+    seoDescription: 'Analyze any string online — length, word count, character frequency, byte size, unique chars. Free, instant, runs entirely in your browser.',
   },
   {
     id: 'regex-tester',
@@ -163,6 +193,8 @@ export const tools: Tool[] = [
     icon: '🎯',
     tags: ['regex', 'regexp', 'test', 'pattern', 'match', 'online'],
     popular: true,
+    seoTitle: 'Free Regex Tester Online — Test Regular Expressions Live | DevTools Online',
+    seoDescription: 'Test and debug regular expressions online with real-time match highlighting. Supports flags, capture groups, replace preview — free, no signup.',
   },
 
   // Number
@@ -173,6 +205,8 @@ export const tools: Tool[] = [
     category: 'number',
     icon: '🔢',
     tags: ['number', 'binary', 'hex', 'octal', 'decimal', 'convert', 'online'],
+    seoTitle: 'Free Number Base Converter Online — Binary, Hex, Octal | DevTools Online',
+    seoDescription: 'Convert numbers between binary, octal, decimal and hexadecimal online — instant, free, no signup. Shows all bases simultaneously with copy buttons.',
   },
   {
     id: 'byte-converter',
@@ -181,6 +215,8 @@ export const tools: Tool[] = [
     category: 'number',
     icon: '💾',
     tags: ['bytes', 'kb', 'mb', 'gb', 'size', 'convert', 'online'],
+    seoTitle: 'Free Byte / File Size Converter Online | DevTools Online',
+    seoDescription: 'Convert between bytes, KB, MB, GB and TB online — instant, free, no signup. Supports decimal (SI) and binary (IEC) units side by side.',
   },
 
   // Date & Time
@@ -192,6 +228,8 @@ export const tools: Tool[] = [
     icon: '📅',
     tags: ['unix', 'timestamp', 'date', 'time', 'convert', 'online'],
     popular: true,
+    seoTitle: 'Free Unix Timestamp Converter Online — Epoch to Date | DevTools Online',
+    seoDescription: 'Convert Unix epoch timestamps to readable dates and vice versa online — instant, free, no signup. Supports seconds, milliseconds and ISO 8601.',
   },
   {
     id: 'cron-parser',
@@ -201,6 +239,8 @@ export const tools: Tool[] = [
     icon: '⏰',
     tags: ['cron', 'schedule', 'expression', 'parse', 'online'],
     new: true,
+    seoTitle: 'Free Cron Expression Parser & Explainer Online | DevTools Online',
+    seoDescription: 'Parse and explain cron job expressions in plain English online — see next run times, validate syntax. Free, instant, no signup, runs in browser.',
   },
 
   // Web
@@ -211,6 +251,8 @@ export const tools: Tool[] = [
     category: 'web',
     icon: '🎨',
     tags: ['css', 'minify', 'compress', 'web', 'online'],
+    seoTitle: 'Free CSS Minifier & Compressor Online | DevTools Online',
+    seoDescription: 'Minify and compress CSS code online — remove whitespace, comments and optimize output. Free, instant, no signup, reduce stylesheet file size fast.',
   },
   {
     id: 'html-minifier',
@@ -219,6 +261,19 @@ export const tools: Tool[] = [
     category: 'web',
     icon: '🌐',
     tags: ['html', 'minify', 'compress', 'web', 'online'],
+    seoTitle: 'Free HTML Minifier & Compressor Online | DevTools Online',
+    seoDescription: 'Minify and compress HTML markup online — remove whitespace, comments and optional attributes. Free, instant, no signup, reduce page size fast.',
+  },
+  {
+    id: 'html-preview',
+    name: 'HTML / CSS / JS Preview',
+    description: 'Write HTML, CSS, and JavaScript and see the live preview instantly in your browser',
+    category: 'web',
+    icon: '🖥️',
+    tags: ['html', 'css', 'javascript', 'js', 'preview', 'live', 'sandbox', 'playground', 'web', 'online'],
+    new: true,
+    seoTitle: 'Free HTML / CSS / JS Live Preview Online — Sandbox | DevTools Online',
+    seoDescription: 'Write HTML, CSS and JavaScript and see a live preview instantly in your browser — free online sandbox, no setup, no signup, no server needed.',
   },
   {
     id: 'markdown-preview',
@@ -228,6 +283,8 @@ export const tools: Tool[] = [
     icon: '📖',
     tags: ['markdown', 'preview', 'render', 'html', 'online'],
     popular: true,
+    seoTitle: 'Free Markdown Live Preview Online — Rendered HTML | DevTools Online',
+    seoDescription: 'Live Markdown editor with real-time HTML preview online. Supports GFM, tables, code blocks and task lists — copy HTML or download, no login needed.',
   },
   {
     id: 'meta-tag-generator',
@@ -237,6 +294,8 @@ export const tools: Tool[] = [
     icon: '🏷️',
     tags: ['meta', 'seo', 'tags', 'html', 'generator', 'online'],
     new: true,
+    seoTitle: 'Free SEO Meta Tag Generator Online | DevTools Online',
+    seoDescription: 'Generate SEO meta tags for your website online — title, description, Open Graph, Twitter Card. Copy-ready HTML tags, free, no signup required.',
   },
 
   // Color
@@ -248,6 +307,8 @@ export const tools: Tool[] = [
     icon: '🎨',
     tags: ['color', 'hex', 'rgb', 'hsl', 'hsv', 'convert', 'online'],
     popular: true,
+    seoTitle: 'Free Color Converter Online — HEX, RGB, HSL, HSV | DevTools Online',
+    seoDescription: 'Convert colors between HEX, RGB, HSL and HSV formats instantly online. Click to pick a color and get all formats at once — free, no signup.',
   },
   {
     id: 'color-palette',
@@ -257,6 +318,8 @@ export const tools: Tool[] = [
     icon: '🖌️',
     tags: ['color', 'palette', 'gradient', 'generator', 'online'],
     new: true,
+    seoTitle: 'Free Color Palette Generator Online | DevTools Online',
+    seoDescription: 'Generate beautiful color palettes and gradients online — complementary, triadic, analogous, monochromatic schemes. Free, copy HEX codes, no signup.',
   },
 
   // Generators
@@ -268,6 +331,8 @@ export const tools: Tool[] = [
     icon: '⚡',
     tags: ['uuid', 'guid', 'generate', 'id', 'random', 'online'],
     popular: true,
+    seoTitle: 'Free UUID Generator Online — v1, v4, v7 UUIDs | DevTools Online',
+    seoDescription: 'Generate RFC-compliant UUID v1, v4 and v7 identifiers online — bulk generation, copy with one click. Cryptographically random, 100% client-side.',
   },
   {
     id: 'random-string',
@@ -276,6 +341,8 @@ export const tools: Tool[] = [
     category: 'generator',
     icon: '🎲',
     tags: ['random', 'string', 'generator', 'token', 'online'],
+    seoTitle: 'Free Random String Generator Online — Custom Charset & Length | DevTools Online',
+    seoDescription: 'Generate random strings with custom length and character set online — alphanumeric, hex, base64, custom. Bulk generation, free, no signup needed.',
   },
 
   // Formatters
@@ -286,6 +353,8 @@ export const tools: Tool[] = [
     category: 'formatter',
     icon: '🗄️',
     tags: ['sql', 'format', 'query', 'database', 'online', 'beautify'],
+    seoTitle: 'Free SQL Formatter & Beautifier Online | DevTools Online',
+    seoDescription: 'Format and beautify SQL queries online — supports MySQL, PostgreSQL, SQL Server, T-SQL. Configurable indentation, keyword case — free, no signup.',
   },
   {
     id: 'xml-formatter',
@@ -294,6 +363,8 @@ export const tools: Tool[] = [
     category: 'formatter',
     icon: '📄',
     tags: ['xml', 'format', 'validate', 'beautify', 'online'],
+    seoTitle: 'Free XML Formatter & Validator Online | DevTools Online',
+    seoDescription: 'Format and validate XML documents online — beautify with proper indentation, detect syntax errors. Free, instant, no signup, supports large files.',
   },
 
   // Misc
@@ -304,6 +375,8 @@ export const tools: Tool[] = [
     category: 'misc',
     icon: '🖼️',
     tags: ['image', 'base64', 'convert', 'data-url', 'online'],
+    seoTitle: 'Free Image to Base64 Converter Online | DevTools Online',
+    seoDescription: 'Convert images to Base64 encoded data URLs online — drag and drop any image, copy data URI. Free, 100% client-side, no upload to server, no signup.',
   },
   {
     id: 'qr-generator',
@@ -312,6 +385,8 @@ export const tools: Tool[] = [
     category: 'misc',
     icon: '📱',
     tags: ['qr', 'qrcode', 'generate', 'barcode', 'online'],
+    seoTitle: 'Free QR Code Generator Online — URL, WiFi, vCard & More | DevTools Online',
+    seoDescription: 'Generate QR codes from text, URLs, WiFi credentials, email, phone, SMS or vCard online — download PNG, free, no signup, customizable size.',
   },
 
   // ── New tools ──────────────────────────────────────────────────────────────
@@ -325,6 +400,8 @@ export const tools: Tool[] = [
     icon: '📄',
     tags: ['yaml', 'json', 'convert', 'online'],
     new: true,
+    seoTitle: 'Free YAML to JSON Converter Online (& JSON to YAML) | DevTools Online',
+    seoDescription: 'Convert YAML to JSON or JSON to YAML online — instant bidirectional conversion, syntax validation, copy output. Free, no signup, works in browser.',
   },
   {
     id: 'json-to-typescript',
@@ -334,6 +411,8 @@ export const tools: Tool[] = [
     icon: '🔷',
     tags: ['json', 'typescript', 'interface', 'type', 'generate', 'online'],
     new: true,
+    seoTitle: 'Free JSON to TypeScript Interface Generator Online | DevTools Online',
+    seoDescription: 'Generate TypeScript interfaces from JSON online — handles nested objects, arrays, optional fields. Free, no signup, copy-ready TS code instantly.',
   },
   {
     id: 'jsonpath-tester',
@@ -343,6 +422,8 @@ export const tools: Tool[] = [
     icon: '🎯',
     tags: ['jsonpath', 'json', 'query', 'path', 'filter', 'online'],
     new: true,
+    seoTitle: 'Free JSONPath Tester & Query Tool Online | DevTools Online',
+    seoDescription: 'Test JSONPath expressions against JSON data online with real-time results. Filter, extract and navigate JSON using path syntax — free, no signup.',
   },
   {
     id: 'json-schema-validator',
@@ -352,6 +433,8 @@ export const tools: Tool[] = [
     icon: '✅',
     tags: ['json', 'schema', 'validate', 'jsonschema', 'online'],
     new: true,
+    seoTitle: 'Free JSON Schema Validator Online | DevTools Online',
+    seoDescription: 'Validate JSON data against a JSON Schema online — detailed error messages, Draft-07 support. Free, no signup, runs entirely in your browser.',
   },
 
   // Encoding (new)
@@ -363,6 +446,8 @@ export const tools: Tool[] = [
     icon: '🔢',
     tags: ['hex', 'hexadecimal', 'encode', 'decode', 'online'],
     new: true,
+    seoTitle: 'Free Hex Encode & Decode Online | DevTools Online',
+    seoDescription: 'Encode text to hexadecimal and decode hex strings back to plain text online — free, instant, no signup. Supports UTF-8 and ASCII encoding.',
   },
   {
     id: 'binary-encode-decode',
@@ -372,6 +457,8 @@ export const tools: Tool[] = [
     icon: '💻',
     tags: ['binary', 'bits', 'encode', 'decode', 'online'],
     new: true,
+    seoTitle: 'Free Binary Encode & Decode Online | DevTools Online',
+    seoDescription: 'Encode text to binary bits and decode binary back to text online — free, instant, no signup. Displays 8-bit groups with space separation.',
   },
 
   // String (new)
@@ -383,6 +470,8 @@ export const tools: Tool[] = [
     icon: '🔗',
     tags: ['slug', 'url', 'permalink', 'string', 'seo', 'online'],
     new: true,
+    seoTitle: 'Free Slug Generator Online — URL-Friendly Slugs | DevTools Online',
+    seoDescription: 'Convert text to URL-friendly slugs online — customize separator, case, remove stop words. Free, instant, perfect for SEO-friendly URLs and permalinks.',
   },
   {
     id: 'string-escape',
@@ -392,6 +481,8 @@ export const tools: Tool[] = [
     icon: '🔧',
     tags: ['escape', 'unescape', 'string', 'js', 'json', 'html', 'regex', 'online'],
     new: true,
+    seoTitle: 'Free String Escape / Unescape Online — JS, JSON, HTML, Regex | DevTools Online',
+    seoDescription: 'Escape and unescape strings for JavaScript, JSON, HTML, Regex and URL encoding online — free, instant, no signup, runs entirely in browser.',
   },
   {
     id: 'html-to-markdown',
@@ -401,6 +492,8 @@ export const tools: Tool[] = [
     icon: '📝',
     tags: ['html', 'markdown', 'convert', 'md', 'online'],
     new: true,
+    seoTitle: 'Free HTML to Markdown Converter Online | DevTools Online',
+    seoDescription: 'Convert HTML markup to clean Markdown syntax online — headings, links, images, tables, lists. Free, instant, no signup, copy or download output.',
   },
 
   // Date & Time (new)
@@ -412,6 +505,8 @@ export const tools: Tool[] = [
     icon: '🌍',
     tags: ['timezone', 'time', 'convert', 'utc', 'dst', 'world', 'online'],
     new: true,
+    seoTitle: 'Free Timezone Converter Online — Convert Time Zones Instantly | DevTools Online',
+    seoDescription: 'Convert time between any two timezones online — supports all IANA zones, DST-aware, shows UTC offset. Free, instant, no signup required.',
   },
   {
     id: 'date-calculator',
@@ -421,6 +516,8 @@ export const tools: Tool[] = [
     icon: '🗓️',
     tags: ['date', 'calculator', 'difference', 'days', 'add', 'subtract', 'online'],
     new: true,
+    seoTitle: 'Free Date Calculator Online — Difference & Add/Subtract Days | DevTools Online',
+    seoDescription: 'Calculate the difference between two dates or add/subtract days, months and years online — free, instant, no signup, works in your browser.',
   },
 
   // Web (new)
@@ -432,6 +529,8 @@ export const tools: Tool[] = [
     icon: '✨',
     tags: ['css', 'format', 'beautify', 'minify', 'web', 'online'],
     new: true,
+    seoTitle: 'Free CSS Formatter & Beautifier Online | DevTools Online',
+    seoDescription: 'Beautify or minify CSS code online — format with proper indentation, organize properties. Free, instant, no signup, supports modern CSS syntax.',
   },
   {
     id: 'js-formatter',
@@ -441,6 +540,8 @@ export const tools: Tool[] = [
     icon: '⚡',
     tags: ['javascript', 'js', 'minify', 'format', 'beautify', 'online'],
     new: true,
+    seoTitle: 'Free JavaScript Minifier & Formatter Online | DevTools Online',
+    seoDescription: 'Minify or beautify JavaScript code online — format with Prettier-style indentation or compress for production. Free, instant, no signup required.',
   },
   {
     id: 'url-parser',
@@ -450,6 +551,8 @@ export const tools: Tool[] = [
     icon: '🔍',
     tags: ['url', 'parse', 'query', 'params', 'host', 'path', 'online'],
     new: true,
+    seoTitle: 'Free URL Parser Online — Analyze URL Components | DevTools Online',
+    seoDescription: 'Parse any URL into its components — protocol, host, path, query parameters, hash — online. Free, instant, no signup, copy individual parts easily.',
   },
 
   // Formatters (new)
@@ -461,6 +564,8 @@ export const tools: Tool[] = [
     icon: '📋',
     tags: ['yaml', 'format', 'validate', 'beautify', 'online'],
     new: true,
+    seoTitle: 'Free YAML Formatter & Validator Online | DevTools Online',
+    seoDescription: 'Format and validate YAML documents online — detect syntax errors, normalize indentation, view structure. Free, instant, no signup, runs in browser.',
   },
   {
     id: 'csv-to-json',
@@ -470,6 +575,8 @@ export const tools: Tool[] = [
     icon: '📊',
     tags: ['csv', 'json', 'convert', 'table', 'data', 'online'],
     new: true,
+    seoTitle: 'Free CSV to JSON Converter Online | DevTools Online',
+    seoDescription: 'Convert CSV data to JSON array online — auto-detect delimiter, custom headers, type inference. Free, instant, no signup, copy or download output.',
   },
 
   // Misc (new)
@@ -481,6 +588,8 @@ export const tools: Tool[] = [
     icon: '🔐',
     tags: ['chmod', 'unix', 'linux', 'permissions', 'octal', 'rwx', 'online'],
     new: true,
+    seoTitle: 'Free Chmod Calculator Online — Unix File Permissions | DevTools Online',
+    seoDescription: 'Calculate Unix file permissions from octal or symbolic notation online. Convert rwxr-xr-x to 755 and vice versa — free, instant, no signup needed.',
   },
 
   // Crypto (new)
@@ -492,6 +601,8 @@ export const tools: Tool[] = [
     icon: '🎟️',
     tags: ['jwt', 'token', 'encode', 'sign', 'hmac', 'auth', 'online'],
     new: true,
+    seoTitle: 'Free JWT Encoder & Signer Online — HS256, HS512 | DevTools Online',
+    seoDescription: 'Create and sign JSON Web Tokens online with HS256, HS384 or HS512. Set payload, expiry, custom claims — free, runs in browser, no signup needed.',
   },
 
   // Converter
@@ -503,6 +614,8 @@ export const tools: Tool[] = [
     icon: '🖼️',
     tags: ['image', 'convert', 'jpg', 'png', 'webp', 'bmp', 'online'],
     new: true,
+    seoTitle: 'Free Image Converter Online — JPG, PNG, WebP, BMP | DevTools Online',
+    seoDescription: 'Convert images between JPG, PNG, WebP and BMP formats online — 100% client-side, no upload to server. Free, instant, no signup, preserves quality.',
   },
   {
     id: 'image-resizer',
@@ -512,6 +625,8 @@ export const tools: Tool[] = [
     icon: '📐',
     tags: ['image', 'resize', 'compress', 'quality', 'scale', 'online'],
     new: true,
+    seoTitle: 'Free Image Resizer Online — Resize & Compress Images | DevTools Online',
+    seoDescription: 'Resize and compress images online with quality control — set exact dimensions or scale by percentage. Free, 100% client-side, no signup required.',
   },
   {
     id: 'svg-to-png',
@@ -521,6 +636,8 @@ export const tools: Tool[] = [
     icon: '✏️',
     tags: ['svg', 'png', 'jpg', 'convert', 'rasterize', 'vector', 'online'],
     new: true,
+    seoTitle: 'Free SVG to PNG / JPG Converter Online | DevTools Online',
+    seoDescription: 'Convert SVG vector files to rasterized PNG or JPG images online — set custom resolution, download instantly. Free, 100% client-side, no signup.',
   },
   {
     id: 'csv-to-excel',
@@ -530,6 +647,8 @@ export const tools: Tool[] = [
     icon: '📊',
     tags: ['csv', 'excel', 'xlsx', 'convert', 'spreadsheet', 'online'],
     new: true,
+    seoTitle: 'Free CSV to Excel Converter Online — Download XLSX | DevTools Online',
+    seoDescription: 'Convert CSV files to Excel XLSX spreadsheet format online — instant download, no signup, 100% client-side. Free online CSV to Excel converter.',
   },
   {
     id: 'json-to-excel',
@@ -539,6 +658,8 @@ export const tools: Tool[] = [
     icon: '📋',
     tags: ['json', 'excel', 'xlsx', 'convert', 'spreadsheet', 'export', 'online'],
     new: true,
+    seoTitle: 'Free JSON to Excel Converter Online — Export XLSX | DevTools Online',
+    seoDescription: 'Export JSON array data to Excel XLSX spreadsheet online — instant download, free, no signup, 100% client-side. Handles nested objects and arrays.',
   },
   {
     id: 'markdown-to-html',
@@ -548,6 +669,8 @@ export const tools: Tool[] = [
     icon: '📝',
     tags: ['markdown', 'html', 'convert', 'export', 'md', 'online'],
     new: true,
+    seoTitle: 'Free Markdown to HTML Converter Online | DevTools Online',
+    seoDescription: 'Convert Markdown to styled HTML online — download as .html file, copy code, preview output. Free, instant, supports GFM tables and task lists.',
   },
   {
     id: 'html-to-pdf',
@@ -557,35 +680,37 @@ export const tools: Tool[] = [
     icon: '📄',
     tags: ['html', 'pdf', 'convert', 'print', 'export', 'online'],
     new: true,
+    seoTitle: 'Free HTML to PDF Converter Online | DevTools Online',
+    seoDescription: 'Render HTML content and export to PDF via browser print online — supports custom CSS, images. Free, no signup, works in any modern browser.',
   },
 
   // String (new batch 2)
-  { id: 'text-sorter', name: 'Text Sorter', description: 'Sort, deduplicate, reverse and shuffle text lines online', category: 'string', icon: '📑', tags: ['text', 'sort', 'deduplicate', 'lines', 'shuffle', 'online'], new: true },
-  { id: 'word-frequency', name: 'Word Frequency', description: 'Count word and character frequency in text online', category: 'string', icon: '📊', tags: ['word', 'frequency', 'count', 'text', 'analyze', 'online'], new: true },
-  { id: 'text-stats', name: 'Text Statistics', description: 'Detailed text stats: reading time, sentences, paragraphs online', category: 'string', icon: '📈', tags: ['text', 'statistics', 'reading', 'time', 'words', 'sentences', 'online'], new: true },
+  { id: 'text-sorter', name: 'Text Sorter', description: 'Sort, deduplicate, reverse and shuffle text lines online', category: 'string', icon: '📑', tags: ['text', 'sort', 'deduplicate', 'lines', 'shuffle', 'online'], new: true, seoTitle: 'Free Text Line Sorter & Deduplicator Online | DevTools Online', seoDescription: 'Sort, deduplicate, reverse and shuffle text lines online — alphabetical, numerical, by length or random order. Free, instant, no signup needed.' },
+  { id: 'word-frequency', name: 'Word Frequency', description: 'Count word and character frequency in text online', category: 'string', icon: '📊', tags: ['word', 'frequency', 'count', 'text', 'analyze', 'online'], new: true, seoTitle: 'Free Word Frequency Counter Online | DevTools Online', seoDescription: 'Count word and character frequency in any text online — ranked list with counts and percentages. Free, instant, no signup, 100% in-browser.' },
+  { id: 'text-stats', name: 'Text Statistics', description: 'Detailed text stats: reading time, sentences, paragraphs online', category: 'string', icon: '📈', tags: ['text', 'statistics', 'reading', 'time', 'words', 'sentences', 'online'], new: true, seoTitle: 'Free Text Statistics & Readability Tool Online | DevTools Online', seoDescription: 'Get detailed text statistics online — word count, sentence count, reading time, paragraphs, Flesch score. Free, instant, runs in your browser.' },
 
   // JSON (new batch 2)
-  { id: 'json-to-code', name: 'JSON to Code', description: 'Generate Python, PHP, Go, Ruby, Java code from JSON online', category: 'json', icon: '💻', tags: ['json', 'code', 'python', 'php', 'go', 'ruby', 'generate', 'online'], new: true },
+  { id: 'json-to-code', name: 'JSON to Code', description: 'Generate Python, PHP, Go, Ruby, Java code from JSON online', category: 'json', icon: '💻', tags: ['json', 'code', 'python', 'php', 'go', 'ruby', 'generate', 'online'], new: true, seoTitle: 'Free JSON to Code Generator Online — Python, PHP, Go & More | DevTools Online', seoDescription: 'Generate Python, PHP, Go, Ruby and Java code from JSON online. Instant code scaffolding from any JSON structure — free, no signup, copy ready.' },
 
   // Crypto (new batch 2)
-  { id: 'aes-encrypt', name: 'AES Encrypt / Decrypt', description: 'Encrypt and decrypt text using AES-256-GCM in the browser online', category: 'crypto', icon: '🛡️', tags: ['aes', 'encrypt', 'decrypt', 'crypto', 'security', 'cipher', 'online'], new: true },
-  { id: 'totp-generator', name: 'TOTP / 2FA Generator', description: 'Generate and verify time-based one-time passwords (RFC 6238) online', category: 'crypto', icon: '🔑', tags: ['totp', '2fa', 'otp', 'authenticator', 'mfa', 'google', 'online'], new: true },
+  { id: 'aes-encrypt', name: 'AES Encrypt / Decrypt', description: 'Encrypt and decrypt text using AES-256-GCM in the browser online', category: 'crypto', icon: '🛡️', tags: ['aes', 'encrypt', 'decrypt', 'crypto', 'security', 'cipher', 'online'], new: true, seoTitle: 'Free AES-256 Encrypt & Decrypt Online | DevTools Online', seoDescription: 'Encrypt and decrypt text using AES-256-GCM in your browser online — 100% client-side, key never sent to server. Free, instant, no signup required.' },
+  { id: 'totp-generator', name: 'TOTP / 2FA Generator', description: 'Generate and verify time-based one-time passwords (RFC 6238) online', category: 'crypto', icon: '🔑', tags: ['totp', '2fa', 'otp', 'authenticator', 'mfa', 'google', 'online'], new: true, seoTitle: 'Free TOTP / 2FA Code Generator Online — RFC 6238 | DevTools Online', seoDescription: 'Generate and verify TOTP two-factor authentication codes online (RFC 6238). Test Google Authenticator secrets — free, runs locally in browser.' },
 
   // Number (new batch 2)
-  { id: 'unit-converter', name: 'Unit Converter', description: 'Convert between units: length, weight, temperature, area, speed online', category: 'number', icon: '📏', tags: ['unit', 'convert', 'length', 'weight', 'temperature', 'area', 'speed', 'online'], new: true },
-  { id: 'math-evaluator', name: 'Math Evaluator', description: 'Evaluate mathematical expressions with variables and functions online', category: 'number', icon: '🧮', tags: ['math', 'calculator', 'expression', 'evaluate', 'formula', 'online'], new: true },
+  { id: 'unit-converter', name: 'Unit Converter', description: 'Convert between units: length, weight, temperature, area, speed online', category: 'number', icon: '📏', tags: ['unit', 'convert', 'length', 'weight', 'temperature', 'area', 'speed', 'online'], new: true, seoTitle: 'Free Unit Converter Online — Length, Weight, Temperature & More | DevTools Online', seoDescription: 'Convert between units of length, weight, temperature, area and speed online — free, instant, no signup. All conversions run in your browser.' },
+  { id: 'math-evaluator', name: 'Math Evaluator', description: 'Evaluate mathematical expressions with variables and functions online', category: 'number', icon: '🧮', tags: ['math', 'calculator', 'expression', 'evaluate', 'formula', 'online'], new: true, seoTitle: 'Free Math Expression Evaluator Online | DevTools Online', seoDescription: 'Evaluate mathematical expressions with variables and functions online — supports trig, log, constants. Free, instant, no signup, runs in browser.' },
 
   // Color (new batch 2)
-  { id: 'css-gradient', name: 'CSS Gradient Generator', description: 'Visually build linear, radial, and conic CSS gradients online', category: 'color', icon: '🌈', tags: ['css', 'gradient', 'linear', 'radial', 'color', 'generator', 'online'], new: true },
-  { id: 'css-shadow', name: 'CSS Shadow Generator', description: 'Visually build box-shadow and text-shadow CSS values online', category: 'color', icon: '🌑', tags: ['css', 'shadow', 'box-shadow', 'text-shadow', 'generator', 'online'], new: true },
+  { id: 'css-gradient', name: 'CSS Gradient Generator', description: 'Visually build linear, radial, and conic CSS gradients online', category: 'color', icon: '🌈', tags: ['css', 'gradient', 'linear', 'radial', 'color', 'generator', 'online'], new: true, seoTitle: 'Free CSS Gradient Generator Online — Linear, Radial, Conic | DevTools Online', seoDescription: 'Visually build linear, radial and conic CSS gradients online — real-time preview, copy CSS code. Free, no signup, supports all modern gradient types.' },
+  { id: 'css-shadow', name: 'CSS Shadow Generator', description: 'Visually build box-shadow and text-shadow CSS values online', category: 'color', icon: '🌑', tags: ['css', 'shadow', 'box-shadow', 'text-shadow', 'generator', 'online'], new: true, seoTitle: 'Free CSS Shadow Generator Online — box-shadow & text-shadow | DevTools Online', seoDescription: 'Visually build box-shadow and text-shadow CSS values online — real-time preview, copy CSS property. Free, no signup, supports multiple layers.' },
 
   // Web (new batch 2)
-  { id: 'http-status-codes', name: 'HTTP Status Codes', description: 'Searchable reference for all HTTP status codes with descriptions online', category: 'web', icon: '🌐', tags: ['http', 'status', 'codes', '404', '200', '500', 'reference', 'online'], new: true },
-  { id: 'mime-types', name: 'MIME Types Lookup', description: 'Look up MIME types by file extension or content type online', category: 'web', icon: '📂', tags: ['mime', 'type', 'extension', 'content-type', 'file', 'online'], new: true },
-  { id: 'curl-to-code', name: 'Curl to Code', description: 'Convert curl commands to fetch, axios, or Python requests code online', category: 'web', icon: '⚡', tags: ['curl', 'fetch', 'axios', 'python', 'http', 'convert', 'online'], new: true },
+  { id: 'http-status-codes', name: 'HTTP Status Codes', description: 'Searchable reference for all HTTP status codes with descriptions online', category: 'web', icon: '🌐', tags: ['http', 'status', 'codes', '404', '200', '500', 'reference', 'online'], new: true, seoTitle: 'Free HTTP Status Codes Reference Online — All 1xx–5xx | DevTools Online', seoDescription: 'Searchable reference for all HTTP status codes with descriptions and examples online — 1xx, 2xx, 3xx, 4xx, 5xx. Free, instant, no signup needed.' },
+  { id: 'mime-types', name: 'MIME Types Lookup', description: 'Look up MIME types by file extension or content type online', category: 'web', icon: '📂', tags: ['mime', 'type', 'extension', 'content-type', 'file', 'online'], new: true, seoTitle: 'Free MIME Types Lookup Online — File Extension to Content-Type | DevTools Online', seoDescription: 'Look up MIME types by file extension or content-type header online — comprehensive database. Free, instant, no signup, works in any browser.' },
+  { id: 'curl-to-code', name: 'Curl to Code', description: 'Convert curl commands to fetch, axios, or Python requests code online', category: 'web', icon: '⚡', tags: ['curl', 'fetch', 'axios', 'python', 'http', 'convert', 'online'], new: true, seoTitle: 'Free Curl to Code Converter Online — fetch, axios, Python | DevTools Online', seoDescription: 'Convert curl commands to fetch, axios, Python requests or PHP code online — instant, free, no signup. Great for API integration and code generation.' },
 
   // Generator (new batch 2)
-  { id: 'data-faker', name: 'Data Faker', description: 'Generate realistic fake test data: names, emails, phones, addresses online', category: 'generator', icon: '🎭', tags: ['fake', 'data', 'faker', 'test', 'name', 'email', 'phone', 'mock', 'online'], new: true },
+  { id: 'data-faker', name: 'Data Faker', description: 'Generate realistic fake test data: names, emails, phones, addresses online', category: 'generator', icon: '🎭', tags: ['fake', 'data', 'faker', 'test', 'name', 'email', 'phone', 'mock', 'online'], new: true, seoTitle: 'Free Fake Data Generator Online — Names, Emails, Addresses | DevTools Online', seoDescription: 'Generate realistic fake test data online — names, emails, phones, addresses, companies, up to 1000 rows. Free, no signup, export as JSON or CSV.' },
 
   // Generator (original)
   {
@@ -596,84 +721,86 @@ export const tools: Tool[] = [
     icon: '🆔',
     tags: ['nanoid', 'ulid', 'id', 'generate', 'unique', 'random', 'online'],
     new: true,
+    seoTitle: 'Free Nano ID & ULID Generator Online | DevTools Online',
+    seoDescription: 'Generate compact unique identifiers online — Nano IDs (URL-safe) and ULIDs (sortable). Custom alphabet, configurable length, free, no signup.',
   },
 
   // Batch 4 - Text/Code
-  { id: 'html-formatter', name: 'HTML Formatter', description: 'Beautify and format HTML markup with proper indentation online', category: 'web', icon: '🖊️', tags: ['html', 'format', 'beautify', 'indent', 'web', 'online'], new: true },
-  { id: 'csv-viewer', name: 'CSV Viewer', description: 'View and explore CSV data as an interactive table with sorting online', category: 'formatter', icon: '📋', tags: ['csv', 'table', 'viewer', 'sort', 'filter', 'data', 'online'], new: true },
-  { id: 'env-parser', name: '.ENV Parser', description: 'Parse .env files to JSON and convert back, view key/value pairs online', category: 'misc', icon: '🔑', tags: ['env', 'dotenv', 'environment', 'json', 'config', 'parse', 'online'], new: true },
-  { id: 'markdown-table', name: 'Markdown Table Generator', description: 'Create Markdown tables from a visual grid editor online', category: 'string', icon: '📊', tags: ['markdown', 'table', 'generator', 'md', 'grid', 'online'], new: true },
+  { id: 'html-formatter', name: 'HTML Formatter', description: 'Beautify and format HTML markup with proper indentation online', category: 'web', icon: '🖊️', tags: ['html', 'format', 'beautify', 'indent', 'web', 'online'], new: true, seoTitle: 'Free HTML Formatter & Beautifier Online | DevTools Online', seoDescription: 'Beautify and format HTML markup with proper indentation online — configurable indent size, attributes formatting. Free, instant, no signup required.' },
+  { id: 'csv-viewer', name: 'CSV Viewer', description: 'View and explore CSV data as an interactive table with sorting online', category: 'formatter', icon: '📋', tags: ['csv', 'table', 'viewer', 'sort', 'filter', 'data', 'online'], new: true, seoTitle: 'Free CSV Viewer — Interactive Table with Sort & Filter | DevTools Online', seoDescription: 'View and explore CSV data as an interactive sortable table online — click headers to sort, search rows. Free, no signup, handles large CSV files.' },
+  { id: 'env-parser', name: '.ENV Parser', description: 'Parse .env files to JSON and convert back, view key/value pairs online', category: 'misc', icon: '🔑', tags: ['env', 'dotenv', 'environment', 'json', 'config', 'parse', 'online'], new: true, seoTitle: 'Free .ENV File Parser Online — ENV to JSON | DevTools Online', seoDescription: 'Parse .env files to JSON and convert back online — view key/value pairs, handle comments, multi-line values. Free, instant, no signup, client-side.' },
+  { id: 'markdown-table', name: 'Markdown Table Generator', description: 'Create Markdown tables from a visual grid editor online', category: 'string', icon: '📊', tags: ['markdown', 'table', 'generator', 'md', 'grid', 'online'], new: true, seoTitle: 'Free Markdown Table Generator Online | DevTools Online', seoDescription: 'Create Markdown tables from a visual grid editor online — add rows, columns, align cells, copy formatted Markdown. Free, no signup, instant output.' },
 
   // Batch 4 - Web/Network
-  { id: 'cidr-calculator', name: 'CIDR / IP Calculator', description: 'Calculate subnet, broadcast address, host range from CIDR notation online', category: 'web', icon: '🌐', tags: ['cidr', 'ip', 'subnet', 'network', 'calculator', 'ipv4', 'online'], new: true },
-  { id: 'http-headers-builder', name: 'HTTP Security Headers', description: 'Build and understand CORS, CSP, HSTS and other security headers online', category: 'web', icon: '🔒', tags: ['http', 'headers', 'cors', 'csp', 'hsts', 'security', 'online'], new: true },
-  { id: 'robots-txt', name: 'robots.txt Generator', description: 'Generate robots.txt file with GUI rule builder for crawlers online', category: 'web', icon: '🤖', tags: ['robots', 'txt', 'seo', 'crawler', 'sitemap', 'generator', 'online'], new: true },
-  { id: 'sitemap-generator', name: 'Sitemap Generator', description: 'Generate XML sitemap from a list of URLs online', category: 'web', icon: '🗺️', tags: ['sitemap', 'xml', 'seo', 'url', 'generator', 'online'], new: true },
+  { id: 'cidr-calculator', name: 'CIDR / IP Calculator', description: 'Calculate subnet, broadcast address, host range from CIDR notation online', category: 'web', icon: '🌐', tags: ['cidr', 'ip', 'subnet', 'network', 'calculator', 'ipv4', 'online'], new: true, seoTitle: 'Free CIDR / Subnet Calculator Online — IPv4 Network Tool | DevTools Online', seoDescription: 'Calculate subnet, broadcast address, host range and IP count from CIDR notation online. Free, instant, no signup — supports all IPv4 subnets.' },
+  { id: 'http-headers-builder', name: 'HTTP Security Headers', description: 'Build and understand CORS, CSP, HSTS and other security headers online', category: 'web', icon: '🔒', tags: ['http', 'headers', 'cors', 'csp', 'hsts', 'security', 'online'], new: true, seoTitle: 'Free HTTP Security Headers Builder Online — CORS, CSP, HSTS | DevTools Online', seoDescription: 'Build and understand CORS, CSP, HSTS and other HTTP security headers online. Visual builder with explanations — free, no signup, copy-ready output.' },
+  { id: 'robots-txt', name: 'robots.txt Generator', description: 'Generate robots.txt file with GUI rule builder for crawlers online', category: 'web', icon: '🤖', tags: ['robots', 'txt', 'seo', 'crawler', 'sitemap', 'generator', 'online'], new: true, seoTitle: 'Free robots.txt Generator Online — SEO Crawler Rules | DevTools Online', seoDescription: 'Generate a robots.txt file with a GUI rule builder online — allow/disallow paths, add sitemaps, configure crawlers. Free, no signup, instant output.' },
+  { id: 'sitemap-generator', name: 'Sitemap Generator', description: 'Generate XML sitemap from a list of URLs online', category: 'web', icon: '🗺️', tags: ['sitemap', 'xml', 'seo', 'url', 'generator', 'online'], new: true, seoTitle: 'Free XML Sitemap Generator Online | DevTools Online', seoDescription: 'Generate an XML sitemap from a list of URLs online — set priority, change frequency, last modified. Free, instant, no signup, downloadable output.' },
 
   // Batch 4 - Dev Tools
-  { id: 'keycode-tester', name: 'KeyCode Tester', description: 'Test keyboard events and inspect key codes, modifiers, and event properties online', category: 'misc', icon: '⌨️', tags: ['keycode', 'keyboard', 'event', 'key', 'shortcut', 'test', 'online'], new: true },
-  { id: 'aspect-ratio', name: 'Aspect Ratio Calculator', description: 'Calculate and convert aspect ratios for images and video (16:9, 4:3...) online', category: 'number', icon: '📐', tags: ['aspect', 'ratio', 'resolution', 'image', 'video', '16:9', 'online'], new: true },
-  { id: 'number-formatter', name: 'Number Formatter', description: 'Format numbers with locale-aware separators, currency, and notation online', category: 'number', icon: '🔢', tags: ['number', 'format', 'locale', 'currency', 'thousand', 'separator', 'online'], new: true },
-  { id: 'ts-to-js', name: 'TypeScript → JavaScript', description: 'Strip TypeScript types and transpile TS to plain JavaScript online', category: 'web', icon: '🟡', tags: ['typescript', 'javascript', 'ts', 'js', 'transpile', 'convert', 'online'], new: true },
+  { id: 'keycode-tester', name: 'KeyCode Tester', description: 'Test keyboard events and inspect key codes, modifiers, and event properties online', category: 'misc', icon: '⌨️', tags: ['keycode', 'keyboard', 'event', 'key', 'shortcut', 'test', 'online'], new: true, seoTitle: 'Free KeyCode Tester Online — Keyboard Event Inspector | DevTools Online', seoDescription: 'Test keyboard events and inspect key codes, key names, modifiers and event properties online. Free, no signup — identify any key instantly.' },
+  { id: 'aspect-ratio', name: 'Aspect Ratio Calculator', description: 'Calculate and convert aspect ratios for images and video (16:9, 4:3...) online', category: 'number', icon: '📐', tags: ['aspect', 'ratio', 'resolution', 'image', 'video', '16:9', 'online'], new: true, seoTitle: 'Free Aspect Ratio Calculator Online — 16:9, 4:3 & Custom | DevTools Online', seoDescription: 'Calculate and convert aspect ratios for images and video online — compute missing dimension from width/height. Free, instant, supports any ratio.' },
+  { id: 'number-formatter', name: 'Number Formatter', description: 'Format numbers with locale-aware separators, currency, and notation online', category: 'number', icon: '🔢', tags: ['number', 'format', 'locale', 'currency', 'thousand', 'separator', 'online'], new: true, seoTitle: 'Free Number Formatter Online — Locale, Currency & Notation | DevTools Online', seoDescription: 'Format numbers with locale-aware separators, currency symbols and scientific notation online — free, instant, no signup, supports all locales.' },
+  { id: 'ts-to-js', name: 'TypeScript → JavaScript', description: 'Strip TypeScript types and transpile TS to plain JavaScript online', category: 'web', icon: '🟡', tags: ['typescript', 'javascript', 'ts', 'js', 'transpile', 'convert', 'online'], new: true, seoTitle: 'Free TypeScript to JavaScript Transpiler Online | DevTools Online', seoDescription: 'Strip TypeScript types and transpile TS to plain JavaScript online — instant, free, no signup. Supports modern TypeScript syntax and decorators.' },
 
   // Batch 4 - Media/Visual
-  { id: 'favicon-generator', name: 'Favicon Generator', description: 'Generate favicons from emoji or text in multiple sizes online', category: 'generator', icon: '🎨', tags: ['favicon', 'icon', 'emoji', 'png', 'generator', 'website', 'online'], new: true },
-  { id: 'barcode-generator', name: 'Barcode Generator', description: 'Generate EAN-13, Code128, and other barcode formats online', category: 'generator', icon: '🔲', tags: ['barcode', 'ean', 'code128', 'qr', 'scan', 'generator', 'online'], new: true },
-  { id: 'image-compressor', name: 'Image Compressor', description: 'Compress and optimize images while preserving quality online', category: 'converter', icon: '📸', tags: ['image', 'compress', 'optimize', 'quality', 'size', 'jpg', 'png', 'online'], new: true },
+  { id: 'favicon-generator', name: 'Favicon Generator', description: 'Generate favicons from emoji or text in multiple sizes online', category: 'generator', icon: '🎨', tags: ['favicon', 'icon', 'emoji', 'png', 'generator', 'website', 'online'], new: true, seoTitle: 'Free Favicon Generator Online — From Emoji or Text | DevTools Online', seoDescription: 'Generate favicons from emoji or text in multiple sizes (16x16 to 512x512) online — download PNG, free, no signup, instant browser-side generation.' },
+  { id: 'barcode-generator', name: 'Barcode Generator', description: 'Generate EAN-13, Code128, and other barcode formats online', category: 'generator', icon: '🔲', tags: ['barcode', 'ean', 'code128', 'qr', 'scan', 'generator', 'online'], new: true, seoTitle: 'Free Barcode Generator Online — EAN-13, Code128 & More | DevTools Online', seoDescription: 'Generate EAN-13, Code128, Code39, UPC-A and other barcode formats online — download PNG, adjust size. Free, instant, no signup required.' },
+  { id: 'image-compressor', name: 'Image Compressor', description: 'Compress and optimize images while preserving quality online', category: 'converter', icon: '📸', tags: ['image', 'compress', 'optimize', 'quality', 'size', 'jpg', 'png', 'online'], new: true, seoTitle: 'Free Image Compressor Online — Reduce Image File Size | DevTools Online', seoDescription: 'Compress and optimize images online while preserving quality — reduce file size for web. Free, 100% client-side, no upload to server, no signup.' },
 
   // npm
-  { id: 'npm-checker', name: 'npm Package Checker', description: 'Look up any npm package — version, downloads, bundle size, dependencies, and changelog online', category: 'web', icon: '📦', tags: ['npm', 'package', 'node', 'registry', 'bundle', 'dependencies', 'version', 'online'], popular: true, new: true },
+  { id: 'npm-checker', name: 'npm Package Checker', description: 'Look up any npm package — version, downloads, bundle size, dependencies, and changelog online', category: 'web', icon: '📦', tags: ['npm', 'package', 'node', 'registry', 'bundle', 'dependencies', 'version', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'Package data fetched from the npm registry (registry.npmjs.org). Package names you search are sent to their API.', seoTitle: 'Free npm Package Checker Online — Version, Size & Downloads | DevTools Online', seoDescription: 'Look up any npm package online — latest version, weekly downloads, bundle size, dependencies & changelog. Instant search, powered by npm registry.' },
 
   // SVG Icons
-  { id: 'svg-icons', name: 'SVG Icon Browser', description: 'Search and browse 200,000+ icons from Heroicons, Lucide, Material, Tabler and more — copy SVG, JSX, or CDN link instantly online', category: 'web', icon: '🎨', tags: ['svg', 'icons', 'heroicons', 'lucide', 'material', 'tabler', 'iconify', 'design', 'online'], popular: true, new: true },
+  { id: 'svg-icons', name: 'SVG Icon Browser', description: 'Search and browse 200,000+ icons from Heroicons, Lucide, Material, Tabler and more — copy SVG, JSX, or CDN link instantly online', category: 'web', icon: '🎨', tags: ['svg', 'icons', 'heroicons', 'lucide', 'material', 'tabler', 'iconify', 'design', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'Icon data fetched from the Iconify CDN. Search queries are sent to their API.', seoTitle: 'Free SVG Icon Browser Online — 200,000+ Icons | DevTools Online', seoDescription: 'Search 200,000+ SVG icons from Heroicons, Lucide, Material Design, Tabler & more. Copy SVG, JSX or CDN link instantly — free online icon browser.' },
 
   // .NET / C#
-  { id: 'json-to-csharp', name: 'JSON to C# Classes', description: 'Generate C# class definitions from JSON — supports nested objects, arrays, nullable types, Newtonsoft & System.Text.Json attributes online', category: 'dotnet', icon: '🔷', tags: ['csharp', 'dotnet', 'json', 'class', 'model', 'poco', 'dto', 'newtonsoft', 'c#', 'online'], popular: true, new: true },
-  { id: 'nuget-checker', name: 'NuGet Package Checker', description: 'Search NuGet packages — version history, download stats, install commands, PackageReference snippets online', category: 'dotnet', icon: '📦', tags: ['nuget', 'package', 'dotnet', 'csharp', 'c#', '.net', 'library', 'dependency', 'online'], popular: true, new: true },
-  { id: 'connection-string-builder', name: 'Connection String Builder', description: 'Build database connection strings for SQL Server, MySQL, PostgreSQL, SQLite, Oracle and MongoDB with live preview online', category: 'dotnet', icon: '🔌', tags: ['connection', 'string', 'sql', 'server', 'mysql', 'postgresql', 'sqlite', 'oracle', 'mongodb', 'ef', 'dotnet', 'online'], popular: true, new: true },
-  { id: 'csharp-string-escape', name: 'C# String Escape', description: 'Escape/unescape C# strings — regular, verbatim @"..." and interpolated $"..." string formats online', category: 'dotnet', icon: '✏️', tags: ['csharp', 'c#', 'string', 'escape', 'verbatim', 'interpolated', 'dotnet', 'online'], new: true },
-  { id: 'sql-to-linq', name: 'SQL to LINQ', description: 'Convert SQL SELECT queries to LINQ method syntax — WHERE, ORDER BY, GROUP BY, HAVING, DISTINCT, TOP online', category: 'dotnet', icon: '🔃', tags: ['sql', 'linq', 'csharp', 'c#', 'dotnet', 'query', 'convert', 'ef', 'entity framework', 'online'], popular: true, new: true },
+  { id: 'json-to-csharp', name: 'JSON to C# Classes', description: 'Generate C# class definitions from JSON — supports nested objects, arrays, nullable types, Newtonsoft & System.Text.Json attributes online', category: 'dotnet', icon: '🔷', tags: ['csharp', 'dotnet', 'json', 'class', 'model', 'poco', 'dto', 'newtonsoft', 'c#', 'online'], popular: true, new: true, seoTitle: 'Free JSON to C# Class Generator Online | DevTools Online', seoDescription: 'Generate C# class definitions from JSON online — nested objects, arrays, nullable types, Newtonsoft & System.Text.Json attributes. Free, no signup.' },
+  { id: 'nuget-checker', name: 'NuGet Package Checker', description: 'Search NuGet packages — version history, download stats, install commands, PackageReference snippets online', category: 'dotnet', icon: '📦', tags: ['nuget', 'package', 'dotnet', 'csharp', 'c#', '.net', 'library', 'dependency', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'Package data fetched from api.nuget.org. Package names you search are sent to their API.', seoTitle: 'Free NuGet Package Checker Online | DevTools Online', seoDescription: 'Search NuGet packages online — version history, download stats, install commands and PackageReference snippets. Free, powered by api.nuget.org.' },
+  { id: 'connection-string-builder', name: 'Connection String Builder', description: 'Build database connection strings for SQL Server, MySQL, PostgreSQL, SQLite, Oracle and MongoDB with live preview online', category: 'dotnet', icon: '🔌', tags: ['connection', 'string', 'sql', 'server', 'mysql', 'postgresql', 'sqlite', 'oracle', 'mongodb', 'ef', 'dotnet', 'online'], popular: true, new: true, seoTitle: 'Free Connection String Builder Online — SQL Server, MySQL & More | DevTools Online', seoDescription: 'Build database connection strings for SQL Server, MySQL, PostgreSQL, SQLite, Oracle & MongoDB with live preview — free, copy-ready, no signup.' },
+  { id: 'csharp-string-escape', name: 'C# String Escape', description: 'Escape/unescape C# strings — regular, verbatim @"..." and interpolated $"..." string formats online', category: 'dotnet', icon: '✏️', tags: ['csharp', 'c#', 'string', 'escape', 'verbatim', 'interpolated', 'dotnet', 'online'], new: true, seoTitle: 'Free C# String Escape / Unescape Online | DevTools Online', seoDescription: 'Escape and unescape C# strings online — regular, verbatim @"..." and interpolated $"..." formats supported. Free, instant, no signup, runs in browser.' },
+  { id: 'sql-to-linq', name: 'SQL to LINQ', description: 'Convert SQL SELECT queries to LINQ method syntax — WHERE, ORDER BY, GROUP BY, HAVING, DISTINCT, TOP online', category: 'dotnet', icon: '🔃', tags: ['sql', 'linq', 'csharp', 'c#', 'dotnet', 'query', 'convert', 'ef', 'entity framework', 'online'], popular: true, new: true, seoTitle: 'Free SQL to LINQ Converter Online — C# Query Syntax | DevTools Online', seoDescription: 'Convert SQL SELECT queries to LINQ method syntax online — WHERE, JOIN, GROUP BY, HAVING, DISTINCT, TOP supported. Free C# LINQ converter, no signup.' },
 
   // Diagram & Visualization
-  { id: 'diagram-creator', name: 'Diagram Creator', description: 'Create flowcharts, sequence diagrams, ER diagrams, class diagrams, Gantt, mindmaps using Mermaid syntax — export SVG/PNG online', category: 'misc', icon: '🗂️', tags: ['diagram', 'mermaid', 'flowchart', 'sequence', 'erd', 'uml', 'class', 'gantt', 'mindmap', 'chart', 'online'], popular: true, new: true },
-  { id: 'erd-diagram', name: 'ERD Diagram', description: 'Paste CREATE TABLE SQL to generate an interactive Entity Relationship Diagram — drag tables, visualize FK relationships online', category: 'dotnet', icon: '🔗', tags: ['erd', 'sql', 'diagram', 'entity', 'relationship', 'table', 'schema', 'foreign key', 'database', 'online'], popular: true, new: true },
-  { id: 'sql-plan-viewer', name: 'SQL Execution Plan Viewer', description: 'Visualize PostgreSQL EXPLAIN ANALYZE and MySQL EXPLAIN output as an annotated tree — spot slow operations instantly online', category: 'dotnet', icon: '📊', tags: ['sql', 'explain', 'execution', 'plan', 'postgresql', 'mysql', 'performance', 'query', 'index', 'online'], popular: true, new: true },
-  { id: 'log-viewer', name: 'Log Viewer', description: 'Parse and view structured logs — JSON Lines (Serilog, Pino), .NET NLog, Apache/Nginx access logs — filter by level, search online', category: 'misc', icon: '📋', tags: ['log', 'viewer', 'serilog', 'nlog', 'json', 'apache', 'nginx', 'dotnet', 'debug', 'error', 'filter', 'online'], popular: true, new: true },
+  { id: 'diagram-creator', name: 'Diagram Creator', description: 'Create flowcharts, sequence diagrams, ER diagrams, class diagrams, Gantt, mindmaps using Mermaid syntax — export SVG/PNG online', category: 'misc', icon: '🗂️', tags: ['diagram', 'mermaid', 'flowchart', 'sequence', 'erd', 'uml', 'class', 'gantt', 'mindmap', 'chart', 'online'], popular: true, new: true, seoTitle: 'Free Online Diagram Creator — Flowcharts, ERD, Sequence | DevTools Online', seoDescription: 'Create flowcharts, sequence diagrams, ER diagrams, class diagrams, Gantt charts and mindmaps with Mermaid — export SVG/PNG. Free, no signup.' },
+  { id: 'erd-diagram', name: 'ERD Diagram', description: 'Paste CREATE TABLE SQL to generate an interactive Entity Relationship Diagram — drag tables, visualize FK relationships online', category: 'dotnet', icon: '🔗', tags: ['erd', 'sql', 'diagram', 'entity', 'relationship', 'table', 'schema', 'foreign key', 'database', 'online'], popular: true, new: true, seoTitle: 'Free ERD Diagram Generator from SQL Online | DevTools Online', seoDescription: 'Paste CREATE TABLE SQL to generate an interactive Entity Relationship Diagram online. Drag tables, visualize FK relationships — free, no signup.' },
+  { id: 'sql-plan-viewer', name: 'SQL Execution Plan Viewer', description: 'Visualize PostgreSQL EXPLAIN ANALYZE and MySQL EXPLAIN output as an annotated tree — spot slow operations instantly online', category: 'dotnet', icon: '📊', tags: ['sql', 'explain', 'execution', 'plan', 'postgresql', 'mysql', 'performance', 'query', 'index', 'online'], popular: true, new: true, seoTitle: 'Free SQL Execution Plan Viewer Online — EXPLAIN ANALYZE | DevTools Online', seoDescription: 'Visualize PostgreSQL EXPLAIN ANALYZE and MySQL EXPLAIN output as an annotated tree online. Spot slow operations and missing indexes instantly.' },
+  { id: 'log-viewer', name: 'Log Viewer', description: 'Parse and view structured logs — JSON Lines (Serilog, Pino), .NET NLog, Apache/Nginx access logs — filter by level, search online', category: 'misc', icon: '📋', tags: ['log', 'viewer', 'serilog', 'nlog', 'json', 'apache', 'nginx', 'dotnet', 'debug', 'error', 'filter', 'online'], popular: true, new: true, seoTitle: 'Free Log Viewer Online — JSON Logs, Serilog, NLog, Apache | DevTools Online', seoDescription: 'Parse structured logs online — JSON Lines (Serilog, Pino), .NET NLog, Apache/Nginx access logs. Filter by level, search, highlight — free, no signup.' },
 
   // Network / Web tools
-  { id: 'dns-lookup', name: 'DNS Lookup', description: 'Query DNS records for any domain — A, AAAA, MX, TXT, NS, CNAME, SOA and more via Cloudflare DNS-over-HTTPS online', category: 'web', icon: '🌐', tags: ['dns', 'lookup', 'domain', 'a', 'mx', 'txt', 'ns', 'cname', 'nameserver', 'record', 'online'], popular: true, new: true },
-  { id: 'ip-lookup', name: 'IP Address Lookup', description: 'Look up geolocation, ASN, timezone and organization for any IP address — detects your own IP automatically online', category: 'web', icon: '📍', tags: ['ip', 'lookup', 'geolocation', 'asn', 'country', 'city', 'timezone', 'network', 'online'], popular: true, new: true },
-  { id: 'ssl-checker', name: 'SSL Certificate Checker', description: 'Check SSL/TLS certificate validity, expiry date, issuer and SANs for any domain via Certificate Transparency logs online', category: 'web', icon: '🔒', tags: ['ssl', 'tls', 'certificate', 'https', 'expiry', 'domain', 'security', 'crt.sh', 'online'], popular: true, new: true },
-  { id: 'http-request-builder', name: 'HTTP Request Builder', description: 'Build and send HTTP requests with custom headers, body, params — generate fetch, axios, curl, Python code snippets online', category: 'web', icon: '📡', tags: ['http', 'request', 'api', 'rest', 'fetch', 'axios', 'curl', 'get', 'post', 'headers', 'builder', 'online'], popular: true, new: true },
-  { id: 'user-agent-parser', name: 'User-Agent Parser', description: 'Parse User-Agent strings to detect browser, OS, device type and brand — analyze any UA or test your own browser online', category: 'web', icon: '🕵️', tags: ['user-agent', 'browser', 'os', 'device', 'parse', 'chrome', 'firefox', 'safari', 'mobile', 'detect', 'online'], new: true },
+  { id: 'dns-lookup', name: 'DNS Lookup', description: 'Query DNS records for any domain — A, AAAA, MX, TXT, NS, CNAME, SOA and more via Cloudflare DNS-over-HTTPS online', category: 'web', icon: '🌐', tags: ['dns', 'lookup', 'domain', 'a', 'mx', 'txt', 'ns', 'cname', 'nameserver', 'record', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'Queries sent via Cloudflare DNS-over-HTTPS (1.1.1.1). Domain names you look up leave your browser.', seoTitle: 'Free DNS Lookup Tool Online — A, MX, TXT, NS Records | DevTools Online', seoDescription: 'Query DNS records for any domain online — A, AAAA, MX, TXT, NS, CNAME, SOA via Cloudflare DoH. Fast, accurate, free — no account needed.' },
+  { id: 'ip-lookup', name: 'IP Address Lookup', description: 'Look up geolocation, ASN, timezone and organization for any IP address — detects your own IP automatically online', category: 'web', icon: '📍', tags: ['ip', 'lookup', 'geolocation', 'asn', 'country', 'city', 'timezone', 'network', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'IP data fetched from ipapi.co. The IP address you query is sent to their API.', seoTitle: 'Free IP Address Lookup — Geolocation & ASN Online | DevTools Online', seoDescription: 'Look up IP geolocation, ASN, timezone and ISP for any IP address online. Auto-detects your own IP — free, instant, powered by ipapi.co.' },
+  { id: 'ssl-checker', name: 'SSL Certificate Checker', description: 'Check SSL/TLS certificate validity, expiry date, issuer and SANs for any domain via Certificate Transparency logs online', category: 'web', icon: '🔒', tags: ['ssl', 'tls', 'certificate', 'https', 'expiry', 'domain', 'security', 'crt.sh', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'Certificate data fetched from crt.sh (Certificate Transparency logs). The domain you query is sent to their API.', seoTitle: 'Free SSL Certificate Checker Online — Expiry & Validity | DevTools Online', seoDescription: 'Check SSL/TLS certificate validity, expiry date, issuer and SANs for any domain online. Spot expiring certificates before they cause downtime.' },
+  { id: 'http-request-builder', name: 'HTTP Request Builder', description: 'Build and send HTTP requests with custom headers, body, params — generate fetch, axios, curl, Python code snippets online', category: 'web', icon: '📡', tags: ['http', 'request', 'api', 'rest', 'fetch', 'axios', 'curl', 'get', 'post', 'headers', 'builder', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'Requests are sent directly from your browser to the target URL you specify.', seoTitle: 'Free HTTP Request Builder & API Tester Online | DevTools Online', seoDescription: 'Build and send HTTP requests with custom headers, body & params. Generate fetch, axios, curl, Python snippets — free online API testing tool.' },
+  { id: 'user-agent-parser', name: 'User-Agent Parser', description: 'Parse User-Agent strings to detect browser, OS, device type and brand — analyze any UA or test your own browser online', category: 'web', icon: '🕵️', tags: ['user-agent', 'browser', 'os', 'device', 'parse', 'chrome', 'firefox', 'safari', 'mobile', 'detect', 'online'], new: true, seoTitle: 'Free User-Agent Parser Online — Browser & OS Detection | DevTools Online', seoDescription: 'Parse User-Agent strings to detect browser, OS, device type and brand online. Auto-analyzes your own UA — free, instant, no signup required.' },
 
   // Color tools
-  { id: 'color-extractor', name: 'Color Extractor', description: 'Upload an image to extract its dominant color palette — copy HEX, RGB, HSL values with proportional preview strip online', category: 'color', icon: '🎨', tags: ['color', 'palette', 'extract', 'image', 'dominant', 'hex', 'rgb', 'hsl', 'online'], new: true },
-  { id: 'color-contrast', name: 'Color Contrast Checker', description: 'Check WCAG 2.1 color contrast ratio — AA and AAA compliance for normal/large text with live preview online', category: 'color', icon: '👁️', tags: ['color', 'contrast', 'wcag', 'accessibility', 'a11y', 'aa', 'aaa', 'ratio', 'online'], new: true },
+  { id: 'color-extractor', name: 'Color Extractor', description: 'Upload an image to extract its dominant color palette — copy HEX, RGB, HSL values with proportional preview strip online', category: 'color', icon: '🎨', tags: ['color', 'palette', 'extract', 'image', 'dominant', 'hex', 'rgb', 'hsl', 'online'], new: true, seoTitle: 'Free Color Extractor from Image Online | DevTools Online', seoDescription: 'Upload an image to extract its dominant color palette online — copy HEX, RGB, HSL values with proportional preview. Free, no signup, client-side.' },
+  { id: 'color-contrast', name: 'Color Contrast Checker', description: 'Check WCAG 2.1 color contrast ratio — AA and AAA compliance for normal/large text with live preview online', category: 'color', icon: '👁️', tags: ['color', 'contrast', 'wcag', 'accessibility', 'a11y', 'aa', 'aaa', 'ratio', 'online'], new: true, seoTitle: 'Free Color Contrast Checker Online — WCAG AA & AAA | DevTools Online', seoDescription: 'Check WCAG 2.1 color contrast ratio online — AA and AAA compliance for normal and large text with live preview. Free, instant, no signup needed.' },
 
   // CSS / Web visual
-  { id: 'css-filter-generator', name: 'CSS Filter Generator', description: 'Visually adjust blur, brightness, contrast, hue-rotate and more — generates CSS filter property with live preview online', category: 'web', icon: '🎛️', tags: ['css', 'filter', 'blur', 'brightness', 'contrast', 'grayscale', 'sepia', 'generator', 'online'], new: true },
-  { id: 'px-to-rem', name: 'Px ↔ Rem Converter', description: 'Convert between px and rem units with configurable base font size — includes reference table and CSS snippet online', category: 'web', icon: '📐', tags: ['px', 'rem', 'converter', 'css', 'font-size', 'responsive', 'units', 'online'], new: true },
-  { id: 'svg-previewer', name: 'SVG Previewer', description: 'Preview and edit SVG code with zoom, background options, element info — export as SVG or PNG online', category: 'web', icon: '✏️', tags: ['svg', 'preview', 'editor', 'zoom', 'export', 'png', 'vector', 'online'], new: true },
+  { id: 'css-filter-generator', name: 'CSS Filter Generator', description: 'Visually adjust blur, brightness, contrast, hue-rotate and more — generates CSS filter property with live preview online', category: 'web', icon: '🎛️', tags: ['css', 'filter', 'blur', 'brightness', 'contrast', 'grayscale', 'sepia', 'generator', 'online'], new: true, seoTitle: 'Free CSS Filter Generator Online — Blur, Brightness, Contrast | DevTools Online', seoDescription: 'Visually adjust CSS filter values — blur, brightness, contrast, hue-rotate, grayscale, sepia — with live preview. Free, no signup, copy-ready CSS.' },
+  { id: 'px-to-rem', name: 'Px ↔ Rem Converter', description: 'Convert between px and rem units with configurable base font size — includes reference table and CSS snippet online', category: 'web', icon: '📐', tags: ['px', 'rem', 'converter', 'css', 'font-size', 'responsive', 'units', 'online'], new: true, seoTitle: 'Free Px to Rem Converter Online — CSS Units | DevTools Online', seoDescription: 'Convert between px and rem CSS units online with configurable base font size. Includes reference table and CSS snippet — free, instant, no signup.' },
+  { id: 'svg-previewer', name: 'SVG Previewer', description: 'Preview and edit SVG code with zoom, background options, element info — export as SVG or PNG online', category: 'web', icon: '✏️', tags: ['svg', 'preview', 'editor', 'zoom', 'export', 'png', 'vector', 'online'], new: true, seoTitle: 'Free SVG Previewer & Editor Online | DevTools Online', seoDescription: 'Preview and edit SVG code with zoom, background color options and element info online. Export as SVG or PNG — free, no signup, runs in browser.' },
 
   // Crypto / Security
-  { id: 'password-strength', name: 'Password Strength Checker', description: 'Check password strength with entropy score, crack time estimate, WCAG checklist and improvement suggestions online', category: 'crypto', icon: '🔑', tags: ['password', 'strength', 'entropy', 'security', 'crack', 'checker', 'validate', 'online'], new: true },
-  { id: 'cert-decoder', name: 'Certificate Decoder', description: 'Decode X.509 PEM certificates — view subject, issuer, validity dates, serial, extensions and public key info online', category: 'crypto', icon: '📜', tags: ['certificate', 'x509', 'pem', 'ssl', 'tls', 'decode', 'x.509', 'openssl', 'security', 'online'], new: true },
+  { id: 'password-strength', name: 'Password Strength Checker', description: 'Check password strength with entropy score, crack time estimate, WCAG checklist and improvement suggestions online', category: 'crypto', icon: '🔑', tags: ['password', 'strength', 'entropy', 'security', 'crack', 'checker', 'validate', 'online'], new: true, seoTitle: 'Free Password Strength Checker Online | DevTools Online', seoDescription: 'Check password strength with entropy score, estimated crack time and WCAG checklist online. Get improvement suggestions — free, 100% client-side.' },
+  { id: 'cert-decoder', name: 'Certificate Decoder', description: 'Decode X.509 PEM certificates — view subject, issuer, validity dates, serial, extensions and public key info online', category: 'crypto', icon: '📜', tags: ['certificate', 'x509', 'pem', 'ssl', 'tls', 'decode', 'x.509', 'openssl', 'security', 'online'], new: true, seoTitle: 'Free X.509 Certificate Decoder Online — PEM Parser | DevTools Online', seoDescription: 'Decode X.509 PEM certificates online — view subject, issuer, validity dates, serial number and public key info. Free, runs entirely in browser.' },
 
   // Generator
-  { id: 'national-id-generator', name: 'National ID Generator', description: 'Generate test national identity numbers — Vietnam CCCD, US SSN, UK NI Number, Singapore NRIC, Germany, France online', category: 'generator', icon: '🪪', tags: ['national', 'id', 'identity', 'ssn', 'cccd', 'nric', 'generator', 'test', 'fake', 'online'], new: true },
+  { id: 'national-id-generator', name: 'National ID Generator', description: 'Generate test national identity numbers — Vietnam CCCD, US SSN, UK NI Number, Singapore NRIC, Germany, France online', category: 'generator', icon: '🪪', tags: ['national', 'id', 'identity', 'ssn', 'cccd', 'nric', 'generator', 'test', 'fake', 'online'], new: true, seoTitle: 'Free National ID Generator Online — Test Data | DevTools Online', seoDescription: 'Generate test national identity numbers online — Vietnam CCCD, US SSN, UK NI, Singapore NRIC, Germany, France. Free, no signup, for testing only.' },
 
   // Formatter
-  { id: 'xml-minifier', name: 'XML Minifier / Formatter', description: 'Minify XML by removing whitespace and comments, or format/beautify XML with configurable indentation online', category: 'formatter', icon: '📄', tags: ['xml', 'minify', 'format', 'beautify', 'compress', 'whitespace', 'comments', 'online'], new: true },
+  { id: 'xml-minifier', name: 'XML Minifier / Formatter', description: 'Minify XML by removing whitespace and comments, or format/beautify XML with configurable indentation online', category: 'formatter', icon: '📄', tags: ['xml', 'minify', 'format', 'beautify', 'compress', 'whitespace', 'comments', 'online'], new: true, seoTitle: 'Free XML Minifier & Formatter Online | DevTools Online', seoDescription: 'Minify XML by removing whitespace and comments online, or format and beautify with configurable indentation. Free, instant, no signup, runs in browser.' },
 
   // SQL Reference
-  { id: 'sql-syntax', name: 'SQL Syntax Reference', description: 'Complete SQL syntax reference with copy-ready examples — DDL, SELECT, JOINs, CTEs, Window Functions, DML, Transactions online', category: 'dotnet', icon: '📖', tags: ['sql', 'syntax', 'reference', 'select', 'join', 'ddl', 'dml', 'cte', 'window', 'functions', 'tsql', 'online'], popular: true, new: true },
+  { id: 'sql-syntax', name: 'SQL Syntax Reference', description: 'Complete SQL syntax reference with copy-ready examples — DDL, SELECT, JOINs, CTEs, Window Functions, DML, Transactions online', category: 'dotnet', icon: '📖', tags: ['sql', 'syntax', 'reference', 'select', 'join', 'ddl', 'dml', 'cte', 'window', 'functions', 'tsql', 'online'], popular: true, new: true, seoTitle: 'Free SQL Syntax Reference & Cheat Sheet Online | DevTools Online', seoDescription: 'Complete SQL syntax reference with copy-ready examples — SELECT, JOINs, CTEs, Window Functions, DDL, DML, Transactions. Free SQL cheat sheet online.' },
 
   // AI Tools
-  { id: 'ai-token-counter', name: 'Token Counter', description: 'Estimate token count for GPT, Claude and Gemini models — track context usage and cost before calling the API online', category: 'ai', icon: '🪙', tags: ['ai', 'token', 'gpt', 'claude', 'gemini', 'openai', 'anthropic', 'count', 'context', 'online'], new: true, popular: true },
-  { id: 'ai-cost-calculator', name: 'AI Cost Calculator', description: 'Calculate API cost for any AI model — enter input/output tokens and get exact pricing for GPT-4o, Claude, Gemini and more online', category: 'ai', icon: '💰', tags: ['ai', 'cost', 'price', 'gpt', 'claude', 'gemini', 'openai', 'anthropic', 'token', 'calculator', 'online'], new: true },
-  { id: 'ai-prompt-builder', name: 'Prompt Builder', description: 'Build structured AI prompts with System / User / Assistant roles — export as OpenAI JSON or plain text online', category: 'ai', icon: '🧱', tags: ['ai', 'prompt', 'system', 'user', 'assistant', 'openai', 'chatgpt', 'builder', 'json', 'online'], new: true },
-  { id: 'ai-model-comparison', name: 'Model Comparison', description: 'Compare GPT, Claude, Gemini and open-source models — context window, pricing, strengths side by side online', category: 'ai', icon: '⚖️', tags: ['ai', 'model', 'compare', 'gpt', 'claude', 'gemini', 'llama', 'context', 'price', 'online'], new: true },
-  { id: 'ai-json-to-prompt', name: 'JSON → Prompt', description: 'Convert JSON data into a natural language prompt — describe objects, arrays and values in readable sentences online', category: 'ai', icon: '🔀', tags: ['ai', 'json', 'prompt', 'convert', 'natural', 'language', 'describe', 'online'], new: true },
-  { id: 'ai-system-prompt', name: 'System Prompt Generator', description: 'Generate system prompts for AI assistants — choose use case, tone and constraints to get a ready-to-use prompt online', category: 'ai', icon: '⚙️', tags: ['ai', 'system', 'prompt', 'generator', 'assistant', 'chatbot', 'instruction', 'online'], new: true },
+  { id: 'ai-token-counter', name: 'Token Counter', description: 'Estimate token count for GPT, Claude and Gemini models — track context usage and cost before calling the API online', category: 'ai', icon: '🪙', tags: ['ai', 'token', 'gpt', 'claude', 'gemini', 'openai', 'anthropic', 'count', 'context', 'online'], new: true, popular: true, seoTitle: 'Free AI Token Counter Online — GPT, Claude, Gemini | DevTools Online', seoDescription: 'Estimate token count for GPT-4, Claude and Gemini models online. Track context window usage and API cost before calling — free, runs in browser.' },
+  { id: 'ai-cost-calculator', name: 'AI Cost Calculator', description: 'Calculate API cost for any AI model — enter input/output tokens and get exact pricing for GPT-4o, Claude, Gemini and more online', category: 'ai', icon: '💰', tags: ['ai', 'cost', 'price', 'gpt', 'claude', 'gemini', 'openai', 'anthropic', 'token', 'calculator', 'online'], new: true, privacy: 'network', networkNote: 'Pricing data fetched from LiteLLM. No prompt content or token data leaves your browser.', seoTitle: 'Free AI API Cost Calculator Online — GPT, Claude, Gemini | DevTools Online', seoDescription: 'Calculate API cost for any AI model online — enter input/output tokens and get exact pricing for GPT-4o, Claude, Gemini and more. Free, no signup.' },
+  { id: 'ai-prompt-builder', name: 'Prompt Builder', description: 'Build structured AI prompts with System / User / Assistant roles — export as OpenAI JSON or plain text online', category: 'ai', icon: '🧱', tags: ['ai', 'prompt', 'system', 'user', 'assistant', 'openai', 'chatgpt', 'builder', 'json', 'online'], new: true, seoTitle: 'Free AI Prompt Builder Online — System, User, Assistant Roles | DevTools Online', seoDescription: 'Build structured AI prompts with System, User and Assistant roles online — export as OpenAI JSON or plain text. Free, no signup, runs in browser.' },
+  { id: 'ai-model-comparison', name: 'Model Comparison', description: 'Compare GPT, Claude, Gemini and open-source models — context window, pricing, strengths side by side online', category: 'ai', icon: '⚖️', tags: ['ai', 'model', 'compare', 'gpt', 'claude', 'gemini', 'llama', 'context', 'price', 'online'], new: true, privacy: 'network', networkNote: 'Model pricing data fetched from LiteLLM. No personal data is sent.', seoTitle: 'Free AI Model Comparison Online — GPT vs Claude vs Gemini | DevTools Online', seoDescription: 'Compare GPT, Claude, Gemini and open-source AI models — context window, pricing and strengths side by side. Free, no signup, data from LiteLLM.' },
+  { id: 'ai-json-to-prompt', name: 'JSON → Prompt', description: 'Convert JSON data into a natural language prompt — describe objects, arrays and values in readable sentences online', category: 'ai', icon: '🔀', tags: ['ai', 'json', 'prompt', 'convert', 'natural', 'language', 'describe', 'online'], new: true, seoTitle: 'Free JSON to Natural Language Prompt Converter Online | DevTools Online', seoDescription: 'Convert JSON data into a natural language AI prompt online — describe objects, arrays and values in readable sentences. Free, instant, no signup.' },
+  { id: 'ai-system-prompt', name: 'System Prompt Generator', description: 'Generate system prompts for AI assistants — choose use case, tone and constraints to get a ready-to-use prompt online', category: 'ai', icon: '⚙️', tags: ['ai', 'system', 'prompt', 'generator', 'assistant', 'chatbot', 'instruction', 'online'], new: true, seoTitle: 'Free AI System Prompt Generator Online | DevTools Online', seoDescription: 'Generate system prompts for AI assistants online — choose use case, tone and constraints to get a ready-to-use prompt. Free, instant, no signup.' },
 ]

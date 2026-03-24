@@ -176,8 +176,8 @@ export default function HtmlToMarkdown() {
     <div className="space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block">
+          <div className="tool-output-header">
+            <label className="tool-label">
               HTML Input
             </label>
             <span className="text-xs text-gray-400 dark:text-gray-500">
@@ -194,19 +194,19 @@ export default function HtmlToMarkdown() {
         </div>
 
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+          <div className="tool-output-header">
+            <label className="tool-label">
               Markdown Output
             </label>
             <div className="flex items-center gap-2">
               <span className="text-xs text-gray-400 dark:text-gray-500">
                 {lineCount} line{lineCount !== 1 ? 's' : ''}
               </span>
-              <CopyButton text={output} />
+              <CopyButton text={output} toast="Markdown copied" />
             </div>
           </div>
           <textarea
-            className="tool-textarea h-80"
+            className="tool-textarea-output h-80"
             readOnly
             value={output}
             placeholder="Markdown will appear here..."

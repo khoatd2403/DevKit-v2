@@ -247,7 +247,7 @@ export default function ImageCompressor() {
 
             {/* Quality */}
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+              <label className="tool-label block mb-1">
                 Quality: <strong className="text-gray-700 dark:text-gray-300">{quality}%</strong>
                 <span className="ml-1 opacity-60">(applies to JPG/WebP)</span>
               </label>
@@ -263,7 +263,7 @@ export default function ImageCompressor() {
             {/* Max dimensions */}
             <div className="flex flex-wrap gap-4">
               <div>
-                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Max width (px)</label>
+                <label className="tool-label block mb-1">Max width (px)</label>
                 <input
                   type="number"
                   value={maxWidth}
@@ -274,7 +274,7 @@ export default function ImageCompressor() {
                 />
               </div>
               <div>
-                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Max height (px)</label>
+                <label className="tool-label block mb-1">Max height (px)</label>
                 <input
                   type="number"
                   value={maxHeight}
@@ -288,7 +288,7 @@ export default function ImageCompressor() {
 
             {/* Output format */}
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Output Format</label>
+              <label className="tool-label block mb-1">Output Format</label>
               <div className="flex flex-wrap gap-1.5">
                 {formats.map(f => (
                   <button

@@ -44,7 +44,7 @@ export default function UnixTimestamp() {
           <div className="text-xs text-gray-400 mb-1">Local Time</div>
           <div className="text-sm font-medium text-gray-700 dark:text-gray-300">{new Date().toLocaleString()}</div>
         </div>
-        <CopyButton text={String(now)} />
+        <CopyButton text={String(now)} toast="Timestamp copied" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -71,7 +71,7 @@ export default function UnixTimestamp() {
               {tsResult.split('\n').map((line, i) => (
                 <div key={i} className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 rounded px-3 py-1.5">
                   <span className="font-mono text-sm text-gray-700 dark:text-gray-300">{line}</span>
-                  <CopyButton text={line.split(': ')[1] || ''} />
+                  <CopyButton text={line.split(': ')[1] || ''} toast="Value copied" />
                 </div>
               ))}
             </div>

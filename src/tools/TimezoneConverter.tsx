@@ -173,7 +173,7 @@ export default function TimezoneConverter() {
       </div>
 
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Date &amp; Time</label>
+        <label className="tool-label block mb-1">Date &amp; Time</label>
         <input
           type="datetime-local"
           className="tool-textarea h-auto py-2 w-full"
@@ -184,7 +184,7 @@ export default function TimezoneConverter() {
 
       <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-3 items-end">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">From Timezone</label>
+          <label className="tool-label block mb-1">From Timezone</label>
           <select
             className="tool-textarea h-auto py-2 w-full"
             value={fromTz}
@@ -203,7 +203,7 @@ export default function TimezoneConverter() {
           <ArrowLeftRight size={15} />
         </button>
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">To Timezone</label>
+          <label className="tool-label block mb-1">To Timezone</label>
           <select
             className="tool-textarea h-auto py-2 w-full"
             value={toTz}
@@ -217,9 +217,9 @@ export default function TimezoneConverter() {
       </div>
 
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           {error}
-        </div>
+        </p>
       )}
 
       {result && (
@@ -230,7 +230,7 @@ export default function TimezoneConverter() {
               <div className="text-2xl font-mono font-bold text-primary-600 dark:text-primary-400">{result.converted}</div>
               <div className="text-xs text-gray-500 dark:text-gray-400">{toTz} &nbsp;·&nbsp; {result.toOffset}</div>
             </div>
-            <CopyButton text={result.converted} />
+            <CopyButton text={result.converted} toast="Time copied" />
           </div>
           <div className="border-t border-gray-100 dark:border-gray-800 pt-3 grid grid-cols-2 gap-3 text-sm">
             <div>

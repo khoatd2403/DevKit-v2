@@ -44,26 +44,25 @@ export default function MarkdownPreview() {
   }, [input])
 
   return (
-    <div className="space-y-2">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[600px]">
-        <div className="flex flex-col">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Markdown</label>
-          <FileDropTextarea
-            className="flex-1 resize-none"
-            value={input}
-            onChange={setInput}
-            placeholder="# Write markdown here..."
-            accept=".md,.markdown,text/plain,text/*"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Preview</label>
-          <div
-            ref={previewRef}
-            className="flex-1 overflow-y-auto bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4 prose prose-sm dark:prose-invert max-w-none"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
-        </div>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ height: 'calc(100vh - 160px)' }}>
+      <div className="flex flex-col min-h-0">
+        <label className="tool-label mb-1 shrink-0">Markdown</label>
+        <FileDropTextarea
+          className="h-full resize-none"
+          wrapperClassName="flex-1 min-h-0 flex flex-col"
+          value={input}
+          onChange={setInput}
+          placeholder="# Write markdown here..."
+          accept=".md,.markdown,text/plain,text/*"
+        />
+      </div>
+      <div className="flex flex-col min-h-0">
+        <label className="tool-label mb-1 shrink-0">Preview</label>
+        <div
+          ref={previewRef}
+          className="flex-1 min-h-0 overflow-y-auto bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4 prose prose-sm dark:prose-invert max-w-none"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       </div>
     </div>
   )

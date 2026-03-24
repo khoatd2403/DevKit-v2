@@ -119,7 +119,7 @@ export default function CsharpStringEscape() {
       {/* Editor */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+          <label className="tool-label">
             {mode === 'unescape' ? 'C# escaped string (without quotes)' : 'Raw text input'}
           </label>
           <textarea
@@ -143,7 +143,7 @@ export default function CsharpStringEscape() {
           {/* C# string */}
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+              <label className="tool-label">
                 C# string literal
               </label>
               <button
@@ -162,7 +162,7 @@ export default function CsharpStringEscape() {
           {/* Just the escaped content */}
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+              <label className="tool-label">
                 Content only (no quotes)
               </label>
               <button

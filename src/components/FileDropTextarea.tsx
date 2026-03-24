@@ -6,6 +6,7 @@ interface FileDropTextareaProps {
   onChange: (value: string) => void
   placeholder?: string
   className?: string
+  wrapperClassName?: string
   accept?: string
   readOnly?: boolean
   id?: string
@@ -16,6 +17,7 @@ export default function FileDropTextarea({
   onChange,
   placeholder,
   className = '',
+  wrapperClassName = '',
   accept = '*',
   readOnly = false,
   id,
@@ -62,7 +64,7 @@ export default function FileDropTextarea({
 
   return (
     <div
-      className="relative group"
+      className={`relative group ${wrapperClassName}`}
       onDragOver={e => { e.preventDefault(); setDragging(true) }}
       onDragLeave={e => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setDragging(false) }}
       onDrop={onDrop}

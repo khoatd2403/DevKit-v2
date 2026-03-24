@@ -118,7 +118,7 @@ function Field({ label, value, onChange, type = 'text', placeholder = '' }: {
 }) {
   return (
     <div>
-      <label className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 block">{label}</label>
+      <label className="tool-label mb-1 block">{label}</label>
       <input
         type={type}
         value={value}
@@ -245,7 +245,7 @@ export default function ConnectionStringBuilder() {
               <Field label="Username" value={pg.username} onChange={v => setPg(p => ({ ...p, username: v }))} />
               <Field label="Password" value={pg.password} onChange={v => setPg(p => ({ ...p, password: v }))} type={showPassword ? 'text' : 'password'} />
               <div>
-                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 block">SSL Mode</label>
+                <label className="tool-label mb-1 block">SSL Mode</label>
                 <select value={pg.sslMode} onChange={e => setPg(p => ({ ...p, sslMode: e.target.value }))}
                   className="w-full text-xs bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-500">
                   {['disable','allow','prefer','require','verify-ca','verify-full'].map(m => (
@@ -262,7 +262,7 @@ export default function ConnectionStringBuilder() {
             <>
               <Field label="Data Source (file path)" value={sl.dataSource} onChange={v => setSl(p => ({ ...p, dataSource: v }))} placeholder="app.db" />
               <div>
-                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 block">Mode</label>
+                <label className="tool-label mb-1 block">Mode</label>
                 <select value={sl.mode} onChange={e => setSl(p => ({ ...p, mode: e.target.value }))}
                   className="w-full text-xs bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-500">
                   <option value="">Default</option>
@@ -282,7 +282,7 @@ export default function ConnectionStringBuilder() {
               <Field label="User Id" value={or.user} onChange={v => setOr(p => ({ ...p, user: v }))} />
               <Field label="Password" value={or.password} onChange={v => setOr(p => ({ ...p, password: v }))} type={showPassword ? 'text' : 'password'} />
               <div>
-                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 block">DBA Privilege</label>
+                <label className="tool-label mb-1 block">DBA Privilege</label>
                 <select value={or.dbaPrivilege} onChange={e => setOr(p => ({ ...p, dbaPrivilege: e.target.value }))}
                   className="w-full text-xs bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-500">
                   <option value="">None</option>
@@ -324,8 +324,8 @@ export default function ConnectionStringBuilder() {
         {/* Output */}
         <div className="space-y-3">
           <div>
-            <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Connection String</label>
+            <div className="tool-output-header">
+              <label className="tool-label">Connection String</label>
               <button onClick={copy} className="btn-ghost text-xs px-2 py-1 flex items-center gap-1">
                 {copied ? <Check size={12} className="text-green-500" /> : <Copy size={12} />}
                 {copied ? 'Copied' : 'Copy'}
@@ -334,13 +334,13 @@ export default function ConnectionStringBuilder() {
             <textarea
               readOnly
               value={connectionString}
-              className="tool-textarea font-mono text-xs h-28 resize-none select-all"
+              className="tool-textarea-output font-mono text-xs h-28 resize-none select-all"
             />
           </div>
 
           {/* appsettings.json preview */}
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5 block">appsettings.json</label>
+            <label className="tool-label mb-1.5 block">appsettings.json</label>
             <pre className="bg-[#1e1e1e] rounded-xl font-mono text-xs h-36 overflow-auto whitespace-pre p-3">
               <JsonHighlight code={`{\n  "ConnectionStrings": {\n    "Default": "${connectionString.replace(/"/g, '\\"')}"\n  }\n}`} />
             </pre>

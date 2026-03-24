@@ -2,6 +2,50 @@ import { useState, useRef, useMemo, useCallback, useEffect } from 'react';
 import { usePersistentState } from '../hooks/usePersistentState';
 import { Upload, Eraser, AlignJustify, Columns2, ArrowLeftRight, ChevronUp, ChevronDown, WrapText, ChevronsUpDown } from 'lucide-react';
 import CopyButton from '../components/CopyButton';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-markup';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-go';
+import 'prismjs/components/prism-rust';
+import 'prismjs/components/prism-java';
+import 'prismjs/components/prism-csharp';
+
+const LANGUAGES = [
+  { label: 'Plain text', id: '' },
+  { label: 'JavaScript', id: 'javascript' },
+  { label: 'TypeScript', id: 'typescript' },
+  { label: 'JSX', id: 'jsx' },
+  { label: 'TSX', id: 'tsx' },
+  { label: 'HTML', id: 'markup' },
+  { label: 'CSS', id: 'css' },
+  { label: 'JSON', id: 'json' },
+  { label: 'Python', id: 'python' },
+  { label: 'SQL', id: 'sql' },
+  { label: 'Bash', id: 'bash' },
+  { label: 'Go', id: 'go' },
+  { label: 'Rust', id: 'rust' },
+  { label: 'Java', id: 'java' },
+  { label: 'C#', id: 'csharp' },
+];
+
+function escapeHtml(s: string) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function highlightLine(line: string, langId: string): string {
+  if (!langId) return escapeHtml(line);
+  const grammar = Prism.languages[langId];
+  if (!grammar) return escapeHtml(line);
+  return Prism.highlight(line, grammar, langId);
+}
 
 // ─── Line-level Diff Engine ──────────────────────────────────────────────────
 
@@ -306,6 +350,19 @@ function buildUnifiedPatch(ops: DiffOp[], context = 3): string {
   return lines.join('\n');
 }
 
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+const MAX_LINES = 5_000;
+
+function useDebounced<T>(value: T, delay: number): T {
+  const [debounced, setDebounced] = useState(value);
+  useEffect(() => {
+    const t = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(t);
+  }, [value, delay]);
+  return debounced;
+}
+
 // ─── Component ───────────────────────────────────────────────────────────────
 
 type ViewMode = 'sidebyside' | 'unified';
@@ -320,11 +377,15 @@ export default function TextDiff({ initialData }: { initialData?: string | null 
   const [activeHunk, setActiveHunk] = useState(0);
   const [expandedHunks, setExpandedHunks] = useState<Set<number>>(new Set());
   const [wordWrap, setWordWrap] = useState(true);
+  const [lang, setLang] = useState('');
   const [leftDragOver, setLeftDragOver] = useState(false);
   const [rightDragOver, setRightDragOver] = useState(false);
 
   const leftFileRef = useRef<HTMLInputElement>(null);
   const rightFileRef = useRef<HTMLInputElement>(null);
+
+  const dLeft = useDebounced(left, 400);
+  const dRight = useDebounced(right, 400);
 
   const readFile = useCallback((file: File, setter: (v: string) => void) => {
     const reader = new FileReader();
@@ -339,9 +400,14 @@ export default function TextDiff({ initialData }: { initialData?: string | null 
     if (file) readFile(file, setter);
   }, [readFile]);
 
-  const { ops, stats } = useMemo(() => {
-    const leftLines = left.split(/\r?\n/);
-    const rightLines = right.split(/\r?\n/);
+  const { ops, stats, tooLarge } = useMemo(() => {
+    const leftLines = dLeft.split(/\r?\n/);
+    const rightLines = dRight.split(/\r?\n/);
+
+    if (leftLines.length > MAX_LINES || rightLines.length > MAX_LINES) {
+      return { ops: [] as DiffOp[], stats: { added: 0, removed: 0, equal: 0 }, tooLarge: { left: leftLines.length, right: rightLines.length } };
+    }
+
     const normLeft = leftLines.map(line => normalise(line, ignoreWs, ignoreCase));
     const normRight = rightLines.map(line => normalise(line, ignoreWs, ignoreCase));
     const normOps = lcsLineDiff(normLeft, normRight);
@@ -357,8 +423,8 @@ export default function TextDiff({ initialData }: { initialData?: string | null 
     const added = remapped.filter(o => o.type === 'insert').length;
     const removed = remapped.filter(o => o.type === 'delete').length;
     const equal = remapped.filter(o => o.type === 'equal').length;
-    return { ops: remapped, stats: { added, removed, equal } };
-  }, [left, right, ignoreWs, ignoreCase]);
+    return { ops: remapped, stats: { added, removed, equal }, tooLarge: null };
+  }, [dLeft, dRight, ignoreWs, ignoreCase]);
 
   const rows = useMemo(() => {
     const all = buildSideBySide(ops);
@@ -404,6 +470,14 @@ export default function TextDiff({ initialData }: { initialData?: string | null 
         ))}
 
         <div className="ml-auto flex items-center gap-2">
+          <select
+            value={lang}
+            onChange={e => setLang(e.target.value)}
+            className="text-xs px-2 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-primary-400"
+            title="Syntax highlighting language"
+          >
+            {LANGUAGES.map(l => <option key={l.id} value={l.id}>{l.label}</option>)}
+          </select>
           <button type="button" onClick={() => setWordWrap(w => !w)}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs transition-colors ${
               wordWrap
@@ -473,8 +547,27 @@ export default function TextDiff({ initialData }: { initialData?: string | null 
         </button>
       </div>
 
+      {/* Too large warning */}
+      {tooLarge && (
+        <div className="flex flex-wrap items-center gap-3 px-4 py-3 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-xl text-sm">
+          <span className="text-amber-600 dark:text-amber-400 font-medium">
+            ⚠️ File quá lớn — A: {tooLarge.left.toLocaleString()} dòng, B: {tooLarge.right.toLocaleString()} dòng (giới hạn {MAX_LINES.toLocaleString()} dòng/file)
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              setLeft(left.split(/\r?\n/).slice(0, MAX_LINES).join('\n'));
+              setRight(right.split(/\r?\n/).slice(0, MAX_LINES).join('\n'));
+            }}
+            className="ml-auto px-3 py-1.5 text-xs font-medium bg-amber-500 hover:bg-amber-600 text-white rounded-lg transition-colors"
+          >
+            Cắt {MAX_LINES.toLocaleString()} dòng đầu và diff
+          </button>
+        </div>
+      )}
+
       {/* Stats bar */}
-      {(left || right) && (
+      {!tooLarge && (left || right) && (
         <div className="flex flex-wrap items-center gap-3 px-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl text-xs">
           <span className="text-green-600 dark:text-green-400 font-medium">+{stats.added} added</span>
           <span className="text-red-500 dark:text-red-400 font-medium">-{stats.removed} removed</span>
@@ -501,18 +594,18 @@ export default function TextDiff({ initialData }: { initialData?: string | null 
                 </button>
               </div>
             )}
-            <CopyButton text={unifiedPatch} label="Copy patch" />
+            <CopyButton text={unifiedPatch} label="Copy patch" toast="Patch copied" />
           </div>
         </div>
       )}
 
       {/* Diff output */}
-      {(left || right) && (
+      {!tooLarge && (left || right) && (
         <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
           {viewMode === 'sidebyside' ? (
-            <SideBySideView rows={rows} activeHunk={activeHunk} wordWrap={wordWrap} />
+            <SideBySideView rows={rows} activeHunk={activeHunk} wordWrap={wordWrap} lang={lang} />
           ) : (
-            <UnifiedView rows={unifiedRows} activeHunk={activeHunk} wordWrap={wordWrap} onExpandHunk={onExpandHunk} />
+            <UnifiedView rows={unifiedRows} activeHunk={activeHunk} wordWrap={wordWrap} onExpandHunk={onExpandHunk} lang={lang} />
           )}
         </div>
       )}
@@ -522,7 +615,7 @@ export default function TextDiff({ initialData }: { initialData?: string | null 
 
 // ─── Side-by-side view ───────────────────────────────────────────────────────
 
-function SideBySideView({ rows, activeHunk, wordWrap }: { rows: SideBySideRow[]; activeHunk: number; wordWrap: boolean }) {
+function SideBySideView({ rows, activeHunk, wordWrap, lang }: { rows: SideBySideRow[]; activeHunk: number; wordWrap: boolean; lang: string }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const hunkRefs = useRef<(HTMLTableRowElement | null)[]>([]);
 
@@ -594,8 +687,8 @@ function SideBySideView({ rows, activeHunk, wordWrap }: { rows: SideBySideRow[];
                   row.left === null ? 'bg-gray-50 dark:bg-gray-900' : 'text-gray-700 dark:text-gray-300'
                 }`}>
                   {(row.type === 'delete' || row.type === 'change') && row.left !== null ? (
-                    <span><span className="text-red-400 select-none mr-1">-</span>{inline ? <InlineSpans ops={inline.left} /> : row.left}</span>
-                  ) : row.left !== null ? <span>{row.left}</span> : null}
+                    <span><span className="text-red-400 select-none mr-1">-</span>{lang ? <span dangerouslySetInnerHTML={{ __html: highlightLine(row.left, lang) }} /> : inline ? <InlineSpans ops={inline.left} /> : row.left}</span>
+                  ) : row.left !== null ? <span>{lang ? <span dangerouslySetInnerHTML={{ __html: highlightLine(row.left, lang) }} /> : row.left}</span> : null}
                 </td>
                 {/* Right line no */}
                 <td className={`px-2 py-0.5 text-right select-none border-r border-l text-[10px] ${
@@ -611,8 +704,8 @@ function SideBySideView({ rows, activeHunk, wordWrap }: { rows: SideBySideRow[];
                   row.right === null ? 'bg-gray-50 dark:bg-gray-900' : 'text-gray-700 dark:text-gray-300'
                 }`}>
                   {(row.type === 'insert' || row.type === 'change') && row.right !== null ? (
-                    <span><span className="text-emerald-500 select-none mr-1">+</span>{inline ? <InlineSpans ops={inline.right} /> : row.right}</span>
-                  ) : row.right !== null ? <span>{row.right}</span> : null}
+                    <span><span className="text-emerald-500 select-none mr-1">+</span>{lang ? <span dangerouslySetInnerHTML={{ __html: highlightLine(row.right, lang) }} /> : inline ? <InlineSpans ops={inline.right} /> : row.right}</span>
+                  ) : row.right !== null ? <span>{lang ? <span dangerouslySetInnerHTML={{ __html: highlightLine(row.right, lang) }} /> : row.right}</span> : null}
                 </td>
               </tr>
             );
@@ -625,11 +718,12 @@ function SideBySideView({ rows, activeHunk, wordWrap }: { rows: SideBySideRow[];
 
 // ─── Unified view ────────────────────────────────────────────────────────────
 
-function UnifiedView({ rows, activeHunk, wordWrap, onExpandHunk }: {
+function UnifiedView({ rows, activeHunk, wordWrap, onExpandHunk, lang }: {
   rows: UnifiedDisplayRow[];
   activeHunk: number;
   wordWrap: boolean;
   onExpandHunk: (idx: number) => void;
+  lang: string;
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const hunkRefs = useRef<(HTMLTableRowElement | null)[]>([]);
@@ -681,7 +775,7 @@ function UnifiedView({ rows, activeHunk, wordWrap, onExpandHunk }: {
               return (
                 <tr key={i} className="bg-white dark:bg-gray-950 hover:bg-gray-50 dark:hover:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
                   <td className="px-2 py-0.5 text-gray-300 select-none text-center border-r border-gray-100 dark:border-gray-800" />
-                  <td className={`px-3 py-0.5 text-gray-600 dark:text-gray-400 ${wordWrap ? 'whitespace-pre-wrap break-all' : 'whitespace-pre'}`}>{row.text}</td>
+                  <td className={`px-3 py-0.5 text-gray-600 dark:text-gray-400 ${wordWrap ? 'whitespace-pre-wrap break-all' : 'whitespace-pre'}`}>{lang ? <span dangerouslySetInnerHTML={{ __html: highlightLine(row.text, lang) }} /> : row.text}</td>
                 </tr>
               );
             }
@@ -692,7 +786,7 @@ function UnifiedView({ rows, activeHunk, wordWrap, onExpandHunk }: {
                 <tr key={i} className="bg-red-50 dark:bg-red-950/30 border-b border-red-100 dark:border-red-900">
                   <td className="px-2 py-0.5 text-red-400 select-none text-center border-r border-red-100 dark:border-red-900">-</td>
                   <td className={`px-3 py-0.5 text-red-800 dark:text-red-200 ${wordWrap ? 'whitespace-pre-wrap break-all' : 'whitespace-pre'}`}>
-                    {ops ? <InlineSpans ops={ops} /> : row.text}
+                    {lang ? <span dangerouslySetInnerHTML={{ __html: highlightLine(row.text, lang) }} /> : ops ? <InlineSpans ops={ops} /> : row.text}
                   </td>
                 </tr>
               );
@@ -704,7 +798,7 @@ function UnifiedView({ rows, activeHunk, wordWrap, onExpandHunk }: {
               <tr key={i} className="bg-emerald-50 dark:bg-emerald-950/30 border-b border-emerald-100 dark:border-emerald-900">
                 <td className="px-2 py-0.5 text-emerald-500 select-none text-center border-r border-emerald-100 dark:border-emerald-900">+</td>
                 <td className={`px-3 py-0.5 text-emerald-800 dark:text-emerald-200 ${wordWrap ? 'whitespace-pre-wrap break-all' : 'whitespace-pre'}`}>
-                  {ops ? <InlineSpans ops={ops} /> : row.text}
+                  {lang ? <span dangerouslySetInnerHTML={{ __html: highlightLine(row.text, lang) }} /> : ops ? <InlineSpans ops={ops} /> : row.text}
                 </td>
               </tr>
             );

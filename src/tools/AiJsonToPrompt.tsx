@@ -85,8 +85,8 @@ export default function AiJsonToPrompt() {
     <div className="space-y-4">
       {/* Style */}
       <div className="flex items-center gap-2">
-        <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Style:</span>
-        <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-xs">
+        <span className="tool-label">Style:</span>
+        <div className="tool-tabs">
           {([
             { v: 'plain', label: 'Plain' },
             { v: 'describe', label: 'Describe' },
@@ -95,7 +95,7 @@ export default function AiJsonToPrompt() {
             <button
               key={s.v}
               onClick={() => setStyle(s.v)}
-              className={`px-3 py-1.5 font-medium transition-colors ${style === s.v ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+              className={`tool-tab ${style === s.v ? 'active' : ''}`}
             >
               {s.label}
             </button>
@@ -106,7 +106,9 @@ export default function AiJsonToPrompt() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">JSON Input</label>
+          <div className="tool-output-header">
+            <label className="tool-label">JSON Input</label>
+          </div>
           <textarea
             className="tool-textarea h-64 font-mono text-xs"
             value={input}
@@ -115,12 +117,12 @@ export default function AiJsonToPrompt() {
           />
         </div>
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Prompt Output</label>
-            <CopyButton text={output} />
+          <div className="tool-output-header">
+            <label className="tool-label">Prompt Output</label>
+            <CopyButton text={output} toast="Prompt copied" />
           </div>
           <textarea
-            className="tool-textarea h-64 text-xs"
+            className="tool-textarea-output h-64 text-xs"
             readOnly
             value={output}
             placeholder="Click Convert to generate prompt..."
@@ -129,9 +131,9 @@ export default function AiJsonToPrompt() {
       </div>
 
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           {error}
-        </div>
+        </p>
       )}
     </div>
   )

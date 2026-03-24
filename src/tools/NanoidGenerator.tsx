@@ -125,10 +125,10 @@ export default function NanoidGenerator() {
   return (
     <div className="space-y-4">
       {/* Tabs */}
-      <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm w-fit">
+      <div className="tool-tabs w-fit">
         {(['nanoid', 'ulid'] as const).map(t => (
           <button key={t} onClick={() => setTab(t)}
-            className={`px-5 py-1.5 transition-colors ${tab === t ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+            className={`tool-tab ${tab === t ? 'active' : ''}`}>
             {t === 'nanoid' ? 'Nano ID' : 'ULID'}
           </button>
         ))}
@@ -139,7 +139,7 @@ export default function NanoidGenerator() {
         <div className="space-y-4">
           <div className="flex flex-wrap gap-4 items-end">
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Length</label>
+              <label className="tool-label block mb-1">Length</label>
               <input
                 type="number"
                 min={1} max={256}
@@ -149,7 +149,7 @@ export default function NanoidGenerator() {
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Count</label>
+              <label className="tool-label block mb-1">Count</label>
               <input
                 type="number"
                 min={1} max={100}
@@ -159,7 +159,7 @@ export default function NanoidGenerator() {
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Alphabet</label>
+              <label className="tool-label block mb-1">Alphabet</label>
               <select
                 value={alphabetPreset}
                 onChange={e => setAlphabetPreset(e.target.value as keyof typeof ALPHABETS)}
@@ -175,7 +175,7 @@ export default function NanoidGenerator() {
 
           {alphabetPreset === 'default' && (
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Custom Alphabet (overrides default)</label>
+              <label className="tool-label block mb-1">Custom Alphabet (overrides default)</label>
               <input
                 type="text"
                 className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm font-mono text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
@@ -203,7 +203,7 @@ export default function NanoidGenerator() {
                 {nanoIds.map((id, i) => (
                   <div key={i} className="flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2">
                     <span className="font-mono text-sm text-gray-700 dark:text-gray-300 flex-1 break-all">{id}</span>
-                    <CopyButton text={id} />
+                    <CopyButton text={id} toast="ID copied" />
                   </div>
                 ))}
               </div>
@@ -217,7 +217,7 @@ export default function NanoidGenerator() {
         <div className="space-y-4">
           <div className="flex items-end gap-4 flex-wrap">
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Count</label>
+              <label className="tool-label block mb-1">Count</label>
               <input
                 type="number"
                 min={1} max={100}
@@ -248,7 +248,7 @@ export default function NanoidGenerator() {
                           <span className="text-blue-600 dark:text-blue-400">{id.slice(0, 10)}</span>
                           <span className="text-orange-600 dark:text-orange-400">{id.slice(10)}</span>
                         </button>
-                        <CopyButton text={id} />
+                        <CopyButton text={id} toast="ID copied" />
                       </div>
                       {isExpanded && decoded && (
                         <div className="border-t border-gray-100 dark:border-gray-800 px-3 py-2 text-xs text-gray-500 dark:text-gray-400 space-y-1">
@@ -266,7 +266,7 @@ export default function NanoidGenerator() {
 
           {/* Decode panel */}
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Decode a ULID</label>
+            <label className="tool-label block mb-1">Decode a ULID</label>
             <input
               type="text"
               className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm font-mono text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
@@ -275,9 +275,9 @@ export default function NanoidGenerator() {
               onChange={e => handleDecode(e.target.value)}
             />
             {decodeError && (
-              <div className="text-sm px-3 py-2 mt-1 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+              <p className="tool-msg tool-msg--error mt-1">
                 {decodeError}
-              </div>
+              </p>
             )}
             {decodeResult && (
               <div className="mt-2 bg-gray-50 dark:bg-gray-900/50 rounded-xl p-3 text-sm space-y-1">

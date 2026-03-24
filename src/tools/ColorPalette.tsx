@@ -69,7 +69,7 @@ export default function ColorPalette() {
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-gray-900 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
                   {color}
                 </div>
-                <CopyButton text={color} className="!text-xs mt-1 w-full justify-center" />
+                <CopyButton text={color} toast="Color copied" className="!text-xs mt-1 w-full justify-center" />
               </div>
             ))}
           </div>

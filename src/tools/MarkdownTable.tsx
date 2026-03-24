@@ -146,8 +146,8 @@ export default function MarkdownTable() {
     <div className="space-y-6">
       {/* Table editor */}
       <div>
-        <div className="flex items-center justify-between mb-2">
-          <label className="label-text">Table Editor</label>
+        <div className="tool-output-header">
+          <label className="tool-label">Table Editor</label>
           <span className="text-xs text-gray-400 dark:text-gray-500">
             {colCount} col{colCount !== 1 ? 's' : ''} × {rowCount} row{rowCount !== 1 ? 's' : ''}
           </span>
@@ -267,8 +267,8 @@ export default function MarkdownTable() {
 
       {/* Markdown preview */}
       <div>
-        <div className="flex items-center justify-between mb-1">
-          <label className="label-text">Markdown Output</label>
+        <div className="tool-output-header">
+          <label className="tool-label">Markdown Output</label>
           <button
             onClick={copy}
             className="btn-ghost text-xs flex items-center gap-1"
@@ -278,7 +278,7 @@ export default function MarkdownTable() {
           </button>
         </div>
         <textarea
-          className="tool-textarea h-48 font-mono"
+          className="tool-textarea-output h-48 font-mono"
           readOnly
           value={markdown}
         />

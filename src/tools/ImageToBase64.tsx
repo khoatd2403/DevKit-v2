@@ -51,14 +51,14 @@ export default function ImageToBase64() {
 
       {result && (
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Data URL (Base64)</label>
+          <div className="tool-output-header">
+            <label className="tool-label">Data URL (Base64)</label>
             <div className="flex gap-2">
-              <CopyButton text={result} />
-              <CopyButton text={result.split(',')[1] || ''} className="!text-xs" />
+              <CopyButton text={result} toast="Data URL copied" />
+              <CopyButton text={result.split(',')[1] || ''} toast="Base64 copied" className="!text-xs" />
             </div>
           </div>
-          <textarea className="tool-textarea h-40 text-xs" readOnly value={result} />
+          <textarea className="tool-textarea-output h-40 text-xs" readOnly value={result} />
         </div>
       )}
     </div>

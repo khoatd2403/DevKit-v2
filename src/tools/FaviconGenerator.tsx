@@ -209,7 +209,7 @@ export default function FaviconGenerator() {
     <div className="space-y-5">
       {/* Mode toggle */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">Mode</label>
+        <label className="tool-label block mb-2">Mode</label>
         <div className="flex gap-1">
           {(['emoji', 'text'] as Mode[]).map(m => (
             <button
@@ -232,7 +232,7 @@ export default function FaviconGenerator() {
         <div className="space-y-4">
           {mode === 'emoji' ? (
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Emoji</label>
+              <label className="tool-label block mb-1">Emoji</label>
               <input
                 type="text"
                 value={emoji}
@@ -245,7 +245,7 @@ export default function FaviconGenerator() {
           ) : (
             <>
               <div>
-                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Text (1–2 chars)</label>
+                <label className="tool-label block mb-1">Text (1–2 chars)</label>
                 <input
                   type="text"
                   value={text}
@@ -257,7 +257,7 @@ export default function FaviconGenerator() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Text Color</label>
+                  <label className="tool-label block mb-1">Text Color</label>
                   <div className="flex items-center gap-2">
                     <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)}
                       className="w-10 h-9 rounded cursor-pointer border border-gray-200 dark:border-gray-700" />
@@ -265,7 +265,7 @@ export default function FaviconGenerator() {
                   </div>
                 </div>
                 <div>
-                  <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Bold</label>
+                  <label className="tool-label block mb-1">Bold</label>
                   <label className="flex items-center gap-2 cursor-pointer mt-2">
                     <input type="checkbox" checked={bold} onChange={e => setBold(e.target.checked)}
                       className="w-4 h-4 accent-primary-600" />
@@ -274,7 +274,7 @@ export default function FaviconGenerator() {
                 </div>
               </div>
               <div>
-                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+                <label className="tool-label block mb-1">
                   Font size: {fontSize}%
                 </label>
                 <input type="range" min={30} max={100} value={fontSize}
@@ -286,7 +286,7 @@ export default function FaviconGenerator() {
 
           {/* Background color */}
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Background Color</label>
+            <label className="tool-label block mb-1">Background Color</label>
             <div className="flex items-center gap-2">
               <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
                 className="w-10 h-9 rounded cursor-pointer border border-gray-200 dark:border-gray-700" />
@@ -296,7 +296,7 @@ export default function FaviconGenerator() {
 
           {/* Border radius */}
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+            <label className="tool-label block mb-1">
               Corner radius: {borderRadius}%
             </label>
             <input type="range" min={0} max={50} value={borderRadius}
@@ -313,7 +313,7 @@ export default function FaviconGenerator() {
         {/* Right: preview */}
         <div className="space-y-4">
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-3">Preview</label>
+            <label className="tool-label block mb-3">Preview</label>
             {/* Master preview at 256 (displayed smaller) */}
             <div className="flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-xl p-6 mb-4">
               <canvas

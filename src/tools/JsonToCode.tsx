@@ -454,8 +454,8 @@ export default function JsonToCode() {
 
       {/* Output */}
       <div>
-        <div className="flex items-center justify-between mb-1">
-          <label className="label-text flex items-center gap-2">
+        <div className="tool-output-header">
+          <label className="tool-label flex items-center gap-2">
             <Code2 size={13} />
             Generated Code
           </label>

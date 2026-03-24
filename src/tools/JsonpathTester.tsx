@@ -360,7 +360,7 @@ export default function JsonpathTester() {
   return (
     <div className="space-y-4">
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">JSON Input</label>
+        <label className="tool-label block mb-1">JSON Input</label>
         <FileDropTextarea
           className="h-48"
           placeholder={'{\n  "store": {\n    "book": [\n      { "author": "Alice", "price": 9.99 },\n      { "author": "Bob", "price": 14.99 }\n    ]\n  }\n}'}
@@ -371,7 +371,7 @@ export default function JsonpathTester() {
       </div>
 
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">JSONPath Expression</label>
+        <label className="tool-label block mb-1">JSONPath Expression</label>
         <input
           type="text"
           className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 font-mono"
@@ -382,8 +382,8 @@ export default function JsonpathTester() {
       </div>
 
       <div>
-        <div className="flex items-center justify-between mb-1">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block">
+        <div className="tool-output-header">
+          <label className="tool-label">
             Results
             {resultCount !== null && (
               <span className="ml-2 px-2 py-0.5 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 text-xs">
@@ -391,10 +391,10 @@ export default function JsonpathTester() {
               </span>
             )}
           </label>
-          <CopyButton text={output} />
+          <CopyButton text={output} toast="Result copied" />
         </div>
         <textarea
-          className="tool-textarea h-48"
+          className="tool-textarea-output h-48"
           readOnly
           value={output}
           placeholder="Matched results will appear here..."
@@ -402,9 +402,9 @@ export default function JsonpathTester() {
       </div>
 
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           {error}
-        </div>
+        </p>
       )}
     </div>
   )

@@ -55,20 +55,20 @@ export default function MetaTagGenerator() {
             { label: 'OG Image URL', key: 'image', placeholder: 'https://example.com/og.png' },
           ].map(({ label, key, placeholder }) => (
             <div key={key}>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">{label}</label>
+              <label className="tool-label block mb-1">{label}</label>
               <input type="text" className={inputCls} placeholder={placeholder} value={form[key as keyof typeof form]} onChange={e => set(key, e.target.value)} />
             </div>
           ))}
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Robots</label>
+              <label className="tool-label block mb-1">Robots</label>
               <select value={form.robots} onChange={e => set('robots', e.target.value)} className="tool-textarea h-auto py-2 text-sm">
                 {['index, follow', 'noindex, nofollow', 'index, nofollow', 'noindex, follow'].map(v => <option key={v}>{v}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Twitter Card</label>
+              <label className="tool-label block mb-1">Twitter Card</label>
               <select value={form.twitterCard} onChange={e => set('twitterCard', e.target.value)} className="tool-textarea h-auto py-2 text-sm">
                 {['summary', 'summary_large_image', 'app', 'player'].map(v => <option key={v}>{v}</option>)}
               </select>
@@ -77,11 +77,11 @@ export default function MetaTagGenerator() {
         </div>
 
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Generated Meta Tags</label>
-            <CopyButton text={tags} />
+          <div className="tool-output-header">
+            <label className="tool-label">Generated Meta Tags</label>
+            <CopyButton text={tags} toast="Meta tags copied" />
           </div>
-          <textarea className="tool-textarea h-[500px] text-xs" readOnly value={tags} />
+          <textarea className="tool-textarea-output h-[500px] text-xs" readOnly value={tags} />
         </div>
       </div>
     </div>

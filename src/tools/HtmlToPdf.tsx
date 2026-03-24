@@ -90,7 +90,7 @@ export default function HtmlToPdf() {
       {/* HTML Input */}
       <div>
         <div className="flex items-center justify-between mb-1">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+          <label className="tool-label">
             HTML Input
           </label>
           {html && (
@@ -112,7 +112,7 @@ export default function HtmlToPdf() {
       <div className="space-y-3">
         {/* Page size pills */}
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">
+          <label className="tool-label block mb-2">
             Page Size
           </label>
           <div className="flex flex-wrap gap-2">
@@ -134,7 +134,7 @@ export default function HtmlToPdf() {
 
         {/* Orientation pills */}
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">
+          <label className="tool-label block mb-2">
             Orientation
           </label>
           <div className="flex gap-2">
@@ -170,7 +170,7 @@ export default function HtmlToPdf() {
 
       {/* Custom CSS */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+        <label className="tool-label block mb-1">
           Custom CSS (optional, injected before printing)
         </label>
         <FileDropTextarea
@@ -211,7 +211,7 @@ export default function HtmlToPdf() {
       {/* Live Preview */}
       {previewHtml.trim() && (
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">
+          <label className="tool-label block mb-2">
             Live Preview
           </label>
           <iframe

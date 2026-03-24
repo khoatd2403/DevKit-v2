@@ -29,18 +29,20 @@ export default function HtmlMinifier() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Input HTML</label>
+          <div className="tool-output-header">
+            <label className="tool-label">Input HTML</label>
+          </div>
           <FileDropTextarea className="h-72" placeholder="<html>\n  <body>\n    <h1>Hello</h1>\n  </body>\n</html>" value={input} onChange={setInput} accept=".html,.htm,text/html,text/*" />
         </div>
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Minified Output</label>
+          <div className="tool-output-header">
+            <label className="tool-label">Minified Output</label>
             <div className="flex items-center gap-2">
               {savings > 0 && <span className="text-xs text-green-600 dark:text-green-400">-{savings}%</span>}
-              <CopyButton text={output} />
+              <CopyButton text={output} toast="HTML copied" />
             </div>
           </div>
-          <textarea className="tool-textarea h-72" readOnly value={output} placeholder="Minified HTML will appear here..." />
+          <textarea className="tool-textarea-output h-72" readOnly value={output} placeholder="Minified HTML will appear here..." />
         </div>
       </div>
     </div>

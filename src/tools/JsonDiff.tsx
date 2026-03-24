@@ -64,15 +64,15 @@ export default function JsonDiff() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">JSON A (Original)</label>
+          <label className="tool-label block mb-1">JSON A (Original)</label>
           <FileDropTextarea className="h-64" placeholder='{"a":1,"b":2}' value={left} onChange={setLeft} accept=".json,text/plain,text/*" />
         </div>
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">JSON B (Modified)</label>
+          <label className="tool-label block mb-1">JSON B (Modified)</label>
           <FileDropTextarea className="h-64" placeholder='{"a":1,"b":3,"c":4}' value={right} onChange={setRight} accept=".json,text/plain,text/*" />
         </div>
       </div>
-      {error && <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">{error}</div>}
+      {error && <p className="tool-msg tool-msg--error">{error}</p>}
       {compared && (
         <div className="bg-gray-900 dark:bg-black rounded-lg p-4 font-mono text-sm">
           {diffs.length === 0 ? (

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import { useToast } from '../context/ToastContext'
 
-export default function CopyButton({ text, label, className = '' }: { text: string; label?: string; className?: string }) {
+export default function CopyButton({ text, label, toast, className = '' }: { text: string; label?: string; toast?: string; className?: string }) {
   const [copied, setCopied] = useState(false)
   const { showToast } = useToast()
 
@@ -10,7 +10,7 @@ export default function CopyButton({ text, label, className = '' }: { text: stri
     if (!text) return
     await navigator.clipboard.writeText(text)
     setCopied(true)
-    showToast('Copied to clipboard', 'success')
+    showToast(toast ?? 'Copied to clipboard', 'success')
     setTimeout(() => setCopied(false), 2000)
   }
 

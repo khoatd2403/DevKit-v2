@@ -154,7 +154,7 @@ function InfoRow({ label, value, mono = false, copyable = false, muted = false }
         >
           {value}
         </span>
-        {copyable && <CopyButton text={value} className="shrink-0" />}
+        {copyable && <CopyButton text={value} toast="Value copied" className="shrink-0" />}
       </div>
     </div>
   )

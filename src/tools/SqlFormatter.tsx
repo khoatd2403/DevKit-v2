@@ -44,13 +44,15 @@ export default function SqlFormatter() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Input SQL</label>
+          <div className="tool-output-header">
+            <label className="tool-label">Input SQL</label>
+          </div>
           <FileDropTextarea className="h-72" placeholder="SELECT * FROM users WHERE id = 1" value={input} onChange={setInput} accept=".sql,text/plain,text/*" />
         </div>
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Formatted Output</label>
-            <CopyButton text={output} />
+          <div className="tool-output-header">
+            <label className="tool-label">Formatted Output</label>
+            <CopyButton text={output} toast="SQL copied" />
           </div>
           <SqlCodeBlock code={output} className="h-72" placeholder="Formatted SQL will appear here..." />
         </div>

@@ -34,8 +34,8 @@ export default function AiTokenCounter() {
   return (
     <div className="space-y-4">
       <div>
-        <div className="flex items-center justify-between mb-1">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Input Text</label>
+        <div className="tool-output-header">
+          <label className="tool-label">Input Text</label>
           <button onClick={() => setText('')} className="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">Clear</button>
         </div>
         <textarea

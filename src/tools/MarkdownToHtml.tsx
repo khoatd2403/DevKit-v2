@@ -73,7 +73,7 @@ export default function MarkdownToHtml() {
     <div className="space-y-4">
       {/* Input */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+        <label className="tool-label block mb-1">
           Markdown Input
         </label>
         <FileDropTextarea
@@ -121,14 +121,14 @@ export default function MarkdownToHtml() {
 
       {/* Output */}
       <div>
-        <div className="flex items-center justify-between mb-1">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+        <div className="tool-output-header">
+          <label className="tool-label">
             HTML Output
           </label>
-          {outputHtml && <CopyButton text={outputHtml} />}
+          {outputHtml && <CopyButton text={outputHtml} toast="HTML copied" />}
         </div>
         <textarea
-          className="tool-textarea font-mono text-sm"
+          className="tool-textarea-output font-mono text-sm"
           rows={8}
           readOnly
           value={outputHtml}
@@ -157,7 +157,7 @@ export default function MarkdownToHtml() {
       {/* Live Preview */}
       {showPreview && outputHtml && (
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">
+          <label className="tool-label block mb-2">
             Rendered Preview
           </label>
           <iframe

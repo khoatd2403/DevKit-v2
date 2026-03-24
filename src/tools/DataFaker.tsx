@@ -295,12 +295,12 @@ export default function DataFaker() {
         </div>
         <div>
           <label className="label-text block mb-2">Output Format</label>
-          <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm h-[38px]">
+          <div className="tool-tabs h-[38px]">
             {(['json', 'csv', 'sql'] as const).map(f => (
               <button
                 key={f}
                 onClick={() => setFormat(f)}
-                className={`flex-1 uppercase transition-colors text-xs font-semibold ${format === f ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+                className={`tool-tab flex-1 uppercase text-xs font-semibold ${format === f ? 'active' : ''}`}
               >
                 {f}
               </button>
@@ -327,7 +327,7 @@ export default function DataFaker() {
           <textarea
             readOnly
             value={output}
-            className="tool-textarea font-mono text-xs h-80"
+            className="tool-textarea-output font-mono text-xs h-80"
           />
           <p className="text-xs text-gray-400 mt-1">
             {format === 'json' && `${JSON.parse(output).length} records`}

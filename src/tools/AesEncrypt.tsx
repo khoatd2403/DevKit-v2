@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { usePersistentState } from '../hooks/usePersistentState'
-import { Eye, EyeOff, Lock, Unlock, Copy, Check } from 'lucide-react'
+import { Eye, EyeOff, Lock, Unlock } from 'lucide-react'
 import FileDropTextarea from '../components/FileDropTextarea'
+import CopyButton from '../components/CopyButton'
 
 type Mode = 'CBC' | 'GCM'
 type KeySize = 128 | 192 | 256
@@ -88,7 +89,6 @@ export default function AesEncrypt() {
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [copied, setCopied] = useState(false)
 
   const handleProcess = async () => {
     setError('')
@@ -113,27 +113,15 @@ export default function AesEncrypt() {
     }
   }
 
-  const handleCopy = () => {
-    if (!output) return
-    navigator.clipboard.writeText(output).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    })
-  }
-
   return (
     <div className="space-y-4">
       {/* Tab toggle */}
-      <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden w-fit text-sm">
+      <div className="tool-tabs w-fit">
         {(['encrypt', 'decrypt'] as Tab[]).map(t => (
           <button
             key={t}
             onClick={() => { setTab(t); setInput(''); setOutput(''); setError('') }}
-            className={`flex items-center gap-1.5 px-5 py-2 transition-colors capitalize ${
-              tab === t
-                ? 'bg-primary-600 text-white'
-                : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
-            }`}
+            className={`tool-tab flex items-center gap-1.5 px-5 py-2 ${tab === t ? 'active' : ''}`}
           >
             {t === 'encrypt' ? <Lock size={14} /> : <Unlock size={14} />}
             {t}
@@ -143,7 +131,7 @@ export default function AesEncrypt() {
 
       {/* Input */}
       <div>
-        <label className="label-text block mb-1">
+        <label className="tool-label block mb-1">
           {tab === 'encrypt' ? 'Plaintext' : 'Ciphertext (Base64)'}
         </label>
         <FileDropTextarea
@@ -157,11 +145,11 @@ export default function AesEncrypt() {
 
       {/* Password */}
       <div>
-        <label className="label-text block mb-1">Password</label>
+        <label className="tool-label block mb-1">Password</label>
         <div className="relative">
           <input
             type={showPass ? 'text' : 'password'}
-            className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 pr-10 text-sm font-mono text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="tool-textarea h-auto py-2 pr-10"
             value={password}
             onChange={e => setPassword(e.target.value)}
             placeholder="Enter encryption password..."
@@ -179,36 +167,20 @@ export default function AesEncrypt() {
       {/* Options row */}
       <div className="flex flex-wrap gap-4">
         <div>
-          <label className="label-text block mb-1">Key Size</label>
-          <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+          <label className="tool-label block mb-1">Key Size</label>
+          <div className="tool-tabs">
             {([128, 192, 256] as KeySize[]).map(k => (
-              <button
-                key={k}
-                onClick={() => setKeySize(k)}
-                className={`px-3 py-1.5 transition-colors ${
-                  keySize === k
-                    ? 'bg-primary-600 text-white'
-                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
-                }`}
-              >
+              <button key={k} onClick={() => setKeySize(k)} className={`tool-tab ${keySize === k ? 'active' : ''}`}>
                 {k}-bit
               </button>
             ))}
           </div>
         </div>
         <div>
-          <label className="label-text block mb-1">Mode</label>
-          <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+          <label className="tool-label block mb-1">Mode</label>
+          <div className="tool-tabs">
             {(['CBC', 'GCM'] as Mode[]).map(m => (
-              <button
-                key={m}
-                onClick={() => setMode(m)}
-                className={`px-4 py-1.5 transition-colors ${
-                  mode === m
-                    ? 'bg-primary-600 text-white'
-                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
-                }`}
-              >
+              <button key={m} onClick={() => setMode(m)} className={`tool-tab ${mode === m ? 'active' : ''}`}>
                 {m}
               </button>
             ))}
@@ -222,32 +194,19 @@ export default function AesEncrypt() {
         {loading ? 'Processing...' : tab === 'encrypt' ? 'Encrypt' : 'Decrypt'}
       </button>
 
-      {/* Error */}
-      {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
-          {error}
-        </div>
-      )}
+      {error && <p className="tool-msg tool-msg--error">{error}</p>}
 
       {/* Output */}
       {output && (
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="label-text">
+          <div className="tool-output-header">
+            <label className="tool-label">
               {tab === 'encrypt' ? 'Ciphertext (Base64)' : 'Decrypted Plaintext'}
             </label>
-            <button onClick={handleCopy} className="btn-ghost flex items-center gap-1.5 text-xs py-1 px-2">
-              {copied ? <Check size={13} className="text-green-500" /> : <Copy size={13} />}
-              {copied ? 'Copied!' : 'Copy'}
-            </button>
+            <CopyButton text={output} toast={tab === 'encrypt' ? 'Ciphertext copied' : 'Decrypted text copied'} />
           </div>
-          <FileDropTextarea
-            className="h-32"
-            value={output}
-            onChange={() => {}}
-            readOnly
-          />
-          <p className="text-xs text-gray-400 mt-1">
+          <FileDropTextarea className="h-32" value={output} onChange={() => {}} readOnly />
+          <p className="tool-note">
             Format: Base64(salt[16] + iv[{mode === 'CBC' ? 16 : 12}] + ciphertext) — AES-{keySize}-{mode} / PBKDF2 100k iterations
           </p>
         </div>

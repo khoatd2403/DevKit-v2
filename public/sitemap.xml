@@ -2,727 +2,733 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://devtoolsonline.dev/</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tools</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/json-formatter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/json-minifier</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/json-to-csv</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/json-diff</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/base64-encode-decode</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/url-encode-decode</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/html-encode-decode</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/jwt-decoder</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/hash-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/password-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/bcrypt</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/string-case-converter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/text-diff</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/lorem-ipsum</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/string-inspector</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/regex-tester</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/number-base-converter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/byte-converter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/unix-timestamp</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/cron-parser</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/css-minifier</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/html-minifier</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://devtoolsonline.dev/tool/html-preview</loc>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/markdown-preview</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/meta-tag-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/color-converter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/color-palette</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/uuid-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/random-string</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/sql-formatter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/xml-formatter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/image-to-base64</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/qr-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/yaml-json</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/json-to-typescript</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/jsonpath-tester</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/json-schema-validator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/hex-encode-decode</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/binary-encode-decode</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/slug-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/string-escape</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/html-to-markdown</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/timezone-converter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/date-calculator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/css-formatter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/js-formatter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/url-parser</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/yaml-formatter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/csv-to-json</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/chmod-calculator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/jwt-encoder</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/image-converter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/image-resizer</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/svg-to-png</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/csv-to-excel</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/json-to-excel</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/markdown-to-html</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/html-to-pdf</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/text-sorter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/word-frequency</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/text-stats</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/json-to-code</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/aes-encrypt</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/totp-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/unit-converter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/math-evaluator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/css-gradient</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/css-shadow</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/http-status-codes</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/mime-types</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/curl-to-code</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/data-faker</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/nanoid-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/html-formatter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/csv-viewer</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/env-parser</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/markdown-table</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/cidr-calculator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/http-headers-builder</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/robots-txt</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/sitemap-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/keycode-tester</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/aspect-ratio</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/number-formatter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/ts-to-js</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/favicon-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/barcode-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/image-compressor</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/npm-checker</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/svg-icons</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/json-to-csharp</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/nuget-checker</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/connection-string-builder</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/csharp-string-escape</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/sql-to-linq</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/diagram-creator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/erd-diagram</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/sql-plan-viewer</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/log-viewer</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/dns-lookup</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/ip-lookup</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/ssl-checker</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/http-request-builder</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/user-agent-parser</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/color-extractor</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/color-contrast</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/css-filter-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/px-to-rem</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/svg-previewer</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/password-strength</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/cert-decoder</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/national-id-generator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/xml-minifier</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/sql-syntax</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/ai-token-counter</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/ai-cost-calculator</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/ai-prompt-builder</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/ai-model-comparison</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/ai-json-to-prompt</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://devtoolsonline.dev/tool/ai-system-prompt</loc>
-    <lastmod>2026-03-22</lastmod>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

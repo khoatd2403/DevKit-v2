@@ -1,15 +1,34 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Search, RefreshCw, MapPin, Globe, Wifi, Building } from 'lucide-react'
+import CopyButton from '../components/CopyButton'
 
 interface IpInfo {
-  ip: string; version: string; city: string; region: string; region_code: string
-  country_name: string; country_code: string; continent_code: string
-  latitude: number; longitude: number; timezone: string; utc_offset: string
-  org: string; asn: string; hostname?: string; postal?: string; currency?: string
-  in_eu?: boolean; languages?: string; country_calling_code?: string
+  ip: string
+  type: string
+  continent: string
+  continent_code: string
+  country: string
+  country_code: string
+  region: string
+  region_code: string
+  city: string
+  latitude: number
+  longitude: number
+  is_eu: boolean
+  postal: string
+  calling_code: string
+  capital: string
+  flag: { img: string; emoji: string }
+  connection: { asn: number; org: string; isp: string; domain: string }
+  timezone: { id: string; abbr: string; utc: string; current_time: string; is_dst: boolean }
 }
 
 const SAMPLE_IPS = ['8.8.8.8', '1.1.1.1', '208.67.222.222', '9.9.9.9', '76.76.2.0']
+
+function countryEmoji(code?: string): string {
+  if (!code || code.length !== 2) return '🌐'
+  return code.toUpperCase().replace(/./g, c => String.fromCodePoint(127397 + c.charCodeAt(0)))
+}
 
 function InfoBlock({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
   return (
@@ -44,12 +63,65 @@ export default function IpLookup() {
     setError('')
     setInfo(null)
     try {
-      const endpoint = ip ? `https://ipapi.co/${ip}/json/` : 'https://ipapi.co/json/'
-      const res = await fetch(endpoint)
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
-      const data = await res.json()
-      if (data.error) throw new Error(data.reason ?? data.error)
-      setInfo(data)
+      // Provider 1: freeipapi.com
+      const r1 = await fetch(ip ? `https://freeipapi.com/api/json/${ip}` : 'https://freeipapi.com/api/json/').catch(() => null)
+      if (r1?.ok) {
+        const d = await r1.json()
+        if (d.ipAddress) {
+          setInfo({
+            ip: d.ipAddress,
+            type: `IPv${d.ipVersion}`,
+            continent: d.continent ?? '',
+            continent_code: d.continentCode ?? '',
+            country: d.countryName,
+            country_code: d.countryCode,
+            region: d.regionName,
+            region_code: d.regionCode ?? '',
+            city: d.cityName,
+            latitude: d.latitude,
+            longitude: d.longitude,
+            is_eu: false,
+            postal: d.zipCode ?? '',
+            calling_code: '',
+            capital: '',
+            flag: { img: '', emoji: countryEmoji(d.countryCode) },
+            connection: { asn: 0, org: d.isp ?? '', isp: d.isp ?? '', domain: '' },
+            timezone: { id: d.timeZone ?? '', abbr: '', utc: d.timeZone ?? '', current_time: '', is_dst: false },
+          })
+          return
+        }
+      }
+
+      // Provider 2: ipapi.is
+      const r2 = await fetch(ip ? `https://api.ipapi.is/?q=${ip}` : 'https://api.ipapi.is/').catch(() => null)
+      if (r2?.ok) {
+        const d = await r2.json()
+        if (d.ip) {
+          setInfo({
+            ip: d.ip,
+            type: d.ip?.includes(':') ? 'IPv6' : 'IPv4',
+            continent: d.location?.continent ?? '',
+            continent_code: d.location?.continent ?? '',
+            country: d.location?.country ?? '',
+            country_code: d.location?.country_code ?? '',
+            region: d.location?.state ?? '',
+            region_code: d.location?.state ?? '',
+            city: d.location?.city ?? '',
+            latitude: d.location?.latitude ?? 0,
+            longitude: d.location?.longitude ?? 0,
+            is_eu: false,
+            postal: d.location?.zip ?? '',
+            calling_code: '',
+            capital: '',
+            flag: { img: '', emoji: countryEmoji(d.location?.country_code) },
+            connection: { asn: d.asn?.asn ?? 0, org: d.asn?.org ?? '', isp: d.company?.name ?? '', domain: d.company?.domain ?? '' },
+            timezone: { id: d.location?.timezone ?? '', abbr: '', utc: '', current_time: d.location?.local_time ?? '', is_dst: d.location?.is_dst ?? false },
+          })
+          return
+        }
+      }
+
+      throw new Error('All providers failed. Try again later.')
     } catch (e) {
       setError((e as Error).message)
     } finally {
@@ -57,10 +129,7 @@ export default function IpLookup() {
     }
   }, [input])
 
-  // Auto-lookup own IP on mount
   useEffect(() => { lookup('') }, [])
-
-  const flag = info?.country_code ? `https://flagcdn.com/24x18/${info.country_code.toLowerCase()}.png` : ''
 
   return (
     <div className="space-y-4">
@@ -103,15 +172,30 @@ export default function IpLookup() {
       {info && !loading && (
         <>
           {/* IP header */}
-          <div className="flex items-center gap-4 p-4 bg-primary-50 dark:bg-primary-950/30 border border-primary-200 dark:border-primary-800 rounded-xl">
-            {flag && <img src={flag} alt={info.country_code} className="h-6 rounded shadow-sm" />}
-            <div>
-              <p className="text-xl font-bold font-mono text-gray-900 dark:text-white">{info.ip}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{info.city}, {info.region}, {info.country_name}</p>
+          <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+            {/* IP row — dark bg */}
+            <div className="flex items-center gap-3 px-5 py-4 bg-gray-900 dark:bg-gray-950">
+              <span className="text-4xl leading-none select-none">{info.flag?.emoji}</span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-2xl sm:text-3xl font-bold font-mono tracking-wider text-white break-all">
+                    {info.ip}
+                  </span>
+                  <CopyButton text={info.ip} toast="IP copied" />
+                  <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-gray-300 border border-white/20">
+                    {info.type}
+                  </span>
+                  {info.is_eu && (
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">🇪🇺 EU</span>
+                  )}
+                </div>
+              </div>
             </div>
-            <div className="ml-auto text-right">
-              <p className="text-xs text-gray-400">IPv{info.version}</p>
-              {info.in_eu && <span className="text-[11px] bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full">EU</span>}
+            {/* Location summary row */}
+            <div className="flex items-center gap-6 px-5 py-3 bg-gray-50 dark:bg-gray-900 text-sm text-gray-600 dark:text-gray-400 flex-wrap border-t border-gray-200 dark:border-gray-800">
+              {info.city && <span>📍 {[info.city, info.region, info.country].filter(Boolean).join(', ')}</span>}
+              {info.connection?.isp && <span>🏢 {info.connection.isp}</span>}
+              {info.timezone?.id && <span>🕐 {info.timezone.id}</span>}
             </div>
           </div>
 
@@ -119,25 +203,27 @@ export default function IpLookup() {
             <InfoBlock icon={<MapPin size={14} />} title="Location">
               <Row label="City" value={info.city} />
               <Row label="Region" value={`${info.region} (${info.region_code})`} />
-              <Row label="Country" value={`${info.country_name} (${info.country_code})`} />
-              <Row label="Continent" value={info.continent_code} />
+              <Row label="Country" value={`${info.country} (${info.country_code})`} />
+              <Row label="Continent" value={`${info.continent} (${info.continent_code})`} />
+              <Row label="Capital" value={info.capital} />
               <Row label="Postal" value={info.postal} />
               <Row label="Latitude" value={info.latitude} />
               <Row label="Longitude" value={info.longitude} />
             </InfoBlock>
 
             <InfoBlock icon={<Globe size={14} />} title="Timezone & Locale">
-              <Row label="Timezone" value={info.timezone} />
-              <Row label="UTC Offset" value={info.utc_offset} />
-              <Row label="Currency" value={info.currency} />
-              <Row label="Languages" value={info.languages} />
-              <Row label="Calling Code" value={info.country_calling_code} />
+              <Row label="Timezone" value={info.timezone?.id} />
+              <Row label="Abbreviation" value={`${info.timezone?.abbr}${info.timezone?.is_dst ? ' (DST)' : ''}`} />
+              <Row label="UTC Offset" value={info.timezone?.utc} />
+              <Row label="Current Time" value={info.timezone?.current_time?.slice(0, 19).replace('T', ' ')} />
+              <Row label="Calling Code" value={`+${info.calling_code}`} />
             </InfoBlock>
 
             <InfoBlock icon={<Building size={14} />} title="Network">
-              <Row label="ASN" value={info.asn} />
-              <Row label="Organization" value={info.org} />
-              {info.hostname && <Row label="Hostname" value={info.hostname} />}
+              <Row label="ASN" value={`AS${info.connection?.asn}`} />
+              <Row label="Organization" value={info.connection?.org} />
+              <Row label="ISP" value={info.connection?.isp} />
+              <Row label="Domain" value={info.connection?.domain} />
             </InfoBlock>
 
             <InfoBlock icon={<Wifi size={14} />} title="Map">
@@ -154,7 +240,7 @@ export default function IpLookup() {
         </>
       )}
 
-      <p className="text-[11px] text-gray-400">Powered by ipapi.co — rate limited to 1000 requests/day for free use</p>
+      <p className="text-[11px] text-gray-400">Powered by freeipapi.com / ipapi.is — free, no API key required</p>
     </div>
   )
 }

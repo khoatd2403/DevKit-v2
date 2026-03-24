@@ -152,16 +152,12 @@ export default function EnvParser() {
     <div className="space-y-4">
       {/* Tab bar */}
       <div className="flex items-center gap-3">
-        <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+        <div className="tool-tabs">
           {tabs.map(t => (
             <button
               key={t.id}
               onClick={() => { setTab(t.id); setInput('') }}
-              className={`px-4 py-1.5 transition-colors ${
-                tab === t.id
-                  ? 'bg-primary-600 text-white'
-                  : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
-              }`}
+              className={`tool-tab ${tab === t.id ? 'active' : ''}`}
             >
               {t.label}
             </button>
@@ -205,8 +201,8 @@ export default function EnvParser() {
 
         {/* Output */}
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="label-text">
+          <div className="tool-output-header">
+            <label className="tool-label">
               {tab === 'env-to-json' ? 'JSON Output' : '.env Output'}
               {result.keyCount > 0 && (
                 <span className="ml-2 text-xs font-normal text-gray-400">
@@ -230,7 +226,7 @@ export default function EnvParser() {
             </div>
           ) : (
             <textarea
-              className="tool-textarea h-80"
+              className="tool-textarea-output h-80"
               readOnly
               value={result.output}
               placeholder="Output will appear here…"

@@ -41,7 +41,7 @@ export default function NumberBaseConverter() {
               <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">{label}</label>
               <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-400">Base {base}</span>
-                <CopyButton text={values[base] || ''} />
+                <CopyButton text={values[base] || ''} toast={`${label} copied`} />
               </div>
             </div>
             <div className="flex items-center gap-1">
@@ -57,7 +57,7 @@ export default function NumberBaseConverter() {
           </div>
         ))}
       </div>
-      {error && <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">{error}</div>}
+      {error && <p className="tool-msg tool-msg--error">{error}</p>}
 
       {/* Quick reference */}
       <div className="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-4">

@@ -364,7 +364,7 @@ export default function DiagramCreator() {
         {/* Editor */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Mermaid Syntax</label>
+            <label className="tool-label">Mermaid Syntax</label>
             <button onClick={() => copy(code, 'code')} className="btn-ghost text-xs px-2 py-1 flex items-center gap-1">
               {copied === 'code' ? <Check size={11} className="text-green-500" /> : <Copy size={11} />}
               {copied === 'code' ? 'Copied' : 'Copy code'}
@@ -387,7 +387,7 @@ export default function DiagramCreator() {
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Preview</label>
+              <label className="tool-label">Preview</label>
               {rendering && <RefreshCw size={11} className="animate-spin text-gray-400" />}
             </div>
             <div className="flex items-center gap-1">

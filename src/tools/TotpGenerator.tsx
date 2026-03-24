@@ -167,10 +167,10 @@ export default function TotpGenerator() {
       <div className="flex flex-wrap gap-4">
         <div>
           <label className="label-text block mb-1">Time Step</label>
-          <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+          <div className="tool-tabs">
             {([30, 60] as TimeStep[]).map(t => (
               <button key={t} onClick={() => setTimeStep(t)}
-                className={`px-4 py-1.5 transition-colors ${timeStep === t ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+                className={`tool-tab ${timeStep === t ? 'active' : ''}`}>
                 {t}s
               </button>
             ))}
@@ -178,10 +178,10 @@ export default function TotpGenerator() {
         </div>
         <div>
           <label className="label-text block mb-1">Digits</label>
-          <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+          <div className="tool-tabs">
             {([6, 8] as Digits[]).map(d => (
               <button key={d} onClick={() => setDigits(d)}
-                className={`px-4 py-1.5 transition-colors ${digits === d ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+                className={`tool-tab ${digits === d ? 'active' : ''}`}>
                 {d}
               </button>
             ))}
@@ -189,10 +189,10 @@ export default function TotpGenerator() {
         </div>
         <div>
           <label className="label-text block mb-1">Algorithm</label>
-          <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+          <div className="tool-tabs">
             {(['SHA-1', 'SHA-256', 'SHA-512'] as Algorithm[]).map(a => (
               <button key={a} onClick={() => setAlgorithm(a)}
-                className={`px-3 py-1.5 transition-colors ${algorithm === a ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+                className={`tool-tab ${algorithm === a ? 'active' : ''}`}>
                 {a}
               </button>
             ))}
@@ -202,9 +202,9 @@ export default function TotpGenerator() {
 
       {/* Error */}
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           {error}
-        </div>
+        </p>
       )}
 
       {/* TOTP display */}

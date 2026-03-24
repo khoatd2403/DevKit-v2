@@ -380,7 +380,7 @@ export default function SqlToLinq() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">SQL Query</label>
+            <label className="tool-label">SQL Query</label>
             {sql && <span className="text-[10px] text-gray-400">editing</span>}
           </div>
           <textarea
@@ -394,7 +394,7 @@ export default function SqlToLinq() {
         </div>
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">LINQ (Method Syntax)</label>
+            <label className="tool-label">LINQ (Method Syntax)</label>
             <button onClick={copy} disabled={!linq} className="btn-ghost text-xs px-2 py-1 flex items-center gap-1 disabled:opacity-40">
               {copied ? <Check size={12} className="text-green-500" /> : <Copy size={12} />}
               {copied ? 'Copied' : 'Copy'}

@@ -262,16 +262,12 @@ export default function HtmlFormatter() {
         <div className="flex items-center gap-2">
           <AlignLeft size={14} className="text-gray-400" />
           <span className="text-sm text-gray-600 dark:text-gray-400">Indent:</span>
-          <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+          <div className="tool-tabs">
             {(['2', '4', 'tab'] as IndentOption[]).map(v => (
               <button
                 key={v}
                 onClick={() => setIndent(v)}
-                className={`px-3 py-1.5 transition-colors ${
-                  indent === v
-                    ? 'bg-primary-600 text-white'
-                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
-                }`}
+                className={`tool-tab ${indent === v ? 'active' : ''}`}
               >
                 {v === 'tab' ? 'Tab' : `${v} spaces`}
               </button>
@@ -311,8 +307,8 @@ export default function HtmlFormatter() {
 
         {/* Output */}
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="label-text">Formatted Output</label>
+          <div className="tool-output-header">
+            <label className="tool-label">Formatted Output</label>
             <div className="flex items-center gap-2">
               {output && (
                 <span className="text-xs text-gray-400">{lineCount} lines</span>
@@ -328,7 +324,7 @@ export default function HtmlFormatter() {
             </div>
           </div>
           <textarea
-            className="tool-textarea h-96"
+            className="tool-textarea-output h-96"
             readOnly
             value={output}
             placeholder="Formatted HTML will appear here…"

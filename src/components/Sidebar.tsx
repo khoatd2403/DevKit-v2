@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { LATEST_VERSION } from '../version'
 import { categories, tools } from '../tools-registry'
-import { X, Wrench, ChevronDown, ChevronRight, Home, MessageSquare, Newspaper, Star, Settings } from 'lucide-react'
+import { X, ChevronDown, ChevronRight, Home, MessageSquare, Newspaper, Star, Settings } from 'lucide-react'
 import { useFavorites } from '../hooks/useFavorites'
 import { useLang } from '../context/LanguageContext'
 
@@ -50,10 +50,19 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
       `}>
         {/* Logo */}
         <div className="h-14 flex items-center px-4 gap-2 border-b border-gray-200 dark:border-gray-800 shrink-0">
-          <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-            <Wrench size={16} className="text-white" />
-          </div>
-          <span className="font-bold text-gray-900 dark:text-white">DevTools Online</span>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
+            <rect width="32" height="32" rx="7" fill="#111827"/>
+            <rect x="0.5" y="0.5" width="31" height="31" rx="6.5" stroke="#374151"/>
+            {/* traffic lights */}
+            <circle cx="7" cy="8" r="2" fill="#ff5f57"/>
+            <circle cx="13" cy="8" r="2" fill="#febc2e"/>
+            <circle cx="19" cy="8" r="2" fill="#28c840"/>
+            {/* prompt */}
+            <text x="6" y="23" fontFamily="monospace" fontSize="10" fontWeight="700" fill="#4ade80">&gt;_</text>
+          </svg>
+          <span className="font-semibold text-gray-900 dark:text-white leading-none">
+            DevTools <span className="text-green-500">Online</span><span className="text-gray-400 dark:text-gray-600 font-normal text-sm">.dev</span>
+          </span>
           <button onClick={onClose} className="ml-auto btn-ghost p-1 lg:hidden">
             <X size={16} />
           </button>
