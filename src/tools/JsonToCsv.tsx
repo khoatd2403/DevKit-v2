@@ -49,8 +49,8 @@ export default function JsonToCsv() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-4 flex-wrap">
-        <div className="flex bg-gray-100 dark:bg-gray-800 p-1 rounded-xl w-fit">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex bg-gray-100 dark:bg-gray-800 p-1 rounded-xl shrink-0">
           {[',', ';', '\t', '|'].map(d => (
             <button 
               key={d}
@@ -66,7 +66,7 @@ export default function JsonToCsv() {
           ))}
         </div>
         
-        <div className="ml-auto flex items-center gap-1">
+        <div className="flex items-center gap-1 shrink-0">
              <button onClick={() => setInput(SAMPLE)} className="btn-ghost text-xs flex items-center gap-1 font-medium">
                   <FileText size={12} /> Load Sample
              </button>

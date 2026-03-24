@@ -160,7 +160,7 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
 
       {/* Sticky Sub-Header */}
       <div className="sticky top-0 z-20 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 py-3 sm:px-6">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        <div className="max-w-[1600px] mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
             <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg shrink-0 outline-none">
               <ArrowLeft size={20} className="text-gray-500" />
@@ -210,9 +210,8 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
         </div>
       </div>
 
-      {/* Main Form Content */}
-      <div className="flex-1 overflow-y-auto">
-        <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6">
+    <div className="flex-1 overflow-y-auto">
+        <div className="max-w-[1600px] mx-auto px-4 py-8 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <div className="lg:col-span-3 space-y-6">
               <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100 dark:border-gray-800 tool-content min-h-[400px]">
