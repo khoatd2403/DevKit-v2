@@ -201,11 +201,11 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
   const showRecentSection = query === '' && recentToolObjects.length > 0
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-[15vh] px-4">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-[5vh] sm:pt-[15vh] px-2 sm:px-4">
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="relative w-full max-w-xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col max-h-[65vh]">
+      <div className="relative w-full max-w-xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col max-h-[85vh] sm:max-h-[65vh]">
         {/* Search input */}
         <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 dark:border-gray-800">
           <div className="flex items-center gap-1.5 px-2 py-0.5 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-md shrink-0 border border-purple-100 dark:border-purple-800/50">
@@ -225,7 +225,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
               <X size={14} />
             </button>
           )}
-          <kbd className="text-xs bg-gray-100 dark:bg-gray-800 text-gray-400 px-1.5 py-0.5 rounded font-mono shrink-0">Esc</kbd>
+          <kbd className="hidden sm:block text-xs bg-gray-100 dark:bg-gray-800 text-gray-400 px-1.5 py-0.5 rounded font-mono shrink-0">Esc</kbd>
         </div>
 
         {/* Results */}
@@ -277,7 +277,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
                   </div>
                   <Clock size={12} className="text-gray-400 shrink-0" />
                   {i === cursor && (
-                    <CornerDownLeft size={13} className="text-gray-400 shrink-0" />
+                    <CornerDownLeft size={13} className="hidden sm:block text-gray-400 shrink-0" />
                   )}
                 </div>
               ))}
@@ -312,7 +312,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
                       {getCatIcon(tool.category)} {getCatName(tool.category)}
                     </span>
                     {globalIndex === cursor && (
-                      <CornerDownLeft size={13} className="text-gray-400 shrink-0" />
+                      <CornerDownLeft size={13} className="hidden sm:block text-gray-400 shrink-0" />
                     )}
                   </div>
                 )
@@ -349,7 +349,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
                     {getCatIcon(tool.category)} {getCatName(tool.category)}
                   </span>
                   {i === cursor && (
-                    <CornerDownLeft size={13} className="text-gray-400 shrink-0" />
+                    <CornerDownLeft size={13} className="hidden sm:block text-gray-400 shrink-0" />
                   )}
                 </div>
               ))}
@@ -358,7 +358,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
         </div>
 
         {/* Footer hints */}
-        <div className="flex items-center gap-4 px-4 py-2 border-t border-gray-100 dark:border-gray-800 text-xs text-gray-400">
+        <div className="hidden sm:flex items-center gap-4 px-4 py-2 border-t border-gray-100 dark:border-gray-800 text-xs text-gray-400">
           <span className="flex items-center gap-1"><ArrowUp size={11} /><ArrowDown size={11} /> {t.navHint}</span>
           <span className="flex items-center gap-1"><CornerDownLeft size={11} /> {t.selectHint}</span>
           <span className="flex items-center gap-1"><kbd className="bg-gray-100 dark:bg-gray-800 px-1 rounded font-mono">Esc</kbd> {t.closeHint}</span>
