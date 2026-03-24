@@ -1,23 +1,22 @@
-import { Suspense, useState, useEffect, useMemo } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { Suspense, useState, useEffect, useMemo, useCallback, useRef } from 'react'
+import { useParams, useNavigate, Link, useSearchParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { SITE_URL } from '../../site.config'
 import { tools } from '../tools-registry'
-import { ArrowLeft, MessageSquare, Share2, Check, Star, BookMarked, X, LayoutPanelLeft } from 'lucide-react'
+import { ArrowLeft, MessageSquare, Share2, Check, Star, BookMarked, X, LayoutPanelLeft, Zap } from 'lucide-react'
 import ProTipBanner from '../components/ProTipBanner'
 import { useFavorites } from '../hooks/useFavorites'
 import { useRecentTools } from '../hooks/useRecentTools'
 import { useToolStats } from '../hooks/useToolStats'
-import { useSnippets } from '../hooks/useSnippets'
 import SnippetDrawer from '../components/SnippetDrawer'
 import { useLiveMode } from '../context/LiveModeContext'
+import { useLang } from '../context/LanguageContext'
 import { lazyToolComponents } from '../lazyToolComponents'
 import ToolErrorBoundary from '../components/ToolErrorBoundary'
 import PrivacyBadge from '../components/PrivacyBadge'
-
-interface ToolPageProps {
-  onFeedback: (toolName?: string) => void
-}
+import { ToolAbout } from '../components/ToolAbout'
+import { encodeShareData, decodeShareData } from '../utils/shareUtils'
+import { useToast } from '../context/ToastContext'
 
 const PRO_TIPS: Record<string, { tip: string; tipId: string }> = {
   'json-formatter': { tipId: 'json-ctrl-enter', tip: 'Press Ctrl+Enter to format instantly without clicking the button.' },
@@ -35,38 +34,51 @@ const PRO_TIPS: Record<string, { tip: string; tipId: string }> = {
   'data-faker': { tipId: 'faker-schema', tip: 'Build a schema with multiple field types and generate up to 1000 rows of realistic test data.' },
 }
 
-export default function ToolPage({ onFeedback }: ToolPageProps) {
+export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) => void }) {
   const { toolId } = useParams<{ toolId: string }>()
+  const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const [copied, setCopied] = useState(false)
+  const { showToast } = useToast()
 
-  const toolMeta = tools.find(t => t.id === toolId)
-  const ToolComponent = toolId ? lazyToolComponents[toolId] : undefined
+  const toolMeta = useMemo(() => tools.find(t => t.id === toolId), [toolId])
+  const ToolComponent = useMemo(() => toolId ? lazyToolComponents[toolId] : undefined, [toolId])
+  
+  const { lang } = useLang()
+  const isVi = lang === 'vi'
   const { toggle, isFavorite } = useFavorites()
-  const fav = toolMeta ? isFavorite(toolMeta.id) : false
+  const fav = useMemo(() => toolMeta ? isFavorite(toolMeta.id) : false, [toolMeta, isFavorite])
   const { addRecent } = useRecentTools()
   const { markExplored } = useToolStats()
   const [snippetOpen, setSnippetOpen] = useState(false)
-  const { snippets } = useSnippets(toolId)
   const { liveMode, setLiveMode } = useLiveMode()
 
+  // Track the current toolId to avoid double tracking or loops
+  const lastTracked = useRef<string>('')
   useEffect(() => {
-    if (toolId) {
+    if (toolId && toolId !== lastTracked.current) {
       addRecent(toolId)
       markExplored(toolId)
+      lastTracked.current = toolId
     }
-  }, [toolId])
+  }, [toolId, addRecent, markExplored])
 
-
+  // Process shared state from URL
   useEffect(() => {
-    const handler = () => {
-      const btn = document.querySelector<HTMLButtonElement>('.tool-content .btn-primary')
-      btn?.click()
+    if (!toolId) return
+    const s = searchParams.get('s')
+    if (s) {
+      const decoded = decodeShareData(s)
+      if (decoded) {
+        const timer = setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('devkit:load-state', { detail: { state: decoded } }))
+        }, 400)
+        return () => clearTimeout(timer)
+      }
     }
-    window.addEventListener('devkit:run', handler)
-    return () => window.removeEventListener('devkit:run', handler)
-  }, [])
+  }, [toolId, searchParams])
 
+  // Related Tools calculation
   const relatedTools = useMemo(() => {
     if (!toolMeta) return []
     return tools
@@ -75,217 +87,198 @@ export default function ToolPage({ onFeedback }: ToolPageProps) {
         t.tags.some(tag => toolMeta.tags.includes(tag))
       ))
       .slice(0, 6)
-  }, [toolId])
+  }, [toolMeta])
 
-  const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+  const handleShare = useCallback(() => {
+    let responded = false
+    const timeout = setTimeout(() => {
+      if (!responded) {
+        const url = window.location.href.split('?')[0].split('#')[0] + '#' + window.location.hash
+        navigator.clipboard.writeText(url)
+        showToast(isVi ? 'Đã sao chép liên kết (không kèm dữ liệu)' : 'Link copied to clipboard (no state data)', 'info')
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      }
+    }, 100)
+
+    const stateHandler = (e: any) => {
+      responded = true
+      clearTimeout(timeout)
+      window.removeEventListener('devkit:state-provided', stateHandler)
+      const data = e.detail?.state
+      const url = new URL(window.location.href.split('#')[0] + window.location.hash)
+      if (data) {
+        const encoded = encodeShareData(data)
+        url.searchParams.set('s', encoded)
+      }
+      navigator.clipboard.writeText(url.toString())
+      showToast(isVi ? 'Đã sao chép liên kết kèm dữ liệu' : 'Share link copied to clipboard', 'success')
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+
+    window.addEventListener('devkit:state-provided', stateHandler)
+    window.dispatchEvent(new CustomEvent('devkit:request-state'))
+  }, [isVi, showToast])
+
+  const handleSnippetLoad = useCallback((content: string) => {
+    window.dispatchEvent(new CustomEvent('devkit:load-state', { detail: { state: content } }))
+    setSnippetOpen(false)
+    showToast(isVi ? 'Đã tải mẫu code' : 'Snippet loaded', 'success')
+  }, [isVi, showToast])
 
   if (!toolMeta || !ToolComponent) {
     return (
-      <div className="p-8 text-center">
-        <p className="text-4xl mb-4">🔧</p>
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Tool not found</h2>
-        <button onClick={() => navigate('/')} className="btn-primary mt-4">Go Home</button>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center">
+        <div className="w-20 h-20 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-6">
+          <X size={40} className="text-gray-400" />
+        </div>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Tool Not Found</h1>
+        <p className="text-gray-500 mb-8 max-w-sm">The tool you are looking for might have been moved or renamed.</p>
+        <Link to="/" className="btn-primary px-8">Return Home</Link>
       </div>
     )
   }
 
-  const BASE_URL = SITE_URL
-  const pageUrl = `${BASE_URL}/tool/${toolId}`
-  const pageTitle = toolMeta.seoTitle ?? `Free ${toolMeta.name} Online — Fast & Secure | DevTools Online`
-  const rawDesc = toolMeta.seoDescription ?? `${toolMeta.description}. Free online tool — no account needed, no data sent to servers, works instantly in your browser.`
-  const pageDesc = rawDesc.length > 160 ? rawDesc.slice(0, 157) + '...' : rawDesc
-  const ogImage = `${BASE_URL}/og/${toolId}.png`
-
   return (
-    <div className="p-4 max-w-7xl mx-auto">
+    <div className="flex-1 flex flex-col min-w-0 bg-gray-50 dark:bg-gray-950">
       <Helmet>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDesc} />
-        <link rel="canonical" href={pageUrl} />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDesc} />
-        <meta property="og:url" content={pageUrl} />
+        <title>{toolMeta.seoTitle || `${toolMeta.name} | DevTools Online`}</title>
+        <meta name="description" content={toolMeta.seoDescription || toolMeta.description} />
+        
+        {/* OpenGraph */}
+        <meta property="og:title" content={toolMeta.seoTitle || `${toolMeta.name} | DevTools Online`} />
+        <meta property="og:description" content={toolMeta.seoDescription || toolMeta.description} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={ogImage} />
+        <meta property="og:url" content={`${SITE_URL}/tool/${toolMeta.id}`} />
+        
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={pageTitle} />
-        <meta name="twitter:description" content={pageDesc} />
-        <meta name="twitter:image" content={ogImage} />
+        <meta name="twitter:title" content={toolMeta.seoTitle || `${toolMeta.name} | DevTools Online`} />
+        <meta name="twitter:description" content={toolMeta.seoDescription || toolMeta.description} />
       </Helmet>
-      {/* Back button */}
-      <button
-        onClick={() => navigate(-1)}
-        className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 mb-4 transition-colors"
-      >
-        <ArrowLeft size={16} />
-        Back
-      </button>
 
-      {/* Tool header */}
-      <div className="mb-6">
-        {/* Top row: icon + name + action buttons */}
-        <div className="flex items-center gap-3">
-          <span className="text-3xl shrink-0">{toolMeta.icon}</span>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2">
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">{toolMeta.name}</h1>
-              {toolMeta.new && (
-                <span className="text-xs bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded-full border border-green-200 dark:border-green-800 shrink-0">New</span>
-              )}
+      {/* Sticky Sub-Header */}
+      <div className="sticky top-0 z-20 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 py-3 sm:px-6">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg shrink-0 outline-none">
+              <ArrowLeft size={20} className="text-gray-500" />
+            </button>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="text-xl sm:text-2xl shrink-0">{toolMeta.icon}</span>
+                <h1 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white truncate">{toolMeta.name}</h1>
+                <PrivacyBadge />
+              </div>
             </div>
           </div>
-          {/* Action buttons — always visible, icon-only on mobile */}
-          <div className="flex items-center gap-0.5 shrink-0">
-            <button
+
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+             <button
               onClick={() => setLiveMode(!liveMode)}
-              className={`btn-ghost flex items-center gap-1 text-xs ${liveMode ? 'text-green-600 dark:text-green-400' : 'text-gray-400'}`}
-              title={liveMode ? 'Live mode on (Alt+L)' : 'Live mode off (Alt+L)'}
+              className={`p-2 rounded-lg transition-colors flex items-center gap-2 ${liveMode ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500'}`}
+              title={isVi ? 'Chế độ Trực tiếp' : 'Live Mode'}
             >
-              <span className={`w-1.5 h-1.5 rounded-full ${liveMode ? 'bg-green-500 animate-pulse' : 'bg-gray-300 dark:bg-gray-600'}`} />
-              <span className="hidden sm:inline">Live</span>
+              <Zap size={18} className={liveMode ? 'fill-current' : ''} />
+              <span className="hidden md:inline text-xs font-bold uppercase tracking-wider">{isVi ? 'Trực tiếp' : 'Live'}</span>
             </button>
-            <button
-              onClick={() => toolMeta && toggle(toolMeta.id)}
-              className={`btn-ghost p-1.5 ${fav ? 'text-yellow-500' : ''}`}
-              title={fav ? 'Remove from favorites' : 'Add to favorites'}
-            >
-              <Star size={15} className={fav ? 'fill-yellow-500' : ''} />
+
+            <button onClick={() => setSnippetOpen(true)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-gray-500 relative" title={isVi ? 'Mẫu code' : 'Snippets'}>
+              <BookMarked size={20} />
+              <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-primary-500 rounded-full"></span>
             </button>
-            <button
-              onClick={() => setSnippetOpen(true)}
-              className="btn-ghost flex items-center gap-1.5 text-xs relative"
-              title="Snippets"
-            >
-              <BookMarked size={13} />
-              <span className="hidden sm:inline">Snippets</span>
-              {snippets.filter(s => s.toolId === toolId).length > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary-500 text-white text-[10px] rounded-full flex items-center justify-center">
-                  {snippets.filter(s => s.toolId === toolId).length}
-                </span>
-              )}
+            
+            <button onClick={() => toggle(toolMeta.id)} className={`p-2 rounded-lg transition-colors ${fav ? 'text-yellow-500 bg-yellow-50 dark:bg-yellow-900/20' : 'text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+              <Star size={20} fill={fav ? 'currentColor' : 'none'} />
             </button>
+
             <button
               onClick={handleShare}
-              className="btn-ghost flex items-center gap-1.5 text-xs"
-              title="Copy link to this tool"
+              className={`p-2 rounded-lg flex items-center gap-2 transition-all ${copied ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' : 'bg-primary-600 text-white hover:bg-primary-700 shadow-md shadow-primary-500/20'}`}
             >
-              {copied ? <Check size={13} /> : <Share2 size={13} />}
-              <span className="hidden sm:inline">{copied ? 'Copied!' : 'Share'}</span>
-            </button>
-            <button
-              onClick={() => navigate(`/split?a=${toolId}&b=${toolId === 'json-formatter' ? 'base64-encode-decode' : 'json-formatter'}`)}
-              className="btn-ghost flex items-center gap-1.5 text-xs"
-              title="Open in split pane"
-            >
-              <LayoutPanelLeft size={13} />
-              <span className="hidden sm:inline">Split</span>
-            </button>
-            <button
-              onClick={() => onFeedback(toolMeta?.name)}
-              className="btn-ghost flex items-center gap-1.5 text-xs"
-              title="Send feedback (Ctrl+Shift+F)"
-            >
-              <MessageSquare size={13} />
-              <span className="hidden sm:inline">Feedback</span>
+              {copied ? <Check size={18} /> : (
+                <>
+                  <Share2 size={18} />
+                  {toolMeta.supportsShare && (
+                    <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-wider">{isVi ? 'Chia sẻ' : 'Share with Data'}</span>
+                  )}
+                </>
+              )}
             </button>
           </div>
         </div>
-        {/* Description — full width below on all screen sizes */}
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1.5 ml-[52px]">{toolMeta.description}</p>
-        <div className="mt-1 ml-[52px]">
-          <PrivacyBadge privacy={toolMeta.privacy} networkNote={toolMeta.networkNote} />
-        </div>
       </div>
 
-      {/* Keyboard shortcuts hint bar */}
-      <div className="hidden sm:flex items-center gap-3 mb-4 text-[11px] text-gray-400 dark:text-gray-600 flex-wrap">
-        <span className="flex items-center gap-1">
-          <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 font-mono text-[10px] text-gray-500 dark:text-gray-400">Ctrl</kbd>
-          <span>+</span>
-          <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 font-mono text-[10px] text-gray-500 dark:text-gray-400">↵</kbd>
-          <span className="ml-0.5">Run</span>
-        </span>
-        <span className="text-gray-200 dark:text-gray-800">·</span>
-        <span className="flex items-center gap-1">
-          <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 font-mono text-[10px] text-gray-500 dark:text-gray-400">Ctrl</kbd>
-          <span>+</span>
-          <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 font-mono text-[10px] text-gray-500 dark:text-gray-400">Shift</kbd>
-          <span>+</span>
-          <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 font-mono text-[10px] text-gray-500 dark:text-gray-400">C</kbd>
-          <span className="ml-0.5">Copy output</span>
-        </span>
-        <span className="text-gray-200 dark:text-gray-800">·</span>
-        <span className="flex items-center gap-1">
-          <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 font-mono text-[10px] text-gray-500 dark:text-gray-400">Alt</kbd>
-          <span>+</span>
-          <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 font-mono text-[10px] text-gray-500 dark:text-gray-400">L</kbd>
-          <span className="ml-0.5">Live mode</span>
-        </span>
-        <span className="text-gray-200 dark:text-gray-800">·</span>
-        <span className="flex items-center gap-1">
-          <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 font-mono text-[10px] text-gray-500 dark:text-gray-400">?</kbd>
-          <span className="ml-0.5">All shortcuts</span>
-        </span>
-      </div>
-
-      {/* Pro tip banner */}
-      {toolId && PRO_TIPS[toolId] && (
-        <ProTipBanner
-          toolId={toolId}
-          tip={PRO_TIPS[toolId].tip}
-          tipId={PRO_TIPS[toolId].tipId}
-        />
-      )}
-
-      {/* Network warning banner */}
-      {toolMeta.privacy === 'network' && (
-        <PrivacyBadge privacy="network" networkNote={toolMeta.networkNote} variant="banner" />
-      )}
-
-      {/* Tool content */}
-      <div className="tool-content">
-        <ToolErrorBoundary toolName={toolMeta.name}>
-          <Suspense fallback={
-            <div className="flex items-center justify-center h-64">
-              <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent" />
+      {/* Main Form Content */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div className="lg:col-span-3 space-y-6">
+              <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100 dark:border-gray-800 tool-content min-h-[400px]">
+                <Suspense fallback={<ToolLoader />}>
+                   <ToolErrorBoundary>
+                     <ToolComponent />
+                   </ToolErrorBoundary>
+                </Suspense>
+              </div>
+              
+              <ToolAbout 
+                toolId={toolMeta.id} 
+                toolName={toolMeta.name}
+                onSupport={() => onFeedback(toolMeta.name)}
+              />
             </div>
-          }>
-            <ToolComponent />
-          </Suspense>
-        </ToolErrorBoundary>
-      </div>
 
-      {relatedTools.length > 0 && (
-        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
-          <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">Related Tools</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {relatedTools.map(tool => (
-              <Link
-                key={tool.id}
-                to={`/tool/${tool.id}`}
-                className="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-primary-400 dark:hover:border-primary-600 transition-colors bg-white dark:bg-gray-900 hover:bg-primary-50 dark:hover:bg-primary-950/30"
-              >
-                <span className="text-lg shrink-0">{tool.icon}</span>
-                <span className="text-xs font-medium text-gray-700 dark:text-gray-300 line-clamp-2">{tool.name}</span>
-              </Link>
-            ))}
+            <div className="space-y-6">
+              {PRO_TIPS[toolMeta.id] && (
+                <ProTipBanner toolId={toolMeta.id} tipId={PRO_TIPS[toolMeta.id].tipId} tip={PRO_TIPS[toolMeta.id].tip} />
+              )}
+
+              <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 shadow-sm border border-gray-100 dark:border-gray-800">
+                <h3 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                  <LayoutPanelLeft size={16} />
+                  {isVi ? 'Liên quan' : 'Related'}
+                </h3>
+                <div className="space-y-1.5">
+                  {relatedTools.map(tool => (
+                    <Link key={tool.id} to={`/tool/${tool.id}`} className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                      <span className="text-xl">{tool.icon}</span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-white truncate">{tool.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-primary-600 to-indigo-700 rounded-3xl p-6 text-white">
+                <MessageSquare className="mb-4 opacity-50" />
+                <h3 className="text-lg font-bold mb-1">Need a feature?</h3>
+                <p className="text-xs text-primary-200 mb-6 leading-relaxed">We love building custom tools for our users. Drop us a request!</p>
+                <button onClick={() => onFeedback(toolMeta.name)} className="w-full py-2.5 bg-white text-primary-700 rounded-xl text-xs font-bold hover:bg-primary-50 transition-colors">
+                  Request it now
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      )}
+      </div>
 
-      <SnippetDrawer
-        open={snippetOpen}
-        onClose={() => setSnippetOpen(false)}
+      <SnippetDrawer 
+        open={snippetOpen} 
+        onClose={() => setSnippetOpen(false)} 
         toolId={toolId}
-        onLoad={(content) => {
-          window.dispatchEvent(new CustomEvent('devkit:load-snippet', { detail: { content } }))
-          setSnippetOpen(false)
-        }}
+        onLoad={handleSnippetLoad}
       />
+    </div>
+  )
+}
+
+function ToolLoader() {
+  return (
+    <div className="animate-pulse space-y-6 py-4">
+      <div className="h-8 bg-gray-100 dark:bg-gray-800 rounded w-1/4"></div>
+      <div className="h-48 bg-gray-100 dark:bg-gray-800 rounded-2xl w-full"></div>
+      <div className="h-48 bg-gray-100 dark:bg-gray-800 rounded-2xl w-full"></div>
     </div>
   )
 }

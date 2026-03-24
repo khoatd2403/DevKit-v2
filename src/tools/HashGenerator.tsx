@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { usePersistentState } from '../hooks/usePersistentState'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
+import { useShareableState } from '../hooks/useShareableState'
 
 // Simple pure-JS implementations
 function md5(input: string): string {
@@ -64,6 +65,7 @@ async function sha(input: string, algo: string) {
 
 export default function HashGenerator() {
   const [input, setInput] = usePersistentState('tool-hash-input', 'Hello, World!')
+  useShareableState(input, setInput)
   const [hashes, setHashes] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(false)
 

@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import FileDropTextarea from '../components/FileDropTextarea'
+import { usePersistentState } from '../hooks/usePersistentState'
+import { useShareableState } from '../hooks/useShareableState'
+import { Zap, Trash2, Check, AlertTriangle, Minus, Plus } from 'lucide-react'
 
-function diffObjects(a: unknown, b: unknown, path = ''): string[] {
+function diffObjects(a: any, b: any, path = ''): string[] {
   const results: string[] = []
   if (JSON.stringify(a) === JSON.stringify(b)) return results
 
@@ -21,8 +24,8 @@ function diffObjects(a: unknown, b: unknown, path = ''): string[] {
   }
 
   if (typeof a === 'object' && typeof b === 'object') {
-    const aObj = a as Record<string, unknown>
-    const bObj = b as Record<string, unknown>
+    const aObj = a
+    const bObj = b
     const keys = new Set([...Object.keys(aObj), ...Object.keys(bObj)])
     for (const key of keys) {
       const p = path ? `${path}.${key}` : key
@@ -37,14 +40,26 @@ function diffObjects(a: unknown, b: unknown, path = ''): string[] {
   return results
 }
 
+const SAMPLE_A = '{"id":1,"name":"Alice","role":"Engineer","salary":95000,"active":true}'
+const SAMPLE_B = '{"id":1,"name":"Alice","role":"Senior Engineer","salary":110000,"active":true,"tags":["lead"]}'
+
 export default function JsonDiff() {
-  const [left, setLeft] = useState('{"name":"Alice","age":28,"city":"NYC"}')
-  const [right, setRight] = useState('{"name":"Alice","age":29,"city":"Boston","job":"Engineer"}')
+  const [left, setLeft] = usePersistentState('tool-json-diff-left', SAMPLE_A)
+  const [right, setRight] = usePersistentState('tool-json-diff-right', SAMPLE_B)
+  
+  // Accept incoming state into the 'Left' (Original) field
+  useShareableState(left, setLeft)
+  
   const [diffs, setDiffs] = useState<string[]>([])
   const [error, setError] = useState('')
   const [compared, setCompared] = useState(false)
 
   const compare = () => {
+    if (!left.trim() || !right.trim()) {
+      setDiffs([])
+      setCompared(false)
+      return
+    }
     try {
       const a = JSON.parse(left)
       const b = JSON.parse(right)
@@ -57,33 +72,105 @@ export default function JsonDiff() {
     }
   }
 
+  // Auto-compare on change if both exist
+  useEffect(() => {
+    if (left.trim() && right.trim()) {
+      const t = setTimeout(compare, 300)
+      return () => clearTimeout(t)
+    }
+  }, [left, right])
+
   return (
     <div className="space-y-4">
-      <div className="flex justify-end">
-        <button onClick={compare} className="btn-primary">Compare</button>
+      <div className="flex items-center justify-between gap-4 flex-wrap">
+        <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Compare JSON Objects</h2>
+        <div className="flex items-center gap-2">
+           <button onClick={() => { setLeft(SAMPLE_A); setRight(SAMPLE_B) }} className="btn-ghost text-xs font-medium">Reset Samples</button>
+           <button onClick={() => { setLeft(''); setRight(''); setDiffs([]) }} className="btn-ghost text-xs font-medium text-red-500">
+                <Trash2 size={12} /> Clear Both
+           </button>
+           <button onClick={compare} className="btn-primary py-1.5 px-4 flex items-center gap-2">
+                <Zap size={14} /> Compare Now
+           </button>
+        </div>
       </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="tool-label block mb-1">JSON A (Original)</label>
-          <FileDropTextarea className="h-64" placeholder='{"a":1,"b":2}' value={left} onChange={setLeft} accept=".json,text/plain,text/*" />
+          <div className="tool-output-header">
+            <label className="tool-label flex items-center gap-2">
+              <span className="w-5 h-5 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded">A</span>
+              Original JSON
+            </label>
+          </div>
+          <FileDropTextarea 
+            className="h-64" 
+            placeholder='Original JSON here...' 
+            value={left} 
+            onChange={setLeft} 
+            accept=".json,text/plain,text/*" 
+          />
         </div>
         <div>
-          <label className="tool-label block mb-1">JSON B (Modified)</label>
-          <FileDropTextarea className="h-64" placeholder='{"a":1,"b":3,"c":4}' value={right} onChange={setRight} accept=".json,text/plain,text/*" />
+          <div className="tool-output-header">
+             <label className="tool-label flex items-center gap-2">
+                <span className="w-5 h-5 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded">B</span>
+                Modified JSON
+             </label>
+          </div>
+          <FileDropTextarea 
+            className="h-64" 
+            placeholder='Modified JSON here...' 
+            value={right} 
+            onChange={setRight} 
+            accept=".json,text/plain,text/*" 
+          />
         </div>
       </div>
-      {error && <p className="tool-msg tool-msg--error">{error}</p>}
+
+      {error && (
+        <div className="tool-msg tool-msg--error flex items-center gap-2">
+          <AlertTriangle size={14} />
+          {error}
+        </div>
+      )}
+
       {compared && (
-        <div className="bg-gray-900 dark:bg-black rounded-lg p-4 font-mono text-sm">
-          {diffs.length === 0 ? (
-            <p className="text-green-400">✅ No differences found. JSON objects are identical.</p>
-          ) : (
-            diffs.map((line, i) => (
-              <div key={i} className={`py-0.5 ${line.startsWith('+') ? 'text-green-400' : line.startsWith('-') ? 'text-red-400' : 'text-yellow-400'}`}>
-                {line}
+        <div className="space-y-3 mt-6 animate-in slide-in-from-top-2 duration-300">
+           <div className="flex items-center gap-3">
+              <h3 className="font-bold text-gray-900 dark:text-white">Differences Found</h3>
+              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${diffs.length === 0 ? 'bg-green-100 text-green-700 dark:bg-green-900/30' : 'bg-amber-100 text-amber-700 dark:bg-amber-900/30'}`}>
+                {diffs.length} total
+              </span>
+           </div>
+
+           <div className="bg-gray-950 rounded-2xl p-6 border border-gray-800 overflow-hidden font-mono text-xs sm:text-sm shadow-xl">
+            {diffs.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-6 text-green-400 gap-2">
+                 <Check size={32} />
+                 <p className="font-bold">JSON objects are identical!</p>
               </div>
-            ))
-          )}
+            ) : (
+              <div className="space-y-1 overflow-x-auto custom-scrollbar max-h-80">
+                {diffs.map((line, i) => {
+                  const isPlus = line.startsWith('+')
+                  const isMinus = line.startsWith('-')
+                  const isChange = line.startsWith('~')
+                  return (
+                    <div key={i} className={`flex items-start gap-3 px-2 py-1 rounded transition-colors group cursor-default whitespace-pre
+                      ${isPlus ? 'bg-green-500/10 text-green-400' : 
+                        isMinus ? 'bg-red-500/10 text-red-400' : 
+                        'bg-amber-500/10 text-amber-400'}`}>
+                      <span className="w-4 shrink-0 font-bold opacity-60">
+                         {isPlus ? '+' : isMinus ? '-' : '~'}
+                      </span>
+                      <span className="break-all">{line.slice(1).trim()}</span>
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+           </div>
         </div>
       )}
     </div>

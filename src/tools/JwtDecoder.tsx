@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { usePersistentState } from '../hooks/usePersistentState'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
+import { useShareableState } from '../hooks/useShareableState'
 
 function decodeJwt(token: string) {
   const parts = token.trim().split('.')
@@ -19,6 +20,7 @@ function decodeJwt(token: string) {
 
 export default function JwtDecoder() {
   const [input, setInput] = usePersistentState('tool-jwt-input', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c')
+  useShareableState(input, setInput)
   const [result, setResult] = useState<ReturnType<typeof decodeJwt> | null>(null)
   const [error, setError] = useState('')
 

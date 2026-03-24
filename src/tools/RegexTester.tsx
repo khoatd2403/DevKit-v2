@@ -1,12 +1,23 @@
 import { useState, useMemo } from 'react'
 import { usePersistentState } from '../hooks/usePersistentState'
 import FileDropTextarea from '../components/FileDropTextarea'
+import { useShareableState } from '../hooks/useShareableState'
 
 export default function RegexTester() {
   const [pattern, setPattern] = usePersistentState('tool-regex-pattern', '\\b[A-Z][a-z]+\\b')
   const [flags, setFlags] = useState('g')
   const [testString, setTestString] = usePersistentState('tool-regex-input', 'Hello World, my Name is Alice and I live in New York.')
   const [error, setError] = useState('')
+
+  // Share all 3 fields
+  useShareableState(
+    { pattern, flags, testString },
+    (val: any) => {
+      if (val.pattern !== undefined) setPattern(val.pattern)
+      if (val.flags !== undefined) setFlags(val.flags)
+      if (val.testString !== undefined) setTestString(val.testString)
+    }
+  )
 
   const result = useMemo(() => {
     if (!pattern || !testString) return null
