@@ -4,6 +4,15 @@
     "changes": [
       {
         "type": "new",
+        "text": "implement image metadata editor, smart tool cross-linking, and global UI stabilizers"
+      }
+    ]
+  },
+  {
+    "date": "March 2026",
+    "changes": [
+      {
+        "type": "new",
         "text": "fetch realtime AI pricing from LiteLLM, fix github links"
       }
     ]

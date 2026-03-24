@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
+import { useShareableState } from '../hooks/useShareableState'
 
 const converters: { label: string; fn: (s: string) => string }[] = [
   { label: 'camelCase', fn: s => s.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, c) => c.toUpperCase()) },
@@ -19,6 +20,7 @@ const converters: { label: string; fn: (s: string) => string }[] = [
 
 export default function CaseConverter() {
   const [input, setInput] = useState('hello world this is a case converter example')
+  useShareableState(input, setInput)
 
   return (
     <div className="space-y-4">

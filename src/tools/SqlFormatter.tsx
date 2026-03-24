@@ -4,6 +4,7 @@ import { Wand2, Trash2 } from 'lucide-react'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
 import { SqlCodeBlock } from '../lib/sqlHighlight'
+import { useShareableState } from '../hooks/useShareableState'
 
 const KEYWORDS = ['SELECT','FROM','WHERE','JOIN','LEFT JOIN','RIGHT JOIN','INNER JOIN','OUTER JOIN','ON','AND','OR','NOT','IN','EXISTS','BETWEEN','LIKE','IS NULL','IS NOT NULL','ORDER BY','GROUP BY','HAVING','LIMIT','OFFSET','INSERT INTO','VALUES','UPDATE','SET','DELETE FROM','CREATE TABLE','ALTER TABLE','DROP TABLE','INDEX','PRIMARY KEY','FOREIGN KEY','REFERENCES','AS','DISTINCT','UNION','INTERSECT','EXCEPT','CASE','WHEN','THEN','ELSE','END','WITH']
 
@@ -29,6 +30,7 @@ const SAMPLE = `select u.id, u.name, u.email, count(o.id) as order_count from us
 
 export default function SqlFormatter() {
   const [input, setInput] = usePersistentState('tool-sql-input', 'SELECT u.id,u.name,u.email,o.total FROM users u INNER JOIN orders o ON u.id=o.user_id WHERE u.active=1 AND o.total>100 ORDER BY o.total DESC LIMIT 10')
+  useShareableState(input, setInput)
   const [output, setOutput] = useState('')
 
   const [mode, setMode] = usePersistentState<'format' | 'minify'>('sql-formatter-mode', 'format')

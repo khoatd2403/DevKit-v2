@@ -121,4 +121,5 @@ export const lazyToolComponents: Record<string, React.LazyExoticComponent<React.
   'ai-model-comparison': lazy(() => import('./tools/AiModelComparison')),
   'ai-json-to-prompt': lazy(() => import('./tools/AiJsonToPrompt')),
   'ai-system-prompt': lazy(() => import('./tools/AiSystemPrompt')),
+  'image-metadata-modifier': lazy(() => import('./tools/ImageMetadataModifier')),
 }

@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { usePersistentState } from '../hooks/usePersistentState'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
+import { useShareableState } from '../hooks/useShareableState'
 
 export default function UrlEncodeTool() {
   const [input, setInput] = usePersistentState('tool-url-encode-input', 'https://example.com/search?q=hello world&lang=en&page=1')
+  useShareableState(input, setInput)
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
   const [mode, setMode] = useState<'encode' | 'decode'>('encode')

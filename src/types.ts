@@ -15,6 +15,9 @@ export interface Tool {
   seoTitle?: string
   /** Override meta description (max ~155 chars). Falls back to generated description. */
   seoDescription?: string
+  /** Whether the tool supports compressing state into the URL for sharing. */
+  supportsShare?: boolean;
+  suggestedTools?: string[];
 }
 
 export interface Category {
