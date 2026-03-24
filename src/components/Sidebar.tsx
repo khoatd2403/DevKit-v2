@@ -63,8 +63,8 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
           <span className="font-semibold text-gray-900 dark:text-white leading-none">
             DevTools <span className="text-green-500">Online</span><span className="text-gray-400 dark:text-gray-600 font-normal text-sm">.dev</span>
           </span>
-          <button onClick={onClose} className="ml-auto btn-ghost p-1 lg:hidden">
-            <X size={16} />
+          <button onClick={onClose} className="ml-auto btn-ghost p-2 lg:hidden">
+            <X size={20} />
           </button>
         </div>
 
@@ -124,7 +124,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
                           onClick={() => navigate(`/tool/${tool.id}`)}
                         >
                           <span className="text-sm shrink-0">{tool.icon}</span>
-                          <span className="truncate flex-1 text-xs">{tool.name}</span>
+                          <span className="truncate flex-1 text-sm">{tool.name}</span>
                         </div>
                       ))
                     )}
@@ -170,7 +170,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
                             className={`sidebar-item py-1.5 ${currentToolId === tool.id ? 'active' : ''}`}
                             onClick={() => navigate(`/tool/${tool.id}`)}
                           >
-                            <span className="truncate flex-1 text-xs">{tool.name}</span>
+                            <span className="truncate flex-1 text-sm">{tool.name}</span>
                             {tool.new && (
                               <span className="text-xs bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-1.5 py-0.5 rounded-full shrink-0">
                                 {t.new}

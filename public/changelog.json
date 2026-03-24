@@ -4,6 +4,15 @@
     "changes": [
       {
         "type": "new",
+        "text": "optimize UI/UX for mobile devices"
+      }
+    ]
+  },
+  {
+    "date": "March 2026",
+    "changes": [
+      {
+        "type": "new",
         "text": "implement image metadata editor, smart tool cross-linking, and global UI stabilizers"
       }
     ]

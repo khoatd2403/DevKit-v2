@@ -1,5 +1,12 @@
 import { Suspense, useState, useEffect, useMemo, useCallback, useRef } from 'react'
-import { useParams, useNavigate, Link, useSearchParams } from 'react-router-dom'
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
+...
+  const location = useLocation()
+  useEffect(() => {
+    if (globalThis.innerWidth < 1024) {
+      setSidebarOpen(false)
+    }
+  }, [location.pathname])
 import { Helmet } from 'react-helmet-async'
 import { SITE_URL } from '../../site.config'
 import { tools } from '../tools-registry'
@@ -214,7 +221,7 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
         <div className="max-w-[1600px] mx-auto px-4 py-8 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <div className="lg:col-span-3 space-y-6">
-              <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100 dark:border-gray-800 tool-content min-h-[400px]">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-sm border border-gray-100 dark:border-gray-800 tool-content min-h-[400px]">
                 <Suspense fallback={<ToolLoader />}>
                    <ToolErrorBoundary>
                      <ToolComponent />
@@ -234,7 +241,7 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
                 <ProTipBanner toolId={toolMeta.id} tipId={PRO_TIPS[toolMeta.id].tipId} tip={PRO_TIPS[toolMeta.id].tip} />
               )}
 
-              <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 shadow-sm border border-gray-100 dark:border-gray-800">
+              <div className="bg-white dark:bg-gray-900 rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-800">
                 <h3 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                   <LayoutPanelLeft size={16} />
                   {isVi ? 'Liên quan' : 'Related'}
@@ -249,7 +256,7 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-primary-600 to-indigo-700 rounded-3xl p-6 text-white">
+              <div className="bg-gradient-to-br from-primary-600 to-indigo-700 rounded-2xl sm:rounded-3xl p-5 sm:p-6 text-white">
                 <MessageSquare className="mb-4 opacity-50" />
                 <h3 className="text-lg font-bold mb-1">Need a feature?</h3>
                 <p className="text-xs text-primary-200 mb-6 leading-relaxed">We love building custom tools for our users. Drop us a request!</p>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
@@ -65,7 +65,7 @@ function AppInner() {
   // Appearance (accent color + bg shade)
   useAppearance()
 
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(() => globalThis.innerWidth >= 1024)
   const [searchQuery, setSearchQuery] = useState('')
   const [cmdOpen, setCmdOpen] = useState(false)
   const [feedbackOpen, setFeedbackOpen] = useState(false)
@@ -73,6 +73,19 @@ function AppInner() {
   const [changelogOpen, setChangelogOpen] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
+
+  // Close sidebar on mobile when window is resized
+  useEffect(() => {
+    const handler = () => {
+      if (globalThis.innerWidth < 1024) {
+        setSidebarOpen(false)
+      } else {
+        setSidebarOpen(true)
+      }
+    }
+    globalThis.addEventListener('resize', handler)
+    return () => globalThis.removeEventListener('resize', handler)
+  }, [])
   // LATEST_VERSION imported from src/version.ts (auto-generated from git tag)
   const [hasNewChangelog, setHasNewChangelog] = useState(() =>
     localStorage.getItem('devkit-seen-version') !== LATEST_VERSION
@@ -80,6 +93,13 @@ function AppInner() {
 
   // Apply saved editor settings on mount
   useEditorSettings()
+
+  const location = useLocation()
+  useEffect(() => {
+    if (globalThis.innerWidth < 1024) {
+      setSidebarOpen(false)
+    }
+  }, [location.pathname])
 
   // PWA install
   const { canInstall, install } = usePwaInstall()
@@ -172,7 +192,6 @@ function AppInner() {
   return (
     <ThemeContext.Provider value={{ darkMode, setDarkMode, theme, setTheme }}>
       <LiveModeProvider>
-        <BrowserRouter>
           <div className="flex h-screen overflow-hidden">
             <Sidebar
               open={sidebarOpen}
@@ -230,7 +249,6 @@ function AppInner() {
           <OnboardingTour />
           <ToastContainer />
           <CookieBanner />
-        </BrowserRouter>
       </LiveModeProvider>
     </ThemeContext.Provider>
   )
@@ -242,7 +260,9 @@ export default function App() {
       <ToastProvider>
         <LanguageProvider>
           <FavoritesProvider>
-            <AppInner />
+            <BrowserRouter>
+              <AppInner />
+            </BrowserRouter>
           </FavoritesProvider>
         </LanguageProvider>
       </ToastProvider>

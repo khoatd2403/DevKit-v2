@@ -91,7 +91,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
 
   return (
     <div>
-      <div className="p-6 max-w-6xl mx-auto">
+      <div className="p-4 sm:p-6 max-w-6xl mx-auto">
 
         {/* ── Hero ── */}
         <div className="mb-6 text-center py-5">
@@ -185,7 +185,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
               </div>
               <div
                 onClick={() => navigate(`/tool/${todayTool.id}`)}
-                className="cursor-pointer bg-gradient-to-br from-primary-50 to-purple-50 dark:from-primary-950/40 dark:to-purple-950/40 border border-primary-200 dark:border-primary-800 rounded-xl p-5 flex items-center gap-4 hover:shadow-md transition-shadow"
+                className="cursor-pointer bg-gradient-to-br from-primary-50 to-purple-50 dark:from-primary-950/40 dark:to-purple-950/40 border border-primary-200 dark:border-primary-800 rounded-lg sm:rounded-xl p-4 sm:p-5 flex items-center gap-4 hover:shadow-md transition-shadow"
               >
                 <span className="text-4xl">{todayTool.icon}</span>
                 <div className="flex-1 min-w-0">
@@ -298,7 +298,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
 
       {/* ── SEO Content Section ── */}
       <section className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50">
-        <div className="max-w-6xl mx-auto px-6 py-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
           <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t.whatIsDevTools}</h2>
           <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6 max-w-3xl">
             {t.whatIsDesc(tools.length)}
