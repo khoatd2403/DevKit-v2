@@ -4,7 +4,7 @@ import { X } from 'lucide-react'
 const STEPS = [
   {
     title: 'Welcome to DevTools Online! 🔧',
-    description: '87+ free developer tools — JSON formatter, Base64, regex tester, hash generator and more. All running in your browser. No sign-up needed.',
+    description: '119+ free developer tools — JSON formatter, Base64, regex tester, hash generator and more. All running in your browser. No sign-up needed.',
     emoji: '👋',
   },
   {
@@ -109,11 +109,10 @@ export default function OnboardingTour() {
             <button
               key={i}
               onClick={() => setStep(i)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                i === step
-                  ? 'bg-primary-500 w-5'
-                  : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'
-              }`}
+              className={`w-2 h-2 rounded-full transition-all ${i === step
+                ? 'bg-primary-500 w-5'
+                : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'
+                }`}
               aria-label={`Go to step ${i + 1}`}
             />
           ))}

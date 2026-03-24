@@ -1,4 +1,5 @@
 import { Github, Heart } from 'lucide-react'
+import { useLang } from '../context/LanguageContext'
 
 const REPO = 'https://github.com/khoatd2403/DevKit-v2'
 
@@ -6,11 +7,12 @@ const BUG_URL = `${REPO}/issues/new?assignees=khoatd2403&labels=bug&title=${enco
 const FEATURE_URL = `${REPO}/issues/new?assignees=khoatd2403&labels=enhancement&title=${encodeURIComponent('Feature: ')}&body=${encodeURIComponent('## What problem does this solve?\n\n## Describe the feature\n\n## Additional context\n')}`
 
 export default function Footer() {
+  const { t } = useLang()
   const year = new Date().getFullYear()
 
   const links = [
     {
-      title: 'Tools',
+      title: t.footerTools,
       items: [
         { label: 'JSON Formatter', href: '/tool/json-formatter' },
         { label: 'Base64 Encode/Decode', href: '/tool/base64-encode-decode' },
@@ -20,22 +22,22 @@ export default function Footer() {
       ],
     },
     {
-      title: 'Categories',
+      title: t.footerCategories,
       items: [
-        { label: 'JSON Tools', href: '/?cat=json' },
-        { label: 'Encoding', href: '/?cat=encoding' },
-        { label: 'Crypto & Hash', href: '/?cat=crypto' },
-        { label: 'Color Tools', href: '/?cat=color' },
-        { label: 'Formatters', href: '/?cat=formatter' },
+        { label: t.categories.json, href: '/?cat=json' },
+        { label: t.categories.encoding, href: '/?cat=encoding' },
+        { label: t.categories.crypto, href: '/?cat=crypto' },
+        { label: t.categories.color, href: '/?cat=color' },
+        { label: t.categories.formatter, href: '/?cat=formatter' },
       ],
     },
     {
-      title: 'Project',
+      title: t.footerProject,
       items: [
         { label: 'GitHub', href: REPO, external: true },
-        { label: 'Report a Bug', href: BUG_URL, external: true },
-        { label: 'Feature Request', href: FEATURE_URL, external: true },
-        { label: 'Changelog', href: '#', onClick: () => window.dispatchEvent(new CustomEvent('open-changelog')) },
+        { label: t.footerReportBug, href: BUG_URL, external: true },
+        { label: t.footerFeatureRequest, href: FEATURE_URL, external: true },
+        { label: t.whatsNew, href: '#', onClick: () => window.dispatchEvent(new CustomEvent('open-changelog')) },
       ],
     },
   ]
@@ -60,7 +62,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-              A free, fast, and privacy-friendly developer toolkit. Everything runs in your browser — no sign-up, no tracking.
+              {t.footerDesc}
             </p>
             <a
               href="https://github.com/khoatd2403/DevKit-v2"
@@ -69,7 +71,7 @@ export default function Footer() {
               className="inline-flex items-center gap-1.5 mt-4 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               <Github size={15} />
-              DevTools Online on GitHub
+              {t.footerSocial}
             </a>
           </div>
 
@@ -108,19 +110,19 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-6 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400 dark:text-gray-600">
-          <p>© {year} DevTools Online. Open source under MIT License.</p>
+          <p>{t.footerCopyright(year)}</p>
           <div className="flex items-center gap-3">
             <p className="flex items-center gap-1">
-              Built with <Heart size={11} className="text-red-400 fill-red-400" /> for developers.
+              {t.footerBuiltWith.split('{heart}')[0]} <Heart size={11} className="text-red-400 fill-red-400" /> {t.footerBuiltWith.split('{heart}')[1]}
             </p>
             <a
               href="https://paypal.me/tranphu0ng"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-500 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors text-xs font-medium"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-500 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors text-xs font-medium"
             >
               <Heart size={11} className="fill-blue-500 dark:fill-blue-400" />
-              Support
+              {t.support}
             </a>
           </div>
         </div>

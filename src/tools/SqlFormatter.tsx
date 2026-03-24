@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { usePersistentState } from '../hooks/usePersistentState'
+import { Wand2, Trash2 } from 'lucide-react'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
 import { SqlCodeBlock } from '../lib/sqlHighlight'
@@ -30,7 +31,7 @@ export default function SqlFormatter() {
   const [input, setInput] = usePersistentState('tool-sql-input', 'SELECT u.id,u.name,u.email,o.total FROM users u INNER JOIN orders o ON u.id=o.user_id WHERE u.active=1 AND o.total>100 ORDER BY o.total DESC LIMIT 10')
   const [output, setOutput] = useState('')
 
-  const [mode, setMode] = useState<'format' | 'minify'>('format')
+  const [mode, setMode] = usePersistentState<'format' | 'minify'>('sql-formatter-mode', 'format')
 
   useEffect(() => {
     if (!input.trim()) { setOutput(''); return }
@@ -51,6 +52,16 @@ export default function SqlFormatter() {
         <div>
           <div className="tool-output-header">
             <label className="tool-label">Input SQL</label>
+            <div className="flex items-center gap-1">
+              {output && mode === 'format' && (
+                <button onClick={() => setInput(output)} className="btn-ghost flex items-center gap-1 text-xs text-primary-600 dark:text-primary-400 font-medium" title="Apply formatted output to input">
+                  <Wand2 size={12} /> Format code
+                </button>
+              )}
+              <button onClick={() => { setInput(''); setOutput('') }} className="btn-ghost text-xs gap-1 flex items-center">
+                <Trash2 size={12} /> Clear
+              </button>
+            </div>
           </div>
           <FileDropTextarea className="h-72" placeholder="SELECT * FROM users WHERE id = 1" value={input} onChange={setInput} accept=".sql,text/plain,text/*" />
         </div>

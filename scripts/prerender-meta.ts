@@ -28,26 +28,26 @@ for (const tool of tools) {
   })
 
   const metaTags = `
-    <title>${pageTitle}</title>
-    <meta name="description" content="${pageDesc}" />
-    <link rel="canonical" href="${pageUrl}" />
-    <meta property="og:title" content="${pageTitle}" />
-    <meta property="og:description" content="${pageDesc}" />
-    <meta property="og:url" content="${pageUrl}" />
-    <meta property="og:image" content="${ogImage}" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${pageTitle}" />
-    <meta name="twitter:description" content="${pageDesc}" />
-    <meta name="twitter:image" content="${ogImage}" />
+    <title data-rh="true">${pageTitle}</title>
+    <meta data-rh="true" name="description" content="${pageDesc}" />
+    <link data-rh="true" rel="canonical" href="${pageUrl}" />
+    <meta data-rh="true" property="og:title" content="${pageTitle}" />
+    <meta data-rh="true" property="og:description" content="${pageDesc}" />
+    <meta data-rh="true" property="og:url" content="${pageUrl}" />
+    <meta data-rh="true" property="og:image" content="${ogImage}" />
+    <meta data-rh="true" property="og:type" content="website" />
+    <meta data-rh="true" name="twitter:card" content="summary_large_image" />
+    <meta data-rh="true" name="twitter:title" content="${pageTitle}" />
+    <meta data-rh="true" name="twitter:description" content="${pageDesc}" />
+    <meta data-rh="true" name="twitter:image" content="${ogImage}" />
     <script type="application/ld+json">${jsonLd}</script>`
 
   const html = baseHtml
-    .replace(/<title>[^<]*<\/title>/, '')
-    .replace(/<meta name="description"[^>]*>/g, '')
-    .replace(/<link rel="canonical"[^>]*>/g, '')
-    .replace(/<meta property="og:[^>]*>/g, '')
-    .replace(/<meta name="twitter:[^>]*>/g, '')
+    .replace(/<title[^>]*>[^<]*<\/title>/, '')
+    .replace(/<meta[^>]*name="description"[^>]*>/g, '')
+    .replace(/<link[^>]*rel="canonical"[^>]*>/g, '')
+    .replace(/<meta[^>]*property="og:[^>]*>/g, '')
+    .replace(/<meta[^>]*name="twitter:[^>]*>/g, '')
     .replace('<head>', `<head>${metaTags}`)
 
   const outDir = join(distDir, 'tool', tool.id)

@@ -108,7 +108,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
 
         {/* ── Category filter tabs ── */}
         <div className="flex gap-1.5 flex-wrap mb-6 -mt-2">
-            {[{ id: 'all', name: 'All', icon: '🧰', color: 'gray' }, ...categories.filter(c => c.id !== 'all')].map(cat => (
+            {[{ id: 'all', name: t.categories.all, icon: '🧰', color: 'gray' }, ...categories.filter(c => c.id !== 'all')].map(cat => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
@@ -133,8 +133,8 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
               return (
                 <>
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="text-lg">{cat?.icon}</span>
-                    <h2 className="font-semibold text-gray-900 dark:text-white">{cat?.name}</h2>
+                    <span className="text-xl">{cat?.icon}</span>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">{t.categories[cat?.id as keyof typeof t.categories] || cat?.name}</h3>
                     <span className="text-xs text-gray-400">({catTools.length})</span>
                     <button
                       onClick={() => navigate('/tools?cat=' + activeCategory)}
@@ -299,69 +299,58 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
       {/* ── SEO Content Section ── */}
       <section className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50">
         <div className="max-w-6xl mx-auto px-6 py-10">
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">What is DevTools Online?</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t.whatIsDevTools}</h2>
           <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6 max-w-3xl">
-            DevTools Online is a free collection of {tools.length}+ online developer tools built for software engineers, web developers,
-            and digital creators. Every tool runs entirely in your browser — no sign-up required, no data leaves your
-            device, and no tracking. Whether you need to format JSON, beautify SQL queries online, decode a JWT token, or
-            generate a QR code, DevTools Online has you covered instantly.
+            {t.whatIsDesc(tools.length)}
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div>
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">📋 JSON Tools</h3>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoJsonTitle}</h3>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                Format, validate, minify, and diff JSON data online. Convert JSON to C# classes, TypeScript interfaces,
-                CSV, or YAML in one click.
+                {t.seoJSON}
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">🗄️ SQL Tools</h3>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoSqlTitle}</h3>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                Free SQL formatter online for SELECT, INSERT, UPDATE, and DDL. Convert SQL to LINQ, visualize execution
-                plans, and generate ERD diagrams from CREATE TABLE scripts.
+               {t.seoSQL}
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">🔐 Encoding &amp; Crypto</h3>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoEncodingTitle}</h3>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                Encode and decode Base64, URLs, and HTML entities online. Generate MD5, SHA-256, SHA-512, BCrypt hashes.
-                AES-256 encryption and JWT decoder — all client-side.
+                {t.seoCrypto}
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">🌐 Web &amp; Network</h3>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoWebTitle}</h3>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                DNS lookup, SSL certificate checker, HTTP headers, IP geolocation, CIDR subnet calculator, user-agent
-                parser, and cURL-to-code converter — all online, no install.
+                {t.seoWeb}
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">✨ Code Formatters</h3>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoFormattersTitle}</h3>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                Format XML, YAML, HTML, CSS, and Markdown online. Minify JavaScript and CSS for production. Preview
-                Mermaid diagrams and build ERD schemas in your browser.
+                {t.seoFormatters}
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">⚡ Generators</h3>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoGeneratorsTitle}</h3>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                Generate UUIDs, NanoIDs, secure passwords, QR codes, barcodes, favicon sets, fake test data, and
-                TOTP 2FA codes — free, online, no account needed.
+                {t.seoGenerators}
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">🎨 Color &amp; CSS</h3>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoColorTitle}</h3>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                Convert HEX, RGB, HSL colors online. Build CSS gradients, box shadows, and filters. Check WCAG contrast
-                ratios and extract color palettes from images.
+                {t.seoColor}
               </p>
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">🔒 Privacy First</h3>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoPrivacyTitle}</h3>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                All DevTools Online tools run entirely client-side in your browser. No servers receive your data, no accounts
-                required, no usage tracked. Your data stays private at all times.
+                {t.seoPrivacy}
               </p>
             </div>
           </div>

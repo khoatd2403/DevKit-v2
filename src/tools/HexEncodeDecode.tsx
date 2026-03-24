@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { usePersistentState } from '../hooks/usePersistentState'
 import { ArrowLeftRight } from 'lucide-react'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
@@ -33,7 +34,7 @@ function decodeHex(hex: string): { result: string; error: string } {
 }
 
 export default function HexEncodeDecode() {
-  const [mode, setMode] = useState<'encode' | 'decode'>('encode')
+  const [mode, setMode] = usePersistentState<'encode' | 'decode'>('hex-encode-mode', 'encode')
   const [input, setInput] = useState('Hello, World!')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')

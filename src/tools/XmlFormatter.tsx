@@ -34,7 +34,7 @@ export default function XmlFormatter() {
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
 
-  const [mode, setMode] = useState<'format' | 'minify'>('format')
+  const [mode, setMode] = usePersistentState<'format' | 'minify'>('xml-formatter-mode', 'format')
 
   useEffect(() => {
     if (!input.trim()) { setOutput(''); setError(''); return }

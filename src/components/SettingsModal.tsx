@@ -15,6 +15,14 @@ interface SettingsModalProps {
 const LANGUAGES = [
   { code: 'en', label: 'English' },
   { code: 'vi', label: 'Tiếng Việt' },
+  { code: 'zh-CN', label: '简体中文' },
+  { code: 'ja', label: '日本語' },
+  { code: 'ko', label: '한국어' },
+  { code: 'es', label: 'Español' },
+  { code: 'fr', label: 'Français' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'pt', label: 'Português' },
+  { code: 'ru', label: 'Русский' },
 ]
 
 function getExportStats() {

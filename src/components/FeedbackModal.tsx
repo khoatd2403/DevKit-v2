@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { X, Bug, Lightbulb, Palette, MessageSquare, Copy, Check, ExternalLink, ChevronDown, Wrench } from 'lucide-react'
+import { useLang } from '../context/LanguageContext'
 import { tools } from '../tools-registry'
 
 interface FeedbackModalProps {
@@ -49,6 +50,7 @@ const MAX_CHARS = 2000
 const WARN_THRESHOLD = 1800
 
 export default function FeedbackModal({ open, onClose, toolName }: FeedbackModalProps) {
+  const { t } = useLang()
   const [type, setType] = useState<FeedbackType>('general')
   const [message, setMessage] = useState('')
   const [submitted, setSubmitted] = useState(false)
@@ -59,13 +61,14 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
   const [toolSearch, setToolSearch] = useState('')
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  const current = TYPES.find(t => t.id === type)!
+  const feedbackTypeData = t.feedbackTypes[type]
+  const current = TYPES.find(tp => tp.id === type)!
   const remaining = MAX_CHARS - message.length
   const isNearLimit = remaining <= MAX_CHARS - WARN_THRESHOLD
   const isOverLimit = remaining < 0
 
   const filteredTools = toolSearch
-    ? tools.filter(t => t.name.toLowerCase().includes(toolSearch.toLowerCase()))
+    ? tools.filter(tl => tl.name.toLowerCase().includes(toolSearch.toLowerCase()))
     : tools
 
   useEffect(() => {
@@ -96,11 +99,11 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
     setSubmitted(true)
   }
 
-  const markdownFallback = `**[${current.label}]${selectedTool ? ` — ${selectedTool}` : ''}**\n\n${message}`
+  const markdownFallback = `**[${feedbackTypeData.label}]${selectedTool ? ` — ${selectedTool}` : ''}**\n\n${message}`
 
   const labelMap: Record<FeedbackType, string> = { bug: 'bug', feature: 'enhancement', ux: 'ux', general: 'feedback' }
-  const githubTitle = `${current.label}${selectedTool ? ` — ${selectedTool}` : ''}: `
-  const githubBody = `**Type:** ${current.label}\n${selectedTool ? `**Tool:** ${selectedTool}\n` : ''}\n## Message\n\n${message}\n\n---\n*Submitted via DevTools Online feedback form*`
+  const githubTitle = `${feedbackTypeData.label}${selectedTool ? ` — ${selectedTool}` : ''}: `
+  const githubBody = `**Type:** ${feedbackTypeData.label}\n${selectedTool ? `**Tool:** ${selectedTool}\n` : ''}\n## Message\n\n${message}\n\n---\n*Submitted via DevTools Online feedback form*`
   const githubUrl = `https://github.com/khoatd2403/DevKit-v2/issues/new?assignees=khoatd2403&labels=${labelMap[type]}&title=${encodeURIComponent(githubTitle)}&body=${encodeURIComponent(githubBody)}`
 
   const copyMarkdown = async () => {
@@ -120,7 +123,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-800">
           <div>
-            <h2 className="font-semibold text-gray-900 dark:text-white">Send Feedback</h2>
+            <h2 className="font-semibold text-gray-900 dark:text-white">{t.feedbackTitle}</h2>
             {selectedTool && (
               <p className="text-xs text-gray-400 mt-0.5">on <span className="text-primary-600 dark:text-primary-400 font-medium">{selectedTool}</span></p>
             )}
@@ -137,9 +140,9 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
               ✅
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white text-lg">Thanks for the feedback!</h3>
+              <h3 className="font-semibold text-gray-900 dark:text-white text-lg">{t.feedbackSuccessTitle}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 max-w-xs">
-                Your input helps make DevTools Online better. If you have a screenshot, feel free to attach it in a GitHub issue.
+                {t.feedbackSuccessDesc}
               </p>
             </div>
             <a
@@ -148,38 +151,38 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm text-primary-600 dark:text-primary-400 hover:underline"
             >
-              <ExternalLink size={13} /> Open on GitHub (with your message pre-filled)
+              <ExternalLink size={13} /> {t.feedbackOpenGithub}
             </a>
             <div className="flex gap-2 mt-2">
-              <button onClick={reset} className="btn-secondary text-sm">Send another</button>
-              <button onClick={onClose} className="btn-primary text-sm">Done</button>
+              <button onClick={reset} className="btn-secondary text-sm">{t.feedbackSendAnother}</button>
+              <button onClick={onClose} className="btn-primary text-sm">{t.done}</button>
             </div>
           </div>
         ) : (
           <div className="p-5 space-y-4">
             {/* Type selector */}
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1.5">Type</label>
+              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1.5">{t.feedbackType}</label>
               <div className="relative">
                 <button
                   onClick={() => setTypeOpen(o => !o)}
                   className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg border text-sm font-medium transition-colors ${current.color}`}
                 >
                   {current.icon}
-                  <span className="flex-1 text-left">{current.label}</span>
+                  <span className="flex-1 text-left">{feedbackTypeData.label}</span>
                   <ChevronDown size={14} className={`transition-transform ${typeOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {typeOpen && (
                   <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg overflow-hidden z-10">
-                    {TYPES.map(t => (
+                    {TYPES.map(tp => (
                       <button
-                        key={t.id}
-                        onClick={() => { setType(t.id); setTypeOpen(false) }}
-                        className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 ${type === t.id ? 'font-medium' : ''}`}
+                        key={tp.id}
+                        onClick={() => { setType(tp.id); setTypeOpen(false) }}
+                        className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 ${type === tp.id ? 'font-medium' : ''}`}
                       >
-                        <span className={t.color.split(' ')[0]}>{t.icon}</span>
-                        {t.label}
-                        {type === t.id && <Check size={13} className="ml-auto text-primary-500" />}
+                        <span className={tp.color.split(' ')[0]}>{tp.icon}</span>
+                        {t.feedbackTypes[tp.id].label}
+                        {type === tp.id && <Check size={13} className="ml-auto text-primary-500" />}
                       </button>
                     ))}
                   </div>
@@ -190,7 +193,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
             {/* Tool selector */}
             <div>
               <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1.5">
-                Related Tool <span className="text-gray-400 font-normal">(optional)</span>
+                {t.feedbackRelatedTool} <span className="text-gray-400 font-normal">{t.feedbackOptional}</span>
               </label>
               <div className="relative">
                 <button
@@ -199,7 +202,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
                 >
                   <Wrench size={13} className="text-gray-400 shrink-0" />
                   <span className={`flex-1 text-left ${selectedTool ? 'text-gray-800 dark:text-gray-200' : 'text-gray-400'}`}>
-                    {selectedTool || 'Select a tool...'}
+                    {selectedTool || t.feedbackSelectTool}
                   </span>
                   {selectedTool && (
                     <span
@@ -218,7 +221,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
                       <input
                         type="text"
                         autoFocus
-                        placeholder="Search tools..."
+                         placeholder={t.searchPlaceholder}
                         value={toolSearch}
                         onChange={e => setToolSearch(e.target.value)}
                         className="w-full text-xs bg-gray-50 dark:bg-gray-800 rounded-lg px-3 py-1.5 focus:outline-none text-gray-700 dark:text-gray-300 placeholder-gray-400"
@@ -226,16 +229,16 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
                     </div>
                     <div className="max-h-44 overflow-y-auto">
                       {filteredTools.length === 0 ? (
-                        <p className="text-xs text-gray-400 text-center py-4">No tools found</p>
-                      ) : filteredTools.map(t => (
+                        <p className="text-xs text-gray-400 text-center py-4">{t.noToolsFound(toolSearch)}</p>
+                      ) : filteredTools.map(tl => (
                         <button
-                          key={t.id}
-                          onClick={() => { setSelectedTool(t.name); setToolOpen(false) }}
-                          className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${selectedTool === t.name ? 'font-medium text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'}`}
+                          key={tl.id}
+                          onClick={() => { setSelectedTool(tl.name); setToolOpen(false) }}
+                          className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${selectedTool === tl.name ? 'font-medium text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'}`}
                         >
-                          <span>{t.icon}</span>
-                          <span className="flex-1 truncate">{t.name}</span>
-                          {selectedTool === t.name && <Check size={12} className="text-primary-500 shrink-0" />}
+                          <span>{tl.icon}</span>
+                          <span className="flex-1 truncate">{tl.name}</span>
+                          {selectedTool === tl.name && <Check size={12} className="text-primary-500 shrink-0" />}
                         </button>
                       ))}
                     </div>
@@ -247,12 +250,12 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
             {/* Message */}
             <div>
               <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1.5">
-                {current.labelText}
+                {feedbackTypeData.labelText}
               </label>
               <textarea
                 ref={textareaRef}
                 className={`tool-textarea h-36 resize-none transition-colors ${isOverLimit ? '!border-red-400 !ring-red-400' : ''}`}
-                placeholder={current.placeholder}
+                placeholder={feedbackTypeData.placeholder}
                 value={message}
                 onChange={e => setMessage(e.target.value)}
                 maxLength={MAX_CHARS + 50}
@@ -269,7 +272,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
               <span className="text-lg shrink-0">💡</span>
               <div className="flex-1 min-w-0">
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  No GitHub account? Copy your feedback as Markdown and share it elsewhere.
+                  {t.feedbackNoGithub}
                 </p>
                 <button
                   onClick={copyMarkdown}
@@ -277,7 +280,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
                   className="mt-1.5 flex items-center gap-1.5 text-xs text-primary-600 dark:text-primary-400 hover:underline disabled:opacity-40 disabled:no-underline"
                 >
                   {copied ? <Check size={12} className="text-green-500" /> : <Copy size={12} />}
-                  {copied ? 'Copied!' : 'Copy as Markdown'}
+                  {copied ? t.feedbackCopied : t.feedbackCopyMarkdown}
                 </button>
               </div>
             </div>
@@ -285,16 +288,16 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
             {/* Actions */}
             <div className="flex items-center justify-between pt-1">
               <span className="text-xs text-gray-400 dark:text-gray-600">
-                Press <kbd className="bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-gray-500 font-mono">Esc</kbd> to close
+                {t.pressEscToClose.split('Esc')[0]} <kbd className="bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-gray-500 font-mono">Esc</kbd> {t.pressEscToClose.split('Esc')[1]}
               </span>
               <div className="flex gap-2">
-                <button onClick={onClose} className="btn-secondary text-sm">Cancel</button>
+                <button onClick={onClose} className="btn-secondary text-sm">{t.cancel}</button>
                 <button
                   onClick={handleSubmit}
                   disabled={!message.trim() || isOverLimit}
                   className="btn-primary text-sm"
                 >
-                  Submit
+                  {t.feedbackSubmit}
                 </button>
               </div>
             </div>

@@ -57,9 +57,6 @@ export default function ToolPage({ onFeedback }: ToolPageProps) {
     }
   }, [toolId])
 
-  useEffect(() => {
-    return () => { document.title = 'DevTools Online — Free Online Developer Tools' }
-  }, [])
 
   useEffect(() => {
     const handler = () => {
