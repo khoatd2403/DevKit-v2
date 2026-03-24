@@ -97,12 +97,12 @@ export default function DateCalculator() {
 
   return (
     <div className="space-y-4">
-      <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm w-fit">
+      <div className="tool-tabs w-fit">
         {tabs.map(t => (
           <button
             key={t.key}
             onClick={() => setMode(t.key)}
-            className={`px-4 py-1.5 transition-colors ${mode === t.key ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+            className={`tool-tab ${mode === t.key ? 'active' : ''}`}
           >
             {t.label}
           </button>
@@ -113,7 +113,7 @@ export default function DateCalculator() {
         <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Start Date</label>
+              <label className="tool-label block mb-1">Start Date</label>
               <input
                 type="date"
                 className="tool-textarea h-auto py-2 w-full"
@@ -125,7 +125,7 @@ export default function DateCalculator() {
               )}
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">End Date</label>
+              <label className="tool-label block mb-1">End Date</label>
               <input
                 type="date"
                 className="tool-textarea h-auto py-2 w-full"
@@ -190,7 +190,7 @@ export default function DateCalculator() {
 
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Operation</label>
+              <label className="tool-label block mb-1">Operation</label>
               <select
                 className="tool-textarea h-auto py-2 w-full"
                 value={operation}
@@ -201,7 +201,7 @@ export default function DateCalculator() {
               </select>
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Amount</label>
+              <label className="tool-label block mb-1">Amount</label>
               <input
                 type="number"
                 min="0"
@@ -211,7 +211,7 @@ export default function DateCalculator() {
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Unit</label>
+              <label className="tool-label block mb-1">Unit</label>
               <select
                 className="tool-textarea h-auto py-2 w-full"
                 value={unit}
@@ -233,7 +233,7 @@ export default function DateCalculator() {
                   <div className="text-2xl font-mono font-bold text-primary-600 dark:text-primary-400">{formatDate(addResult)}</div>
                   <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">{DAYS[addResult.getDay()]}</div>
                 </div>
-                <CopyButton text={formatDate(addResult)} />
+                <CopyButton text={formatDate(addResult)} toast="Date copied" />
               </div>
               <div className="border-t border-gray-100 dark:border-gray-800 pt-2 text-sm text-gray-500 dark:text-gray-400">
                 {(() => {

@@ -29,7 +29,7 @@ export default function StringInspector() {
   return (
     <div className="space-y-4">
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Input Text</label>
+        <label className="tool-label block mb-1">Input Text</label>
         <FileDropTextarea className="h-40" placeholder="Type or paste text to analyze..." value={input} onChange={setInput} accept="text/*" />
       </div>
 

@@ -103,7 +103,7 @@ export default function AiPromptBuilder() {
               </button>
             ))}
           </div>
-          <CopyButton text={output} />
+          <CopyButton text={output} toast="Prompt copied" />
         </div>
         <textarea
           className="tool-textarea h-48 font-mono text-xs"

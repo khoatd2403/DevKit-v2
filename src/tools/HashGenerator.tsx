@@ -82,7 +82,7 @@ export default function HashGenerator() {
   return (
     <div className="space-y-4">
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Input Text</label>
+        <label className="tool-label block mb-1">Input Text</label>
         <FileDropTextarea className="h-32" placeholder="Enter text to hash..." value={input} onChange={setInput} accept="text/*" />
       </div>
       <button onClick={generate} disabled={loading} className="btn-primary">
@@ -91,10 +91,10 @@ export default function HashGenerator() {
       {Object.keys(hashes).length > 0 && (
         <div className="space-y-3">
           {Object.entries(hashes).map(([algo, hash]) => (
-            <div key={algo} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-3">
-              <div className="flex items-center justify-between mb-1">
+            <div key={algo} className="tool-result-card">
+              <div className="tool-result-card-header">
                 <span className="text-xs font-semibold text-primary-600 dark:text-primary-400">{algo}</span>
-                <CopyButton text={hash} />
+                <CopyButton text={hash} toast={`${algo} hash copied`} />
               </div>
               <p className="font-mono text-xs text-gray-700 dark:text-gray-300 break-all">{hash}</p>
             </div>

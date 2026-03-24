@@ -1,4 +1,4 @@
-import { Wrench, Github, Heart } from 'lucide-react'
+import { Github, Heart } from 'lucide-react'
 
 const REPO = 'https://github.com/khoatd2403/DevKit-v2'
 
@@ -47,10 +47,17 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-                <Wrench size={15} className="text-white" />
-              </div>
-              <span className="font-bold text-gray-900 dark:text-white">DevTools Online</span>
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
+                <rect width="32" height="32" rx="7" fill="#111827"/>
+                <rect x="0.5" y="0.5" width="31" height="31" rx="6.5" stroke="#374151"/>
+                <circle cx="7" cy="8" r="2" fill="#ff5f57"/>
+                <circle cx="13" cy="8" r="2" fill="#febc2e"/>
+                <circle cx="19" cy="8" r="2" fill="#28c840"/>
+                <text x="6" y="23" fontFamily="monospace" fontSize="10" fontWeight="700" fill="#4ade80">&gt;_</text>
+              </svg>
+              <span className="font-semibold text-gray-900 dark:text-white">
+                DevTools <span className="text-green-500">Online</span><span className="text-gray-400 dark:text-gray-600 font-normal text-sm">.dev</span>
+              </span>
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
               A free, fast, and privacy-friendly developer toolkit. Everything runs in your browser — no sign-up, no tracking.

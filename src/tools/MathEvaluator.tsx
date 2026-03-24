@@ -306,9 +306,9 @@ export default function MathEvaluator() {
 
       {/* Error */}
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800 font-mono">
+        <p className="tool-msg tool-msg--error font-mono">
           {error}
-        </div>
+        </p>
       )}
 
       {/* Result */}

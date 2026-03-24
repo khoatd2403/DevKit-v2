@@ -109,12 +109,12 @@ export default function CssGradient() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="label-text block mb-2">Gradient Type</label>
-          <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+          <div className="tool-tabs">
             {(['linear', 'radial', 'conic'] as const).map(t => (
               <button
                 key={t}
                 onClick={() => setType(t)}
-                className={`flex-1 py-1.5 capitalize transition-colors ${type === t ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+                className={`tool-tab flex-1 capitalize ${type === t ? 'active' : ''}`}
               >
                 {t}
               </button>
@@ -184,7 +184,7 @@ export default function CssGradient() {
             {copied ? <><Check size={13} /> Copied</> : <><Copy size={13} /> Copy</>}
           </button>
         </div>
-        <textarea readOnly value={css} className="tool-textarea font-mono text-sm h-20" />
+        <textarea readOnly value={css} className="tool-textarea-output font-mono text-sm h-20" />
       </div>
     </div>
   )

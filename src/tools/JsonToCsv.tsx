@@ -46,18 +46,20 @@ export default function JsonToCsv() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Input JSON (array)</label>
+          <div className="tool-output-header">
+            <label className="tool-label">Input JSON (array)</label>
+          </div>
           <FileDropTextarea className="h-80" placeholder='[{"name":"Alice","age":30},{"name":"Bob","age":25}]' value={input} onChange={setInput} accept=".json,text/plain,text/*" />
         </div>
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">CSV Output</label>
-            <CopyButton text={output} />
+          <div className="tool-output-header">
+            <label className="tool-label">CSV Output</label>
+            <CopyButton text={output} toast="CSV copied" />
           </div>
-          <textarea className="tool-textarea h-80" readOnly value={output} placeholder="CSV will appear here..." />
+          <textarea className="tool-textarea-output h-80" readOnly value={output} placeholder="CSV will appear here..." />
         </div>
       </div>
-      {error && <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">{error}</div>}
+      {error && <p className="tool-msg tool-msg--error">{error}</p>}
     </div>
   )
 }

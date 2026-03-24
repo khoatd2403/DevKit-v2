@@ -105,7 +105,7 @@ export default function AiCostCalculator() {
   )
 
   if (error) return (
-    <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">{error}</div>
+    <p className="tool-msg tool-msg--error">{error}</p>
   )
 
   return (
@@ -126,7 +126,7 @@ export default function AiCostCalculator() {
 
       {/* Model select */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Model</label>
+        <label className="tool-label block mb-1">Model</label>
         <select
           className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
           value={modelIdx}
@@ -146,7 +146,7 @@ export default function AiCostCalculator() {
           { label: 'API calls', value: calls, set: setCalls, hint: 'number of requests' },
         ].map(f => (
           <div key={f.label}>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">{f.label}</label>
+            <label className="tool-label block mb-1">{f.label}</label>
             <input
               type="number" min="0"
               className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400"

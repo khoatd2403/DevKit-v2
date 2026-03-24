@@ -109,11 +109,11 @@ export default function JwtEncoder() {
     <div className="space-y-4">
       {/* Algorithm selector */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Algorithm</label>
-        <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm w-fit">
+        <label className="tool-label block mb-1">Algorithm</label>
+        <div className="tool-tabs w-fit">
           {(['HS256', 'HS384', 'HS512', 'none'] as Algorithm[]).map(alg => (
             <button key={alg} onClick={() => setAlgorithm(alg)}
-              className={`px-4 py-1.5 transition-colors ${algorithm === alg ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+              className={`tool-tab ${algorithm === alg ? 'active' : ''}`}>
               {alg}
             </button>
           ))}
@@ -122,7 +122,7 @@ export default function JwtEncoder() {
 
       {/* Header (readonly) */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+        <label className="tool-label block mb-1">
           Header <span className="text-blue-500">(blue in token)</span>
         </label>
         <pre className="font-mono text-xs bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-3 text-blue-600 dark:text-blue-400">
@@ -132,8 +132,8 @@ export default function JwtEncoder() {
 
       {/* Payload */}
       <div>
-        <div className="flex items-center justify-between mb-1">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+        <div className="tool-output-header">
+          <label className="tool-label">
             Payload <span className="text-green-500">(green in token)</span>
           </label>
           <div className="flex gap-1 flex-wrap">
@@ -156,7 +156,7 @@ export default function JwtEncoder() {
       {/* Secret */}
       {algorithm !== 'none' && (
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Secret</label>
+          <label className="tool-label block mb-1">Secret</label>
           <input
             type="text"
             className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm font-mono text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
@@ -172,19 +172,19 @@ export default function JwtEncoder() {
       )}
 
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           {error}
-        </div>
+        </p>
       )}
 
       {/* Token output */}
       {token && (
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+          <div className="tool-output-header">
+            <label className="tool-label">
               Generated JWT {generating && <span className="text-gray-400">(updating...)</span>}
             </label>
-            <CopyButton text={token} />
+            <CopyButton text={token} toast="JWT token copied" />
           </div>
           <div className="font-mono text-xs bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-3 break-all leading-relaxed">
             <span className="text-blue-600 dark:text-blue-400">{headerPart}</span>

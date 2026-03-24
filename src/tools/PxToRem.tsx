@@ -54,7 +54,7 @@ export default function PxToRem() {
       {/* Converter */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Pixels (px)</label>
+          <label className="tool-label">Pixels (px)</label>
           <div className="flex gap-2">
             <input
               type="number" value={pxVal}
@@ -66,7 +66,7 @@ export default function PxToRem() {
           </div>
         </div>
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Root Em (rem)</label>
+          <label className="tool-label">Root Em (rem)</label>
           <div className="flex gap-2">
             <input
               type="number" value={remVal}

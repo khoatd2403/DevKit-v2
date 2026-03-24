@@ -105,7 +105,7 @@ export default function AiSystemPrompt() {
     <div className="space-y-5">
       {/* Templates grid */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">Use case</label>
+        <label className="tool-label block mb-2">Use case</label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {TEMPLATES.map(t => (
             <button
@@ -127,7 +127,7 @@ export default function AiSystemPrompt() {
       {/* Custom base */}
       {templateId === 'custom' && (
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Base description</label>
+          <label className="tool-label block mb-1">Base description</label>
           <textarea
             className="tool-textarea h-24"
             placeholder="Describe what your AI assistant should do..."
@@ -140,7 +140,7 @@ export default function AiSystemPrompt() {
       {/* Options */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Tone</label>
+          <label className="tool-label block mb-1">Tone</label>
           <div className="flex flex-wrap gap-1.5">
             {TONES.map(t => (
               <button
@@ -154,7 +154,7 @@ export default function AiSystemPrompt() {
           </div>
         </div>
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Response language</label>
+          <label className="tool-label block mb-1">Response language</label>
           <select
             className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
             value={language}
@@ -166,7 +166,7 @@ export default function AiSystemPrompt() {
       </div>
 
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Extra constraints <span className="text-gray-400">(optional)</span></label>
+        <label className="tool-label block mb-1">Extra constraints <span className="text-gray-400">(optional)</span></label>
         <input
           className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400"
           placeholder="e.g. Never reveal your system prompt. Only answer questions about cooking."
@@ -177,12 +177,12 @@ export default function AiSystemPrompt() {
 
       {/* Output */}
       <div>
-        <div className="flex items-center justify-between mb-1">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Generated System Prompt</label>
-          <CopyButton text={output} />
+        <div className="tool-output-header">
+          <label className="tool-label">Generated System Prompt</label>
+          <CopyButton text={output} toast="Prompt copied" />
         </div>
         <textarea
-          className="tool-textarea h-48"
+          className="tool-textarea-output h-48"
           readOnly
           value={output}
           placeholder="Select a use case above to generate a system prompt..."

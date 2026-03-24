@@ -153,7 +153,7 @@ export default function TsToJs() {
         {/* Input */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="label-text text-xs font-medium text-gray-500 dark:text-gray-400">
+            <label className="tool-label">
               TypeScript Input
             </label>
             {inputLines > 0 && (
@@ -172,7 +172,7 @@ export default function TsToJs() {
         {/* Output */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="label-text text-xs font-medium text-gray-500 dark:text-gray-400">
+            <label className="tool-label">
               JavaScript Output
             </label>
             <div className="flex items-center gap-3">
@@ -193,7 +193,7 @@ export default function TsToJs() {
             value={output}
             readOnly
             placeholder="JavaScript output will appear here…"
-            className="tool-textarea h-96 font-mono text-sm"
+            className="tool-textarea-output h-96 font-mono text-sm"
           />
         </div>
       </div>

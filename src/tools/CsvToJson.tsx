@@ -133,7 +133,7 @@ export default function CsvToJson() {
     <div className="space-y-4">
       <div className="flex flex-wrap gap-3 items-end">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Delimiter</label>
+          <label className="tool-label block mb-1">Delimiter</label>
           <select
             value={delimiter}
             onChange={e => setDelimiter(e.target.value as DelimiterOption)}
@@ -145,7 +145,7 @@ export default function CsvToJson() {
           </select>
         </div>
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Output Format</label>
+          <label className="tool-label block mb-1">Output Format</label>
           <select
             value={format}
             onChange={e => setFormat(e.target.value as 'objects' | 'arrays' | 'pretty')}
@@ -179,7 +179,9 @@ export default function CsvToJson() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Input CSV</label>
+          <div className="tool-output-header">
+            <label className="tool-label">Input CSV</label>
+          </div>
           <FileDropTextarea
             className="h-80"
             placeholder={"name,age,city\nAlice,30,New York\nBob,25,London"}
@@ -189,12 +191,12 @@ export default function CsvToJson() {
           />
         </div>
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">JSON Output</label>
+          <div className="tool-output-header">
+            <label className="tool-label">JSON Output</label>
             <CopyButton text={output} />
           </div>
           <textarea
-            className="tool-textarea h-80"
+            className="tool-textarea-output h-80"
             readOnly
             value={output}
             placeholder="JSON will appear here..."
@@ -203,9 +205,9 @@ export default function CsvToJson() {
       </div>
 
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           {error}
-        </div>
+        </p>
       )}
 
       {stats && !error && (

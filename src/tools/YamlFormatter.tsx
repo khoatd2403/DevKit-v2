@@ -265,7 +265,9 @@ export default function YamlFormatter() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Input YAML</label>
+          <div className="tool-output-header">
+            <label className="tool-label">Input YAML</label>
+          </div>
           <FileDropTextarea
             className="h-80"
             placeholder="name: John Doe&#10;age: 30&#10;roles:&#10;  - admin&#10;  - user"
@@ -275,12 +277,12 @@ export default function YamlFormatter() {
           />
         </div>
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Formatted Output</label>
-            <CopyButton text={output} />
+          <div className="tool-output-header">
+            <label className="tool-label">Formatted Output</label>
+            <CopyButton text={output} toast="YAML copied" />
           </div>
           <textarea
-            className="tool-textarea h-80"
+            className="tool-textarea-output h-80"
             readOnly
             value={output}
             placeholder="Formatted YAML will appear here..."
@@ -289,9 +291,9 @@ export default function YamlFormatter() {
       </div>
 
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           {error}
-        </div>
+        </p>
       )}
 
       {stats && !error && (

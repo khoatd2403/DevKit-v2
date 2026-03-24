@@ -1,4 +1,4 @@
-import { Suspense, useState, useEffect } from 'react'
+import { Suspense, useState, useEffect, useMemo } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { SITE_URL } from '../../site.config'
@@ -13,6 +13,7 @@ import SnippetDrawer from '../components/SnippetDrawer'
 import { useLiveMode } from '../context/LiveModeContext'
 import { lazyToolComponents } from '../lazyToolComponents'
 import ToolErrorBoundary from '../components/ToolErrorBoundary'
+import PrivacyBadge from '../components/PrivacyBadge'
 
 interface ToolPageProps {
   onFeedback: (toolName?: string) => void
@@ -69,12 +70,15 @@ export default function ToolPage({ onFeedback }: ToolPageProps) {
     return () => window.removeEventListener('devkit:run', handler)
   }, [])
 
-  const relatedTools = toolMeta ? tools
-    .filter(t => t.id !== toolMeta.id && (
-      t.category === toolMeta.category ||
-      t.tags.some(tag => toolMeta.tags.includes(tag))
-    ))
-    .slice(0, 4) : []
+  const relatedTools = useMemo(() => {
+    if (!toolMeta) return []
+    return tools
+      .filter(t => t.id !== toolMeta.id && (
+        t.category === toolMeta.category ||
+        t.tags.some(tag => toolMeta.tags.includes(tag))
+      ))
+      .slice(0, 6)
+  }, [toolId])
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href)
@@ -94,8 +98,8 @@ export default function ToolPage({ onFeedback }: ToolPageProps) {
 
   const BASE_URL = SITE_URL
   const pageUrl = `${BASE_URL}/tool/${toolId}`
-  const pageTitle = `${toolMeta.name} — DevTools Online`
-  const rawDesc = `${toolMeta.description}. Free DevTools Online tool — no account needed, no data sent to servers, works instantly in any browser.`
+  const pageTitle = toolMeta.seoTitle ?? `Free ${toolMeta.name} Online — Fast & Secure | DevTools Online`
+  const rawDesc = toolMeta.seoDescription ?? `${toolMeta.description}. Free online tool — no account needed, no data sent to servers, works instantly in your browser.`
   const pageDesc = rawDesc.length > 160 ? rawDesc.slice(0, 157) + '...' : rawDesc
   const ogImage = `${BASE_URL}/og/${toolId}.png`
 
@@ -125,69 +129,79 @@ export default function ToolPage({ onFeedback }: ToolPageProps) {
       </button>
 
       {/* Tool header */}
-      <div className="flex items-center gap-3 mb-6">
-        <span className="text-3xl">{toolMeta.icon}</span>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">{toolMeta.name}</h1>
-            {toolMeta.new && (
-              <span className="text-xs bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded-full border border-green-200 dark:border-green-800">New</span>
-            )}
+      <div className="mb-6">
+        {/* Top row: icon + name + action buttons */}
+        <div className="flex items-center gap-3">
+          <span className="text-3xl shrink-0">{toolMeta.icon}</span>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">{toolMeta.name}</h1>
+              {toolMeta.new && (
+                <span className="text-xs bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded-full border border-green-200 dark:border-green-800 shrink-0">New</span>
+              )}
+            </div>
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{toolMeta.description}</p>
+          {/* Action buttons — always visible, icon-only on mobile */}
+          <div className="flex items-center gap-0.5 shrink-0">
+            <button
+              onClick={() => setLiveMode(!liveMode)}
+              className={`btn-ghost flex items-center gap-1 text-xs ${liveMode ? 'text-green-600 dark:text-green-400' : 'text-gray-400'}`}
+              title={liveMode ? 'Live mode on (Alt+L)' : 'Live mode off (Alt+L)'}
+            >
+              <span className={`w-1.5 h-1.5 rounded-full ${liveMode ? 'bg-green-500 animate-pulse' : 'bg-gray-300 dark:bg-gray-600'}`} />
+              <span className="hidden sm:inline">Live</span>
+            </button>
+            <button
+              onClick={() => toolMeta && toggle(toolMeta.id)}
+              className={`btn-ghost p-1.5 ${fav ? 'text-yellow-500' : ''}`}
+              title={fav ? 'Remove from favorites' : 'Add to favorites'}
+            >
+              <Star size={15} className={fav ? 'fill-yellow-500' : ''} />
+            </button>
+            <button
+              onClick={() => setSnippetOpen(true)}
+              className="btn-ghost flex items-center gap-1.5 text-xs relative"
+              title="Snippets"
+            >
+              <BookMarked size={13} />
+              <span className="hidden sm:inline">Snippets</span>
+              {snippets.filter(s => s.toolId === toolId).length > 0 && (
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary-500 text-white text-[10px] rounded-full flex items-center justify-center">
+                  {snippets.filter(s => s.toolId === toolId).length}
+                </span>
+              )}
+            </button>
+            <button
+              onClick={handleShare}
+              className="btn-ghost flex items-center gap-1.5 text-xs"
+              title="Copy link to this tool"
+            >
+              {copied ? <Check size={13} /> : <Share2 size={13} />}
+              <span className="hidden sm:inline">{copied ? 'Copied!' : 'Share'}</span>
+            </button>
+            <button
+              onClick={() => navigate(`/split?a=${toolId}&b=${toolId === 'json-formatter' ? 'base64-encode-decode' : 'json-formatter'}`)}
+              className="btn-ghost flex items-center gap-1.5 text-xs"
+              title="Open in split pane"
+            >
+              <LayoutPanelLeft size={13} />
+              <span className="hidden sm:inline">Split</span>
+            </button>
+            <button
+              onClick={() => onFeedback(toolMeta?.name)}
+              className="btn-ghost flex items-center gap-1.5 text-xs"
+              title="Send feedback (Ctrl+Shift+F)"
+            >
+              <MessageSquare size={13} />
+              <span className="hidden sm:inline">Feedback</span>
+            </button>
+          </div>
         </div>
-        <button
-          onClick={() => setLiveMode(!liveMode)}
-          className={`btn-ghost flex items-center gap-1 text-xs shrink-0 ${liveMode ? 'text-green-600 dark:text-green-400' : 'text-gray-400'}`}
-          title={liveMode ? 'Live mode on (Alt+L)' : 'Live mode off (Alt+L)'}
-        >
-          <span className={`w-1.5 h-1.5 rounded-full ${liveMode ? 'bg-green-500 animate-pulse' : 'bg-gray-300 dark:bg-gray-600'}`} />
-          Live
-        </button>
-        <button
-          onClick={() => toolMeta && toggle(toolMeta.id)}
-          className={`btn-ghost p-1.5 shrink-0 ${fav ? 'text-yellow-500' : ''}`}
-          title={fav ? 'Remove from favorites' : 'Add to favorites'}
-        >
-          <Star size={15} className={fav ? 'fill-yellow-500' : ''} />
-        </button>
-        <button
-          onClick={() => setSnippetOpen(true)}
-          className="btn-ghost flex items-center gap-1.5 text-xs shrink-0 relative"
-          title="Snippets"
-        >
-          <BookMarked size={13} />
-          Snippets
-          {snippets.filter(s => s.toolId === toolId).length > 0 && (
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary-500 text-white text-[10px] rounded-full flex items-center justify-center">
-              {snippets.filter(s => s.toolId === toolId).length}
-            </span>
-          )}
-        </button>
-        <button
-          onClick={handleShare}
-          className="btn-ghost flex items-center gap-1.5 text-xs shrink-0"
-          title="Copy link to this tool"
-        >
-          {copied ? <Check size={13} /> : <Share2 size={13} />}
-          {copied ? 'Copied!' : 'Share'}
-        </button>
-        <button
-          onClick={() => navigate(`/split?a=${toolId}&b=${toolId === 'json-formatter' ? 'base64-encode-decode' : 'json-formatter'}`)}
-          className="btn-ghost flex items-center gap-1.5 text-xs shrink-0"
-          title="Open in split pane"
-        >
-          <LayoutPanelLeft size={13} />
-          Split
-        </button>
-        <button
-          onClick={() => onFeedback(toolMeta?.name)}
-          className="btn-ghost flex items-center gap-1.5 text-xs shrink-0"
-          title="Send feedback (Ctrl+Shift+F)"
-        >
-          <MessageSquare size={13} />
-          Feedback
-        </button>
+        {/* Description — full width below on all screen sizes */}
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1.5 ml-[52px]">{toolMeta.description}</p>
+        <div className="mt-1 ml-[52px]">
+          <PrivacyBadge privacy={toolMeta.privacy} networkNote={toolMeta.networkNote} />
+        </div>
       </div>
 
       {/* Keyboard shortcuts hint bar */}
@@ -228,6 +242,11 @@ export default function ToolPage({ onFeedback }: ToolPageProps) {
           tip={PRO_TIPS[toolId].tip}
           tipId={PRO_TIPS[toolId].tipId}
         />
+      )}
+
+      {/* Network warning banner */}
+      {toolMeta.privacy === 'network' && (
+        <PrivacyBadge privacy="network" networkNote={toolMeta.networkNote} variant="banner" />
       )}
 
       {/* Tool content */}

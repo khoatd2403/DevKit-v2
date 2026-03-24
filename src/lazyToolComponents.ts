@@ -8,6 +8,7 @@ export const lazyToolComponents: Record<string, React.LazyExoticComponent<React.
   'base64-encode-decode': lazy(() => import('./tools/Base64Tool')),
   'url-encode-decode': lazy(() => import('./tools/UrlEncodeTool')),
   'html-encode-decode': lazy(() => import('./tools/HtmlEncodeTool')),
+  'html-preview': lazy(() => import('./tools/HtmlPreview')),
   'jwt-decoder': lazy(() => import('./tools/JwtDecoder')),
   'hash-generator': lazy(() => import('./tools/HashGenerator')),
   'password-generator': lazy(() => import('./tools/PasswordGenerator')),

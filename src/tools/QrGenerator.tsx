@@ -269,7 +269,7 @@ export default function QrGenerator() {
     <div className="space-y-4">
       {/* Tab selector */}
       <div>
-        <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">
+        <label className="tool-label block mb-2">
           Content Type
         </label>
         <div className="flex flex-wrap gap-1">
@@ -293,7 +293,7 @@ export default function QrGenerator() {
       <div className="space-y-3">
         {activeTab === 'text' && (
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+            <label className="tool-label block mb-1">
               Text or URL
             </label>
             <textarea
@@ -308,7 +308,7 @@ export default function QrGenerator() {
         {activeTab === 'wifi' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">SSID (Network Name)</label>
+              <label className="tool-label block mb-1">SSID (Network Name)</label>
               <input
                 type="text"
                 className="tool-textarea py-1.5"
@@ -318,7 +318,7 @@ export default function QrGenerator() {
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Password</label>
+              <label className="tool-label block mb-1">Password</label>
               <input
                 type="text"
                 className="tool-textarea py-1.5"
@@ -328,7 +328,7 @@ export default function QrGenerator() {
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Encryption</label>
+              <label className="tool-label block mb-1">Encryption</label>
               <div className="flex gap-1">
                 {(['WPA', 'WEP', 'nopass'] as WifiEncryption[]).map(enc => (
                   <button
@@ -363,7 +363,7 @@ export default function QrGenerator() {
         {activeTab === 'email' && (
           <div className="space-y-3">
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">To</label>
+              <label className="tool-label block mb-1">To</label>
               <input
                 type="email"
                 className="tool-textarea py-1.5"
@@ -373,7 +373,7 @@ export default function QrGenerator() {
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Subject</label>
+              <label className="tool-label block mb-1">Subject</label>
               <input
                 type="text"
                 className="tool-textarea py-1.5"
@@ -383,7 +383,7 @@ export default function QrGenerator() {
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Body</label>
+              <label className="tool-label block mb-1">Body</label>
               <textarea
                 className="tool-textarea h-20"
                 placeholder="Email body..."
@@ -396,7 +396,7 @@ export default function QrGenerator() {
 
         {activeTab === 'phone' && (
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Phone Number</label>
+            <label className="tool-label block mb-1">Phone Number</label>
             <input
               type="tel"
               className="tool-textarea py-1.5"
@@ -410,7 +410,7 @@ export default function QrGenerator() {
         {activeTab === 'sms' && (
           <div className="space-y-3">
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Phone Number</label>
+              <label className="tool-label block mb-1">Phone Number</label>
               <input
                 type="tel"
                 className="tool-textarea py-1.5"
@@ -420,7 +420,7 @@ export default function QrGenerator() {
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Message</label>
+              <label className="tool-label block mb-1">Message</label>
               <textarea
                 className="tool-textarea h-20"
                 placeholder="Message text..."
@@ -434,7 +434,7 @@ export default function QrGenerator() {
         {activeTab === 'vcard' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Full Name</label>
+              <label className="tool-label block mb-1">Full Name</label>
               <input
                 type="text"
                 className="tool-textarea py-1.5"
@@ -444,7 +444,7 @@ export default function QrGenerator() {
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Phone</label>
+              <label className="tool-label block mb-1">Phone</label>
               <input
                 type="tel"
                 className="tool-textarea py-1.5"
@@ -454,7 +454,7 @@ export default function QrGenerator() {
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Email</label>
+              <label className="tool-label block mb-1">Email</label>
               <input
                 type="email"
                 className="tool-textarea py-1.5"
@@ -464,7 +464,7 @@ export default function QrGenerator() {
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Organization</label>
+              <label className="tool-label block mb-1">Organization</label>
               <input
                 type="text"
                 className="tool-textarea py-1.5"
@@ -474,7 +474,7 @@ export default function QrGenerator() {
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Website URL</label>
+              <label className="tool-label block mb-1">Website URL</label>
               <input
                 type="url"
                 className="tool-textarea py-1.5"
@@ -501,7 +501,7 @@ export default function QrGenerator() {
         <div className="flex flex-wrap gap-x-6 gap-y-3 items-end">
           {/* Colors */}
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Foreground</label>
+            <label className="tool-label block mb-1">Foreground</label>
             <div className="flex items-center gap-2">
               <input
                 type="color"
@@ -514,7 +514,7 @@ export default function QrGenerator() {
           </div>
 
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Background</label>
+            <label className="tool-label block mb-1">Background</label>
             <div className="flex items-center gap-2">
               <input
                 type="color"
@@ -528,7 +528,7 @@ export default function QrGenerator() {
 
           {/* Error correction */}
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Error Correction</label>
+            <label className="tool-label block mb-1">Error Correction</label>
             <div className="flex gap-1">
               {(['L', 'M', 'Q', 'H'] as EccLevel[]).map(level => (
                 <button
@@ -550,7 +550,7 @@ export default function QrGenerator() {
         <div className="flex flex-wrap gap-x-6 gap-y-3 items-end">
           {/* Size slider */}
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+            <label className="tool-label block mb-1">
               Size: {size} × {size} px
             </label>
             <input
@@ -566,7 +566,7 @@ export default function QrGenerator() {
 
           {/* Margin */}
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+            <label className="tool-label block mb-1">
               Margin: {margin}
             </label>
             <input
@@ -585,7 +585,7 @@ export default function QrGenerator() {
       {/* Logo section */}
       <div className="flex items-center gap-3 flex-wrap">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Logo / Icon (optional)</label>
+          <label className="tool-label block mb-1">Logo / Icon (optional)</label>
           <div className="flex items-center gap-2">
             <button
               onClick={() => logoInputRef.current?.click()}

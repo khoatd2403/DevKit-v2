@@ -113,13 +113,9 @@ export default function CssFormatter() {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3 flex-wrap">
-        <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+        <div className="tool-tabs">
           {(['beautify', 'minify'] as const).map(m => (
-            <button
-              key={m}
-              onClick={() => setMode(m)}
-              className={`px-4 py-1.5 capitalize transition-colors ${mode === m ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
-            >
+            <button key={m} onClick={() => setMode(m)} className={`tool-tab ${mode === m ? 'active' : ''}`}>
               {m}
             </button>
           ))}
@@ -135,7 +131,9 @@ export default function CssFormatter() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Input CSS</label>
+          <div className="tool-output-header">
+            <label className="tool-label">Input CSS</label>
+          </div>
           <FileDropTextarea
             className="h-80"
             placeholder={`.container {\n  display: flex;\n  background-color: #fff;\n}\n\n@media (max-width: 768px) {\n  .container { flex-direction: column; }\n}`}
@@ -143,26 +141,15 @@ export default function CssFormatter() {
             onChange={setInput}
             accept=".css,text/css,text/*"
           />
-          {input && (
-            <div className="text-xs text-gray-400 mt-1 text-right">{inputBytes} bytes</div>
-          )}
+          {input && <p className="tool-note text-right">{inputBytes} bytes</p>}
         </div>
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
-              {mode === 'minify' ? 'Minified' : 'Beautified'} Output
-            </label>
-            <CopyButton text={output} />
+          <div className="tool-output-header">
+            <label className="tool-label">{mode === 'minify' ? 'Minified' : 'Beautified'} Output</label>
+            <CopyButton text={output} toast={`${mode === 'minify' ? 'Minified' : 'Beautified'} CSS copied`} />
           </div>
-          <textarea
-            className="tool-textarea h-80"
-            readOnly
-            value={output}
-            placeholder="Output will appear here as you type..."
-          />
-          {output && (
-            <div className="text-xs text-gray-400 mt-1 text-right">{outputBytes} bytes</div>
-          )}
+          <textarea className="tool-textarea-output h-80" readOnly value={output} placeholder="Output will appear here as you type..." />
+          {output && <p className="tool-note text-right">{outputBytes} bytes</p>}
         </div>
       </div>
     </div>

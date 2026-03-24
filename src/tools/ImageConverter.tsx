@@ -230,7 +230,7 @@ export default function ImageConverter() {
       {images.length > 0 && (
         <>
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Output Format</label>
+            <label className="tool-label block mb-1">Output Format</label>
             <div className="flex gap-2 flex-wrap">
               {formats.map(f => (
                 <button
@@ -251,7 +251,7 @@ export default function ImageConverter() {
           {/* Quality slider */}
           {showQuality && (
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+              <label className="tool-label block mb-1">
                 Quality: {quality}%
               </label>
               <input
@@ -299,9 +299,9 @@ export default function ImageConverter() {
                       <p className="text-xs text-primary-500 mt-1">Converting…</p>
                     )}
                     {entry.error && (
-                      <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800 mt-1">
+                      <p className="tool-msg tool-msg--error mt-1">
                         {entry.error}
-                      </div>
+                      </p>
                     )}
                     {entry.convertedUrl && entry.convertedSize !== undefined && (
                       <div className="flex items-center gap-3 mt-1">

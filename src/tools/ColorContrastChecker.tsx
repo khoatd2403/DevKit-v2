@@ -90,7 +90,7 @@ export default function ColorContrastChecker() {
             { label: 'Background', value: bg, set: setBg },
           ].map(({ label, value, set }) => (
             <div key={label}>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5 block">{label}</label>
+              <label className="tool-label mb-1.5 block">{label}</label>
               <div className="flex items-center gap-2">
                 <input type="color" value={value.length === 7 ? value : '#000000'}
                   onChange={e => set(e.target.value.toUpperCase())}

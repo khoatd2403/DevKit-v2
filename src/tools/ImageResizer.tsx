@@ -229,16 +229,16 @@ export default function ImageResizer() {
       </div>
 
       {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           {error}
-        </div>
+        </p>
       )}
 
       {original && (
         <>
           {/* Original preview + info */}
           <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-2">Original</label>
+            <label className="tool-label block mb-2">Original</label>
             <div className="flex gap-4 items-start">
               <img
                 src={original.objectUrl}
@@ -256,7 +256,7 @@ export default function ImageResizer() {
 
           {/* Resize mode */}
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Resize Mode</label>
+            <label className="tool-label block mb-1">Resize Mode</label>
             <div className="flex gap-2 flex-wrap">
               {modes.map(m => (
                 <button
@@ -278,7 +278,7 @@ export default function ImageResizer() {
           {mode === 'pixels' && (
             <div className="flex gap-3 items-end flex-wrap">
               <div>
-                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Width (px)</label>
+                <label className="tool-label block mb-1">Width (px)</label>
                 <input
                   type="number"
                   min={1}
@@ -295,7 +295,7 @@ export default function ImageResizer() {
                 {lockAspect ? <Lock size={16} /> : <Unlock size={16} />}
               </button>
               <div>
-                <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Height (px)</label>
+                <label className="tool-label block mb-1">Height (px)</label>
                 <input
                   type="number"
                   min={1}
@@ -309,7 +309,7 @@ export default function ImageResizer() {
 
           {mode === 'percentage' && (
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+              <label className="tool-label block mb-1">
                 Scale: {percentage}%
                 {original && (() => {
                   const pct = parseFloat(percentage)
@@ -342,7 +342,7 @@ export default function ImageResizer() {
 
           {mode === 'maxdim' && (
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Max dimension (px) — longest side</label>
+              <label className="tool-label block mb-1">Max dimension (px) — longest side</label>
               <input
                 type="number"
                 min={1}
@@ -368,7 +368,7 @@ export default function ImageResizer() {
 
           {/* Output format */}
           <div>
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">Output Format</label>
+            <label className="tool-label block mb-1">Output Format</label>
             <div className="flex gap-2 flex-wrap">
               {formats.map(f => (
                 <button
@@ -389,7 +389,7 @@ export default function ImageResizer() {
           {/* Quality slider */}
           {showQuality && (
             <div>
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
+              <label className="tool-label block mb-1">
                 Quality: {quality}%
               </label>
               <input
@@ -415,7 +415,7 @@ export default function ImageResizer() {
           {/* Result */}
           {result && (
             <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 space-y-3">
-              <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block">Result Preview</label>
+              <label className="tool-label block">Result Preview</label>
               <img
                 src={result.url}
                 alt="Resized"

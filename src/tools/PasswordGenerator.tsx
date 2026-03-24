@@ -43,12 +43,12 @@ export default function PasswordGenerator() {
   const strength = password ? getStrength(password) : null
 
   return (
-    <div className="space-y-5">
-      <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 space-y-4">
+    <div className="space-y-4">
+      <div className="tool-panel space-y-4">
         {/* Length */}
         <div>
           <div className="flex items-center justify-between mb-1">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Length</label>
+            <label className="tool-label font-semibold">Length</label>
             <span className="text-sm font-mono text-primary-600 dark:text-primary-400">{length}</span>
           </div>
           <input type="range" min={4} max={128} value={length} onChange={e => setLength(+e.target.value)} className="w-full accent-primary-600" />
@@ -89,9 +89,9 @@ export default function PasswordGenerator() {
             </div>
           )}
           {passwords.map((p, i) => (
-            <div key={i} className="flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2">
+            <div key={i} className="tool-result-row">
               <span className="font-mono text-sm text-gray-800 dark:text-gray-200 flex-1 break-all">{p}</span>
-              <CopyButton text={p} />
+              <CopyButton text={p} toast="Password copied" />
             </div>
           ))}
         </div>

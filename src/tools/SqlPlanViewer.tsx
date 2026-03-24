@@ -330,7 +330,7 @@ export default function SqlPlanViewer() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Input */}
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+          <label className="tool-label">
             {flavor === 'postgres' ? 'EXPLAIN / EXPLAIN ANALYZE output' : 'EXPLAIN tabular output'}
           </label>
           <textarea
@@ -350,7 +350,7 @@ export default function SqlPlanViewer() {
 
         {/* Tree / Table */}
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+          <label className="tool-label">
             {flavor === 'postgres' ? 'Execution Plan Tree' : 'EXPLAIN Analysis'}
           </label>
           <div className="border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-gray-950 overflow-auto p-3" style={{ height: 440 }}>

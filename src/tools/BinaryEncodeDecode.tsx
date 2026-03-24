@@ -57,13 +57,9 @@ export default function BinaryEncodeDecode() {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+        <div className="tool-tabs">
           {(['encode', 'decode'] as const).map(m => (
-            <button
-              key={m}
-              onClick={() => switchMode(m)}
-              className={`px-4 py-1.5 capitalize transition-colors ${mode === m ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
-            >
+            <button key={m} onClick={() => switchMode(m)} className={`tool-tab ${mode === m ? 'active' : ''}`}>
               {m}
             </button>
           ))}
@@ -72,9 +68,9 @@ export default function BinaryEncodeDecode() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">
-            {mode === 'encode' ? 'Plain Text' : 'Binary String'}
-          </label>
+          <div className="tool-output-header">
+            <label className="tool-label">{mode === 'encode' ? 'Plain Text' : 'Binary String'}</label>
+          </div>
           <FileDropTextarea
             className="h-56"
             placeholder={mode === 'encode' ? 'Enter text to encode...' : 'e.g. 01101000 01100101 01101100 01101100 01101111'}
@@ -82,45 +78,25 @@ export default function BinaryEncodeDecode() {
             onChange={handleInput}
             accept="text/*"
           />
-          <div className="flex gap-4 mt-1">
+          <p className="tool-note">
             {mode === 'encode' ? (
-              <>
-                <span className="text-xs text-gray-400 dark:text-gray-500">
-                  {charCount} char{charCount !== 1 ? 's' : ''}
-                </span>
-                <span className="text-xs text-gray-400 dark:text-gray-500">
-                  {totalBits} bits
-                </span>
-              </>
+              <>{charCount} char{charCount !== 1 ? 's' : ''} · {totalBits} bits</>
             ) : (
-              <span className="text-xs text-gray-400 dark:text-gray-500">
-                {input.trim() ? input.trim().split(/\s+/).filter(Boolean).length : 0} group{input.trim().split(/\s+/).filter(Boolean).length !== 1 ? 's' : ''} · {totalBits} bits
-              </span>
+              <>{input.trim() ? input.trim().split(/\s+/).filter(Boolean).length : 0} group{input.trim().split(/\s+/).filter(Boolean).length !== 1 ? 's' : ''} · {totalBits} bits</>
             )}
-          </div>
+          </p>
         </div>
 
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
-              {mode === 'encode' ? 'Binary Output' : 'Decoded Text'}
-            </label>
-            <CopyButton text={output} />
+          <div className="tool-output-header">
+            <label className="tool-label">{mode === 'encode' ? 'Binary Output' : 'Decoded Text'}</label>
+            <CopyButton text={output} toast={mode === 'encode' ? 'Binary copied' : 'Decoded text copied'} />
           </div>
-          <textarea
-            className="tool-textarea h-56"
-            readOnly
-            value={output}
-            placeholder="Result will appear here..."
-          />
+          <textarea className="tool-textarea-output h-56" readOnly value={output} placeholder="Result will appear here..." />
         </div>
       </div>
 
-      {error && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
-          {error}
-        </div>
-      )}
+      {error && <p className="tool-msg tool-msg--error">{error}</p>}
     </div>
   )
 }

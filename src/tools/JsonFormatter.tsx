@@ -58,8 +58,8 @@ export default function JsonFormatter() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Input JSON</label>
+          <div className="tool-output-header">
+            <label className="tool-label">Input JSON</label>
             <button onClick={() => { setInput(''); setOutput(''); setError('') }} className="btn-ghost text-xs gap-1 flex items-center">
               <Trash2 size={12} /> Clear
             </button>
@@ -73,12 +73,12 @@ export default function JsonFormatter() {
           />
         </div>
         <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">Formatted Output</label>
-            <CopyButton text={output} />
+          <div className="tool-output-header">
+            <label className="tool-label">Formatted Output</label>
+            <CopyButton text={output} toast="JSON copied" />
           </div>
           <textarea
-            className="tool-textarea h-80"
+            className="tool-textarea-output h-80"
             readOnly
             value={output}
             placeholder="Formatted JSON will appear here..."
@@ -87,11 +87,9 @@ export default function JsonFormatter() {
       </div>
 
       {error && (
-        <div className={`text-sm px-3 py-2 rounded-lg ${error.startsWith('✅')
-          ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800'
-          : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800'}`}>
+        <p className={`tool-msg ${error.startsWith('✅') ? 'tool-msg--success' : 'tool-msg--error'}`}>
           {error}
-        </div>
+        </p>
       )}
     </div>
   )

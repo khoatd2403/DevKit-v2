@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Prism syntax tokens ───────────────────────────────────────── */
+.token.comment,.token.prolog,.token.doctype,.token.cdata { color:#6b7280; font-style:italic; }
+.token.punctuation { color:#6b7280; }
+.token.property,.token.tag,.token.boolean,.token.number,.token.constant,.token.symbol,.token.deleted { color:#e45649; }
+.token.selector,.token.attr-name,.token.string,.token.char,.token.builtin,.token.inserted { color:#50a14f; }
+.token.operator,.token.entity,.token.url { color:#c18401; }
+.token.atrule,.token.attr-value,.token.keyword { color:#a626a4; font-weight:600; }
+.token.function,.token.class-name { color:#4078f2; }
+.token.regex,.token.important,.token.variable { color:#e45649; }
+
+.dark .token.comment,.dark .token.prolog,.dark .token.doctype,.dark .token.cdata { color:#5c6370; font-style:italic; }
+.dark .token.punctuation { color:#abb2bf; }
+.dark .token.property,.dark .token.tag,.dark .token.boolean,.dark .token.number,.dark .token.constant,.dark .token.symbol,.dark .token.deleted { color:#e06c75; }
+.dark .token.selector,.dark .token.attr-name,.dark .token.string,.dark .token.char,.dark .token.builtin,.dark .token.inserted { color:#98c379; }
+.dark .token.operator,.dark .token.entity,.dark .token.url { color:#d19a66; }
+.dark .token.atrule,.dark .token.attr-value,.dark .token.keyword { color:#c678dd; font-weight:600; }
+.dark .token.function,.dark .token.class-name { color:#61afef; }
+.dark .token.regex,.dark .token.important,.dark .token.variable { color:#e06c75; }
+
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
@@ -127,5 +146,77 @@
   .sidebar-item.active {
     @apply bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300
            font-medium border border-primary-200 dark:border-primary-800;
+  }
+
+  /* ─── Tool design system ──────────────────────────────────────────── */
+
+  /* Standard label above any input or output */
+  .tool-label {
+    @apply text-xs font-medium text-gray-500 dark:text-gray-400;
+  }
+
+  /* Config/settings card wrapper */
+  .tool-panel {
+    @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4;
+  }
+
+  /* Row above any section (input or output): label left, action right, consistent height */
+  .tool-output-header {
+    @apply flex items-center justify-between mb-1 min-h-[26px];
+  }
+
+  /* Tab toggle container (encode/decode, encrypt/decrypt…) */
+  .tool-tabs {
+    @apply flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm;
+  }
+
+  /* Individual tab button — add .active or use data-active="true" */
+  .tool-tab {
+    @apply px-4 py-1.5 capitalize transition-colors
+           text-gray-600 dark:text-gray-400
+           hover:bg-gray-100 dark:hover:bg-gray-800;
+  }
+  .tool-tab.active {
+    @apply bg-primary-600 text-white hover:bg-primary-600;
+  }
+
+  /* Status / alert messages */
+  .tool-msg {
+    @apply text-sm px-3 py-2 rounded-lg border;
+  }
+  .tool-msg--error {
+    @apply bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400
+           border-red-200 dark:border-red-800;
+  }
+  .tool-msg--success {
+    @apply bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400
+           border-green-200 dark:border-green-800;
+  }
+  .tool-msg--warning {
+    @apply bg-yellow-50 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400
+           border-yellow-200 dark:border-yellow-800;
+  }
+  .tool-msg--info {
+    @apply bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400
+           border-primary-200 dark:border-primary-800;
+  }
+
+  /* Output result card (label + copy + mono value) */
+  .tool-result-card {
+    @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-3;
+  }
+  .tool-result-card-header {
+    @apply flex items-center justify-between mb-1;
+  }
+
+  /* Row item with copy button (password list, hash rows…) */
+  .tool-result-row {
+    @apply flex items-center gap-2 bg-white dark:bg-gray-900
+           border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2;
+  }
+
+  /* Hint / note text below a section */
+  .tool-note {
+    @apply text-xs text-gray-400 dark:text-gray-500 mt-1;
   }
 }

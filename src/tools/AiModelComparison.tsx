@@ -122,19 +122,19 @@ export default function AiModelComparison() {
   )
 
   if (error) return (
-    <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">{error}</div>
+    <p className="tool-msg tool-msg--error">{error}</p>
   )
 
   return (
     <div className="space-y-4">
       {/* Tabs */}
       <div className="flex items-center gap-2">
-        <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-xs">
+        <div className="tool-tabs">
           {([{ v: 'browse', label: 'Browse All' }, { v: 'compare', label: `Compare${selected.length ? ` (${selected.length})` : ''}` }] as const).map(t => (
             <button
               key={t.v}
               onClick={() => setTab(t.v)}
-              className={`px-3 py-1.5 font-medium transition-colors ${tab === t.v ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+              className={`tool-tab ${tab === t.v ? 'active' : ''}`}
             >
               {t.label}
             </button>

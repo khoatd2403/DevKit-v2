@@ -284,7 +284,7 @@ export default function CertDecoder() {
     <div className="space-y-4">
       <div className="space-y-1">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">PEM Certificate</span>
+          <span className="tool-label">PEM Certificate</span>
           <button onClick={() => { setPem(SAMPLE_CERT); setCert(null) }}
             className="text-[10px] text-gray-400 hover:text-primary-600">Load sample</button>
         </div>

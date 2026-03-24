@@ -198,7 +198,7 @@ export default function JsonToCsharp() {
       {/* Two-panel editor */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">JSON Input</label>
+          <label className="tool-label">JSON Input</label>
           <textarea
             value={input}
             onChange={e => setInput(e.target.value)}
@@ -212,7 +212,7 @@ export default function JsonToCsharp() {
         </div>
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">C# Classes</label>
+            <label className="tool-label">C# Classes</label>
             <button
               onClick={copy}
               disabled={!output}

@@ -69,7 +69,7 @@ export default function RandomString() {
           {results.map((s, i) => (
             <div key={i} className="flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2">
               <span className="font-mono text-sm text-gray-700 dark:text-gray-300 flex-1 break-all">{s}</span>
-              <CopyButton text={s} />
+              <CopyButton text={s} toast="String copied" />
             </div>
           ))}
         </div>

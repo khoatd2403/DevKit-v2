@@ -71,7 +71,7 @@ export default function ColorConverter() {
       <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 space-y-2">
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-sm text-gray-700 dark:text-gray-300">HEX</h3>
-          <CopyButton text={hex} />
+          <CopyButton text={hex} toast="HEX copied" />
         </div>
         <div className="flex gap-3 items-center">
           <input type="color" value={hex} onChange={e => fromHex(e.target.value)} className="w-10 h-10 rounded cursor-pointer border border-gray-200 dark:border-gray-700" />
@@ -84,7 +84,7 @@ export default function ColorConverter() {
       <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-sm text-gray-700 dark:text-gray-300">RGB</h3>
-          <CopyButton text={`rgb(${rgb.join(', ')})`} />
+          <CopyButton text={`rgb(${rgb.join(', ')})`} toast="RGB copied" />
         </div>
         <div className="grid grid-cols-3 gap-3">
           {['R', 'G', 'B'].map((c, i) => (
@@ -102,7 +102,7 @@ export default function ColorConverter() {
       <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-sm text-gray-700 dark:text-gray-300">HSL</h3>
-          <CopyButton text={`hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`} />
+          <CopyButton text={`hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`} toast="HSL copied" />
         </div>
         <div className="grid grid-cols-3 gap-3">
           {[['H', 360], ['S', 100], ['L', 100]].map(([label, max], i) => (

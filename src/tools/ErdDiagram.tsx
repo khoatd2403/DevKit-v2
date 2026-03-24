@@ -385,7 +385,7 @@ export default function ErdDiagram() {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
         {/* SQL Input */}
         <div className="lg:col-span-2 space-y-1.5">
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+          <label className="tool-label">
             CREATE TABLE SQL
           </label>
           <textarea
@@ -404,7 +404,7 @@ export default function ErdDiagram() {
         {/* Diagram */}
         <div className="lg:col-span-3 space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-medium text-gray-500 dark:text-gray-400">ERD Diagram <span className="text-gray-400 font-normal">(drag tables)</span></label>
+            <label className="tool-label">ERD Diagram <span className="text-gray-400 font-normal">(drag tables)</span></label>
             <div className="flex items-center gap-1">
               <button onClick={() => setZoom(z => Math.min(2, z + 0.1))} className="btn-ghost p-1.5"><ZoomIn size={13} /></button>
               <span className="text-xs text-gray-400 w-10 text-center">{Math.round(zoom * 100)}%</span>

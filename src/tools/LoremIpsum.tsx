@@ -46,10 +46,10 @@ export default function LoremIpsum() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-4">
-        <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+        <div className="tool-tabs">
           {(['paragraphs', 'sentences', 'words'] as const).map(t => (
             <button key={t} onClick={() => setType(t)}
-              className={`px-3 py-1.5 capitalize transition-colors ${type === t ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+              className={`tool-tab capitalize ${type === t ? 'active' : ''}`}>
               {t}
             </button>
           ))}
@@ -69,9 +69,9 @@ export default function LoremIpsum() {
         <>
           <div className="flex items-center justify-between">
             <span className="text-xs text-gray-400">{output.split(/\s+/).length} words, {output.length} chars</span>
-            <CopyButton text={output} />
+            <CopyButton text={output} toast="Lorem ipsum copied" />
           </div>
-          <textarea className="tool-textarea h-64" readOnly value={output} />
+          <textarea className="tool-textarea-output h-64" readOnly value={output} />
         </>
       )}
     </div>

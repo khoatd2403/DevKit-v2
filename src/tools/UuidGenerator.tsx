@@ -39,10 +39,10 @@ export default function UuidGenerator() {
   return (
     <div className="space-y-5">
       <div className="flex items-center gap-4 flex-wrap">
-        <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-sm">
+        <div className="tool-tabs">
           {(['v4', 'v7'] as const).map(v => (
             <button key={v} onClick={() => setVersion(v)}
-              className={`px-4 py-1.5 transition-colors ${version === v ? 'bg-primary-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+              className={`tool-tab ${version === v ? 'active' : ''}`}>
               UUID {v}
             </button>
           ))}
@@ -71,7 +71,7 @@ export default function UuidGenerator() {
             {uuids.map((id, i) => (
               <div key={i} className="flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2">
                 <span className="font-mono text-sm text-gray-700 dark:text-gray-300 flex-1">{id}</span>
-                <CopyButton text={id} />
+                <CopyButton text={id} toast="UUID copied" />
               </div>
             ))}
           </div>

@@ -211,7 +211,7 @@ export default function XmlMinifier() {
             readOnly
             rows={16}
             placeholder="Output will appear here..."
-            className="tool-textarea font-mono text-xs bg-gray-50 dark:bg-gray-900"
+            className="tool-textarea-output font-mono text-xs bg-gray-50 dark:bg-gray-900"
           />
         </div>
       </div>

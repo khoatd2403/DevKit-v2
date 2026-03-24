@@ -349,7 +349,7 @@ export default function JsonSchemaValidator() {
     <div className="space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">JSON Data</label>
+          <label className="tool-label block mb-1">JSON Data</label>
           <FileDropTextarea
             className="h-72"
             placeholder='{"name": "Alice", "age": 30}'
@@ -359,7 +359,7 @@ export default function JsonSchemaValidator() {
           />
         </div>
         <div>
-          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 block mb-1">JSON Schema</label>
+          <label className="tool-label block mb-1">JSON Schema</label>
           <FileDropTextarea
             className="h-72"
             placeholder={'{\n  "type": "object",\n  "required": ["name"],\n  "properties": {\n    "name": { "type": "string" }\n  }\n}'}
@@ -387,9 +387,9 @@ export default function JsonSchemaValidator() {
       </div>
 
       {parseError && (
-        <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
+        <p className="tool-msg tool-msg--error">
           Parse error: {parseError}
-        </div>
+        </p>
       )}
 
       {validated && !parseError && errors !== null && (
@@ -400,9 +400,9 @@ export default function JsonSchemaValidator() {
           </div>
         ) : (
           <div className="space-y-2">
-            <div className="text-sm px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800 font-medium">
+            <p className="tool-msg tool-msg--error font-medium">
               {errors.length} validation {errors.length === 1 ? 'error' : 'errors'} found
-            </div>
+            </p>
             <div className="space-y-1">
               {errors.map((err, i) => (
                 <div
@@ -417,7 +417,7 @@ export default function JsonSchemaValidator() {
               ))}
             </div>
             <div className="flex justify-end">
-              <CopyButton text={errors.map(e => `${e.path || '$'}: ${e.message}`).join('\n')} label="Copy errors" />
+              <CopyButton text={errors.map(e => `${e.path || '$'}: ${e.message}`).join('\n')} label="Copy errors" toast="Errors copied" />
             </div>
           </div>
         )
