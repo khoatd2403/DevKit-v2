@@ -541,6 +541,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://devtoolsonline.dev/tool/image-metadata-modifier</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://devtoolsonline.dev/tool/npm-checker</loc>
     <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
