@@ -2,6 +2,25 @@ import { useState, useMemo } from 'react'
 import { Copy, Check, FileCode } from 'lucide-react'
 import FileDropTextarea from '../components/FileDropTextarea'
 
+const SAMPLE_TS = `import type { RootProps } from './types';
+
+// Example Interface
+export interface User<T> {
+  id: number;
+  name: string;
+  metadata?: T;
+}
+
+export type StringUser = User<string>;
+
+export const formatUser = (user: User<any>): string => {
+  return \`User: \${user.name} (\${user.id})\`;
+};
+
+const userId = 123 as number;
+let name: string = "Alice";
+`
+
 // ─── TypeScript → JavaScript stripper ─────────────────────────────────────────
 
 function stripTypeScript(code: string, removeComments: boolean, preserveJsx: boolean): string {
@@ -149,29 +168,40 @@ export default function TsToJs() {
       </div>
 
       {/* Two-column layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:min-h-[500px] lg:items-stretch">
         {/* Input */}
-        <div className="space-y-1.5">
-          <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-2 h-full">
+          <div className="flex flex-wrap items-center justify-between min-h-[36px]">
             <label className="tool-label">
               TypeScript Input
             </label>
-            {inputLines > 0 && (
-              <span className="text-xs text-gray-400 dark:text-gray-500">{inputLines} lines</span>
-            )}
+            <div className="flex items-center gap-3">
+              {inputLines > 0 && (
+                <span className="text-xs text-gray-400 dark:text-gray-500">{inputLines} lines</span>
+              )}
+              <button 
+                onClick={() => setInput(SAMPLE_TS)} 
+                className="btn-ghost text-xs px-2.5 py-1.5 rounded-md flex items-center gap-1 bg-gray-100/50 dark:bg-gray-800/50 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700"
+              >
+                Sample
+              </button>
+            </div>
           </div>
-          <FileDropTextarea
-            value={input}
-            onChange={setInput}
-            placeholder="Paste TypeScript code here, or drop a .ts / .tsx file…"
-            accept=".ts,.tsx"
-            className="h-96 font-mono text-sm"
-          />
+          <div className="flex-1 w-full min-h-[300px] lg:min-h-0 relative">
+            <FileDropTextarea
+              value={input}
+              onChange={setInput}
+              placeholder="Paste TypeScript code here, or drop a .ts / .tsx file…"
+              accept=".ts,.tsx"
+              wrapperClassName="absolute inset-0 w-full h-full"
+              className="w-full h-full font-mono text-sm resize-none"
+            />
+          </div>
         </div>
 
         {/* Output */}
-        <div className="space-y-1.5">
-          <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-2 h-full min-w-0">
+          <div className="flex flex-wrap items-center justify-between min-h-[36px]">
             <label className="tool-label">
               JavaScript Output
             </label>
@@ -182,19 +212,21 @@ export default function TsToJs() {
               <button
                 onClick={copyOutput}
                 disabled={!output}
-                className="flex items-center gap-1.5 btn-ghost text-xs disabled:opacity-40"
+                className="flex items-center gap-1.5 btn-ghost text-xs px-2.5 py-1.5 rounded-md disabled:opacity-40 border border-transparent bg-primary-50 dark:bg-primary-900/10 text-primary-600 dark:text-primary-400 hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
               >
                 {copied ? <Check size={13} className="text-green-500" /> : <Copy size={13} />}
                 {copied ? 'Copied!' : 'Copy'}
               </button>
             </div>
           </div>
-          <textarea
-            value={output}
-            readOnly
-            placeholder="JavaScript output will appear here…"
-            className="tool-textarea-output h-96 font-mono text-sm"
-          />
+          <div className="flex-1 w-full min-h-[300px] lg:min-h-0 relative">
+            <textarea
+              value={output}
+              readOnly
+              placeholder="JavaScript output will appear here…"
+              className="tool-textarea-output absolute inset-0 w-full h-full font-mono text-sm resize-none"
+            />
+          </div>
         </div>
       </div>
 

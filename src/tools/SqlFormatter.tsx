@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { usePersistentState } from '../hooks/usePersistentState'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
@@ -30,16 +30,21 @@ export default function SqlFormatter() {
   const [input, setInput] = usePersistentState('tool-sql-input', 'SELECT u.id,u.name,u.email,o.total FROM users u INNER JOIN orders o ON u.id=o.user_id WHERE u.active=1 AND o.total>100 ORDER BY o.total DESC LIMIT 10')
   const [output, setOutput] = useState('')
 
-  const format = () => setOutput(formatSql(input))
-  const minify = () => setOutput(input.replace(/\s+/g, ' ').trim())
+  const [mode, setMode] = useState<'format' | 'minify'>('format')
+
+  useEffect(() => {
+    if (!input.trim()) { setOutput(''); return }
+    if (mode === 'format') setOutput(formatSql(input))
+    else setOutput(input.replace(/\s+/g, ' ').trim())
+  }, [input, mode])
 
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2 flex-wrap">
         <button onClick={() => setInput(SAMPLE)} className="btn-ghost text-xs">Load Example</button>
         <div className="flex gap-2 ml-auto">
-          <button onClick={minify} className="btn-secondary">Minify</button>
-          <button onClick={format} className="btn-primary">Format SQL</button>
+          <button onClick={() => setMode('minify')} className={mode === 'minify' ? 'btn-primary' : 'btn-secondary'}>Minify</button>
+          <button onClick={() => setMode('format')} className={mode === 'format' ? 'btn-primary' : 'btn-secondary'}>Format SQL</button>
         </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

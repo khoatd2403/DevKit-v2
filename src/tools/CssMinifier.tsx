@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
 
@@ -30,9 +30,9 @@ export default function CssMinifier() {
   const [output, setOutput] = useState('')
   const [mode, setMode] = useState<'minify' | 'format'>('minify')
 
-  const process = () => {
+  useEffect(() => {
     setOutput(mode === 'minify' ? minifyCss(input) : formatCss(input))
-  }
+  }, [input, mode])
 
   const savings = mode === 'minify' && input.length && output.length
     ? Math.round((1 - output.length / input.length) * 100)
@@ -49,7 +49,6 @@ export default function CssMinifier() {
             </button>
           ))}
         </div>
-        <button onClick={process} className="btn-primary ml-auto">{mode === 'minify' ? 'Minify' : 'Format'} CSS</button>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>

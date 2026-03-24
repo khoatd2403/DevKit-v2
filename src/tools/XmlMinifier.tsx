@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Copy, Check, RotateCcw, ArrowLeftRight } from 'lucide-react'
 
 const SAMPLE_XML = `<?xml version="1.0" encoding="UTF-8"?>
@@ -110,6 +110,10 @@ export default function XmlMinifier() {
     }
   }, [input, mode, removeComments, removeDeclaration, indentSize])
 
+  useEffect(() => {
+    process()
+  }, [process])
+
   const copy = async () => {
     if (!output) return
     await navigator.clipboard.writeText(output)
@@ -163,9 +167,7 @@ export default function XmlMinifier() {
             ))}
           </div>
         )}
-        <button onClick={process} className="btn-primary px-5 ml-auto flex items-center gap-2">
-          <ArrowLeftRight size={13} /> {mode === 'minify' ? 'Minify' : 'Format'}
-        </button>
+        {/* We can remove the explicit button because it auto-runs now, but let's just make it a hidden or visual indicator if they want, actually better to just remove it or keep it as "Copy" or remove entirely */}
       </div>
 
       {/* Editor panels */}

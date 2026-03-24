@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
 
@@ -164,10 +164,9 @@ export default function HtmlToMarkdown() {
   const [input, setInput] = useState('<h1>Hello World</h1>\n<p>This is a <strong>paragraph</strong> with <em>italic</em> and a <a href="https://example.com">link</a>.</p>\n<ul><li>Item 1</li><li>Item 2</li></ul>')
   const [output, setOutput] = useState('')
 
-  const handleInput = (value: string) => {
-    setInput(value)
-    setOutput(htmlToMarkdown(value))
-  }
+  useEffect(() => {
+    setOutput(htmlToMarkdown(input))
+  }, [input])
 
   const byteSize = new TextEncoder().encode(input).length
   const lineCount = output ? output.split('\n').length : 0
@@ -188,7 +187,7 @@ export default function HtmlToMarkdown() {
             className="h-80"
             placeholder={'<h1>Hello World</h1>\n<p>This is a <strong>paragraph</strong> with <em>formatting</em>.</p>\n<ul>\n  <li>Item one</li>\n  <li>Item two</li>\n</ul>'}
             value={input}
-            onChange={handleInput}
+            onChange={setInput}
             accept=".html,.htm,text/html,text/*"
           />
         </div>

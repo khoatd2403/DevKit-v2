@@ -53,12 +53,13 @@ function renderToCanvas(
   ctx.clip()
 
   if (mode === 'emoji') {
-    const content = emoji || '🚀'
-    const emojiSize = size * 0.75
-    ctx.font = `${emojiSize}px serif`
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
-    ctx.fillText(content, size / 2, size / 2 + emojiSize * 0.04)
+    if (emoji) {
+      const emojiSize = size * 0.75
+      ctx.font = `${emojiSize}px serif`
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+      ctx.fillText(emoji, size / 2, size / 2 + emojiSize * 0.04)
+    }
   } else {
     const content = (text || '?').slice(0, 2)
     const scaledFontSize = (fontSize / 100) * size * 0.85
@@ -240,7 +241,24 @@ export default function FaviconGenerator() {
                 placeholder="🚀"
                 className="tool-textarea py-2 text-2xl"
               />
-              <p className="text-xs text-gray-400 mt-1">Type or paste any emoji character</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1.5 leading-relaxed">
+                Type, paste, or pick an emoji below. <br/>
+                <span className="opacity-80">
+                  💡 <b>Tip:</b> Open OS emoji picker using <kbd className="px-1 py-0.5 rounded border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 font-sans text-[10px]">Win</kbd> + <kbd className="px-1 py-0.5 rounded border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 font-sans text-[10px]">.</kbd> (Windows) or <kbd className="px-1 py-0.5 rounded border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 font-sans text-[10px]">Cmd</kbd> + <kbd className="px-1 py-0.5 rounded border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 font-sans text-[10px]">Ctrl</kbd> + <kbd className="px-1 py-0.5 rounded border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 font-sans text-[10px]">Space</kbd> (Mac).
+                </span>
+              </p>
+              <div className="flex flex-wrap gap-1.5 mt-2">
+                {['🚀', '⭐', '🔥', '⚡', '💡', '🛠️', '💻', '🔮', '🎉', '🌟', '⚙️', '✨'].map(e => (
+                  <button
+                    key={e}
+                    onClick={() => setEmoji(e)}
+                    className="p-1.5 text-xl hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                    title={`Use ${e}`}
+                  >
+                    {e}
+                  </button>
+                ))}
+              </div>
             </div>
           ) : (
             <>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { usePersistentState } from '../hooks/usePersistentState'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
@@ -27,32 +27,39 @@ function formatXml(xml: string, indent = 2): string {
   return formatted.trim()
 }
 
+const SAMPLE = `<?xml version="1.0"?><root><user id="1"><name>Alice</name><email>alice@example.com</email><role>admin</role></user><user id="2"><name>Bob</name><email>bob@example.com</email><role>user</role></user></root>`
+
 export default function XmlFormatter() {
   const [input, setInput] = usePersistentState('tool-xml-input', '<?xml version="1.0"?><root><user id="1"><name>Alice</name><email>alice@example.com</email><role>admin</role></user><user id="2"><name>Bob</name><email>bob@example.com</email><role>user</role></user></root>')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
 
-  const format = () => {
-    if (!input.trim()) return
+  const [mode, setMode] = useState<'format' | 'minify'>('format')
+
+  useEffect(() => {
+    if (!input.trim()) { setOutput(''); setError(''); return }
     try {
       const parser = new DOMParser()
       const doc = parser.parseFromString(input, 'text/xml')
       const err = doc.querySelector('parsererror')
       if (err) throw new Error(err.textContent || 'XML parse error')
-      setOutput(formatXml(input))
+      
+      if (mode === 'format') setOutput(formatXml(input))
+      else setOutput(input.replace(/>\s+</g, '><').replace(/\s+/g, ' ').trim())
       setError('')
     } catch (e) {
       setError((e as Error).message)
     }
-  }
-
-  const minify = () => setOutput(input.replace(/>\s+</g, '><').replace(/\s+/g, ' ').trim())
+  }, [input, mode])
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-2 justify-end">
-        <button onClick={minify} className="btn-secondary">Minify</button>
-        <button onClick={format} className="btn-primary">Format XML</button>
+      <div className="flex gap-2 items-center flex-wrap">
+        <button onClick={() => setInput(SAMPLE)} className="btn-ghost text-xs">Load Example</button>
+        <div className="flex gap-2 ml-auto">
+          <button onClick={() => setMode('minify')} className={mode === 'minify' ? 'btn-primary' : 'btn-secondary'}>Minify</button>
+          <button onClick={() => setMode('format')} className={mode === 'format' ? 'btn-primary' : 'btn-secondary'}>Format XML</button>
+        </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
