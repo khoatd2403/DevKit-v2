@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { usePersistentState } from '../hooks/usePersistentState'
+import { FileText, Trash2 } from 'lucide-react'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
 
@@ -283,9 +285,12 @@ function yamlToJson(yaml: string): string {
 
 // ── Component ──────────────────────────────────────────────────────────────────
 
+const SAMPLE_YAML = 'name: John Doe\nage: 30\nhobbies:\n  - reading\n  - coding\naddress:\n  city: New York\n  country: USA'
+const SAMPLE_JSON = '{"name":"John Doe","age":30,"hobbies":["reading","coding"],"address":{"city":"New York","country":"USA"}}'
+
 export default function YamlJson() {
-  const [mode, setMode] = useState<Mode>('yaml2json')
-  const [input, setInput] = useState('name: John Doe\nage: 30\nhobbies:\n  - reading\n  - coding\naddress:\n  city: New York\n  country: USA')
+  const [mode, setMode] = usePersistentState<Mode>('yaml-json-mode', 'yaml2json')
+  const [input, setInput] = usePersistentState('tool-yamljson-input', SAMPLE_YAML)
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
 
@@ -321,26 +326,38 @@ export default function YamlJson() {
         ))}
       </div>
 
-      <div>
-        <label className="tool-label block mb-1">{mode === 'yaml2json' ? 'YAML Input' : 'JSON Input'}</label>
-        <FileDropTextarea
-          className="h-64"
-          placeholder={mode === 'yaml2json' ? 'key: value\nlist:\n  - item1\n  - item2' : '{"key": "value", "list": ["item1", "item2"]}'}
-          value={input}
-          onChange={setInput}
-          accept={mode === 'yaml2json' ? '.yaml,.yml,text/plain,text/*' : '.json,text/plain,text/*'}
-        />
-      </div>
-
-      <div>
-        <div className="tool-output-header">
-          <label className="tool-label">
-            {mode === 'yaml2json' ? 'JSON Output' : 'YAML Output'}
-            {output && <span className="ml-2 text-gray-400 dark:text-gray-500">({output.length} chars)</span>}
-          </label>
-          <CopyButton text={output} toast={mode === 'yaml2json' ? 'JSON copied' : 'YAML copied'} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div>
+          <div className="tool-output-header">
+            <label className="tool-label">{mode === 'yaml2json' ? 'YAML Input' : 'JSON Input'}</label>
+            <div className="flex items-center gap-1">
+              <button onClick={() => setInput(mode === 'yaml2json' ? SAMPLE_YAML : SAMPLE_JSON)} className="btn-ghost text-xs gap-1 flex items-center">
+                <FileText size={12} /> Load Example
+              </button>
+              <button onClick={() => { setInput(''); setOutput(''); setError('') }} className="btn-ghost text-xs gap-1 flex items-center">
+                <Trash2 size={12} /> Clear
+              </button>
+            </div>
+          </div>
+          <FileDropTextarea
+            className="h-[500px]"
+            placeholder={mode === 'yaml2json' ? 'key: value\nlist:\n  - item1\n  - item2' : '{"key": "value", "list": ["item1", "item2"]}'}
+            value={input}
+            onChange={setInput}
+            accept={mode === 'yaml2json' ? '.yaml,.yml,text/plain,text/*' : '.json,text/plain,text/*'}
+          />
         </div>
-        <textarea className="tool-textarea-output h-64" readOnly value={output} placeholder="Output will appear here..." />
+
+        <div>
+          <div className="tool-output-header">
+            <label className="tool-label">
+              {mode === 'yaml2json' ? 'JSON Output' : 'YAML Output'}
+              {output && <span className="ml-2 text-gray-400 dark:text-gray-500">({output.length} chars)</span>}
+            </label>
+            <CopyButton text={output} toast={mode === 'yaml2json' ? 'JSON copied' : 'YAML copied'} />
+          </div>
+          <textarea className="tool-textarea-output h-[500px]" readOnly value={output} placeholder="Output will appear here..." />
+        </div>
       </div>
 
       {error && <p className="tool-msg tool-msg--error">{error}</p>}

@@ -152,7 +152,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
                         }`}
                     >
                       <span className="text-base leading-none">{cat.icon}</span>
-                      <span className="flex-1 text-left truncate">{cat.name}</span>
+                      <span className="flex-1 text-left truncate">{t.categories[cat.id as keyof typeof t.categories] || cat.name}</span>
                       <span className="text-xs text-gray-400 dark:text-gray-600 shrink-0 mr-1">
                         {catTools.length}
                       </span>
@@ -173,7 +173,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
                             <span className="truncate flex-1 text-xs">{tool.name}</span>
                             {tool.new && (
                               <span className="text-xs bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-1.5 py-0.5 rounded-full shrink-0">
-                                New
+                                {t.new}
                               </span>
                             )}
                           </div>

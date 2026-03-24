@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { X, Zap, Bug, Sparkles, Palette } from 'lucide-react'
+import { useLang } from '../context/LanguageContext'
 
 interface ChangelogModalProps {
   open: boolean
@@ -19,31 +20,34 @@ interface Version {
 }
 
 
-const TYPE_CONFIG: Record<ChangeType, { icon: React.ReactNode; label: string; color: string }> = {
-  new: {
-    icon: <Zap size={11} />,
-    label: 'New',
-    color: 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400',
-  },
-  fix: {
-    icon: <Bug size={11} />,
-    label: 'Fix',
-    color: 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400',
-  },
-  improvement: {
-    icon: <Sparkles size={11} />,
-    label: 'Improved',
-    color: 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400',
-  },
-  design: {
-    icon: <Palette size={11} />,
-    label: 'Design',
-    color: 'bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-400',
-  },
-}
+
 
 export default function ChangelogModal({ open, onClose }: ChangelogModalProps) {
+  const { t } = useLang()
   const [changelog, setChangelog] = useState<Version[]>([])
+
+  const TYPE_CONFIG: Record<ChangeType, { icon: React.ReactNode; label: string; color: string }> = {
+    new: {
+      icon: <Zap size={11} />,
+      label: t.changeTypeNew,
+      color: 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400',
+    },
+    fix: {
+      icon: <Bug size={11} />,
+      label: t.changeTypeFix,
+      color: 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400',
+    },
+    improvement: {
+      icon: <Sparkles size={11} />,
+      label: t.changeTypeImproved,
+      color: 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400',
+    },
+    design: {
+      icon: <Palette size={11} />,
+      label: t.changeTypeDesign,
+      color: 'bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-400',
+    },
+  }
 
   useEffect(() => {
     if (!open || changelog.length > 0) return
@@ -71,8 +75,8 @@ export default function ChangelogModal({ open, onClose }: ChangelogModalProps) {
           <div className="flex items-center gap-2">
             <span className="text-xl">🎉</span>
             <div>
-              <h2 className="font-semibold text-gray-900 dark:text-white">What's New</h2>
-              <p className="text-xs text-gray-400">DevTools Online changelog</p>
+              <h2 className="font-semibold text-gray-900 dark:text-white">{t.whatsNew}</h2>
+              <p className="text-xs text-gray-400">{t.changelogDesc}</p>
             </div>
           </div>
           <button onClick={onClose} className="btn-ghost p-1.5"><X size={16} /></button>
@@ -90,12 +94,12 @@ export default function ChangelogModal({ open, onClose }: ChangelogModalProps) {
                 <span className="font-bold text-gray-900 dark:text-white">{version}</span>
                 {badge === 'latest' && (
                   <span className="text-xs bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-400 px-2 py-0.5 rounded-full border border-primary-200 dark:border-primary-800 font-medium">
-                    Latest
+                    {t.changelogLatest}
                   </span>
                 )}
                 {badge === 'recent' && (
                   <span className="text-xs bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 px-2 py-0.5 rounded-full">
-                    Recent
+                    {t.changelogRecent}
                   </span>
                 )}
                 <span className="text-xs text-gray-400 ml-auto">{v.date}</span>
@@ -131,9 +135,9 @@ export default function ChangelogModal({ open, onClose }: ChangelogModalProps) {
             rel="noopener noreferrer"
             className="text-xs text-primary-600 dark:text-primary-400 hover:underline"
           >
-            Full commit history on GitHub →
+            {t.changelogFullHistory}
           </a>
-          <button onClick={onClose} className="btn-primary text-sm">Got it</button>
+          <button onClick={onClose} className="btn-primary text-sm">{t.gotIt}</button>
         </div>
       </div>
     </div>

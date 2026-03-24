@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { usePersistentState } from '../hooks/usePersistentState'
+import { Trash2, FileText, Wand2 } from 'lucide-react'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
 
@@ -25,10 +27,12 @@ function formatCss(css: string): string {
   return result.join('').replace(/\n\s*\n/g, '\n')
 }
 
+const SAMPLE = `.container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 20px;\n  margin: 0 auto;\n  max-width: 1200px;\n  background-color: #ffffff;\n}`
+
 export default function CssMinifier() {
-  const [input, setInput] = useState(`.container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  padding: 20px;\n  margin: 0 auto;\n  max-width: 1200px;\n  background-color: #ffffff;\n}`)
+  const [input, setInput] = usePersistentState('tool-css-input', SAMPLE)
   const [output, setOutput] = useState('')
-  const [mode, setMode] = useState<'minify' | 'format'>('minify')
+  const [mode, setMode] = usePersistentState<'minify' | 'format'>('css-minifier-mode', 'minify')
 
   useEffect(() => {
     setOutput(mode === 'minify' ? minifyCss(input) : formatCss(input))
@@ -54,6 +58,19 @@ export default function CssMinifier() {
         <div>
           <div className="tool-output-header">
             <label className="tool-label">Input CSS</label>
+            <div className="flex items-center gap-1">
+              {output && mode === 'format' && (
+                <button onClick={() => setInput(output)} className="btn-ghost flex items-center gap-1 text-xs text-primary-600 dark:text-primary-400 font-medium" title="Format input code">
+                  <Wand2 size={12} /> Format code
+                </button>
+              )}
+              <button onClick={() => setInput(SAMPLE)} className="btn-ghost text-xs gap-1 flex items-center">
+                <FileText size={12} /> Load Example
+              </button>
+              <button onClick={() => { setInput(''); setOutput('') }} className="btn-ghost text-xs gap-1 flex items-center">
+                <Trash2 size={12} /> Clear
+              </button>
+            </div>
           </div>
           <FileDropTextarea className="h-72" placeholder=".selector {\n  color: red;\n  background: blue;\n}" value={input} onChange={setInput} accept=".css,text/css,text/*" />
         </div>

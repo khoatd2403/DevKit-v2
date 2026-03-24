@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useLang } from '../context/LanguageContext'
 import { tools, categories } from '../tools-registry'
 import type { Tool } from '../types'
 import { ArrowLeft, SortAsc } from 'lucide-react'
@@ -7,6 +8,7 @@ import { ArrowLeft, SortAsc } from 'lucide-react'
 type SortOption = 'default' | 'az' | 'za' | 'popular' | 'new'
 
 export default function AllTools() {
+  const { t } = useLang()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const activeCat = searchParams.get('cat') || 'all'
@@ -39,12 +41,12 @@ export default function AllTools() {
             </h3>
             {tool.new && (
               <span className="text-xs bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded-full border border-green-200 dark:border-green-800">
-                New
+                {t.new}
               </span>
             )}
             {tool.popular && (
               <span className="text-xs bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-400 px-1.5 py-0.5 rounded-full border border-orange-200 dark:border-orange-800">
-                Popular
+                {t.popular}
               </span>
             )}
           </div>
@@ -75,13 +77,13 @@ export default function AllTools() {
           className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 mb-4 transition-colors"
         >
           <ArrowLeft size={15} />
-          Back to Home
+          {t.backToHome}
         </button>
         <div className="flex items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">All Tools</h1>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t.allToolsTitle}</h1>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
-              {displayTools.length} of {tools.length} tools
+              {t.toolsCountAll(displayTools.length, tools.length)}
             </p>
           </div>
 
@@ -94,11 +96,11 @@ export default function AllTools() {
                 onChange={e => setSort(e.target.value as SortOption)}
                 className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
               >
-                <option value="default">Default</option>
-                <option value="az">A → Z</option>
-                <option value="za">Z → A</option>
-                <option value="popular">Popular first</option>
-                <option value="new">New first</option>
+                <option value="default">{t.sortByDefault}</option>
+                <option value="az">{t.sortByAZ}</option>
+                <option value="za">{t.sortByZA}</option>
+                <option value="popular">{t.sortByPopular}</option>
+                <option value="new">{t.sortByNew}</option>
               </select>
             </div>
           </div>
@@ -121,7 +123,7 @@ export default function AllTools() {
               }`}
             >
               <span>{cat.icon}</span>
-              <span>{cat.name}</span>
+              <span>{t.categories[cat.id as keyof typeof t.categories] || cat.name}</span>
               <span className={`text-xs px-1.5 py-0.5 rounded-full ${activeCat === cat.id ? 'bg-white/20 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'}`}>
                 {count}
               </span>
@@ -134,7 +136,7 @@ export default function AllTools() {
       {displayTools.length === 0 ? (
         <div className="text-center py-16 text-gray-400">
           <p className="text-4xl mb-3">🔍</p>
-          <p>No tools found</p>
+          <p>{t.noToolsFound('')}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
