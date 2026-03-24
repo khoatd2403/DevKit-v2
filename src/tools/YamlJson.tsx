@@ -309,7 +309,13 @@ export default function YamlJson() {
     <div className="space-y-4">
       <div className="tool-tabs w-fit">
         {(['yaml2json', 'json2yaml'] as Mode[]).map(m => (
-          <button key={m} onClick={() => { setMode(m); setInput(''); setOutput(''); setError('') }} className={`tool-tab ${m === mode ? 'active' : ''}`}>
+          <button key={m} onClick={() => {
+            if (m === mode) return
+            setMode(m)
+            if (output && !error) {
+              setInput(output)
+            }
+          }} className={`tool-tab ${m === mode ? 'active' : ''}`}>
             {m === 'yaml2json' ? 'YAML → JSON' : 'JSON → YAML'}
           </button>
         ))}

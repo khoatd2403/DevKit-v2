@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { ArrowLeftRight } from 'lucide-react'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
 
@@ -29,24 +30,23 @@ export default function BinaryEncodeDecode() {
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
 
-  const handleInput = (value: string, currentMode = mode) => {
-    setInput(value)
+  useEffect(() => {
     setError('')
-    if (!value) { setOutput(''); return }
-    if (currentMode === 'encode') {
-      setOutput(encodeBinary(value))
+    if (!input) { setOutput(''); return }
+    if (mode === 'encode') {
+      setOutput(encodeBinary(input))
     } else {
-      const { result, error: err } = decodeBinary(value)
+      const { result, error: err } = decodeBinary(input)
       setOutput(result)
       setError(err)
     }
-  }
+  }, [input, mode])
 
-  const switchMode = (m: 'encode' | 'decode') => {
-    setMode(m)
-    setOutput('')
-    setError('')
-    handleInput(input, m)
+  const handleSwap = () => {
+    setMode(m => m === 'encode' ? 'decode' : 'encode')
+    if (output && !error) {
+      setInput(output)
+    }
   }
 
   const charCount = input.length
@@ -59,11 +59,14 @@ export default function BinaryEncodeDecode() {
       <div className="flex items-center gap-3">
         <div className="tool-tabs">
           {(['encode', 'decode'] as const).map(m => (
-            <button key={m} onClick={() => switchMode(m)} className={`tool-tab ${mode === m ? 'active' : ''}`}>
+            <button key={m} onClick={() => setMode(m)} className={`tool-tab capitalize ${mode === m ? 'active' : ''}`}>
               {m}
             </button>
           ))}
         </div>
+        <button onClick={handleSwap} className="flex items-center gap-1.5 btn-secondary text-xs px-3 py-1.5 ml-2">
+          <ArrowLeftRight size={13} /> Swap
+        </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -75,7 +78,7 @@ export default function BinaryEncodeDecode() {
             className="h-56"
             placeholder={mode === 'encode' ? 'Enter text to encode...' : 'e.g. 01101000 01100101 01101100 01101100 01101111'}
             value={input}
-            onChange={handleInput}
+            onChange={setInput}
             accept="text/*"
           />
           <p className="tool-note">

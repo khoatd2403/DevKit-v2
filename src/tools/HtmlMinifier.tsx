@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
 
@@ -16,7 +16,9 @@ export default function HtmlMinifier() {
   const [input, setInput] = useState(`<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <title>Hello World</title>\n  </head>\n  <body>\n    <h1>Hello, World!</h1>\n    <p>This is a sample HTML page.</p>\n  </body>\n</html>`)
   const [output, setOutput] = useState('')
 
-  const minify = () => setOutput(minifyHtml(input))
+  useEffect(() => {
+    setOutput(minifyHtml(input))
+  }, [input])
 
   const savings = input.length && output.length
     ? Math.round((1 - output.length / input.length) * 100)
@@ -24,9 +26,7 @@ export default function HtmlMinifier() {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-end">
-        <button onClick={minify} className="btn-primary">Minify HTML</button>
-      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <div className="tool-output-header">

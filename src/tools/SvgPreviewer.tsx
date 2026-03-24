@@ -1,6 +1,14 @@
 import { useState, useRef, useCallback } from 'react'
 import { Upload, Copy, Check, ZoomIn, ZoomOut, RotateCcw, Download } from 'lucide-react'
 
+const prepareSvgForExport = (raw: string) => {
+  let result = raw.trim();
+  if (!result.includes('xmlns')) {
+    result = result.replace(/<svg/i, '<svg xmlns="http://www.w3.org/2000/svg"');
+  }
+  return result;
+}
+
 const SAMPLE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
     <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -65,8 +73,9 @@ export default function SvgPreviewer() {
 
   const isValidSvg = useCallback(() => {
     try {
+      const testCode = prepareSvgForExport(code);
       const parser = new DOMParser()
-      const doc = parser.parseFromString(code, 'image/svg+xml')
+      const doc = parser.parseFromString(testCode, 'image/svg+xml')
       const err = doc.querySelector('parsererror')
       if (err) { setError(err.textContent?.split('\n')[0] ?? 'Invalid SVG'); return false }
       setError('')
@@ -75,12 +84,8 @@ export default function SvgPreviewer() {
   }, [code])
 
   const safeCode = (() => {
-    try {
-      const parser = new DOMParser()
-      const doc = parser.parseFromString(code, 'image/svg+xml')
-      if (doc.querySelector('parsererror')) return null
-      return code
-    } catch { return null }
+    if (!code || !code.toLowerCase().includes('<svg')) return null;
+    return code;
   })()
 
   const copy = async () => {
@@ -91,7 +96,7 @@ export default function SvgPreviewer() {
 
   const download = () => {
     if (!safeCode) return
-    const blob = new Blob([safeCode], { type: 'image/svg+xml' })
+    const blob = new Blob([prepareSvgForExport(safeCode)], { type: 'image/svg+xml' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url; a.download = 'image.svg'; a.click()
@@ -115,7 +120,7 @@ export default function SvgPreviewer() {
       const a = document.createElement('a')
       a.href = url; a.download = 'image.png'; a.click()
     }
-    const blob = new Blob([safeCode], { type: 'image/svg+xml' })
+    const blob = new Blob([prepareSvgForExport(safeCode)], { type: 'image/svg+xml' })
     img.src = URL.createObjectURL(blob)
   }
 
@@ -142,10 +147,10 @@ export default function SvgPreviewer() {
         </label>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:min-h-[500px] lg:items-stretch">
         {/* Editor */}
-        <div className="space-y-1">
-          <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-2 h-full">
+          <div className="flex items-center justify-between min-h-[36px]">
             <span className="text-xs font-medium text-gray-500 dark:text-gray-400">SVG Code</span>
             <div className="flex items-center gap-2">
               <span className="text-[10px] text-gray-400">{code.length} chars</span>
@@ -158,17 +163,16 @@ export default function SvgPreviewer() {
           <textarea
             value={code}
             onChange={e => { setCode(e.target.value); isValidSvg() }}
-            rows={20}
-            className="tool-textarea font-mono text-xs"
+            className="tool-textarea font-mono text-xs flex-1 w-full min-h-[300px] lg:min-h-0 resize-none"
             spellCheck={false}
           />
           {error && <p className="text-xs text-red-500 bg-red-50 dark:bg-red-950/30 p-2 rounded-lg">{error}</p>}
         </div>
 
         {/* Preview */}
-        <div className="space-y-3">
+        <div className="flex flex-col gap-2 h-full min-w-0">
           {/* Controls */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 min-h-[36px]">
             <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
               <button onClick={() => setZoom(z => Math.max(0.25, z - 0.25))} className="p-1 hover:bg-white dark:hover:bg-gray-700 rounded transition-colors">
                 <ZoomOut size={13} />
@@ -208,15 +212,17 @@ export default function SvgPreviewer() {
 
           {/* Preview box */}
           <div ref={previewRef}
-            className="rounded-xl border border-gray-200 dark:border-gray-800 overflow-auto"
-            style={{ minHeight: 300, ...bgStyle }}>
+            className="flex-1 rounded-xl border border-gray-200 dark:border-gray-800 overflow-auto relative flex flex-col min-h-[300px] lg:min-h-0"
+            style={bgStyle}>
             {safeCode ? (
-              <div className="flex items-center justify-center" style={{ minHeight: 300 }}>
-                <div style={{ transform: `scale(${zoom})`, transformOrigin: 'center', transition: 'transform 0.2s' }}
+              <div className="flex-1 flex items-center justify-center p-4 w-full h-full min-h-[300px]">
+                <div 
+                  className="w-full text-center [&>svg]:inline-block [&>svg]:max-w-full [&>svg]:h-auto [&>svg]:min-w-[100px] [&>svg]:min-h-[100px] [&>svg]:max-h-[600px] transition-all"
+                  style={{ transform: `scale(${zoom})`, transformOrigin: 'center', transition: 'transform 0.2s' }}
                   dangerouslySetInnerHTML={{ __html: safeCode }} />
               </div>
             ) : (
-              <div className="flex items-center justify-center h-64 text-gray-400 text-sm">
+              <div className="flex-1 flex items-center justify-center text-gray-400 text-sm h-full min-h-[300px]">
                 Invalid SVG — check your code
               </div>
             )}
