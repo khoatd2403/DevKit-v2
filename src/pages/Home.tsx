@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import { tools, categories } from '../tools-registry'
 import type { Tool } from '../types'
 import { Star, Zap, Clock, X } from 'lucide-react'
@@ -17,17 +17,28 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
   const { t } = useLang()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
+  const { slug } = useParams<{ slug: string }>()
+  
+  const catFromSlug = useMemo(() => {
+    if (slug?.endsWith('-tools')) {
+      const catId = slug.replace('-tools', '')
+      // Verify if it's a valid category
+      if (categories.some(c => c.id === catId)) return catId
+    }
+    return null
+  }, [slug])
+
   const { recent } = useRecentTools()
   const recentTools = recent.map(id => tools.find(t => t.id === id)).filter(Boolean) as Tool[]
   const { favorites, toggle } = useFavorites()
   const { explored } = useToolStats()
   const [favEditMode, setFavEditMode] = useState(false)
-  const [activeCategory, setActiveCategory] = useState(() => searchParams.get('cat') ?? 'all')
+  const [activeCategory, setActiveCategory] = useState(() => (catFromSlug || searchParams.get('cat')) ?? 'all')
 
   useEffect(() => {
-    const cat = searchParams.get('cat')
+    const cat = catFromSlug || searchParams.get('cat')
     if (cat) setActiveCategory(cat)
-  }, [searchParams])
+  }, [searchParams, catFromSlug])
 
   const todayTool = useMemo(() => {
     const seed = new Date().toDateString()
