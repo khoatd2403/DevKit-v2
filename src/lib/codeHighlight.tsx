@@ -350,3 +350,107 @@ export function CssCodeBlock({
     </pre>
   )
 }
+
+// ─── GraphQL Highlighter ──────────────────────────────────────────────────────
+
+const GQL_KEYWORDS = new Set([
+  'query', 'mutation', 'subscription', 'fragment', 'on', 'type', 'interface', 
+  'enum', 'input', 'scalar', 'schema', 'extend', 'directive', 'null', 'true', 'false'
+])
+
+type GqlTokenType = 'keyword' | 'type' | 'string' | 'number' | 'comment' | 'variable' | 'directive' | 'argument' | 'punctuation' | 'plain'
+interface GqlToken { type: GqlTokenType; text: string }
+
+function tokenizeGql(code: string): GqlToken[] {
+  const tokens: GqlToken[] = []
+  let i = 0
+  let isAfterParen = false
+
+  while (i < code.length) {
+    if (code[i] === '#') {
+      let end = code.indexOf('\n', i)
+      if (end === -1) end = code.length
+      tokens.push({ type: 'comment', text: code.slice(i, end) })
+      i = end; continue
+    }
+    if (code[i] === '"') {
+      let j = i + 1
+      while (j < code.length && !(code[j] === '"' && code[j-1] !== '\\')) j++
+      tokens.push({ type: 'string', text: code.slice(i, j + 1) })
+      i = j + 1; continue
+    }
+    if (code[i] === '$') {
+      let j = i + 1
+      while (j < code.length && /[a-zA-Z0-9_]/.test(code[j])) j++
+      tokens.push({ type: 'variable', text: code.slice(i, j) })
+      i = j; continue
+    }
+    if (code[i] === '@') {
+      let j = i + 1
+      while (j < code.length && /[a-zA-Z0-9_]/.test(code[j])) j++
+      tokens.push({ type: 'directive', text: code.slice(i, j) })
+      i = j; continue
+    }
+    if (/[0-9]/.test(code[i]) && (i === 0 || /[\s,([:{]/.test(code[i - 1]))) {
+      let j = i
+      while (j < code.length && /[0-9.eE+\-]/.test(code[j])) j++
+      tokens.push({ type: 'number', text: code.slice(i, j) })
+      i = j; continue
+    }
+    if (/[a-zA-Z_]/.test(code[i])) {
+      let j = i
+      while (j < code.length && /[a-zA-Z0-9_]/.test(code[j])) j++
+      const word = code.slice(i, j)
+      let type: GqlTokenType = 'plain'
+      if (GQL_KEYWORDS.has(word)) type = 'keyword'
+      else if (isAfterParen && /^\s*:/.test(code.slice(j))) type = 'argument'
+      else if (/^[A-Z]/.test(word)) type = 'type'
+      tokens.push({ type, text: word })
+      i = j; continue
+    }
+    if (/[{}()[\]!:=|]/.test(code[i])) {
+      if (code[i] === '(') isAfterParen = true
+      if (code[i] === ')') isAfterParen = false
+      tokens.push({ type: 'punctuation', text: code[i] })
+      i++; continue
+    }
+    tokens.push({ type: 'plain', text: code[i] })
+    i++
+  }
+  return tokens
+}
+
+const GQL_COLORS: Record<GqlTokenType, string> = {
+  keyword:    'text-[#569cd6]',
+  type:       'text-[#4ec9b0]',
+  string:     'text-[#ce9178]',
+  number:     'text-[#b5cea8]',
+  comment:    'text-[#6a9955] italic',
+  variable:   'text-[#9cdcfe]',
+  directive:  'text-[#c586c0]',
+  argument:   'text-[#9cdcfe]',
+  punctuation:'text-[#d4d4d4]',
+  plain:      'text-[#d4d4d4]',
+}
+
+export function GqlHighlight({ code }: { code: string }) {
+  return (
+    <code>
+      {tokenizeGql(code).map((t, i) => (
+        <span key={i} className={GQL_COLORS[t.type]}>{t.text}</span>
+      ))}
+    </code>
+  )
+}
+
+export function GqlCodeBlock({
+  code,
+  className = '',
+  placeholder = '',
+}: { code: string; className?: string; placeholder?: string }) {
+  return (
+    <pre className={`bg-[#1e1e1e] rounded-xl p-3 font-mono text-xs overflow-auto whitespace-pre ${className}`}>
+      {code ? <GqlHighlight code={code} /> : <span className="text-gray-500">{placeholder}</span>}
+    </pre>
+  )
+}

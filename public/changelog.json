@@ -4,6 +4,15 @@
     "changes": [
       {
         "type": "new",
+        "text": "add GraphQL Formatter tool"
+      }
+    ]
+  },
+  {
+    "date": "March 2026",
+    "changes": [
+      {
+        "type": "new",
         "text": "optimize UI/UX for mobile devices"
       }
     ]
