@@ -12,7 +12,7 @@ export default function PrivacyBadge({ privacy = 'local', networkNote, variant =
     return (
       <span className="inline-flex items-center gap-1 text-xs text-green-600 dark:text-green-500">
         <Shield size={11} className="shrink-0" />
-        No data sent to server
+        <span className="hidden sm:inline">No data sent to server</span>
       </span>
     )
   }
@@ -33,7 +33,7 @@ export default function PrivacyBadge({ privacy = 'local', networkNote, variant =
   return (
     <span className="inline-flex items-center gap-1 text-xs text-amber-600 dark:text-amber-500">
       <Wifi size={11} className="shrink-0" />
-      Uses network
+      <span className="hidden sm:inline">Uses network</span>
     </span>
   )
 }
