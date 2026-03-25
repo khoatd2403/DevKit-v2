@@ -52,7 +52,7 @@ async function generateOG(id: string, name: string, description: string, icon: s
   const accentColor = CATEGORY_COLORS[category] ?? '#3b82f6'
 
   const svg = await satori(
-    {
+    ({
       type: 'div',
       props: {
         style: {
@@ -180,7 +180,7 @@ async function generateOG(id: string, name: string, description: string, icon: s
                       color: accentColor,
                       flexShrink: 0,
                     },
-                    children: CATEGORY_LABEL[category] ?? category.slice(0, 3).toUpperCase(),
+                    children: icon || (CATEGORY_LABEL[category] ?? category.slice(0, 3).toUpperCase()),
                   },
                 },
                 {
@@ -234,7 +234,7 @@ async function generateOG(id: string, name: string, description: string, icon: s
           },
         ],
       },
-    },
+    } as any),
     {
       width: 1200,
       height: 630,

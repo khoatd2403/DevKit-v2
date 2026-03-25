@@ -1,12 +1,5 @@
 import { Suspense, useState, useEffect, useMemo, useCallback, useRef } from 'react'
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
-...
-  const location = useLocation()
-  useEffect(() => {
-    if (globalThis.innerWidth < 1024) {
-      setSidebarOpen(false)
-    }
-  }, [location.pathname])
+import { useParams, useNavigate, Link, useSearchParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { SITE_URL } from '../../site.config'
 import { tools } from '../tools-registry'
@@ -158,26 +151,26 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
         <meta property="og:description" content={toolMeta.seoDescription || toolMeta.description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`${SITE_URL}/tool/${toolMeta.id}`} />
+        <meta property="og:image" content={`${SITE_URL}/og/${toolMeta.id}.png`} />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={toolMeta.seoTitle || `${toolMeta.name} | DevTools Online`} />
         <meta name="twitter:description" content={toolMeta.seoDescription || toolMeta.description} />
+        <meta name="twitter:image" content={`${SITE_URL}/og/${toolMeta.id}.png`} />
       </Helmet>
 
       {/* Sticky Sub-Header */}
       <div className="sticky top-0 z-20 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 py-3 sm:px-6">
         <div className="max-w-[1600px] mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 min-w-0">
-            <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg shrink-0 outline-none">
-              <ArrowLeft size={20} className="text-gray-500" />
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+            <button onClick={() => navigate(-1)} className="p-1.5 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg shrink-0 outline-none">
+              <ArrowLeft size={18} className="text-gray-500 sm:w-5 sm:h-5" />
             </button>
-            <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="text-xl sm:text-2xl shrink-0">{toolMeta.icon}</span>
-                <h1 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white truncate">{toolMeta.name}</h1>
-                <PrivacyBadge />
-              </div>
+            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
+              <span className="text-xl sm:text-2xl shrink-0 leading-none">{toolMeta.icon}</span>
+              <h1 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white truncate flex-1 min-w-0 leading-tight">{toolMeta.name}</h1>
+              <PrivacyBadge />
             </div>
           </div>
 
