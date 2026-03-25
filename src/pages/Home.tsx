@@ -9,13 +9,15 @@ import { useFavorites } from '../hooks/useFavorites'
 import { useToolStats } from '../hooks/useToolStats'
 import { useLang } from '../context/LanguageContext'
 import { categoryAboutTranslations } from '../i18n/categoryContent'
+import { Helmet } from 'react-helmet-async'
+import { SITE_URL } from '../../site.config'
 
 interface HomeProps {
   searchQuery: string
 }
 
 export default function Home({ searchQuery: _searchQuery }: HomeProps) {
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const { slug } = useParams<{ slug: string }>()
@@ -33,6 +35,9 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
   const recentTools = recent.map(id => tools.find(t => t.id === id)).filter(Boolean) as Tool[]
   const { favorites, toggle } = useFavorites()
   const { explored } = useToolStats()
+  const [settingsOpen, setSettingsOpen] = useState(false)
+
+
   const [favEditMode, setFavEditMode] = useState(false)
   const [activeCategory, setActiveCategory] = useState(() => (catFromSlug || searchParams.get('cat')) ?? 'all')
 
@@ -40,6 +45,65 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
     const cat = catFromSlug || searchParams.get('cat') || 'all'
     setActiveCategory(cat)
   }, [searchParams, catFromSlug])
+
+  // JSON-LD for category pages
+  useEffect(() => {
+    if (activeCategory === 'all') return;
+
+    const cat = categories.find(c => c.id === activeCategory);
+    const catName = t.categories[activeCategory as keyof typeof t.categories] || cat?.name || activeCategory;
+    const catContent = categoryAboutTranslations[lang || 'en']?.[activeCategory] || categoryAboutTranslations['en']?.[activeCategory];
+    const seoDesc = catContent?.seoDescription || (lang === 'vi' ? `Tổng hợp các công cụ ${catName} trực tuyến mạnh mẽ, bảo mật và hoàn toàn chạy trên trình duyệt.` : `A comprehensive collection of powerful, secure, and client-side ${catName} tools.`);
+
+    const collectionSchema = {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": catName,
+      "url": `${SITE_URL}/${activeCategory}-tools`,
+      "description": seoDesc,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "DevTools Online",
+        "url": SITE_URL
+      }
+    };
+
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": `${SITE_URL}/`
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": catName,
+          "item": `${SITE_URL}/${activeCategory}-tools`
+        }
+      ]
+    };
+
+    const s1 = document.createElement('script');
+    s1.type = 'application/ld+json';
+    s1.id = `schema-cat-collection-${activeCategory}`;
+    s1.innerHTML = JSON.stringify(collectionSchema);
+    document.head.appendChild(s1);
+
+    const s2 = document.createElement('script');
+    s2.type = 'application/ld+json';
+    s2.id = `schema-cat-bread-${activeCategory}`;
+    s2.innerHTML = JSON.stringify(breadcrumbSchema);
+    document.head.appendChild(s2);
+
+    return () => {
+      document.getElementById(`schema-cat-collection-${activeCategory}`)?.remove();
+      document.getElementById(`schema-cat-bread-${activeCategory}`)?.remove();
+    };
+  }, [activeCategory, lang, t, categories]);
 
   const todayTool = useMemo(() => {
     const seed = new Date().toDateString()
@@ -149,6 +213,35 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                   <h3 className="font-semibold text-gray-900 dark:text-white">{t.categories[cat?.id as keyof typeof t.categories] || cat?.name}</h3>
                     <span className="text-xs text-gray-400">({catTools.length})</span>
                   </div>
+
+                  {(() => {
+                    const { lang } = useLang();
+                    const currentLang = lang || 'en';
+                    const catContent = categoryAboutTranslations[currentLang]?.[activeCategory] || categoryAboutTranslations['en']?.[activeCategory];
+                    const catName = t.categories[activeCategory as keyof typeof t.categories] || cat?.name || activeCategory;
+                    
+                    const seoTitle = catContent?.seoTitle || (currentLang === 'vi' ? `Công cụ ${catName} Trực tuyến Miễn phí | DevTools` : `Free Online ${catName} Tools | DevTools Online`);
+                    const seoDesc = catContent?.seoDescription || (currentLang === 'vi' ? `Tổng hợp các công cụ ${catName} trực tuyến mạnh mẽ, bảo mật và hoàn toàn chạy trên trình duyệt. Không cần cài đặt, không lưu trữ dữ liệu người dùng.` : `A comprehensive collection of powerful, secure, and client-side ${catName} tools. No installation required, 100% private, works instantly in your browser.`);
+
+                    const displayTools = tools.filter(t => t.category === activeCategory);
+                    const firstTool = displayTools[0];
+
+                    return (
+                      <Helmet>
+                        <title>{seoTitle}</title>
+                        <meta name="description" content={seoDesc} />
+                        <link rel="canonical" href={`${SITE_URL}/${activeCategory}-tools`} />
+                        <meta property="og:title" content={seoTitle} />
+                        <meta property="og:description" content={seoDesc} />
+                        <meta property="og:url" content={`${SITE_URL}/${activeCategory}-tools`} />
+                        <meta property="og:image" content={catContent?.seoImage || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
+                        <meta name="twitter:title" content={seoTitle} />
+                        <meta name="twitter:description" content={seoDesc} />
+                        <meta name="twitter:image" content={catContent?.seoImage || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
+                        <meta name="twitter:card" content="summary_large_image" />
+                      </Helmet>
+                    );
+                  })()}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                     {catTools.map(tool => <ToolCard key={tool.id} tool={tool} />)}
                   </div>
