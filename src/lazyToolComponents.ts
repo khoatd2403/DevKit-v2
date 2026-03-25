@@ -32,6 +32,7 @@ export const lazyToolComponents: Record<string, React.LazyExoticComponent<React.
   'random-string': lazy(() => import('./tools/RandomString')),
   'sql-formatter': lazy(() => import('./tools/SqlFormatter')),
   'xml-formatter': lazy(() => import('./tools/XmlFormatter')),
+  'graphql-formatter': lazy(() => import('./tools/GraphQlFormatter')),
   'image-to-base64': lazy(() => import('./tools/ImageToBase64')),
   'qr-generator': lazy(() => import('./tools/QrGenerator')),
   'yaml-json': lazy(() => import('./tools/YamlJson')),
@@ -121,5 +122,7 @@ export const lazyToolComponents: Record<string, React.LazyExoticComponent<React.
   'ai-model-comparison': lazy(() => import('./tools/AiModelComparison')),
   'ai-json-to-prompt': lazy(() => import('./tools/AiJsonToPrompt')),
   'ai-system-prompt': lazy(() => import('./tools/AiSystemPrompt')),
+  'benchmark-builder': lazy(() => import('./tools/BenchmarkBuilder')),
+  'og-preview': lazy(() => import('./tools/OpenGraphPreview')),
   'image-metadata-modifier': lazy(() => import('./tools/ImageMetadataModifier')),
 }

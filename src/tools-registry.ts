@@ -378,6 +378,19 @@ export const tools: Tool[] = [
     seoTitle: 'XML Formatter & Validator | DevTools Online',
     seoDescription: 'Format and validate XML documents online — beautify with proper indentation, detect syntax errors. Free, instant, no signup, supports large files.',
   },
+  {
+    id: 'graphql-formatter',
+    name: 'GraphQL Formatter',
+    description: 'Format and beautify GraphQL queries and schemas online',
+    category: 'formatter',
+    icon: '🔮',
+    tags: ['graphql', 'format', 'beautify', 'query', 'schema', 'online'],
+    new: true,
+    supportsShare: true,
+    suggestedTools: ['json-formatter', 'js-formatter'],
+    seoTitle: 'GraphQL Formatter & Beautifier | DevTools Online',
+    seoDescription: 'Format and beautify GraphQL queries and schemas online — improve readability with proper indentation. Free, instant, no signup, runs entirely in your browser.',
+  },
 
   // Misc
   {
@@ -754,6 +767,7 @@ export const tools: Tool[] = [
   { id: 'aspect-ratio', name: 'Aspect Ratio Calculator', description: 'Calculate and convert aspect ratios for images and video (16:9, 4:3...) online', category: 'number', icon: '📐', tags: ['aspect', 'ratio', 'resolution', 'image', 'video', '16:9', 'online'], new: true, seoTitle: 'Aspect Ratio Calculator — 16:9, 4:3 & Custom | DevTools Online', seoDescription: 'Calculate and convert aspect ratios for images and video online — compute missing dimension from width/height. Free, instant, supports any ratio.' },
   { id: 'number-formatter', name: 'Number Formatter', description: 'Format numbers with locale-aware separators, currency, and notation online', category: 'number', icon: '🔢', tags: ['number', 'format', 'locale', 'currency', 'thousand', 'separator', 'online'], new: true, seoTitle: 'Number Formatter — Locale, Currency & Notation | DevTools Online', seoDescription: 'Format numbers with locale-aware separators, currency symbols and scientific notation online — free, instant, no signup, supports all locales.' },
   { id: 'ts-to-js', name: 'TypeScript → JavaScript', description: 'Strip TypeScript types and transpile TS to plain JavaScript online', category: 'web', icon: '🟡', tags: ['typescript', 'javascript', 'ts', 'js', 'transpile', 'convert', 'online'], new: true, seoTitle: 'TypeScript to JavaScript Transpiler | DevTools Online', seoDescription: 'Strip TypeScript types and transpile TS to plain JavaScript online — instant, free, no signup. Supports modern TypeScript syntax and decorators.' },
+  { id: 'benchmark-builder', name: 'JS / TS Benchmark Builder', description: 'Compare execution speed of different JavaScript and TypeScript code snippets online', category: 'web', icon: '⏱️', tags: ['benchmark', 'performance', 'js', 'ts', 'javascript', 'typescript', 'speed', 'test', 'online'], new: true, seoTitle: 'JS / TS Benchmark Builder — Performance Comparison Tool | DevTools Online', seoDescription: 'Compare execution speed of different JavaScript and TypeScript code snippets online. Real-time benchmarking with ops/sec, iterations, and comparison — free, no signup.' },
 
   // Batch 4 - Media/Visual
   { id: 'favicon-generator', name: 'Favicon Generator', description: 'Generate favicons from emoji or text in multiple sizes online', category: 'generator', icon: '🎨', tags: ['favicon', 'icon', 'emoji', 'png', 'generator', 'website', 'online'], new: true, seoTitle: 'Favicon Generator — From Emoji or Text | DevTools Online', seoDescription: 'Generate favicons from emoji or text in multiple sizes (16x16 to 512x512) online — download PNG, free, no signup, instant browser-side generation.' },
@@ -786,6 +800,7 @@ export const tools: Tool[] = [
   { id: 'ssl-checker', name: 'SSL Certificate Checker', description: 'Check SSL/TLS certificate validity, expiry date, issuer and SANs for any domain via Certificate Transparency logs online', category: 'web', icon: '🔒', tags: ['ssl', 'tls', 'certificate', 'https', 'expiry', 'domain', 'security', 'crt.sh', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'Certificate data fetched from crt.sh (Certificate Transparency logs). The domain you query is sent to their API.', seoTitle: 'SSL Certificate Checker — Expiry & Validity | DevTools Online', seoDescription: 'Check SSL/TLS certificate validity, expiry date, issuer and SANs for any domain online. Spot expiring certificates before they cause downtime.' },
   { id: 'http-request-builder', name: 'HTTP Request Builder', description: 'Build and send HTTP requests with custom headers, body, params — generate fetch, axios, curl, Python code snippets online', category: 'web', icon: '📡', tags: ['http', 'request', 'api', 'rest', 'fetch', 'axios', 'curl', 'get', 'post', 'headers', 'builder', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'Requests are sent directly from your browser to the target URL you specify.', seoTitle: 'HTTP Request Builder & API Tester | DevTools Online', seoDescription: 'Build and send HTTP requests with custom headers, body & params. Generate fetch, axios, curl, Python snippets — free online API testing tool.' },
   { id: 'user-agent-parser', name: 'User-Agent Parser', description: 'Parse User-Agent strings to detect browser, OS, device type and brand — analyze any UA or test your own browser online', category: 'web', icon: '🕵️', tags: ['user-agent', 'browser', 'os', 'device', 'parse', 'chrome', 'firefox', 'safari', 'mobile', 'detect', 'online'], new: true, seoTitle: 'User-Agent Parser — Browser & OS Detection | DevTools Online', seoDescription: 'Parse User-Agent strings to detect browser, OS, device type and brand online. Auto-analyzes your own UA — free, instant, no signup required.' },
+  { id: 'og-preview', name: 'OpenGraph Previewer', description: 'Preview and generate Open Graph meta tags with live mockups for Facebook, Twitter, LinkedIn and Google online', category: 'web', icon: '🖼️', tags: ['opengraph', 'og', 'preview', 'meta', 'tags', 'facebook', 'twitter', 'linkedin', 'seo', 'generator', 'online'], new: true, seoTitle: 'OpenGraph Previewer & Meta Tag Generator | DevTools Online', seoDescription: 'Preview and generate Open Graph meta tags online. Live interactive mockups for Facebook, Twitter (X), LinkedIn and Google Search. Free, no signup, instant results.' },
 
   // Color tools
   { id: 'color-extractor', name: 'Color Extractor', description: 'Upload an image to extract its dominant color palette — copy HEX, RGB, HSL values with proportional preview strip online', category: 'color', icon: '🎨', tags: ['color', 'palette', 'extract', 'image', 'dominant', 'hex', 'rgb', 'hsl', 'online'], new: true, seoTitle: 'Color Extractor from Image | DevTools Online', seoDescription: 'Upload an image to extract its dominant color palette online — copy HEX, RGB, HSL values with proportional preview. Free, no signup, client-side.' },
