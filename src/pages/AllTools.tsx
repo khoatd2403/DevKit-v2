@@ -1,15 +1,17 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useLang } from '../context/LanguageContext'
 import { tools, categories } from '../tools-registry'
 import type { Tool } from '../types'
 import { ArrowLeft, SortAsc } from 'lucide-react'
 import { categoryAboutTranslations } from '../i18n/categoryContent'
+import { Helmet } from 'react-helmet-async'
+import { SITE_URL } from '../../site.config'
 
 type SortOption = 'default' | 'az' | 'za' | 'popular' | 'new'
 
 export default function AllTools() {
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const activeCat = searchParams.get('cat') || 'all'
@@ -27,6 +29,65 @@ export default function AllTools() {
 
     return list
   }, [activeCat, sort])
+
+  // JSON-LD for category pages
+  useEffect(() => {
+    if (activeCat === 'all') return;
+
+    const cat = categories.find(c => c.id === activeCat);
+    const catName = t.categories[activeCat as keyof typeof t.categories] || cat?.name || activeCat;
+    const catContent = categoryAboutTranslations[lang || 'en']?.[activeCat] || categoryAboutTranslations['en']?.[activeCat];
+    const seoDesc = catContent?.seoDescription || (lang === 'vi' ? `Tổng hợp các công cụ ${catName} trực tuyến mạnh mẽ, bảo mật và hoàn toàn chạy trên trình duyệt.` : `A comprehensive collection of powerful, secure, and client-side ${catName} tools.`);
+
+    const collectionSchema = {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": catName,
+      "url": `${SITE_URL}/${activeCat}-tools`,
+      "description": seoDesc,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "DevTools Online",
+        "url": SITE_URL
+      }
+    };
+
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": `${SITE_URL}/`
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": catName,
+          "item": `${SITE_URL}/${activeCat}-tools`
+        }
+      ]
+    };
+
+    const s1 = document.createElement('script');
+    s1.type = 'application/ld+json';
+    s1.id = `schema-cat-collection-${activeCat}`;
+    s1.innerHTML = JSON.stringify(collectionSchema);
+    document.head.appendChild(s1);
+
+    const s2 = document.createElement('script');
+    s2.type = 'application/ld+json';
+    s2.id = `schema-cat-bread-${activeCat}`;
+    s2.innerHTML = JSON.stringify(breadcrumbSchema);
+    document.head.appendChild(s2);
+
+    return () => {
+      document.getElementById(`schema-cat-collection-${activeCat}`)?.remove();
+      document.getElementById(`schema-cat-bread-${activeCat}`)?.remove();
+    };
+  }, [activeCat, lang, t, categories]);
 
   const ToolCard = ({ tool }: { tool: Tool }) => (
     <div
@@ -138,6 +199,37 @@ export default function AllTools() {
           )
         })}
       </div>
+
+      {(() => {
+        if (activeCat === 'all') return null;
+        const { lang } = useLang();
+        const currentLang = lang || 'en';
+        const cat = categories.find(c => c.id === activeCat);
+        const catContent = categoryAboutTranslations[currentLang]?.[activeCat] || categoryAboutTranslations['en']?.[activeCat];
+        const catName = t.categories[activeCat as keyof typeof t.categories] || cat?.name || activeCat;
+        
+        const seoTitle = catContent?.seoTitle || (currentLang === 'vi' ? `Công cụ ${catName} Trực tuyến Miễn phí | DevTools` : `Free Online ${catName} Tools | DevTools Online`);
+        const seoDesc = catContent?.seoDescription || (currentLang === 'vi' ? `Tổng hợp các công cụ ${catName} trực tuyến mạnh mẽ, bảo mật và hoàn toàn chạy trên trình duyệt. Không cần cài đặt, không lưu trữ dữ liệu người dùng.` : `A comprehensive collection of powerful, secure, and client-side ${catName} tools. No installation required, 100% private, works instantly in your browser.`);
+
+        const displayTools = tools.filter(t => t.category === activeCat);
+        const firstTool = displayTools[0];
+
+        return (
+          <Helmet>
+            <title>{seoTitle}</title>
+            <meta name="description" content={seoDesc} />
+            <link rel="canonical" href={`${SITE_URL}/${activeCat}-tools`} />
+            <meta property="og:title" content={seoTitle} />
+            <meta property="og:description" content={seoDesc} />
+            <meta property="og:url" content={`${SITE_URL}/${activeCat}-tools`} />
+            <meta property="og:image" content={catContent?.seoImage || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
+            <meta name="twitter:title" content={seoTitle} />
+            <meta name="twitter:description" content={seoDesc} />
+            <meta name="twitter:image" content={catContent?.seoImage || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
+            <meta name="twitter:card" content="summary_large_image" />
+          </Helmet>
+        );
+      })()}
 
       {/* Tools grid */}
       {displayTools.length === 0 ? (

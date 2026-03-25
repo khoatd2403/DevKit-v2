@@ -1,5 +1,8 @@
 export interface CategoryAboutContent {
   description: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: string;
 }
 
 export const categoryAboutTranslations: Record<string, Record<string, CategoryAboutContent>> = {
@@ -13,7 +16,9 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         Interoperability is a critical requirement in modern polyglot environments, and our platform excels at data transformation. We offer a robust set of bi-directional converters that allow you to move between ecosystems without losing data integrity. You can easily transform your datasets using our <a href="/json-tools/json-to-csv">JSON to CSV</a> for spreadsheet analysis, <a href="/json-tools/json-to-xml">JSON to XML</a> for legacy SOAP integration, and <a href="/json-tools/json-to-yaml">JSON to YAML</a> for modern configuration management. For developers who need to filter large response bodies or extract specific properties, the <a href="/json-tools/jsonpath-tester">JSONPath Tester</a> provides a powerful query interface, allowing you to run complex path expressions against your objects without writing a single line of boilerplate code.
         <br/><br/>
         At DevTools Online, we believe that development tools should be both powerful and inherently private. Every utility in this category runs 100% locally in your browser using high-performance client-side JavaScript. This "Privacy by Design" approach ensures that your sensitive API keys, enterprise configuration files, and private user data never leave your machine and are never transmitted to a remote server. Whether you need to compare two complex states with <a href="/json-tools/json-diff">JSON Diff</a>, validate schema compliance, or convert flat database exports back to structured objects with <a href="/json-tools/csv-to-json">CSV to JSON</a>, you can trust our platform to handle your data safely, securely, and instantly.
-      `
+      `,
+      seoTitle: 'Professional JSON Tools: Formatter, Minifier & Converter | DevTools Online',
+      seoDescription: 'A complete suite of JSON tools to format, minify, validate, and convert JSON data. 100% private, client-side, and secure. Instant bi-directional conversion with CSV, XML, and YAML.'
     },
     encoding: {
       description: `
@@ -24,7 +29,9 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         For those working at the intersection of security and modern web standards, we provide specialized tools that go far beyond basic transformation. Our <a href="/encoding-tools/jwt-decoder">JWT Decoder</a> is an indispensable asset for developers working with OIDC and OAuth2, allowing you to peer into the header and payload claims of JSON Web Tokens without needing a secret key for inspection. Furthermore, to safeguard your applications against Cross-Site Scripting (XSS) and other injection vulnerabilities, our <a href="/encoding-tools/html-entities">HTML Entities Encoder</a> ensures your markup renders exactly as intended across all browser engines.
         <br/><br/>
         Unlike many online services that process your data on their backend, DevTools Online processes all encoding tasks entirely on your local machine. This architecture guarantees that your original strings, sensitive tokens, and private data remain within your browser context. Whether you're a student learning about character sets or a senior engineer debugging complex encoding issues in a production environment, our tools provide the precision and privacy required for modern development. From binary-to-hex conversion to comprehensive URL sanitization, optimize your workflow with our secure, client-side encoding suite.
-      `
+      `,
+      seoTitle: 'Online Encoding & Decoding Tools: Base64, URL & HTML | DevTools Online',
+      seoDescription: 'Securely encode and decode data in your browser. Supports Base64, URL percent-encoding, JWT decoding, and HTML entities. 100% private client-side processing.'
     },
     crypto: {
       description: `
@@ -35,7 +42,9 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         We also include specialized security utilities such as our <a href="/generator-tools/password-generator">Secure Password Generator</a>. Building secure applications starts with strong credentials, and our generator uses cryptographically strong pseudorandom numbers to create unpredictable passwords that resist brute-force attacks. For developers working with HMAC or digital signatures, these tools serve as a reliable playground for testing local implementations.
         <br/><br/>
         Privacy is our highest priority. All cryptographic operations—whether it's hashing a large string or generating a secure 32-character password—occur entirely in your browser memory. We never see your input data, and your secrets never leave your device. This offline-first approach makes DevTools Online the safest choice for processing sensitive information compared to traditional backend-driven tools.
-      `
+      `,
+      seoTitle: 'Crypto & Hash Tools: SHA-256, SHA-512, MD5 & Password Gen | DevTools Online',
+      seoDescription: 'Secure hash generation and cryptographic tools. Calculate SHA-256, SHA-512, MD5, and Bcrypt hashes locally. Features a cryptographically strong password generator.'
     },
     web: {
       description: `
@@ -46,7 +55,9 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         Visual assets and performance optimization are also key focal points. Our <a href="/misc-tools/image-metadata-modifier">Image Metadata Modifier</a> allows you to protect user privacy by stripping EXIF and GPS data from photos before deployment. Additionally, for content creators working with Markdown, our <a href="/web-tools/markdown-previewer">Markdown Previewer</a> provides a side-by-side view of your rendered content, complete with syntax highlighting and theme support.
         <br/><br/>
         All Web Tools are optimized for the modern browser environment. By performing all transformations locally, we avoid the latency of server round-trips while keeping your source code and private assets completely secure. Whether you're minifying assets for a production build or decoding HTML entities for a legacy project, our suite offers the speed and reliability needed for high-stakes web engineering.
-      `
+      `,
+      seoTitle: 'Web Development Tools: Markup Formatter, Regex & Image Meta | DevTools Online',
+      seoDescription: 'Essential tools for web development. Format HTML/CSS/JS, test regular expressions, and modify image metadata locally. Speed up your frontend workflow with zero latency.'
     },
     string: {
       description: `
@@ -137,7 +148,9 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         Khả năng tương thích là yêu cầu then chốt trong các môi trường đa ngôn ngữ hiện đại và nền tảng của chúng tôi luôn xuất sắc trong việc biến đổi dữ liệu. Chúng tôi cung cấp một bộ công cụ chuyển đổi hai chiều mạnh mẽ cho phép bạn di chuyển giữa các hệ sinh thái mà không làm mất tính toàn vẹn của dữ liệu. Bạn có thể dễ dàng biến đổi tập dữ liệu của mình bằng <a href="/json-tools/json-to-csv">JSON sang CSV</a> để phân tích bảng tính, <a href="/json-tools/json-to-xml">JSON sang XML</a> để tích hợp SOAP cũ, và <a href="/json-tools/json-to-yaml">JSON sang YAML</a> để quản lý cấu hình hiện đại. Đối với các lập trình viên cần lọc dữ liệu lớn hoặc trích xuất các thuộc tính cụ thể, <a href="/json-tools/jsonpath-tester">JSONPath Tester</a> cung cấp một giao diện truy vấn mạnh mẽ, cho phép chạy các biểu thức đường dẫn phức tạp mà không cần viết một dòng mã rườm rà nào.
         <br/><br/>
         Tại DevTools Online, chúng tôi tin rằng các công cụ phát triển phải vừa mạnh mẽ vừa có tính riêng tư tuyệt đối. Mọi tiện ích trong danh mục này đều chạy 100% cục bộ trong trình duyệt của bạn bằng JavaScript phía máy khách hiệu suất cao. Cách tiếp cận "Quyền riêng tư ngay từ khâu thiết kế" này đảm bảo rằng các mã API nhạy cảm, tệp cấu hình doanh nghiệp và dữ liệu người dùng cá nhân của bạn không bao giờ rời khỏi máy tính và không bao giờ được truyền đến máy chủ từ xa. Cho dù bạn cần so sánh hai trạng thái phức tạp với <a href="/json-tools/json-diff">JSON Diff</a>, xác thực tính tuân thủ schema, hoặc chuyển đổi các tệp xuất từ database ngược lại đối tượng cấu trúc với <a href="/json-tools/csv-to-json">CSV sang JSON</a>, bạn có thể tin tưởng nền tảng của chúng tôi sẽ xử lý dữ liệu của bạn một cách an toàn và tức thì.
-      `
+      `,
+      seoTitle: 'Bộ Công cụ JSON: Format, Nén & Chuyển đổi JSON | DevTools',
+      seoDescription: 'Bộ sưu tập đầy đủ các công cụ JSON để format, nén, xác thực và chuyển đổi dữ liệu. An toàn 100%, chạy trên trình duyệt, chuyển đổi nhanh chóng với CSV, XML, YAML.'
     },
     encoding: {
       description: `
@@ -148,7 +161,9 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         Đối với những người làm việc tại giao điểm giữa bảo mật và các tiêu chuẩn web hiện đại, chúng tôi cung cấp các công cụ chuyên biệt vượt xa việc chuyển đổi cơ bản. <a href="/encoding-tools/jwt-decoder">JWT Decoder</a> là một tài sản không thể thiếu cho các kỹ sư làm việc với OIDC và OAuth2, cho phép bạn xem nội dung payload của JSON Web Tokens mà không cần khóa bí mật. Hơn nữa, để bảo vệ ứng dụng của bạn khỏi Cross-Site Scripting (XSS) và các lỗ hổng tiêm mã khác, <a href="/encoding-tools/html-entities">HTML Entities Encoder</a> đảm bảo markup của bạn hiển thị chính xác như ý muốn trên mọi công cụ trình duyệt.
         <br/><br/>
         Khác với nhiều dịch vụ trực tuyến xử lý dữ liệu của bạn trên máy chủ của họ, DevTools Online xử lý mọi tác vụ mã hóa hoàn toàn trên máy cục bộ của bạn. Kiến trúc này đảm bảo các chuỗi gốc, token nhạy cảm và dữ liệu cá nhân của bạn vẫn nằm trong trình duyệt. Cho dù bạn là sinh viên đang học về các bộ ký tự hay là kỹ sư cấp cao đang gỡ lỗi các vấn đề mã hóa phức tạp trong môi trường sản xuất, các công cụ của chúng tôi cung cấp độ chính xác và tính riêng tư cần thiết. Từ chuyển đổi nhị phân sang hex đến làm sạch URL toàn diện, hãy tối ưu hóa quy trình làm việc của bạn với bộ mã hóa bảo mật phía máy khách của chúng tôi.
-      `
+      `,
+      seoTitle: 'Công cụ Mã hóa & Giải mã Trực tuyến: Base64, URL, HTML | DevTools',
+      seoDescription: 'Mã hóa và giải mã dữ liệu an toàn ngay trong trình duyệt. Hỗ trợ Base64, URL percent-encoding, giải mã nhanh JWT và thực thể HTML. Bảo mật 100% phía máy khách.'
     },
     crypto: {
       description: `
@@ -159,7 +174,9 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         Chúng tôi cũng bao gồm các tiện ích bảo mật chuyên dụng như <a href="/generator-tools/password-generator">Máy tạo mật khẩu an toàn</a>. Xây dựng ứng dụng bảo mật bắt đầu từ các thông tin đăng nhập mạnh và công cụ của chúng tôi sử dụng các số giả ngẫu nhiên mạnh về mặt mật mã để tạo ra các mật khẩu không thể đoán trước, giúp chống lại các cuộc tấn công brute-force. Đối với các lập trình viên làm việc với HMAC hoặc chữ ký số, đây là môi trường thử nghiệm lý tưởng cho việc triển khai cục bộ.
         <br/><br/>
         Quyền riêng tư là ưu tiên cao nhất của chúng tôi. Mọi hoạt động mã hóa—cho dù là băm một chuỗi văn bản lớn hay tạo một mật khẩu an toàn 32 ký tự—đều diễn ra hoàn toàn trong bộ nhớ trình duyệt của bạn. Chúng tôi không bao giờ nhìn thấy dữ liệu đầu vào của bạn và các bí mật của bạn không bao giờ rời khỏi thiết bị. Cách tiếp cận ưu tiên ngoại tuyến này biến DevTools Online trở thành lựa chọn an toàn nhất để xử lý thông tin nhạy cảm.
-      `
+      `,
+      seoTitle: 'Công cụ Crypto & Hash: SHA-256, MD5, Bcrypt & Tạo Mật khẩu | DevTools',
+      seoDescription: 'Tính toán mã băm và các công cụ mật mã bảo mật. Hỗ trợ SHA-256, SHA-512, MD5, Bcrypt cục bộ. Tích hợp bộ tạo mật khẩu ngẫu nhiên cực mạnh.'
     },
     string: {
       description: `
@@ -168,7 +185,9 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         Từ các chuyển đổi kiểu chữ đơn giản như <a href="/string-tools/case-converter">Case Converter</a> (hỗ trợ camelCase, PascalCase, snake_case...) đến dọn dẹp văn bản nâng cao với <a href="/string-tools/text-remove-duplicates">Xóa dòng trùng</a> và <a href="/string-tools/text-sort">Sắp xếp văn bản</a>, chúng tôi cung cấp mọi thứ cần thiết để quản lý văn bản chính xác. Nếu bạn đang tìm kiếm sự khác biệt giữa hai phiên bản code hoặc tài liệu, <a href="/string-tools/text-diff">Text Diff</a> sẽ làm nổi bật các thay đổi theo từng dòng một cách tức thì.
         <br/><br/>
         Ngoài ra, các công cụ phân tích cũng được tích hợp giúp bạn hiểu rõ nội dung của mình hơn. Bạn có thể sử dụng <a href="/string-tools/word-counter">Đếm từ</a> để nhận số liệu chi tiết về ký tự, từ và thời gian đọc ước tính. Với những người làm việc với quốc tế hóa, <a href="/converter-tools/ascii-converter">ASCII Converter</a> giúp xác định và chuyển đổi mã ký tự dễ dàng. Mọi thao tác đều diễn ra tại trình duyệt, bảo vệ quyền riêng tư tuyệt đối cho nội dung của bạn.
-      `
+      `,
+      seoTitle: 'Công cụ Xử lý Văn bản: Đếm Từ, So Sánh & Chuyển Đổi | DevTools',
+      seoDescription: 'Bộ công cụ xử lý văn bản toàn diện: đếm từ, so sánh khác biệt (diff), chuyển đổi kiểu chữ và dọn dẹp dữ liệu trùng lọc. Bảo mật tuyệt đối nội dung của bạn.'
     },
     datetime: {
       description: `
