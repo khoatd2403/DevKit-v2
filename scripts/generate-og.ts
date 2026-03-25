@@ -4,11 +4,13 @@ import { readFileSync, mkdirSync, writeFileSync } from 'fs'
 import process from 'node:process'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { tools } from '../src/tools-registry'
+import { tools, categories } from '../src/tools-registry'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const outDir = join(__dirname, '../public/og')
 mkdirSync(outDir, { recursive: true })
+const catOutDir = join(outDir, 'categories')
+mkdirSync(catOutDir, { recursive: true })
 
 // Load Inter font
 const fontPath = join(__dirname, '../node_modules/@fontsource/inter/files/inter-latin-600-normal.woff')
@@ -48,7 +50,7 @@ const CATEGORY_LABEL: Record<string, string> = {
   ai: 'AI',
 }
 
-async function generateOG(id: string, name: string, description: string, icon: string, category: string) {
+async function generateOG(id: string, name: string, description: string, category: string, isCategory = false) {
   const accentColor = CATEGORY_COLORS[category] ?? '#3b82f6'
 
   const svg = await satori(
@@ -180,7 +182,7 @@ async function generateOG(id: string, name: string, description: string, icon: s
                       color: accentColor,
                       flexShrink: 0,
                     },
-                    children: icon || (CATEGORY_LABEL[category] ?? category.slice(0, 3).toUpperCase()),
+                    children: CATEGORY_LABEL[category] ?? category.slice(0, 3).toUpperCase(),
                   },
                 },
                 {
@@ -229,7 +231,7 @@ async function generateOG(id: string, name: string, description: string, icon: s
                 fontSize: '18px',
                 fontWeight: 600,
               },
-              children: 'Free • No sign-up',
+              children: isCategory ? 'Tool Collection • Secure' : 'Free • No sign-up',
             },
           },
         ],
@@ -244,15 +246,24 @@ async function generateOG(id: string, name: string, description: string, icon: s
 
   const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } })
   const png = resvg.render().asPng()
-  writeFileSync(join(outDir, `${id}.png`), png)
+  const fileName = isCategory ? `categories/${id}.png` : `${id}.png`
+  writeFileSync(join(outDir, fileName), png)
 }
 
 async function main() {
   console.log(`Generating OG images for ${tools.length} tools...`)
   for (const tool of tools) {
-    await generateOG(tool.id, tool.name, tool.description, tool.icon, tool.category)
+    await generateOG(tool.id, tool.name, tool.description, tool.category)
     process.stdout.write('.')
   }
+
+  console.log(`\nGenerating OG images for ${categories.length - 1} categories...`)
+  for (const cat of categories) {
+    if (cat.id === 'all') continue;
+    await generateOG(cat.id, cat.name + ' Tools', `Collection of powerful ${cat.name} tools. 100% private, runs entirely in your browser.`, cat.id, true)
+    process.stdout.write('+')
+  }
+
   console.log(`\nDone! Images saved to public/og/`)
 }
 

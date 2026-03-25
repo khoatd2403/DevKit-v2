@@ -200,6 +200,22 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
             ))}
         </div>
 
+        {activeCategory === 'all' && (
+          <Helmet>
+            <title>{lang === 'vi' ? 'DevTools Online | Công cụ Lập trình viên Trực tuyến' : 'DevTools Online | Free Online Developer Tools'}</title>
+            <meta name="description" content={lang === 'vi' ? 'Hơn 120 công cụ lập trình viên trực tuyến miễn phí, bảo mật và chạy trên trình duyệt. Định dạng JSON, SQL, mã hóa Base64, Webhook và nhiều hơn nữa.' : '120+ free, secure, and browser-based developer tools. Format JSON, beautify SQL, encode Base64, test Webhooks, and more.'} />
+            <link rel="canonical" href={SITE_URL} />
+            <meta property="og:title" content={lang === 'vi' ? 'DevTools Online | Công cụ Lập trình viên Trực tuyến' : 'DevTools Online | Free Online Developer Tools'} />
+            <meta property="og:description" content={lang === 'vi' ? 'Bộ công cụ lập trình viên toàn diện nhất ngay trong trình duyệt của bạn.' : 'The most comprehensive developer toolbox right in your browser.'} />
+            <meta property="og:url" content={SITE_URL} />
+            <meta property="og:image" content={`${SITE_URL}/og-image.svg`} />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content={lang === 'vi' ? 'DevTools Online | Công cụ Lập trình viên Trực tuyến' : 'DevTools Online | Free Online Developer Tools'} />
+            <meta name="twitter:description" content={lang === 'vi' ? 'Bộ công cụ lập trình viên toàn diện nhất ngay trong trình duyệt của bạn.' : 'The most comprehensive developer toolbox right in your browser.'} />
+            <meta name="twitter:image" content={`${SITE_URL}/og-image.svg`} />
+          </Helmet>
+        )}
+
         {activeCategory !== 'all' ? (
           /* ── Category view ── */
           <div className="mb-8">
@@ -234,10 +250,10 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                         <meta property="og:title" content={seoTitle} />
                         <meta property="og:description" content={seoDesc} />
                         <meta property="og:url" content={`${SITE_URL}/${activeCategory}-tools`} />
-                        <meta property="og:image" content={catContent?.seoImage || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
+                        <meta property="og:image" content={catContent?.seoImage || `${SITE_URL}/og/categories/${activeCategory}.png` || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
                         <meta name="twitter:title" content={seoTitle} />
                         <meta name="twitter:description" content={seoDesc} />
-                        <meta name="twitter:image" content={catContent?.seoImage || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
+                        <meta name="twitter:image" content={catContent?.seoImage || `${SITE_URL}/og/categories/${activeCategory}.png` || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
                         <meta name="twitter:card" content="summary_large_image" />
                       </Helmet>
                     );

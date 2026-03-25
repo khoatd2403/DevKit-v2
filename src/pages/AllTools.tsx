@@ -200,6 +200,22 @@ export default function AllTools() {
         })}
       </div>
 
+      {activeCat === 'all' && (
+        <Helmet>
+          <title>{lang === 'vi' ? 'Tất cả Công cụ Lập trình | DevTools Online' : 'All Developer Tools | DevTools Online'}</title>
+          <meta name="description" content={lang === 'vi' ? 'Khám phá toàn bộ 120+ công cụ lập trình viên trực tuyến miễn phí của chúng tôi. Mọi thứ từ JSON, SQL đến Bảo mật và Chuyển đổi.' : 'Explore our complete collection of 120+ free online developer tools. Everything from JSON and SQL to Security and Conversion tools.'} />
+          <link rel="canonical" href={`${SITE_URL}/tools`} />
+          <meta property="og:title" content={lang === 'vi' ? 'Tất cả Công cụ Lập trình | DevTools Online' : 'All Developer Tools | DevTools Online'} />
+          <meta property="og:description" content={lang === 'vi' ? 'Danh sách đầy đủ các tiện ích lập trình viên chạy trên trình duyệt.' : 'A complete list of browser-based developer utilities.'} />
+          <meta property="og:url" content={`${SITE_URL}/tools`} />
+          <meta property="og:image" content={`${SITE_URL}/og-image.svg`} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={lang === 'vi' ? 'Tất cả Công cụ Lập trình | DevTools Online' : 'All Developer Tools | DevTools Online'} />
+          <meta name="twitter:description" content={lang === 'vi' ? 'Danh sách đầy đủ các tiện ích lập trình viên chạy trên trình duyệt.' : 'A complete list of browser-based developer utilities.'} />
+          <meta name="twitter:image" content={`${SITE_URL}/og-image.svg`} />
+        </Helmet>
+      )}
+
       {(() => {
         if (activeCat === 'all') return null;
         const { lang } = useLang();
@@ -222,10 +238,10 @@ export default function AllTools() {
             <meta property="og:title" content={seoTitle} />
             <meta property="og:description" content={seoDesc} />
             <meta property="og:url" content={`${SITE_URL}/${activeCat}-tools`} />
-            <meta property="og:image" content={catContent?.seoImage || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
+            <meta property="og:image" content={catContent?.seoImage || `${SITE_URL}/og/categories/${activeCat}.png` || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
             <meta name="twitter:title" content={seoTitle} />
             <meta name="twitter:description" content={seoDesc} />
-            <meta name="twitter:image" content={catContent?.seoImage || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
+            <meta name="twitter:image" content={catContent?.seoImage || `${SITE_URL}/og/categories/${activeCat}.png` || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
             <meta name="twitter:card" content="summary_large_image" />
           </Helmet>
         );
