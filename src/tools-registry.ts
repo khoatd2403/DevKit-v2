@@ -32,6 +32,8 @@ export const tools: Tool[] = [
     suggestedTools: ['json-minifier', 'json-to-csv', 'json-diff'],
     seoTitle: 'JSON Formatter & Validator | DevTools Online',
     seoDescription: 'Free online JSON formatter, validator & beautifier. Paste JSON to auto-format, detect errors, collapse nodes — no signup, 100% client-side, works instantly.',
+    howToUse: '1. **Paste** your JSON code into the input editor. \n2. The tool will **auto-format** and validate it immediately.\n3. Use the **Copy** button to get the beautified result.',
+    commonErrors: '- **Syntax Errors**: Missing commas, trailing commas, or unquoted keys.\n- **Invalid Characters**: Hidden characters or smart quotes from word processors.',
   },
   {
     id: 'json-minifier',
@@ -44,6 +46,8 @@ export const tools: Tool[] = [
     suggestedTools: ['json-formatter', 'json-to-csv'],
     seoTitle: 'JSON Minifier & Compressor | DevTools Online',
     seoDescription: 'Minify and compress JSON data online — remove whitespace, reduce file size instantly. Free, no signup, 100% client-side, works in any browser.',
+    howToUse: '1. **Input** your valid JSON data.\n2. The tool will **strip all whitespace** and comments if present.\n3. **Copy** the compact version for use in config or code.',
+    commonErrors: '- **Malformed JSON**: Minification requires valid JSON input first.',
   },
   {
     id: 'json-to-csv',
@@ -80,6 +84,8 @@ export const tools: Tool[] = [
     suggestedTools: ['json-formatter', 'jwt-decoder', 'url-encode-decode'],
     seoTitle: 'Base64 Encode & Decode | DevTools Online',
     seoDescription: 'Encode text or files to Base64 and decode Base64 strings online — free, instant, no upload to server. Drag & drop files, copy output in one click.',
+    howToUse: '1. Enter the **text** or **drag and drop a file** into the input area.\n2. Select **Encode** to convert to Base64 or **Decode** to revert to plain text.\n3. The conversion happens **instantly** in your browser.',
+    commonErrors: '- **Invalid Base64**: Ensure characters are only A-Z, a-z, 0-9, +, /, and =.\n- **Data Corruption**: Ensure you are not decoding binary files as plain text.',
   },
   {
     id: 'url-encode-decode',
@@ -390,6 +396,8 @@ export const tools: Tool[] = [
     suggestedTools: ['json-formatter', 'js-formatter'],
     seoTitle: 'GraphQL Formatter & Beautifier | DevTools Online',
     seoDescription: 'Format and beautify GraphQL queries and schemas online — improve readability with proper indentation. Free, instant, no signup, runs entirely in your browser.',
+    howToUse: '1. Paste your **GraphQL query or schema** into the editor.\n2. The tool will **auto-detect** the structure and format it.\n3. Use the **Copy** button to get the clean output.',
+    commonErrors: '- **Syntax Errors**: Ensure you have correct opening/closing braces.\n- **Invalid Characters**: Hidden characters or smart quotes can break the parser.',
   },
 
   // Misc
@@ -767,7 +775,19 @@ export const tools: Tool[] = [
   { id: 'aspect-ratio', name: 'Aspect Ratio Calculator', description: 'Calculate and convert aspect ratios for images and video (16:9, 4:3...) online', category: 'number', icon: '📐', tags: ['aspect', 'ratio', 'resolution', 'image', 'video', '16:9', 'online'], new: true, seoTitle: 'Aspect Ratio Calculator — 16:9, 4:3 & Custom | DevTools Online', seoDescription: 'Calculate and convert aspect ratios for images and video online — compute missing dimension from width/height. Free, instant, supports any ratio.' },
   { id: 'number-formatter', name: 'Number Formatter', description: 'Format numbers with locale-aware separators, currency, and notation online', category: 'number', icon: '🔢', tags: ['number', 'format', 'locale', 'currency', 'thousand', 'separator', 'online'], new: true, seoTitle: 'Number Formatter — Locale, Currency & Notation | DevTools Online', seoDescription: 'Format numbers with locale-aware separators, currency symbols and scientific notation online — free, instant, no signup, supports all locales.' },
   { id: 'ts-to-js', name: 'TypeScript → JavaScript', description: 'Strip TypeScript types and transpile TS to plain JavaScript online', category: 'web', icon: '🟡', tags: ['typescript', 'javascript', 'ts', 'js', 'transpile', 'convert', 'online'], new: true, seoTitle: 'TypeScript to JavaScript Transpiler | DevTools Online', seoDescription: 'Strip TypeScript types and transpile TS to plain JavaScript online — instant, free, no signup. Supports modern TypeScript syntax and decorators.' },
-  { id: 'benchmark-builder', name: 'JS / TS Benchmark Builder', description: 'Compare execution speed of different JavaScript and TypeScript code snippets online', category: 'web', icon: '⏱️', tags: ['benchmark', 'performance', 'js', 'ts', 'javascript', 'typescript', 'speed', 'test', 'online'], new: true, seoTitle: 'JS / TS Benchmark Builder — Performance Comparison Tool | DevTools Online', seoDescription: 'Compare execution speed of different JavaScript and TypeScript code snippets online. Real-time benchmarking with ops/sec, iterations, and comparison — free, no signup.' },
+  {
+    id: 'benchmark-builder',
+    name: 'JS / TS Benchmark Builder',
+    description: 'Compare execution speed of different JavaScript and TypeScript code snippets online',
+    category: 'web',
+    icon: '⏱️',
+    tags: ['benchmark', 'performance', 'js', 'ts', 'javascript', 'typescript', 'speed', 'test', 'online'],
+    new: true,
+    seoTitle: 'JS / TS Benchmark Builder — Performance Comparison Tool | DevTools Online',
+    seoDescription: 'Compare execution speed of different JavaScript and TypeScript code snippets online. Real-time benchmarking with ops/sec, iterations, and comparison — free, no signup.',
+    howToUse: '1. Add multiple **test cases** to compare.\n2. Write your **Setup code** if needed for all cases.\n3. Click **Run Benchmark** and wait for the results (Ops/sec).',
+    commonErrors: '- **Micro-benchmarking**: Ensure your tests run long enough to get stable results.\n- **External dependencies**: Cannot use network-based modules in benchmarks.',
+  },
 
   // Batch 4 - Media/Visual
   { id: 'favicon-generator', name: 'Favicon Generator', description: 'Generate favicons from emoji or text in multiple sizes online', category: 'generator', icon: '🎨', tags: ['favicon', 'icon', 'emoji', 'png', 'generator', 'website', 'online'], new: true, seoTitle: 'Favicon Generator — From Emoji or Text | DevTools Online', seoDescription: 'Generate favicons from emoji or text in multiple sizes (16x16 to 512x512) online — download PNG, free, no signup, instant browser-side generation.' },

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { LATEST_VERSION } from '../version'
 import { categories, tools } from '../tools-registry'
@@ -15,12 +15,16 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSettings }: SidebarProps) {
-  const { t } = useLang()
+  const { t, lang } = useLang()
+  const isVi = lang === 'vi'
   const navigate = useNavigate()
   const location = useLocation()
-  const currentToolId = location.pathname.startsWith('/tool/')
-    ? location.pathname.slice('/tool/'.length)
-    : ''
+  const currentToolId = useMemo(() => {
+    const parts = location.pathname.split('/').filter(Boolean)
+    if (parts.length === 2 && parts[0].endsWith('-tools')) return parts[1]
+    if (parts.length === 2 && parts[0] === 'tool') return parts[1]
+    return null
+  }, [location.pathname])
 
   const activeCat = tools.find(t => t.id === currentToolId)?.category ?? ''
   const [expanded, setExpanded] = useState<Record<string, boolean>>(() => {
@@ -33,7 +37,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
   const toggle = (catId: string) =>
     setExpanded(prev => ({ ...prev, [catId]: !prev[catId] }))
 
-  const { favorites } = useFavorites()
+  const { favorites, toggle: toggleFav } = useFavorites()
   const favoriteTools = tools.filter(t => favorites.includes(t.id))
 
   return (
@@ -120,11 +124,21 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
                       favoriteTools.map(tool => (
                         <div
                           key={tool.id}
-                          className={`sidebar-item py-1.5 ${currentToolId === tool.id ? 'active' : ''}`}
-                          onClick={() => navigate(`/tool/${tool.id}`)}
+                          className={`sidebar-item-group flex items-center gap-1.5 px-2 py-1.5 group cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 ${currentToolId === tool.id ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-semibold shadow-sm' : ''}`}
+                          onClick={() => navigate(`/${tool.category}-tools/${tool.id}`)}
                         >
                           <span className="text-sm shrink-0">{tool.icon}</span>
                           <span className="truncate flex-1 text-sm">{tool.name}</span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleFav(tool.id);
+                            }}
+                            className="opacity-0 group-hover:opacity-100 p-1 hover:bg-red-50 dark:hover:bg-red-900/20 text-gray-400 hover:text-red-500 rounded transition-all shrink-0"
+                            title={isVi ? 'Xóa khỏi yêu thích' : 'Remove from Favorites'}
+                          >
+                            <X size={12} />
+                          </button>
                         </div>
                       ))
                     )}
@@ -168,7 +182,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
                           <div
                             key={tool.id}
                             className={`sidebar-item py-1.5 ${currentToolId === tool.id ? 'active' : ''}`}
-                            onClick={() => navigate(`/tool/${tool.id}`)}
+                            onClick={() => navigate(`/${tool.category}-tools/${tool.id}`)}
                           >
                             <span className="truncate flex-1 text-sm">{tool.name}</span>
                             {tool.new && (

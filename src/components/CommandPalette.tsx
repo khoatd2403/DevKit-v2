@@ -166,7 +166,12 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
   useEffect(() => { setCursor(0) }, [query])
 
   const select = useCallback((toolId: string) => {
-    navigate(`/tool/${toolId}`)
+    const tool = tools.find(t => t.id === toolId)
+    if (tool) {
+      navigate(`/${tool.category}-tools/${tool.id}`)
+    } else {
+      navigate(`/tool/${toolId}`)
+    }
     onClose()
   }, [navigate, onClose])
 

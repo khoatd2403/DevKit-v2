@@ -4,6 +4,7 @@ import { useLang } from '../context/LanguageContext'
 import { tools, categories } from '../tools-registry'
 import type { Tool } from '../types'
 import { ArrowLeft, SortAsc } from 'lucide-react'
+import { categoryAboutTranslations } from '../i18n/categoryContent'
 
 type SortOption = 'default' | 'az' | 'za' | 'popular' | 'new'
 
@@ -30,7 +31,7 @@ export default function AllTools() {
   const ToolCard = ({ tool }: { tool: Tool }) => (
     <div
       className="tool-card"
-      onClick={() => navigate(`/tool/${tool.id}`)}
+      onClick={() => navigate(`/${tool.category}-tools/${tool.id}`)}
     >
       <div className="flex items-start gap-3">
         <span className="text-2xl shrink-0">{tool.icon}</span>
@@ -115,7 +116,13 @@ export default function AllTools() {
           return (
             <button
               key={cat.id}
-              onClick={() => setSearchParams(cat.id === 'all' ? {} : { cat: cat.id })}
+              onClick={() => {
+                if (cat.id === 'all') {
+                  setSearchParams({});
+                } else {
+                  navigate(`/${cat.id}-tools`);
+                }
+              }}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                 activeCat === cat.id
                   ? 'bg-primary-600 text-white'
@@ -143,6 +150,32 @@ export default function AllTools() {
           {displayTools.map(tool => <ToolCard key={tool.id} tool={tool} />)}
         </div>
       )}
+
+      {/* ── Category About Section ── */}
+      {(() => {
+        const { lang } = useLang();
+        const currentLang = lang || 'en';
+        const cat = categories.find(c => c.id === activeCat);
+        const catDesc = categoryAboutTranslations[currentLang]?.[activeCat] || categoryAboutTranslations['en']?.[activeCat];
+        if (!catDesc || activeCat === 'all') return null;
+        
+        return (
+          <div className="mt-12 pt-10 border-t border-gray-200 dark:border-gray-800">
+            <div className="bg-white dark:bg-gray-950 rounded-2xl p-6 sm:p-8 border border-gray-100 dark:border-gray-900 shadow-sm">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                 <span>{cat?.icon}</span>
+                 {currentLang === 'vi' ? `Về công cụ ${cat?.name}` : `About ${cat?.name} Tools`}
+              </h2>
+              <div 
+                className="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed
+                  prose-a:text-primary-600 dark:prose-a:text-primary-400 prose-a:no-underline hover:prose-a:underline prose-a:font-medium
+                  prose-strong:text-gray-900 dark:prose-strong:text-white prose-strong:font-bold"
+                dangerouslySetInnerHTML={{ __html: catDesc.description }}
+              />
+            </div>
+          </div>
+        );
+      })()}
     </div>
   )
 }
