@@ -213,6 +213,7 @@ function AppInner() {
                 <Routes>
                   <Route path="/" element={<Home searchQuery={searchQuery} />} />
                   <Route path="/tool/:toolId" element={<ToolPage onFeedback={(toolName) => { setFeedbackTool(toolName); setFeedbackOpen(true) }} />} />
+                  <Route path="/:slug" element={<Home searchQuery={searchQuery} />} />
                   <Route path="/split" element={<SplitPage />} />
                   <Route path="/tools" element={<AllTools />} />
                 </Routes>
