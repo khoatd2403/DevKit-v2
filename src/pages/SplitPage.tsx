@@ -101,12 +101,18 @@ export default function SplitPage() {
         <ToolPanel
           toolId={toolA}
           onToolChange={updateA}
-          onClose={() => navigate(`/tool/${toolA}`)}
+          onClose={() => {
+            const tool = tools.find(t => t.id === toolA);
+            navigate(tool ? `/${tool.category}-tools/${toolA}` : `/tool/${toolA}`);
+          }}
         />
         <ToolPanel
           toolId={toolB}
           onToolChange={updateB}
-          onClose={() => navigate(`/tool/${toolB}`)}
+          onClose={() => {
+            const tool = tools.find(t => t.id === toolB);
+            navigate(tool ? `/${tool.category}-tools/${toolB}` : `/tool/${toolB}`);
+          }}
         />
       </div>
     </div>

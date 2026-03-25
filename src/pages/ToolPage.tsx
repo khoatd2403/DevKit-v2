@@ -3,7 +3,8 @@ import { useParams, useNavigate, Link, useSearchParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { SITE_URL } from '../../site.config'
 import { tools, categories } from '../tools-registry'
-import { ArrowLeft, MessageSquare, Share2, Check, Star, BookMarked, X, LayoutPanelLeft, Zap } from 'lucide-react'
+import { ArrowLeft, MessageSquare, Share2, Check, Star, BookMarked, X, LayoutPanelLeft, Zap, BookOpen, AlertCircle } from 'lucide-react'
+import { parse } from 'marked'
 import ProTipBanner from '../components/ProTipBanner'
 import { useFavorites } from '../hooks/useFavorites'
 import { useRecentTools } from '../hooks/useRecentTools'
@@ -140,7 +141,7 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": toolMeta.name,
-      "url": `${SITE_URL}/tool/${toolMeta.id}`,
+      "url": `${SITE_URL}/${toolMeta.category}-tools/${toolMeta.id}`,
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Any",
       "description": toolMeta.seoDescription || toolMeta.description,
@@ -178,7 +179,7 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
           "@type": "ListItem",
           "position": 3,
           "name": toolMeta.name,
-          "item": `${SITE_URL}/tool/${toolMeta.id}`
+          "item": `${SITE_URL}/${toolMeta.category}-tools/${toolMeta.id}`
         }
       ]
     }
@@ -220,13 +221,13 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
       <title>{toolMeta.seoTitle || `${toolMeta.name} | DevTools Online`}</title>
       <meta name="description" content={toolMeta.seoDescription || toolMeta.description} />
       <meta name="keywords" content={toolMeta.tags.join(', ')} />
-      <link rel="canonical" href={`${SITE_URL}/tool/${toolMeta.id}`} />
+      <link rel="canonical" href={`${SITE_URL}/${toolMeta.category}-tools/${toolMeta.id}`} />
 
       {/* OpenGraph */}
       <meta property="og:title" content={toolMeta.seoTitle || `${toolMeta.name} | DevTools Online`} />
       <meta property="og:description" content={toolMeta.seoDescription || toolMeta.description} />
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={`${SITE_URL}/tool/${toolMeta.id}`} />
+      <meta property="og:url" content={`${SITE_URL}/${toolMeta.category}-tools/${toolMeta.id}`} />
       <meta property="og:image" content={`${SITE_URL}/og/${toolMeta.id}.png`} />
       <meta property="og:site_name" content="DevTools Online" />
 
@@ -303,6 +304,9 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
                 <ToolAbout
                   toolId={toolMeta.id}
                   toolName={toolMeta.name}
+                  category={toolMeta.category}
+                  howToUse={toolMeta.howToUse}
+                  commonErrors={toolMeta.commonErrors}
                   onSupport={() => onFeedback(toolMeta.name)}
                 />
               </div>
@@ -319,7 +323,7 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
                   </h3>
                   <div className="space-y-1.5">
                     {relatedTools.map(tool => (
-                      <Link key={tool.id} to={`/tool/${tool.id}`} className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                      <Link key={tool.id} to={`/${tool.category}-tools/${tool.id}`} className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
                         <span className="text-xl">{tool.icon}</span>
                         <span className="text-sm font-medium text-gray-900 dark:text-white truncate">{tool.name}</span>
                       </Link>

@@ -18,6 +18,8 @@ export interface Tool {
   /** Whether the tool supports compressing state into the URL for sharing. */
   supportsShare?: boolean;
   suggestedTools?: string[];
+  howToUse?: string;
+  commonErrors?: string;
 }
 
 export interface Category {

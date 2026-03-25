@@ -212,6 +212,7 @@ function AppInner() {
               <main className="flex-1 overflow-y-auto">
                 <Routes>
                   <Route path="/" element={<Home searchQuery={searchQuery} />} />
+                  <Route path="/:categorySlug/:toolId" element={<ToolPage onFeedback={(toolName) => { setFeedbackTool(toolName); setFeedbackOpen(true) }} />} />
                   <Route path="/tool/:toolId" element={<ToolPage onFeedback={(toolName) => { setFeedbackTool(toolName); setFeedbackOpen(true) }} />} />
                   <Route path="/:slug" element={<Home searchQuery={searchQuery} />} />
                   <Route path="/split" element={<SplitPage />} />

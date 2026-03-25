@@ -8,6 +8,7 @@ import { useRecentTools } from '../hooks/useRecentTools'
 import { useFavorites } from '../hooks/useFavorites'
 import { useToolStats } from '../hooks/useToolStats'
 import { useLang } from '../context/LanguageContext'
+import { categoryAboutTranslations } from '../i18n/categoryContent'
 
 interface HomeProps {
   searchQuery: string
@@ -36,8 +37,8 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
   const [activeCategory, setActiveCategory] = useState(() => (catFromSlug || searchParams.get('cat')) ?? 'all')
 
   useEffect(() => {
-    const cat = catFromSlug || searchParams.get('cat')
-    if (cat) setActiveCategory(cat)
+    const cat = catFromSlug || searchParams.get('cat') || 'all'
+    setActiveCategory(cat)
   }, [searchParams, catFromSlug])
 
   const todayTool = useMemo(() => {
@@ -66,7 +67,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
   const newTools = tools.filter(t => t.new)
 
   const ToolCard = ({ tool }: { tool: Tool }) => (
-    <div className="tool-card" onClick={() => navigate(`/tool/${tool.id}`)}>
+    <div className="tool-card" onClick={() => navigate(`/${tool.category}-tools/${tool.id}`)}>
       <div className="flex items-start gap-3">
         <span className="text-2xl shrink-0">{tool.icon}</span>
         <div className="min-w-0 flex-1">
@@ -122,7 +123,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
             {[{ id: 'all', name: t.categories.all, icon: '🧰', color: 'gray' }, ...categories.filter(c => c.id !== 'all')].map(cat => (
               <button
                 key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
+                onClick={() => navigate(cat.id === 'all' ? '/' : `/${cat.id}-tools`)}
                 className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                   activeCategory === cat.id
                     ? 'bg-primary-600 text-white'
@@ -147,16 +148,35 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                     <span className="text-xl">{cat?.icon}</span>
                   <h3 className="font-semibold text-gray-900 dark:text-white">{t.categories[cat?.id as keyof typeof t.categories] || cat?.name}</h3>
                     <span className="text-xs text-gray-400">({catTools.length})</span>
-                    <button
-                      onClick={() => navigate('/tools?cat=' + activeCategory)}
-                      className="ml-auto text-xs text-primary-600 dark:text-primary-400 hover:underline"
-                    >
-                      View all →
-                    </button>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                     {catTools.map(tool => <ToolCard key={tool.id} tool={tool} />)}
                   </div>
+
+                  {/* ── Category About Section ── */}
+                  {(() => {
+                    const { lang } = useLang();
+                    const currentLang = lang || 'en';
+                    const catDesc = categoryAboutTranslations[currentLang]?.[activeCategory] || categoryAboutTranslations['en']?.[activeCategory];
+                    if (!catDesc) return null;
+                    
+                    return (
+                      <div className="mt-12 pt-10 border-t border-gray-200 dark:border-gray-800">
+                        <div className="bg-white dark:bg-gray-950 rounded-2xl p-6 sm:p-8 border border-gray-100 dark:border-gray-900 shadow-sm">
+                          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                             <span>{cat?.icon}</span>
+                             {currentLang === 'vi' ? `Về công cụ ${cat?.name}` : `About ${cat?.name} Tools`}
+                          </h2>
+                          <div 
+                            className="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed
+                              prose-a:text-primary-600 dark:prose-a:text-primary-400 prose-a:no-underline hover:prose-a:underline prose-a:font-medium
+                              prose-strong:text-gray-900 dark:prose-strong:text-white prose-strong:font-bold"
+                            dangerouslySetInnerHTML={{ __html: catDesc.description }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })()}
                 </>
               )
             })()}
@@ -195,7 +215,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                 <span className="text-xs text-gray-400">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}</span>
               </div>
               <div
-                onClick={() => navigate(`/tool/${todayTool.id}`)}
+                onClick={() => navigate(`/${todayTool.category}-tools/${todayTool.id}`)}
                 className="cursor-pointer bg-gradient-to-br from-primary-50 to-purple-50 dark:from-primary-950/40 dark:to-purple-950/40 border border-primary-200 dark:border-primary-800 rounded-lg sm:rounded-xl p-4 sm:p-5 flex items-center gap-4 hover:shadow-md transition-shadow"
               >
                 <span className="text-4xl">{todayTool.icon}</span>

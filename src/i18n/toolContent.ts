@@ -3,6 +3,7 @@ export interface ToolAboutContent {
   why: { title: string; desc: string }[];
   example?: { before: string; after: string; title?: string } | string;
   faqs: { q: string; a: string }[];
+  complementary?: { id: string; name: string; textEN: string; textVI: string };
 }
 
 export const toolAboutTranslations: Record<string, Record<string, ToolAboutContent>> = {
@@ -23,7 +24,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
         { q: 'Is this JSON Formatter free?', a: 'Yes, it is 100% free with no sign-up or subscription required.' },
         { q: 'Is my data secure?', a: 'Absolutely. We use client-side JavaScript, meaning your data stays in your browser and is never sent to any server.' },
         { q: 'Can I use it for large files?', a: 'Yes, our formatter is optimized to handle large JSON documents efficiently without slowing down your browser.' }
-      ]
+      ],
+      complementary: {
+        id: 'json-minifier',
+        name: 'JSON Minifier',
+        textEN: 'You can also use our',
+        textVI: 'Bạn cũng có thể sử dụng'
+      }
     },
     'base64-encode-decode': {
       what: 'Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It is commonly used to embed images in HTML or include binary data in JSON/XML.',
@@ -41,7 +48,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
         { q: 'Is Base64 encryption?', a: 'No, it is only an encoding format. It can be easily reversed and is not secure for sensitive data without actual encryption.' },
         { q: 'Does Base64 increase data size?', a: 'Yes, Base64 typically increases the data size by about 33%.' },
         { q: 'Is Base64 URL-safe?', a: 'Standard Base64 uses + and / which are not URL-safe. Use a "URL safe" variant for web parameters.' }
-      ]
+      ],
+      complementary: {
+        id: 'url-encode-decode',
+        name: 'URL Encoder/Decoder',
+        textEN: 'Need to process URL parameters? Try our',
+        textVI: 'Cần xử lý tham số URL? Hãy dùng'
+      }
     },
     'uuid-generator': {
       what: 'UUID (Universally Unique Identifier) is a 128-bit number used to identify information in computer systems. Version 4 (v4) is the most common version, contextually unique without central registry.',
@@ -55,7 +68,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'Is UUID truly unique?', a: 'Statistically, yes. To have a 50% chance of collision, you would need to generate 1 billion UUIDs/sec for 100 years.' },
         { q: 'Difference between v4 and v7?', a: 'v4 is fully random. v7 is time-ordered, which improves performance for database indexing.' }
-      ]
+      ],
+      complementary: {
+        id: 'password-generator',
+        name: 'Secure Password Generator',
+        textEN: 'Need a multi-character secret instead? Try our',
+        textVI: 'Cần một chuỗi bí mật nhiều ký tự? Hãy dùng'
+      }
     },
     'password-generator': {
       what: 'A secure password generator is a tool that creates complex, random passwords using a mix of uppercase, lowercase, numbers, and special symbols. It ensures passwords are unpredictable and resistant to brute-force attacks.',
@@ -69,7 +88,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'How long should a password be?', a: 'At least 12-16 characters is recommended for most accounts. For high-security accounts, 20+ characters is better.' },
         { q: 'Should I reuse passwords?', a: 'Never. Use this generator to create a unique password for every single account you have.' }
-      ]
+      ],
+      complementary: {
+        id: 'uuid-generator',
+        name: 'UUID Generator',
+        textEN: 'Need a unique identifier for your database? Check out',
+        textVI: 'Cần mã định danh duy nhất cho database? Xem ngay'
+      }
     },
     'jwt-decoder': {
       what: 'A JWT (JSON Web Token) decoder is a tool that allows you to inspect the contents of a JWT token. It decodes the Base64Url encoded Header, Payload, and Signature sections so you can see the claims and metadata within.',
@@ -83,7 +108,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'Is it safe to paste my JWT here?', a: 'Yes, because this tool is client-side. Processing happens on your computer, no data is sent to our servers.' },
         { q: 'Can I verify the signature?', a: 'This is a decoder tool. Signature verification requires the Secret or Public Key.' }
-      ]
+      ],
+      complementary: {
+        id: 'base64-encode-decode',
+        name: 'Base64 Tool',
+        textEN: 'Did you know JWTs use Base64URL encoding? Learn more with our',
+        textVI: 'Bạn có biết JWT dùng mã hóa Base64URL? Tìm hiểu với'
+      }
     },
     'sql-formatter': {
       what: 'A SQL Formatter is an online tool that takes messy or minified SQL queries and beautifies them into a structured and readable format with proper indentation for complex joins and nested queries.',
@@ -100,7 +131,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'Is it free to use?', a: 'Yes, it is completely free and available online without any sign-up required.' },
         { q: 'Does it support my SQL dialect?', a: 'Yes, it supports standard SQL which works well for MySQL, PostgreSQL, SQL Server, and Oracle.' }
-      ]
+      ],
+      complementary: {
+        id: 'json-formatter',
+        name: 'JSON Formatter',
+        textEN: 'Formatting API results next? Try our',
+        textVI: 'Định dạng kết quả API tiếp theo? Dùng ngay'
+      }
     },
     'url-encode-decode': {
       what: 'URL Encoding (Percent-encoding) is a mechanism for encoding information in a Uniform Resource Identifier (URI). It converts unsafe characters into a format that can be transmitted over the internet.',
@@ -116,7 +153,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'What is the purpose of URL encoding?', a: 'Web browsers and servers only support a limited set of characters in URLs. Encoding converts "unsafe" characters into a % followed by their hex code.' },
         { q: 'What is the difference between Encode and Decode?', a: 'Encoding transforms text into URL-safe format. Decoding reverses the process to get the original text back.' }
-      ]
+      ],
+      complementary: {
+        id: 'base64-encode-decode',
+        name: 'Base64 Encoder',
+        textEN: 'For other encoding needs, check out our',
+        textVI: 'Cho các nhu cầu mã hóa khác, xem ngay'
+      }
     },
     'hash-generator': {
       what: 'A Hash Generator is a tool that computes a fixed-length cryptographic hash (checksum) from your input. It supports popular algorithms like MD5, SHA-1, SHA-256, and SHA-512.',
@@ -132,7 +175,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'Can I reverse a hash?', a: 'No, cryptographic hashes are "one-way" functions. You cannot derive the original text from the hash value.' },
         { q: 'Is MD5 secure?', a: 'MD5 is considered cryptographically broken for security purposes. Use SHA-256 or SHA-512 for better security.' }
-      ]
+      ],
+      complementary: {
+        id: 'password-generator',
+        name: 'Password Generator',
+        textEN: 'Want to generate a secure string to hash? Use',
+        textVI: 'Muốn tạo một chuỗi an toàn để băm? Dùng'
+      }
     },
     'regex-tester': {
       what: 'A Regex Tester is an interactive tool for writing and testing Regular Expressions. It provides real-time matching and highlighting to help you build complex patterns for data extraction and validation.',
@@ -148,7 +197,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'What are flags?', a: 'Flags change how the regex behaves. "g" searches for all matches, "i" ignores case, and "m" enables multi-line mode.' },
         { q: 'Is my regex private?', a: 'Yes. All regex processing happens in your browser.' }
-      ]
+      ],
+      complementary: {
+        id: 'json-formatter',
+        name: 'JSON Formatter',
+        textEN: 'Need to extract data from a JSON? Use our',
+        textVI: 'Cần trích xuất dữ liệu từ JSON? Hãy dùng'
+      }
     },
     'image-metadata-modifier': {
       what: 'Image Metadata Editor is a powerful client-side utility that allows you to view, edit, and strip EXIF, IPTC, and XMP metadata from JPEG and JPG images. It provides a deep dive into your photos technical details while giving you full control over privacy-sensitive information like GPS coordinates and authorship.',
@@ -163,7 +218,31 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
         { q: 'Does this support PNG or WebP?', a: 'Currently, metadata writing is primarily optimized for JPEG/JPG format. Many other formats strip metadata upon saving to save space.' },
         { q: 'Is the image quality preserved?', a: 'Yes, this tool only modifies the header (metadata) of the image. The pixel data remains untouched, so there is no quality loss.' },
         { q: 'Can I add GPS data to a photo without it?', a: 'Yes, you can manually enter Latitude and Longitude coordinates, and they will be "burned" into the new EXIF header upon download.' }
-      ]
+      ],
+      complementary: {
+        id: 'base64-encode-decode',
+        name: 'Base64 Image Tool',
+        textEN: 'Want to convert your image to a Data URI? Try',
+        textVI: 'Muốn chuyển ảnh sang Data URI? Hãy thử'
+      }
+    },
+    'json-minifier': {
+      what: 'JSON Minifier is a tool that removes unnecessary whitespace, newlines, and indentation from your JSON data. This significantly reduces the file size, making it ideal for high-performance data transmission and website optimization.',
+      why: [
+        { title: 'Reduce Size', desc: 'Compress JSON payloads by up to 20-30% by removing redundant characters.' },
+        { title: 'Performance', desc: 'Faster load times and lower bandwidth usage for your web applications.' },
+        { title: 'Privacy First', desc: 'Processing happens entirely on your machine. No data is ever uploaded.' }
+      ],
+      faqs: [
+        { q: 'Why should I minify JSON?', a: 'Minification reduces the overhead of data transfer between servers and clients, especially important for mobile users.' },
+        { q: 'Is minified JSON still valid?', a: 'Yes. Minification only removes "insignificant" whitespace that is ignored by JSON parsers.' }
+      ],
+      complementary: {
+        id: 'json-formatter',
+        name: 'JSON Formatter',
+        textEN: 'Need to make this readable again? Use our',
+        textVI: 'Cần làm dữ liệu dễ đọc lại? Hãy dùng'
+      }
     }
   },
   vi: {
@@ -183,7 +262,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
         { q: 'JSON Formatter có miễn phí không?', a: 'Hoàn toàn miễn phí, không cần đăng ký hay đăng nhập.' },
         { q: 'Dữ liệu của tôi có bị lộ không?', a: 'Không. Mọi dữ liệu chỉ được xử lý trong trình duyệt của bạn.' },
         { q: 'Có thể dùng cho file lớn không?', a: 'Có, thuật toán của chúng tôi được tối ưu để xử lý mượt mà cả các file JSON dung lượng lớn.' }
-      ]
+      ],
+      complementary: {
+        id: 'json-minifier',
+        name: 'JSON Minifier',
+        textEN: 'You can also use our',
+        textVI: 'Bạn cũng có thể sử dụng'
+      }
     },
     'base64-encode-decode': {
       what: 'Base64 là một sơ đồ mã hóa nhị phân thành văn bản, biểu thị dữ liệu nhị phân dưới dạng chuỗi ASCII. Nó thường được sử dụng để nhúng hình ảnh vào HTML hoặc bao gồm dữ liệu nhị phân trong JSON/XML.',
@@ -201,7 +286,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
         { q: 'Base64 có phải là mã hóa (encryption) không?', a: 'Không, nó chỉ là một kiểu mã hóa (encoding), có thể giải mã dễ dàng.' },
         { q: 'Base64 có làm tăng kích thước dữ liệu không?', a: 'Có, tăng khoảng 33% so với dữ liệu gốc.' },
         { q: 'Base64 có an toàn cho URL không?', a: 'Hãy sử dụng biến thể "URL safe" (+ và / được thay thế) cho mục đích này.' }
-      ]
+      ],
+      complementary: {
+        id: 'url-encode-decode',
+        name: 'URL Encoder/Decoder',
+        textEN: 'Need to process URL parameters? Try our',
+        textVI: 'Cần xử lý tham số URL? Hãy dùng'
+      }
     },
     'uuid-generator': {
       what: 'UUID (Universally Unique Identifier) là một số 128 bit dùng để định danh duy nhất thông tin trong hệ thống máy tính. Version 4 (v4) là phiên bản phổ biến nhất, được tạo ra bằng số ngẫu nhiên.',
@@ -215,7 +306,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'UUID có thực sự duy nhất không?', a: 'Về mặt thống kê là có. Để có 50% cơ năng xảy ra xung đột, bạn cần tạo 1 tỷ UUID/giây trong suốt 100 năm.' },
         { q: 'Sự khác biệt giữa v4 và v7?', a: 'v4 hoàn toàn ngẫu nhiên. v7 sắp xếp theo thời gian, giúp tăng tốc độ đánh index trong database.' }
-      ]
+      ],
+      complementary: {
+        id: 'password-generator',
+        name: 'Mật khẩu an toàn',
+        textEN: 'Need a multi-character secret instead? Try our',
+        textVI: 'Cần một chuỗi bí mật nhiều ký tự? Hãy dùng'
+      }
     },
     'password-generator': {
       what: 'Công cụ tạo mật khẩu an toàn là một ứng dụng giúp tạo ra các mật khẩu ngẫu nhiên, phức tạp bằng cách kết hợp chữ hoa, chữ thường, số và các biểu tượng đặc biệt.',
@@ -229,7 +326,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'Độ dài mật khẩu bao nhiêu là đủ?', a: 'Khuyên dùng ít nhất 12-16 ký tự cho tài khoản thông thường.' },
         { q: 'Có nên dùng chung mật khẩu không?', a: 'Tuyệt đối không. Hãy tạo mật khẩu duy nhất cho mỗi tài khoản khác nhau.' }
-      ]
+      ],
+      complementary: {
+        id: 'uuid-generator',
+        name: 'UUID Generator',
+        textEN: 'Need a unique identifier for your database? Check out',
+        textVI: 'Cần mã định danh duy nhất cho database? Xem ngay'
+      }
     },
     'jwt-decoder': {
       what: 'JWT Decoder là công cụ giúp giải mã các thành phần của JSON Web Token (JWT), cho phép bạn kiểm tra các "claims" và metadata bên trong.',
@@ -243,7 +346,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'Dán JWT vào đây có an toàn không?', a: 'Dữ liệu được xử lý 100% tại trình duyệt, không có gì bị truyền ra ngoài.' },
         { q: 'Công cụ có xác thực được chữ ký không?', a: 'Để xác thực chữ ký, bạn cần nhập thêm khóa bí mật (Secret/Public Key).' }
-      ]
+      ],
+      complementary: {
+        id: 'base64-encode-decode',
+        name: 'Base64 Tool',
+        textEN: 'Did you know JWTs use Base64URL encoding? Learn more with our',
+        textVI: 'Bạn có biết JWT dùng mã hóa Base64URL? Tìm hiểu với'
+      }
     },
     'sql-formatter': {
       what: 'SQL Formatter là một công cụ trực tuyến giúp chuyển đổi các câu lệnh SQL nén hoặc lộn xộn thành định dạng có cấu trúc rõ ràng, dễ đọc.',
@@ -260,7 +369,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'SQL Formatter có miễn phí không?', a: 'Có, công cụ này hoàn toàn miễn phí và không cần đăng ký.' },
         { q: 'Nó có hỗ trợ SQL của tôi không?', a: 'Hỗ trợ tốt cho MySQL, PostgreSQL, SQL Server và Oracle.' }
-      ]
+      ],
+      complementary: {
+        id: 'json-formatter',
+        name: 'JSON Formatter',
+        textEN: 'Formatting API results next? Try our',
+        textVI: 'Định dạng kết quả API tiếp theo? Dùng ngay'
+      }
     },
     'url-encode-decode': {
       what: 'Mã hóa URL (Percent-encoding) là cơ chế mã hóa thông tin trong URI. Nó chuyển đổi các ký tự không an toàn thành định dạng có thể truyền tải ổn định qua internet.',
@@ -276,7 +391,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'Mã hóa URL để làm gì?', a: 'Trình duyệt và máy chủ chỉ hỗ trợ một tập hợp ký tự hạn chế. Mã hóa giúp chuyển các ký tự "lạ" thành mã Hex an toàn.' },
         { q: 'Sự khác biệt giữa Encode và Decode?', a: 'Encode chuyển văn bản thành định dạng an toàn cho URL. Decode đảo ngược quá trình để lấy lại văn bản gốc.' }
-      ]
+      ],
+      complementary: {
+        id: 'base64-encode-decode',
+        name: 'Base64 Encoder',
+        textEN: 'For other encoding needs, check out our',
+        textVI: 'Cho các nhu cầu mã hóa khác, xem ngay'
+      }
     },
     'hash-generator': {
       what: 'Hash Generator là công cụ tính toán mã băm (checksum) có độ dài cố định từ đầu vào của bạn. Hỗ trợ các thuật toán phổ biến như MD5, SHA-1, SHA-256 và SHA-512.',
@@ -292,7 +413,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'Tôi có thể giải mã ngược mã băm không?', a: 'Không, các hàm băm mật mã là hàm "một chiều". Bạn không thể lấy lại văn bản gốc từ giá trị băm.' },
         { q: 'MD5 có an toàn không?', a: 'MD5 hiện được coi là không còn an toàn cho mục đích bảo mật. Hãy dùng SHA-256 hoặc SHA-512 để an toàn hơn.' }
-      ]
+      ],
+      complementary: {
+        id: 'password-generator',
+        name: 'Mật khẩu',
+        textEN: 'Want to generate a secure string to hash? Use',
+        textVI: 'Muốn tạo một chuỗi an toàn để băm? Dùng'
+      }
     },
     'regex-tester': {
       what: 'Regex Tester là công cụ tương tác để viết và thử nghiệm Biểu thức chính quy (Regular Expression). Nó cung cấp khả năng khớp lệnh và highlight thời gian thực.',
@@ -308,7 +435,13 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
       faqs: [
         { q: 'Flags là gì?', a: 'Flags thay đổi cách Regex hoạt động. "g" tìm mọi kết quả, "i" không phân biệt hoa thường, "m" cho phép khớp nhiều dòng.' },
         { q: 'Regex của tôi có được bảo mật không?', a: 'Có. Mọi quá trình xử lý Regex diễn ra ngay trong trình duyệt của bạn.' }
-      ]
+      ],
+      complementary: {
+        id: 'json-formatter',
+        name: 'JSON Formatter',
+        textEN: 'Need to extract data from a JSON? Use our',
+        textVI: 'Cần trích xuất dữ liệu từ JSON? Hãy dùng'
+      }
     },
     'image-metadata-modifier': {
       what: 'Image Metadata Editor là một công cụ mạnh mẽ chạy trực tiếp tại trình duyệt, cho phép bạn xem, chỉnh sửa và xóa bỏ các siêu dữ liệu EXIF, IPTC và XMP khỏi hình ảnh định dạng JPEG và JPG. Nó giúp bạn kiểm soát hoàn toàn các thông tin riêng tư như tọa độ GPS, thời gian và thiết bị chụp.',
@@ -323,7 +456,31 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
         { q: 'Có hỗ trợ PNG hay WebP không?', a: 'Hiện tại, việc ghi metadata chủ yếu được tối ưu cho JPEG/JPG. Nhiều định dạng khác tự động loại bỏ metadata khi lưu để giảm dung lượng.' },
         { q: 'Chất lượng ảnh có bị giảm không?', a: 'Không. Công cụ này chỉ sửa đổi phần đầu (header) metadata. Dữ liệu điểm ảnh giữ nguyên, nên không có sự suy giảm chất lượng.' },
         { q: 'Tôi có thể thêm GPS vào ảnh chưa có không?', a: 'Có. Bạn có thể nhập thủ công tọa độ Vĩ độ và Kinh độ, chúng sẽ được ghi vào EXIF mới của ảnh khi tải về.' }
-      ]
+      ],
+      complementary: {
+        id: 'base64-encode-decode',
+        name: 'Base64 Image',
+        textEN: 'Want to convert your image to a Data URI? Try',
+        textVI: 'Muốn chuyển ảnh sang Data URI? Hãy thử'
+      }
+    },
+    'json-minifier': {
+      what: 'JSON Minifier là công cụ giúp loại bỏ các khoảng trắng, dòng mới và thụt lề không cần thiết trong dữ liệu JSON. Điều này giúp giảm đáng kể kích thước file, lý tưởng cho việc truyền tải dữ liệu hiệu suất cao và tối ưu hóa website.',
+      why: [
+        { title: 'Giảm kích thước', desc: 'Nén gói dữ liệu JSON lên đến 20-30% bằng cách bỏ các ký tự dư thừa.' },
+        { title: 'Tăng tốc độ', desc: 'Tải nhanh hơn và tiêu thụ ít băng thông hơn cho website của bạn.' },
+        { title: 'Bảo mật', desc: 'Xử lý tại máy của bạn, tuyệt đối không có dữ liệu nào bị tải lên Server.' }
+      ],
+      faqs: [
+        { q: 'Tại sao nên nén JSON?', a: 'Việc nén JSON làm giảm đáng kể lượng dữ liệu cần truyền tải, đặc biệt quan trọng đối với người dùng di động.' },
+        { q: 'Dữ liệu sau khi nén có hợp lệ không?', a: 'Có. Nén chỉ bỏ các khoảng trắng không có ý nghĩa mà các trình phân tích JSON thường bỏ qua.' }
+      ],
+      complementary: {
+        id: 'json-formatter',
+        name: 'JSON Formatter',
+        textEN: 'Need to make this readable again? Use our',
+        textVI: 'Cần làm dữ liệu dễ đọc lại? Hãy dùng'
+      }
     }
   }
 };

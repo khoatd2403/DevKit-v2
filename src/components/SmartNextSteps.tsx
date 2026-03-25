@@ -43,7 +43,7 @@ export const SmartNextSteps: React.FC<SmartNextStepsProps> = ({ currentToolId, o
         {suggestedTools.map((tool: any) => (
           <Link
             key={tool.id}
-            to={`/tool/${tool.id}?s=${encodedData}`}
+            to={`/${tool.category}-tools/${tool.id}?s=${encodedData}`}
             className="group flex flex-col p-4 bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-2xl hover:border-primary-500 hover:shadow-lg hover:shadow-primary-500/10 transition-all w-full sm:w-[220px]"
           >
             <div className="flex items-center justify-between mb-2">
