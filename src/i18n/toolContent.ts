@@ -9,21 +9,23 @@ export interface ToolAboutContent {
 export const toolAboutTranslations: Record<string, Record<string, ToolAboutContent>> = {
   en: {
     'json-formatter': {
-      what: 'JSON Formatter is an online tool that makes messy or minified JSON data easy to read. It validates your JSON syntax and indents it perfectly according to your selected spacing (2 or 4 spaces).',
+      what: 'A JSON Formatter is a free online tool that formats, validates and beautifies JSON data instantly. It helps developers debug JSON, fix syntax errors, and convert unreadable JSON into a structured format.',
       why: [
-        { title: 'Readability', desc: 'Transform unreadable "one-liner" JSON into a beautifully structured view.' },
-        { title: 'Debugging', desc: 'Identify syntax errors like missing commas or mismatched brackets instantly.' },
-        { title: 'Conversion', desc: 'Easily convert JSON to other formats like YAML, CSV, or XML.' },
-        { title: '100% Privacy', desc: 'Your JSON data is processed entirely in your browser; it never leaves your device.' }
+        { title: 'Readability', desc: 'Transform unreadable "one-liner" JSON into a beautifully structured view instantly.' },
+        { title: 'Real-time Validation', desc: 'Identify syntax errors like missing commas or mismatched brackets as you type.' },
+        { title: '100% Privacy', desc: 'Your JSON data is processed entirely in your browser; it never leaves your device.' },
+        { title: 'Developer Optimized', desc: 'Features like dark mode, customizable indentation, and one-click copy.' }
       ],
       example: {
         before: '{"id":1,"name":"John","active":true}',
         after: '{\n  "id": 1,\n  "name": "John",\n  "active": true\n}'
       },
       faqs: [
-        { q: 'Is this JSON Formatter free?', a: 'Yes, it is 100% free with no sign-up or subscription required.' },
-        { q: 'Is my data secure?', a: 'Absolutely. We use client-side JavaScript, meaning your data stays in your browser and is never sent to any server.' },
-        { q: 'Can I use it for large files?', a: 'Yes, our formatter is optimized to handle large JSON documents efficiently without slowing down your browser.' }
+        { q: 'How to format JSON online?', a: 'You can format JSON by pasting your data into an online JSON formatter tool. It will automatically validate and beautify the JSON.' },
+        { q: 'What is the difference between JSON formatter and validator?', a: 'A JSON formatter improves readability through indentation, while a validator checks for code syntax errors. Most modern tools combine both features.' },
+        { q: 'Why is my JSON invalid?', a: 'Common issues include missing commas, trailing commas, incorrect quotes (use double quotes), or unmatched brackets.' },
+        { q: 'Can I format large JSON files?', a: 'Yes, this tool is optimized to support large files efficiently, limited only by your browser\'s memory.' },
+        { q: 'Is this JSON Formatter tool free?', a: 'Yes, it is completely free to use and runs entirely in your browser with no registration required.' }
       ],
       complementary: {
         id: 'json-minifier',
@@ -242,6 +244,30 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
         name: 'JSON Formatter',
         textEN: 'Need to make this readable again? Use our',
         textVI: 'Cần làm dữ liệu dễ đọc lại? Hãy dùng'
+      }
+    },
+    'html-to-markdown': {
+      what: 'An HTML to Markdown converter allows you to quickly convert HTML code into clean, readable Markdown format. This tool helps developers, writers, and content creators transform HTML into Markdown instantly without installing any software.',
+      why: [
+        { title: 'Fast Conversion', desc: 'Transform complex HTML tags into clean Markdown syntax instantly.' },
+        { title: 'Clean Markdown', desc: 'Automatically strips unnecessary styling and focuses on the content structure.' },
+        { title: '100% Client-Side', desc: 'Your HTML code is processed in your browser, keeping your content private.' }
+      ],
+      example: {
+        before: '<h1>Hello World</h1><p>This is a <strong>strong</strong> paragraph.</p>',
+        after: '# Hello World\n\nThis is a **strong** paragraph.'
+      },
+      faqs: [
+        { q: 'What is HTML to Markdown conversion?', a: 'HTML to Markdown conversion is the process of transforming HTML code into Markdown syntax for easier readability and editing.' },
+        { q: 'Why convert HTML to Markdown?', a: 'Markdown is simpler, cleaner, and widely used in documentation, blogs, and developer tools.' },
+        { q: 'Is this HTML to Markdown tool free?', a: 'Yes, it is completely free and runs entirely in your browser.' },
+        { q: 'Does this tool support complex HTML?', a: 'Yes, it supports most common HTML tags including headings, links, lists, and formatting.' }
+      ],
+      complementary: {
+        id: 'markdown-to-html',
+        name: 'Markdown to HTML',
+        textEN: 'Need to go the other way? Try our',
+        textVI: 'Cần chuyển đổi ngược lại? Thử ngay'
       }
     }
   },
@@ -480,6 +506,28 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
         name: 'JSON Formatter',
         textEN: 'Need to make this readable again? Use our',
         textVI: 'Cần làm dữ liệu dễ đọc lại? Hãy dùng'
+      }
+    },
+    'html-to-markdown': {
+      what: 'Bộ chuyển đổi HTML sang Markdown cho phép bạn nhanh chóng chuyển đổi mã HTML sang định dạng Markdown sạch sẽ và dễ đọc. Công cụ này giúp các nhà phát triển, người viết và người sáng tạo nội dung chuyển đổi HTML sang Markdown ngay lập tức mà không cần cài đặt bất kỳ phần mềm nào.',
+      why: [
+        { title: 'Chuyển đổi nhanh', desc: 'Chuyển đổi các thẻ HTML phức tạp sang cú pháp Markdown sạch sẽ ngay lập tức.' },
+        { title: 'Markdown sạch', desc: 'Tự động lược bỏ các định dạng không cần thiết và tập trung vào cấu trúc nội dung.' },
+        { title: '100% Tại trình duyệt', desc: 'Mã HTML của bạn được xử lý ngay trong trình duyệt, đảm bảo tính riêng tư cho nội dung.' }
+      ],
+      example: {
+        before: '<h1>Hello World</h1><p>This is a <strong>strong</strong> paragraph.</p>',
+        after: '# Hello World\n\nThis is a **strong** paragraph.'
+      },
+      faqs: [
+        { q: 'Mục đích của việc chuyển đổi HTML sang Markdown là gì?', a: 'Markdown dễ đọc và viết hơn HTML, làm cho nó trở thành tiêu chuẩn cho tài liệu, bài đăng blog và hệ thống quản lý nội dung.' },
+        { q: 'Dữ liệu HTML của tôi có an toàn không?', a: 'Hoàn toàn an toàn. Công cụ này chạy hoàn toàn trong trình duyệt của bạn bằng JavaScript, vì vậy dữ liệu của bạn không bao giờ được tải lên bất kỳ máy chủ nào.' }
+      ],
+      complementary: {
+        id: 'markdown-to-html',
+        name: 'Markdown to HTML',
+        textEN: 'Need to go the other way? Try our',
+        textVI: 'Cần chuyển đổi ngược lại? Thử ngay'
       }
     }
   }
