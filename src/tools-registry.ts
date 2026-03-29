@@ -57,7 +57,9 @@ export const tools: Tool[] = [
     icon: '📊',
     tags: ['json', 'csv', 'convert', 'online'],
     seoTitle: 'JSON to CSV Converter | DevTools Online',
-    seoDescription: 'Convert JSON arrays to CSV format online — instant, free, no signup. Handles nested objects, custom delimiters, download as .csv file directly.',
+    seoDescription: 'Convert JSON arrays to CSV format online instantly. Our free tool handles nested objects, flattens data for Excel, and allows downloading .csv files with no signup required.',
+    howToUse: '1. **Paste** your JSON array or object into the input area.\n2. The tool will **auto-detect** the keys and flatten the structure.\n3. **Review** the table preview to ensure the columns are correct.\n4. **Download** the result as a `.csv` file or copy to your clipboard.',
+    commonErrors: '- **Invalid JSON**: Ensure your input is a valid JSON array or object.\n- **Non-Array Input**: The tool works best with arrays of objects to create tabular rows.',
   },
   {
     id: 'json-diff',
@@ -68,7 +70,9 @@ export const tools: Tool[] = [
     tags: ['json', 'diff', 'compare', 'online'],
     new: true,
     seoTitle: 'JSON Diff Tool — Compare JSON Objects | DevTools Online',
-    seoDescription: 'Compare two JSON objects and highlight differences online. Visual diff with added, removed and changed keys — free, no signup, runs in browser.',
+    seoDescription: 'Compare two JSON objects online and highlight differences in keys and values. Free JSON diff tool with side-by-side comparison, auto-sorting, and deep nested detection.',
+    howToUse: '1. **Paste** your original JSON into the left panel.\n2. **Paste** the modified JSON into the right panel.\n3. The tool will **instantly highlight** differences (additions in green, deletions in red).\n4. Toggle **Auto-sort keys** if you want to ignore differences in property order.',
+    commonErrors: '- **Syntax Errors**: Ensure both inputs are valid JSON before comparing.\n- **Large Payloads**: For extremely large files, the initial comparison may take a few seconds.',
   },
 
   // Encoding
@@ -107,7 +111,9 @@ export const tools: Tool[] = [
     icon: '🏷️',
     tags: ['html', 'encode', 'decode', 'entities', 'online'],
     seoTitle: 'HTML Encode & Decode — HTML Entities | DevTools Online',
-    seoDescription: 'Encode HTML special characters to entities and decode HTML entities back to text online. Free, instant, supports all standard HTML5 entities.',
+    seoDescription: 'Encode special characters to HTML entities and decode entities back to text online instantly. Free, secure tool to prevent XSS and ensure correct character rendering.',
+    howToUse: '1. **Paste** your plain text or HTML code into the input area.\n2. **Select** between "Encode" or "Decode" modes.\n3. The conversion happens **instantly** in your browser.\n4. **Copy** the converted string for use in your web projects.',
+    commonErrors: '- **Double Encoding**: Avoid encoding an already encoded string to prevent display bugs.\n- **Incomplete Entities**: Ensure entities start with `&` and end with `;` for proper decoding.',
   },
   {
     id: 'jwt-decoder',
@@ -132,8 +138,9 @@ export const tools: Tool[] = [
     tags: ['hash', 'md5', 'sha1', 'sha256', 'sha512', 'crypto', 'online'],
     popular: true,
     supportsShare: true,
-    seoTitle: 'Hash Generator — MD5, SHA256, SHA512 | DevTools Online',
-    seoDescription: 'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes online. Hash text or drop files to compute checksums — 100% client-side, no data sent to servers.',
+    seoDescription: 'Generate MD5, SHA-1, SHA-256 and SHA-512 hashes online instantly. Free tool to compute file checksums and hash text with 100% client-side security.',
+    howToUse: '1. **Paste** your text or **drag and drop** a file into the input area.\n2. The tool will **instantly compute** hashes using multiple algorithms.\n3. **Compare** resulting hex strings to verify data integrity.\n4. **Copy** specific hashes (MD5, SHA-256, etc.) with a single click.',
+    commonErrors: '- **Unsupported Files**: Extremely large files may slow down your browser as processing is entirely local.\n- **Encoding Issues**: Different input encodings (UTF-8 vs UTF-16) will result in different hash values.',
   },
   {
     id: 'password-generator',
@@ -143,8 +150,9 @@ export const tools: Tool[] = [
     icon: '🔑',
     tags: ['password', 'generator', 'security', 'random', 'online'],
     popular: true,
-    seoTitle: 'Strong Password Generator | DevTools Online',
-    seoDescription: 'Generate strong, random passwords online. Customize length (4–128 chars), uppercase, lowercase, numbers & symbols — 100% local, never sent to server.',
+    seoDescription: 'Generate strong, cryptographically secure passwords online. Customize length and character sets (symbols, numbers, cases) with 100% local, no-server generation.',
+    howToUse: '1. **Choose** your desired length (up to 128 characters).\n2. **Toggle** character sets: Uppercase, Lowercase, Numbers, and Symbols.\n3. **Add** specific characters to exclude if required.\n4. **Copy** your new secure password instantly.',
+    commonErrors: '- **Complexity Warning**: Ensure you include symbols and numbers for high-entropy passwords.\n- **Clipboard Risks**: Always clear your clipboard after pasting your password into a secure manager.',
   },
   {
     id: 'bcrypt',
@@ -154,8 +162,9 @@ export const tools: Tool[] = [
     icon: '🛡️',
     tags: ['bcrypt', 'hash', 'password', 'security', 'online'],
     new: true,
-    seoTitle: 'BCrypt Hash Generator & Verifier | DevTools Online',
-    seoDescription: 'Generate and verify BCrypt password hashes online. Configurable salt rounds, instant hash comparison — 100% client-side, no data leaves your browser.',
+    seoDescription: 'Generate and verify BCrypt password hashes online. Securely test BCrypt salts and hash matching with 100% client-side processing for developer safety.',
+    howToUse: '1. **Enter** the plain text password you want to hash or verify.\n2. **Set cost factor** (salt rounds) for generation (default is 10).\n3. **Input existing hash** to check if it matches the current text.\n4. **Generate** or verify results instantly in your browser.',
+    commonErrors: '- **High Cost Factor**: Values above 12 may significantly slow down generation in some browsers.\n- **Invalid Format**: Ensure BCrypt hashes start with standard prefixes like `$2a$` or `$2b$`.',
   },
 
   // String
@@ -434,7 +443,9 @@ export const tools: Tool[] = [
     tags: ['yaml', 'json', 'convert', 'online'],
     new: true,
     seoTitle: 'YAML to JSON Converter Online (& JSON to YAML) | DevTools Online',
-    seoDescription: 'Convert YAML to JSON or JSON to YAML online — instant bidirectional conversion, syntax validation, copy output. Free, no signup, works in browser.',
+    seoDescription: 'Convert YAML to JSON or JSON to YAML online instantly. Free bidirectional conversion tool with syntax validation, formatting, and 100% browser-side processing.',
+    howToUse: '1. **Paste** your YAML or JSON into the input box.\n2. The tool will **auto-detect** the format and perform the conversion.\n3. **Switch** between YAML to JSON or JSON to YAML modes as needed.\n4. **Copy** the result or download it directly.',
+    commonErrors: '- **Indentation**: YAML is strict about spaces—ensure your formatting is consistent.\n- **Invalid Braces**: For JSON, check for any missing curly or square brackets.',
   },
   {
     id: 'json-to-typescript',
@@ -445,7 +456,9 @@ export const tools: Tool[] = [
     tags: ['json', 'typescript', 'interface', 'type', 'generate', 'online'],
     new: true,
     seoTitle: 'JSON to TypeScript Interface Generator | DevTools Online',
-    seoDescription: 'Generate TypeScript interfaces from JSON online — handles nested objects, arrays, optional fields. Free, no signup, copy-ready TS code instantly.',
+    seoDescription: 'Generate TypeScript interfaces from JSON online instantly. Free tool to convert JSON objects into clean, production-ready TypeScript types and interfaces.',
+    howToUse: '1. **Paste** your JSON sample into the editor.\n2. The tool will **instantly parse** and generate the interfaces.\n3. **Review** the nested types created for sub-objects.\n4. **Copy** the result directly into your TypeScript project.',
+    commonErrors: '- **Malformed JSON**: Ensure your input is valid JSON before generating types.\n- **Empty Objects**: Empty objects in your JSON may result in blank interface definitions.',
   },
   {
     id: 'jsonpath-tester',
@@ -456,7 +469,9 @@ export const tools: Tool[] = [
     tags: ['jsonpath', 'json', 'query', 'path', 'filter', 'online'],
     new: true,
     seoTitle: 'JSONPath Tester & Query Tool | DevTools Online',
-    seoDescription: 'Test JSONPath expressions against JSON data online with real-time results. Filter, extract and navigate JSON using path syntax — free, no signup.',
+    seoDescription: 'Test JSONPath expressions against JSON data online with real-time results. Free interactive tool to query, filter, and extract data from JSON using path syntax.',
+    howToUse: '1. **Paste** your JSON data into the source editor.\n2. **Type** your JSONPath expression (e.g., `$.items[*].id`) into the query field.\n3. **View results** as they update in real-time.\n4. **Debug** matching nodes with visual feedback.',
+    commonErrors: '- **Unsupported Operators**: Ensure your query follows the standard JSONPath specification.\n- **Invalid Syntax**: Check for missing brackets or incorrect wildcards in your path.',
   },
   {
     id: 'json-schema-validator',
@@ -467,7 +482,9 @@ export const tools: Tool[] = [
     tags: ['json', 'schema', 'validate', 'jsonschema', 'online'],
     new: true,
     seoTitle: 'JSON Schema Validator | DevTools Online',
-    seoDescription: 'Validate JSON data against a JSON Schema online — detailed error messages, Draft-07 support. Free, no signup, runs entirely in your browser.',
+    seoDescription: 'Validate JSON data against JSON Schema (Draft 4 to 2020-12) online instantly. Free tool with detailed error messages, path highlighting, and zero data uploads.',
+    howToUse: '1. **Paste** your JSON data into the "Data" input.\n2. **Paste** your JSON Schema into the "Schema" input.\n3. The tool will **instantly validate** and highlight specific error locations.\n4. **Correct** the issues based on the provided validation messages.',
+    commonErrors: '- **Schema Version**: Ensure your $schema draft is supported by the validator.\n- **Circular References**: Some complex schemas with recursion may take longer to validate.',
   },
 
   // Encoding (new)
@@ -480,7 +497,9 @@ export const tools: Tool[] = [
     tags: ['hex', 'hexadecimal', 'encode', 'decode', 'online'],
     new: true,
     seoTitle: 'Hex Encode & Decode | DevTools Online',
-    seoDescription: 'Encode text to hexadecimal and decode hex strings back to plain text online — free, instant, no signup. Supports UTF-8 and ASCII encoding.',
+    seoDescription: 'Convert text to hexadecimal and decode hex strings back to plain text online instantly. Free, secure tool supporting UTF-8 and ASCII with 100% local processing.',
+    howToUse: '1. **Type** or paste your text or hex blocks into the input.\n2. **Select** the desired conversion direction (Text ↔ Hex).\n3. **Use delimiters** (like spaces) to separate bytes if needed.\n4. **Copy** the resulting hex or text output.',
+    commonErrors: '- **Illegal Hex Characters**: Only 0-9 and A-F are valid for hexadecimal input.\n- **Incomplete Bytes**: Each byte is represented by two hex characters; odd-length inputs may fail.',
   },
   {
     id: 'binary-encode-decode',
@@ -491,7 +510,9 @@ export const tools: Tool[] = [
     tags: ['binary', 'bits', 'encode', 'decode', 'online'],
     new: true,
     seoTitle: 'Binary Encode & Decode | DevTools Online',
-    seoDescription: 'Encode text to binary bits and decode binary back to text online — free, instant, no signup. Displays 8-bit groups with space separation.',
+    seoDescription: 'Convert any text to binary bits (0s and 1s) and decode binary back to text online instantly. Free tool with 8-bit spacing for high readability and security.',
+    howToUse: '1. **Enter** your string or binary bitstream in the input editor.\n2. **Choose** between "Text to Binary" or "Binary to Text" modes.\n3. **Observe** the bits update with optional byte-spacing.\n4. **Copy** the final result for your documentation or code.',
+    commonErrors: '- **Input Noise**: Ensure binary input for decoding contains only 0s, 1s, and spaces.\n- **Padding**: For text conversion, every character usually requires 8 bits of binary data.',
   },
 
   // String (new)
@@ -636,8 +657,9 @@ export const tools: Tool[] = [
     icon: '🎟️',
     tags: ['jwt', 'token', 'encode', 'sign', 'hmac', 'auth', 'online'],
     new: true,
-    seoTitle: 'JWT Encoder & Signer — HS256, HS512 | DevTools Online',
-    seoDescription: 'Create and sign JSON Web Tokens online with HS256, HS384 or HS512. Set payload, expiry, custom claims — free, runs in browser, no signup needed.',
+    seoDescription: 'Create and sign JSON Web Tokens (JWT) online with HS256, HS384, or HS512 algorithms. Free interactive tool to build and test secure tokens locally.',
+    howToUse: '1. **Modify** the Header and Payload JSON structures as needed.\n2. **Enter your secret key** for HMAC signature algorithms.\n3. **Set expiry (exp)** or other claims directly in the JSON payload.\n4. **Download** or copy the encoded and signed JWT string.',
+    commonErrors: '- **Weak Secret**: Using short or guessable secrets makes tokens vulnerable to brute-force.\n- **Invalid JSON**: Ensure both header and payload are well-formed JSON objects.',
   },
 
   // Converter
@@ -651,6 +673,8 @@ export const tools: Tool[] = [
     new: true,
     seoTitle: 'Image Converter — JPG, PNG, WebP, BMP | DevTools Online',
     seoDescription: 'Convert images between JPG, PNG, WebP and BMP formats online — 100% client-side, no upload to server. Free, instant, no signup, preserves quality.',
+    howToUse: '1. **Upload** your source image (JPG, PNG, WebP, or BMP).\n2. **Select** the target format from the dropdown menu.\n3. **Download** the converted image instantly.\n4. **Repeat** to convert more files; your privacy is protected as all processing is local.',
+    commonErrors: '- **Corrupt Buffer**: Ensure the source file is not corrupt and is a valid image.\n- **Browser Memory**: Extremely large files might crash the browser; try reducing size first.',
   },
   {
     id: 'image-resizer',
@@ -662,6 +686,8 @@ export const tools: Tool[] = [
     new: true,
     seoTitle: 'Image Resizer — Resize & Compress Images | DevTools Online',
     seoDescription: 'Resize and compress images online with quality control — set exact dimensions or scale by percentage. Free, 100% client-side, no signup required.',
+    howToUse: '1. **Drag and drop** your image into the resize area.\n2. **Specify** the target width or height (aspect ratio is preserved by default).\n3. **Adjust** the quality slider if you need to reduce file size.\n4. **Download** the resized and optimized version of your image.',
+    commonErrors: '- **Very Small Dimensions**: Resizing to 1x1 or empty dimensions may result in a black image.\n- **High Compression**: Setting quality below 50% may result in visible artifacts.',
   },
   {
     id: 'svg-to-png',
@@ -673,6 +699,8 @@ export const tools: Tool[] = [
     new: true,
     seoTitle: 'SVG to PNG / JPG Converter | DevTools Online',
     seoDescription: 'Convert SVG vector files to rasterized PNG or JPG images online — set custom resolution, download instantly. Free, 100% client-side, no signup.',
+    howToUse: '1. **Paste** your SVG code or **upload** an .svg file.\n2. **Set** the output width and height (rasterization resolution).\n3. **Select** between PNG (transparent) or JPG (white background) format.\n4. **Download** your new raster image; all rendering is done locally.',
+    commonErrors: '- **Complex Gradients**: Some advanced SVG patterns might render differently depending on your browser.\n- **External Resources**: SVGs with links to external assets may not render correctly due to security limits.',
   },
   {
     id: 'csv-to-excel',
@@ -684,6 +712,8 @@ export const tools: Tool[] = [
     new: true,
     seoTitle: 'CSV to Excel Converter — Download XLSX | DevTools Online',
     seoDescription: 'Convert CSV files to Excel XLSX spreadsheet format online — instant download, no signup, 100% client-side. Free online CSV to Excel converter.',
+    howToUse: '1. **Select** or drop your `.csv` file into the converter.\n2. **Preview** the data table to ensure the encoding and delimiters are correct.\n3. **Download** the generated `.xlsx` file for use in Microsoft Excel or Google Sheets.\n4. **Safe and Private**: Your spreadsheet data never leaves your browser.',
+    commonErrors: '- **Malformed Rows**: Lines with inconsistent column counts may be shifted.\n- **Special Characters**: If your data shows weird symbols, ensure your CSV uses UTF-8 encoding.',
   },
   {
     id: 'json-to-excel',
@@ -695,6 +725,8 @@ export const tools: Tool[] = [
     new: true,
     seoTitle: 'JSON to Excel Converter — Export XLSX | DevTools Online',
     seoDescription: 'Export JSON array data to Excel XLSX spreadsheet online — instant download, free, no signup, 100% client-side. Handles nested objects and arrays.',
+    howToUse: '1. **Paste** your JSON array into the input editor.\n2. **Confirm** that the tool flattened the nested properties into table columns.\n3. **Download** the resulting Excel (.xlsx) file immediately.\n4. **Process locally**: Your sensitive data remains completely private.',
+    commonErrors: '- **Non-Array Data**: JSON should be an array of objects for best Excel table conversion.\n- **JSON Errors**: Ensure your input is valid JSON first using our formatter.',
   },
   {
     id: 'markdown-to-html',
@@ -706,6 +738,8 @@ export const tools: Tool[] = [
     new: true,
     seoTitle: 'Markdown to HTML Converter | DevTools Online',
     seoDescription: 'Convert Markdown to styled HTML online — download as .html file, copy code, preview output. Free, instant, supports GFM tables and task lists.',
+    howToUse: '1. **Paste** your Markdown text into the left editor.\n2. **Check** the live preview on the right for correct formatting.\n3. **Copy** the raw HTML or **download** a fully styled `.html` document.\n4. Supports GFM (GitHub Flavored Markdown) including tables and checkboxes.',
+    commonErrors: '- **Incomplete Tags**: Ensure HTML blocks inside Markdown are properly closed.\n- **Indentation**: Incorrect spacing in list items can break formatting in some renderers.',
   },
   {
     id: 'html-to-pdf',
@@ -717,6 +751,8 @@ export const tools: Tool[] = [
     new: true,
     seoTitle: 'HTML to PDF Converter | DevTools Online',
     seoDescription: 'Render HTML content and export to PDF via browser print online — supports custom CSS, images. Free, no signup, works in any modern browser.',
+    howToUse: '1. **Paste** your HTML or the website code you want to save.\n2. **Preview** the layout in the interactive frame.\n3. **Click Download PDF** to trigger the browser print-to-pdf engine.\n4. **Customize**: You can modify styles directly before exporting.',
+    commonErrors: '- **Broken Images**: Ensure image URLs are valid or use base64 data URIs.\n- **Dynamic Content**: Scripts might not execute fully before the PDF generation starts.',
   },
 
   // String (new batch 2)
@@ -725,11 +761,23 @@ export const tools: Tool[] = [
   { id: 'text-stats', name: 'Text Statistics', description: 'Detailed text stats: reading time, sentences, paragraphs online', category: 'string', icon: '📈', tags: ['text', 'statistics', 'reading', 'time', 'words', 'sentences', 'online'], new: true, seoTitle: 'Text Statistics & Readability Tool | DevTools Online', seoDescription: 'Get detailed text statistics online — word count, sentence count, reading time, paragraphs, Flesch score. Free, instant, runs in your browser.' },
 
   // JSON (new batch 2)
-  { id: 'json-to-code', name: 'JSON to Code', description: 'Generate Python, PHP, Go, Ruby, Java code from JSON online', category: 'json', icon: '💻', tags: ['json', 'code', 'python', 'php', 'go', 'ruby', 'generate', 'online'], new: true, seoTitle: 'JSON to Code Generator — Python, PHP, Go & More | DevTools Online', seoDescription: 'Generate Python, PHP, Go, Ruby and Java code from JSON online. Instant code scaffolding from any JSON structure — free, no signup, copy ready.' },
+  { id: 'json-to-code', name: 'JSON to Code', description: 'Generate Python, PHP, Go, Ruby, Java code from JSON online', category: 'json', icon: '💻', tags: ['json', 'code', 'python', 'php', 'go', 'ruby', 'generate', 'online'], new: true, seoTitle: 'JSON to Code Generator — Python, PHP, Go & More | DevTools Online',
+    seoDescription: 'Convert JSON objects to class/struct definitions for Python, PHP, Go, Ruby, and Java instantly. Free online code scaffolding tool with 100% browser-side processing.',
+    howToUse: '1. **Paste** your JSON sample into the source editor.\n2. **Select** your target language (Python, Java, Go, etc.).\n3. **Scaffold** your classes or data structures automatically.\n4. **Copy** the generated code directly into your source files.',
+    commonErrors: '- **Invalid JSON**: The tool requires a well-formed JSON object to detect structures.\n- **Mixed Types**: Arrays with inconsistent data types may result in "generic" object types.',
+  },
 
   // Crypto (new batch 2)
-  { id: 'aes-encrypt', name: 'AES Encrypt / Decrypt', description: 'Encrypt and decrypt text using AES-256-GCM in the browser online', category: 'crypto', icon: '🛡️', tags: ['aes', 'encrypt', 'decrypt', 'crypto', 'security', 'cipher', 'online'], new: true, seoTitle: 'AES-256 Encrypt & Decrypt | DevTools Online', seoDescription: 'Encrypt and decrypt text using AES-256-GCM in your browser online — 100% client-side, key never sent to server. Free, instant, no signup required.' },
-  { id: 'totp-generator', name: 'TOTP / 2FA Generator', description: 'Generate and verify time-based one-time passwords (RFC 6238) online', category: 'crypto', icon: '🔑', tags: ['totp', '2fa', 'otp', 'authenticator', 'mfa', 'google', 'online'], new: true, seoTitle: 'TOTP / 2FA Code Generator — RFC 6238 | DevTools Online', seoDescription: 'Generate and verify TOTP two-factor authentication codes online (RFC 6238). Test Google Authenticator secrets — free, runs locally in browser.' },
+  { id: 'aes-encrypt', name: 'AES Encrypt / Decrypt', description: 'Encrypt and decrypt text using AES-256-GCM in the browser online', category: 'crypto', icon: '🛡️', tags: ['aes', 'encrypt', 'decrypt', 'crypto', 'security', 'cipher', 'online'], new: true, seoTitle: 'AES-256 Encrypt & Decrypt | DevTools Online',
+    seoDescription: 'Encrypt and decrypt text using AES-256-GCM online instantly. Secure, browser-based cipher with adjustable key/passphrase and zero data persistence.',
+    howToUse: '1. **Select** operation: Encrypt or Decrypt.\n2. **Enter your secret key** or passphrase.\n3. **Input text** (plain for encryption, hex/base64 for decryption).\n4. **Process** and copy results; your key is never transmitted.',
+    commonErrors: '- **Wrong Key**: AES is symmetric; the same key is required for encryption and decryption.\n- **Salt Mismatch**: Custom IVs or salts must match exactly for successful decryption.',
+  },
+  { id: 'totp-generator', name: 'TOTP / 2FA Generator', description: 'Generate and verify time-based one-time passwords (RFC 6238) online', category: 'crypto', icon: '🔑', tags: ['totp', '2fa', 'otp', 'authenticator', 'mfa', 'google', 'online'], new: true, seoTitle: 'TOTP / 2FA Code Generator — RFC 6238 | DevTools Online',
+    seoDescription: 'Generate and verify 2FA TOTP codes (RFC 6238) online. Test Google Authenticator secrets and verify time-based tokens with 100% local processing.',
+    howToUse: '1. **Paste your secret key** (usually Base32 format from an auth app).\n2. **Observe** the generated 6/8-digit code update every 30 seconds.\n3. **Verify** codes against your system clock to ensure sync.\n4. **Debug** interval states and HMAC internal properties.',
+    commonErrors: '- **Clock Desync**: TOTP relies on accurate time; sync your system clock if codes fail.\n- **Invalid Secret**: Ensure your secret is a valid Base32 encoded string.',
+  },
 
   // Number (new batch 2)
   { id: 'unit-converter', name: 'Unit Converter', description: 'Convert between units: length, weight, temperature, area, speed online', category: 'number', icon: '📏', tags: ['unit', 'convert', 'length', 'weight', 'temperature', 'area', 'speed', 'online'], new: true, seoTitle: 'Unit Converter — Length, Weight, Temperature & More | DevTools Online', seoDescription: 'Convert between units of length, weight, temperature, area and speed online — free, instant, no signup. All conversions run in your browser.' },
@@ -794,8 +842,14 @@ export const tools: Tool[] = [
   // Batch 4 - Media/Visual
   { id: 'favicon-generator', name: 'Favicon Generator', description: 'Generate favicons from emoji or text in multiple sizes online', category: 'generator', icon: '🎨', tags: ['favicon', 'icon', 'emoji', 'png', 'generator', 'website', 'online'], new: true, seoTitle: 'Favicon Generator — From Emoji or Text | DevTools Online', seoDescription: 'Generate favicons from emoji or text in multiple sizes (16x16 to 512x512) online — download PNG, free, no signup, instant browser-side generation.' },
   { id: 'barcode-generator', name: 'Barcode Generator', description: 'Generate EAN-13, Code128, and other barcode formats online', category: 'generator', icon: '🔲', tags: ['barcode', 'ean', 'code128', 'qr', 'scan', 'generator', 'online'], new: true, seoTitle: 'Barcode Generator — EAN-13, Code128 & More | DevTools Online', seoDescription: 'Generate EAN-13, Code128, Code39, UPC-A and other barcode formats online — download PNG, adjust size. Free, instant, no signup required.' },
-  { id: 'image-compressor', name: 'Image Compressor', description: 'Compress and optimize images while preserving quality online', category: 'converter', icon: '📸', tags: ['image', 'compress', 'optimize', 'quality', 'size', 'jpg', 'png', 'online'], new: true, seoTitle: 'Image Compressor — Reduce Image File Size | DevTools Online', seoDescription: 'Compress and optimize images online while preserving quality — reduce file size for web. Free, 100% client-side, no upload to server, no signup.' },
-  { id: 'image-metadata-modifier', name: 'Image Metadata Editor', description: 'View and edit EXIF, IPTC, and XMP metadata of JPEG images online', category: 'converter', icon: '🖼️', tags: ['image', 'exif', 'metadata', 'edit', 'iptc', 'xmp', 'online'], new: true, supportsShare: false, seoTitle: 'Online Image Metadata & EXIF Editor | DevTools Online', seoDescription: 'View and edit image metadata online — modify EXIF, IPTC, XMP, and GPS tags for JPEG images. Free, 100% client-side, no signup required.' },
+  { id: 'image-compressor', name: 'Image Compressor', description: 'Compress and optimize images while preserving quality online', category: 'converter', icon: '📸', tags: ['image', 'compress', 'optimize', 'quality', 'size', 'jpg', 'png', 'online'], new: true, seoTitle: 'Image Compressor — Reduce Image File Size | DevTools Online', seoDescription: 'Compress and optimize images online while preserving quality — reduce file size for web. Free, 100% client-side, no upload to server, no signup.', 
+    howToUse: '1. **Drag and drop** your JPEG or PNG images into the tool.\n2. **Adjust** the compression level to find the balance between size and quality.\n3. **Compare** the original and compressed file sizes in real-time.\n4. **Download** all your optimized images; no data is sent to any server.',
+    commonErrors: '- **Aggressive Compression**: Setting quality too low can cause blurriness.\n- **Oversized Source**: Extremely high-res images can use substantial browser RAM.',
+  },
+  { id: 'image-metadata-modifier', name: 'Image Metadata Editor', description: 'View and edit EXIF, IPTC, and XMP metadata of JPEG images online', category: 'converter', icon: '🖼️', tags: ['image', 'exif', 'metadata', 'edit', 'iptc', 'xmp', 'online'], new: true, supportsShare: false, seoTitle: 'Online Image Metadata & EXIF Editor | DevTools Online', seoDescription: 'View and edit image metadata online — modify EXIF, IPTC, XMP, and GPS tags for JPEG images. Free, 100% client-side, no signup required.',
+    howToUse: '1. **Upload** a JPEG image from your device.\n2. **View** current EXIF, IPTC, and XMP metadata in the sidebar.\n3. **Modify** or delete specific tags (e.g., Artist, GPS, Software).\n4. **Save & Download** the new image with the updated metadata preserved or removed.',
+    commonErrors: '- **Non-JPEG Files**: This editor is currently optimized for `.jpg` and `.jpeg` formats.\n- **Read-Only Tags**: Some low-level system tags cannot be manually edited.',
+  },
 
   // npm
   { id: 'npm-checker', name: 'npm Package Checker', description: 'Look up any npm package — version, downloads, bundle size, dependencies, and changelog online', category: 'web', icon: '📦', tags: ['npm', 'package', 'node', 'registry', 'bundle', 'dependencies', 'version', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'Package data fetched from the npm registry (registry.npmjs.org). Package names you search are sent to their API.', seoTitle: 'npm Package Checker — Version, Size & Downloads | DevTools Online', seoDescription: 'Look up any npm package online — latest version, weekly downloads, bundle size, dependencies & changelog. Instant search, powered by npm registry.' },
@@ -804,16 +858,42 @@ export const tools: Tool[] = [
   { id: 'svg-icons', name: 'SVG Icon Browser', description: 'Search and browse 200,000+ icons from Heroicons, Lucide, Material, Tabler and more — copy SVG, JSX, or CDN link instantly online', category: 'web', icon: '🎨', tags: ['svg', 'icons', 'heroicons', 'lucide', 'material', 'tabler', 'iconify', 'design', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'Icon data fetched from the Iconify CDN. Search queries are sent to their API.', seoTitle: 'SVG Icon Browser — 200,000+ Icons | DevTools Online', seoDescription: 'Search 200,000+ SVG icons from Heroicons, Lucide, Material Design, Tabler & more. Copy SVG, JSX or CDN link instantly — free online icon browser.' },
 
   // .NET / C#
-  { id: 'json-to-csharp', name: 'JSON to C# Classes', description: 'Generate C# class definitions from JSON — supports nested objects, arrays, nullable types, Newtonsoft & System.Text.Json attributes online', category: 'dotnet', icon: '🔷', tags: ['csharp', 'dotnet', 'json', 'class', 'model', 'poco', 'dto', 'newtonsoft', 'c#', 'online'], popular: true, new: true, seoTitle: 'JSON to C# Class Generator | DevTools Online', seoDescription: 'Generate C# class definitions from JSON online — nested objects, arrays, nullable types, Newtonsoft & System.Text.Json attributes. Free, no signup.' },
-  { id: 'nuget-checker', name: 'NuGet Package Checker', description: 'Search NuGet packages — version history, download stats, install commands, PackageReference snippets online', category: 'dotnet', icon: '📦', tags: ['nuget', 'package', 'dotnet', 'csharp', 'c#', '.net', 'library', 'dependency', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'Package data fetched from api.nuget.org. Package names you search are sent to their API.', seoTitle: 'NuGet Package Checker | DevTools Online', seoDescription: 'Search NuGet packages online — version history, download stats, install commands and PackageReference snippets. Free, powered by api.nuget.org.' },
-  { id: 'connection-string-builder', name: 'Connection String Builder', description: 'Build database connection strings for SQL Server, MySQL, PostgreSQL, SQLite, Oracle and MongoDB with live preview online', category: 'dotnet', icon: '🔌', tags: ['connection', 'string', 'sql', 'server', 'mysql', 'postgresql', 'sqlite', 'oracle', 'mongodb', 'ef', 'dotnet', 'online'], popular: true, new: true, seoTitle: 'Connection String Builder — SQL Server, MySQL & More | DevTools Online', seoDescription: 'Build database connection strings for SQL Server, MySQL, PostgreSQL, SQLite, Oracle & MongoDB with live preview — free, copy-ready, no signup.' },
-  { id: 'csharp-string-escape', name: 'C# String Escape', description: 'Escape/unescape C# strings — regular, verbatim @"..." and interpolated $"..." string formats online', category: 'dotnet', icon: '✏️', tags: ['csharp', 'c#', 'string', 'escape', 'verbatim', 'interpolated', 'dotnet', 'online'], new: true, seoTitle: 'C# String Escape / Unescape | DevTools Online', seoDescription: 'Escape and unescape C# strings online — regular, verbatim @"..." and interpolated $"..." formats supported. Free, instant, no signup, runs in browser.' },
-  { id: 'sql-to-linq', name: 'SQL to LINQ', description: 'Convert SQL SELECT queries to LINQ method syntax — WHERE, ORDER BY, GROUP BY, HAVING, DISTINCT, TOP online', category: 'dotnet', icon: '🔃', tags: ['sql', 'linq', 'csharp', 'c#', 'dotnet', 'query', 'convert', 'ef', 'entity framework', 'online'], popular: true, new: true, seoTitle: 'SQL to LINQ Converter — C# Query Syntax | DevTools Online', seoDescription: 'Convert SQL SELECT queries to LINQ method syntax online — WHERE, JOIN, GROUP BY, HAVING, DISTINCT, TOP supported. Free C# LINQ converter, no signup.' },
+  { id: 'json-to-csharp', name: 'JSON to C# Classes', description: 'Generate C# class definitions from JSON — supports nested objects, arrays, nullable types, Newtonsoft & System.Text.Json attributes online', category: 'dotnet', icon: '🔷', tags: ['csharp', 'dotnet', 'json', 'class', 'model', 'poco', 'dto', 'newtonsoft', 'c#', 'online'], popular: true, new: true, seoTitle: 'JSON to C# Class Generator | DevTools Online',
+    seoDescription: 'Generate C# class definitions from JSON online instantly. Free tool supporting nested objects, arrays, nullable types, Newtonsoft, and System.Text.Json attributes.',
+    howToUse: '1. **Paste** your JSON data into the editor.\n2. **Configure** options like Namespace, Class Name, and property attributes.\n3. **Generate** the C# code instantly.\n4. **Copy** the resulting classes into your .NET project.',
+    commonErrors: '- **Invalid JSON**: Ensure your input is well-formed JSON.\n- **Complex Types**: Highly irregular JSON structures may require manual adjustment of generated types.',
+  },
+  { id: 'nuget-checker', name: 'NuGet Package Checker', description: 'Search NuGet packages — version history, download stats, install commands, PackageReference snippets online', category: 'dotnet', icon: '📦', tags: ['nuget', 'package', 'dotnet', 'csharp', 'c#', '.net', 'library', 'dependency', 'online'], popular: true, new: true, privacy: 'network', networkNote: 'Package data fetched from api.nuget.org. Package names you search are sent to their API.', seoTitle: 'NuGet Package Checker | DevTools Online',
+    seoDescription: 'Search NuGet packages online to view version history, download statistics, and installation commands. Free tool powered by the official NuGet API.',
+    howToUse: '1. **Type** the package name (e.g., Newtonsoft.Json) into the search bar.\n2. **Select** the correct package from the results.\n3. **Explore** versions, dependencies, and download trends.\n4. **Copy** the installation command or PackageReference snippet.',
+    commonErrors: '- **Network Issues**: Data is fetched directly from NuGet; intermittent API downtime may affect results.',
+  },
+  { id: 'connection-string-builder', name: 'Connection String Builder', description: 'Build database connection strings for SQL Server, MySQL, PostgreSQL, SQLite, Oracle and MongoDB with live preview online', category: 'dotnet', icon: '🔌', tags: ['connection', 'string', 'sql', 'server', 'mysql', 'postgresql', 'sqlite', 'oracle', 'mongodb', 'ef', 'dotnet', 'online'], popular: true, new: true, seoTitle: 'Connection String Builder — SQL Server, MySQL & More | DevTools Online',
+    seoDescription: 'Build database connection strings for SQL Server, MySQL, PostgreSQL, SQLite, Oracle, and MongoDB online. Free interactive builder with live preview and security tips.',
+    howToUse: '1. **Select** your database engine (e.g., SQL Server).\n2. **Enter** server details, database name, and credentials.\n3. **Toggle** options like Trust Server Certificate or Connection Pooling.\n4. **Copy** the generated connection string.',
+    commonErrors: '- **Security Risk**: Avoid hardcoding plain-text passwords in persistent configuration files.',
+  },
+  { id: 'csharp-string-escape', name: 'C# String Escape', description: 'Escape/unescape C# strings — regular, verbatim @"..." and interpolated $"..." string formats online', category: 'dotnet', icon: '✏️', tags: ['csharp', 'c#', 'string', 'escape', 'verbatim', 'interpolated', 'dotnet', 'online'], new: true, seoTitle: 'C# String Escape / Unescape | DevTools Online',
+    seoDescription: 'Escape and unescape C# strings online instantly. Supports regular, verbatim (@"..."), and interpolated ($"...") formats with 100% client-side processing.',
+    howToUse: '1. **Paste** your C# string or plain text into the input.\n2. **Choose** between Escape or Unescape operations.\n3. **Select** the string type (Normal, Verbatim, or Interpolated).\n4. **Copy** the processed result for use in your code.',
+  },
+  { id: 'sql-to-linq', name: 'SQL to LINQ', description: 'Convert SQL SELECT queries to LINQ method syntax — WHERE, ORDER BY, GROUP BY, HAVING, DISTINCT, TOP online', category: 'dotnet', icon: '🔃', tags: ['sql', 'linq', 'csharp', 'c#', 'dotnet', 'query', 'convert', 'ef', 'entity framework', 'online'], popular: true, new: true, seoTitle: 'SQL to LINQ Converter — C# Query Syntax | DevTools Online',
+    seoDescription: 'Convert SQL SELECT queries to LINQ method syntax online. Free tool supporting WHERE, JOIN, GROUP BY, HAVING, and TOP operations for C# developers.',
+    howToUse: '1. **Paste** your SQL SELECT query into the input.\n2. **Generate** the equivalent LINQ method syntax instantly.\n3. **Review** mapping of SQL clauses to LINQ methods.\n4. **Copy** the C# code into your Data Access Layer.',
+    commonErrors: '- **Unsupported Syntax**: Complex subqueries or vendor-specific SQL functions may not have direct LINQ equivalents.',
+  },
 
   // Diagram & Visualization
   { id: 'diagram-creator', name: 'Diagram Creator', description: 'Create flowcharts, sequence diagrams, ER diagrams, class diagrams, Gantt, mindmaps using Mermaid syntax — export SVG/PNG online', category: 'misc', icon: '🗂️', tags: ['diagram', 'mermaid', 'flowchart', 'sequence', 'erd', 'uml', 'class', 'gantt', 'mindmap', 'chart', 'online'], popular: true, new: true, seoTitle: 'Online Diagram Creator — Flowcharts, ERD, Sequence | DevTools Online', seoDescription: 'Create flowcharts, sequence diagrams, ER diagrams, class diagrams, Gantt charts and mindmaps with Mermaid — export SVG/PNG. Free, no signup.' },
-  { id: 'erd-diagram', name: 'ERD Diagram', description: 'Paste CREATE TABLE SQL to generate an interactive Entity Relationship Diagram — drag tables, visualize FK relationships online', category: 'dotnet', icon: '🔗', tags: ['erd', 'sql', 'diagram', 'entity', 'relationship', 'table', 'schema', 'foreign key', 'database', 'online'], popular: true, new: true, seoTitle: 'ERD Diagram Generator from SQL | DevTools Online', seoDescription: 'Paste CREATE TABLE SQL to generate an interactive Entity Relationship Diagram online. Drag tables, visualize FK relationships — free, no signup.' },
-  { id: 'sql-plan-viewer', name: 'SQL Execution Plan Viewer', description: 'Visualize PostgreSQL EXPLAIN ANALYZE and MySQL EXPLAIN output as an annotated tree — spot slow operations instantly online', category: 'dotnet', icon: '📊', tags: ['sql', 'explain', 'execution', 'plan', 'postgresql', 'mysql', 'performance', 'query', 'index', 'online'], popular: true, new: true, seoTitle: 'SQL Execution Plan Viewer — EXPLAIN ANALYZE | DevTools Online', seoDescription: 'Visualize PostgreSQL EXPLAIN ANALYZE and MySQL EXPLAIN output as an annotated tree online. Spot slow operations and missing indexes instantly.' },
+  { id: 'erd-diagram', name: 'ERD Diagram', description: 'Paste CREATE TABLE SQL to generate an interactive Entity Relationship Diagram — drag tables, visualize FK relationships online', category: 'dotnet', icon: '🔗', tags: ['erd', 'sql', 'diagram', 'entity', 'relationship', 'table', 'schema', 'foreign key', 'database', 'online'], popular: true, new: true, seoTitle: 'ERD Diagram Generator from SQL | DevTools Online',
+    seoDescription: 'Generate interactive Entity Relationship Diagrams (ERD) from SQL CREATE TABLE statements online. Free visualizer to map relationships and foreign keys instantly.',
+    howToUse: '1. **Paste** one or more SQL CREATE TABLE statements into the editor.\n2. **Visualize** the tables and their relationships automatically.\n3. **Drag and drop** tables to organize your schema view.\n4. **Explore** foreign key links between entities.',
+  },
+  { id: 'sql-plan-viewer', name: 'SQL Execution Plan Viewer', description: 'Visualize PostgreSQL EXPLAIN ANALYZE and MySQL EXPLAIN output as an annotated tree — spot slow operations instantly online', category: 'dotnet', icon: '📊', tags: ['sql', 'explain', 'execution', 'plan', 'postgresql', 'mysql', 'performance', 'query', 'index', 'online'], popular: true, new: true, seoTitle: 'SQL Execution Plan Viewer — EXPLAIN ANALYZE | DevTools Online',
+    seoDescription: 'Visualize PostgreSQL and MySQL execution plans online. Free tool to parse EXPLAIN output as an annotated tree to identify performance bottlenecks instantly.',
+    howToUse: '1. **Run** `EXPLAIN (FORMAT JSON) ...` in Postgres or `EXPLAIN ...` in MySQL.\n2. **Paste** the execution plan output into the viewer.\n3. **Analyze** the tree to find high-cost nodes and sequential scans.\n4. **Optimize** your query based on the visual warnings.',
+    commonErrors: '- **Format Mismatch**: Ensure you use the correct format (JSON for Postgres) for optimal visualization.',
+  },
   { id: 'log-viewer', name: 'Log Viewer', description: 'Parse and view structured logs — JSON Lines (Serilog, Pino), .NET NLog, Apache/Nginx access logs — filter by level, search online', category: 'misc', icon: '📋', tags: ['log', 'viewer', 'serilog', 'nlog', 'json', 'apache', 'nginx', 'dotnet', 'debug', 'error', 'filter', 'online'], popular: true, new: true, seoTitle: 'Log Viewer — JSON Logs, Serilog, NLog, Apache | DevTools Online', seoDescription: 'Parse structured logs online — JSON Lines (Serilog, Pino), .NET NLog, Apache/Nginx access logs. Filter by level, search, highlight — free, no signup.' },
 
   // Network / Web tools
@@ -834,8 +914,16 @@ export const tools: Tool[] = [
   { id: 'svg-previewer', name: 'SVG Previewer', description: 'Preview and edit SVG code with zoom, background options, element info — export as SVG or PNG online', category: 'web', icon: '✏️', tags: ['svg', 'preview', 'editor', 'zoom', 'export', 'png', 'vector', 'online'], new: true, seoTitle: 'SVG Previewer & Editor | DevTools Online', seoDescription: 'Preview and edit SVG code with zoom, background color options and element info online. Export as SVG or PNG — free, no signup, runs in browser.' },
 
   // Crypto / Security
-  { id: 'password-strength', name: 'Password Strength Checker', description: 'Check password strength with entropy score, crack time estimate, WCAG checklist and improvement suggestions online', category: 'crypto', icon: '🔑', tags: ['password', 'strength', 'entropy', 'security', 'crack', 'checker', 'validate', 'online'], new: true, seoTitle: 'Password Strength Checker | DevTools Online', seoDescription: 'Check password strength with entropy score, estimated crack time and WCAG checklist online. Get improvement suggestions — free, 100% client-side.' },
-  { id: 'cert-decoder', name: 'Certificate Decoder', description: 'Decode X.509 PEM certificates — view subject, issuer, validity dates, serial, extensions and public key info online', category: 'crypto', icon: '📜', tags: ['certificate', 'x509', 'pem', 'ssl', 'tls', 'decode', 'x.509', 'openssl', 'security', 'online'], new: true, seoTitle: 'X.509 Certificate Decoder — PEM Parser | DevTools Online', seoDescription: 'Decode X.509 PEM certificates online — view subject, issuer, validity dates, serial number and public key info. Free, runs entirely in browser.' },
+  { id: 'password-strength', name: 'Password Strength Checker', description: 'Check password strength with entropy score, crack time estimate, WCAG checklist and improvement suggestions online', category: 'crypto', icon: '🔑', tags: ['password', 'strength', 'entropy', 'security', 'crack', 'checker', 'validate', 'online'], new: true, seoTitle: 'Password Strength Checker | DevTools Online',
+    seoDescription: 'Check password strength and entropy score online. Get crack time estimates and WCAG security checklist with zero data uploads for maximum privacy.',
+    howToUse: '1. **Type** your password into the input field.\n2. **Analyze** entropy score and "Time to Crack" visual indicators.\n3. **Review** checklist (Missing symbols, repeated chars, etc.).\n4. **Iterate** your password until you reach "Very Strong" status.',
+    commonErrors: '- **Dictionary Words**: Passwords with common words are vulnerable even if long.\n- **Low Entropy**: Simple patterns (like 123456) result in low security.',
+  },
+  { id: 'cert-decoder', name: 'Certificate Decoder', description: 'Decode X.509 PEM certificates — view subject, issuer, validity dates, serial, extensions and public key info online', category: 'crypto', icon: '📜', tags: ['certificate', 'x509', 'pem', 'ssl', 'tls', 'decode', 'x.509', 'openssl', 'security', 'online'], new: true, seoTitle: 'X.509 Certificate Decoder — PEM Parser | DevTools Online',
+    seoDescription: 'Decode X.509 PEM certificates online to view subject, issuer, validity, and public key info. Free SSL/TLS certificate parser with 100% local processing.',
+    howToUse: '1. **Paste** PEM certificate (starting with `-----BEGIN CERTIFICATE-----`).\n2. **Analyze** Subject, Issuer, Serial Number, and Extensions.\n3. **Check** validity dates to ensure it is not expired.\n4. **Inspect** public key details and fingerprints.',
+    commonErrors: '- **Incomplete PEM**: Ensure you include BEGIN and END header/footer lines.\n- **Wrong Format**: This tool specifically decodes X.509 PEM certificates.',
+  },
 
   // Generator
   { id: 'national-id-generator', name: 'National ID Generator', description: 'Generate test national identity numbers — Vietnam CCCD, US SSN, UK NI Number, Singapore NRIC, Germany, France online', category: 'generator', icon: '🪪', tags: ['national', 'id', 'identity', 'ssn', 'cccd', 'nric', 'generator', 'test', 'fake', 'online'], new: true, seoTitle: 'National ID Generator — Test Data | DevTools Online', seoDescription: 'Generate test national identity numbers online — Vietnam CCCD, US SSN, UK NI, Singapore NRIC, Germany, France. Free, no signup, for testing only.' },
@@ -844,13 +932,34 @@ export const tools: Tool[] = [
   { id: 'xml-minifier', name: 'XML Minifier / Formatter', description: 'Minify XML by removing whitespace and comments, or format/beautify XML with configurable indentation online', category: 'formatter', icon: '📄', tags: ['xml', 'minify', 'format', 'beautify', 'compress', 'whitespace', 'comments', 'online'], new: true, seoTitle: 'XML Minifier & Formatter | DevTools Online', seoDescription: 'Minify XML by removing whitespace and comments online, or format and beautify with configurable indentation. Free, instant, no signup, runs in browser.' },
 
   // SQL Reference
-  { id: 'sql-syntax', name: 'SQL Syntax Reference', description: 'Complete SQL syntax reference with copy-ready examples — DDL, SELECT, JOINs, CTEs, Window Functions, DML, Transactions online', category: 'dotnet', icon: '📖', tags: ['sql', 'syntax', 'reference', 'select', 'join', 'ddl', 'dml', 'cte', 'window', 'functions', 'tsql', 'online'], popular: true, new: true, seoTitle: 'SQL Syntax Reference & Cheat Sheet | DevTools Online', seoDescription: 'Complete SQL syntax reference with copy-ready examples — SELECT, JOINs, CTEs, Window Functions, DDL, DML, Transactions. Free SQL cheat sheet online.' },
+  { id: 'sql-syntax', name: 'SQL Syntax Reference', description: 'Complete SQL syntax reference with copy-ready examples — DDL, SELECT, JOINs, CTEs, Window Functions, DML, Transactions online', category: 'dotnet', icon: '📖', tags: ['sql', 'syntax', 'reference', 'select', 'join', 'ddl', 'dml', 'cte', 'window', 'functions', 'tsql', 'online'], popular: true, new: true, seoTitle: 'SQL Syntax Reference & Cheat Sheet | DevTools Online',
+    seoDescription: 'Complete SQL syntax reference and cheat sheet with copy-ready examples. Browse T-SQL, PostgreSQL, and MySQL syntax for JOINs, CTEs, and Window Functions.',
+    howToUse: '1. **Search** for a specific SQL clause or function in the reference.\n2. **Read** clear explanations and usage rules.\n3. **View** practical code examples for different database engines.\n4. **Copy** snippets to use in your queries.',
+  },
 
   // AI Tools
-  { id: 'ai-token-counter', name: 'Token Counter', description: 'Estimate token count for GPT, Claude and Gemini models — track context usage and cost before calling the API online', category: 'ai', icon: '🪙', tags: ['ai', 'token', 'gpt', 'claude', 'gemini', 'openai', 'anthropic', 'count', 'context', 'online'], new: true, popular: true, seoTitle: 'AI Token Counter — GPT, Claude, Gemini | DevTools Online', seoDescription: 'Estimate token count for GPT-4, Claude and Gemini models online. Track context window usage and API cost before calling — free, runs in browser.' },
-  { id: 'ai-cost-calculator', name: 'AI Cost Calculator', description: 'Calculate API cost for any AI model — enter input/output tokens and get exact pricing for GPT-4o, Claude, Gemini and more online', category: 'ai', icon: '💰', tags: ['ai', 'cost', 'price', 'gpt', 'claude', 'gemini', 'openai', 'anthropic', 'token', 'calculator', 'online'], new: true, privacy: 'network', networkNote: 'Pricing data fetched from LiteLLM. No prompt content or token data leaves your browser.', seoTitle: 'AI API Cost Calculator — GPT, Claude, Gemini | DevTools Online', seoDescription: 'Calculate API cost for any AI model online — enter input/output tokens and get exact pricing for GPT-4o, Claude, Gemini and more. Free, no signup.' },
-  { id: 'ai-prompt-builder', name: 'Prompt Builder', description: 'Build structured AI prompts with System / User / Assistant roles — export as OpenAI JSON or plain text online', category: 'ai', icon: '🧱', tags: ['ai', 'prompt', 'system', 'user', 'assistant', 'openai', 'chatgpt', 'builder', 'json', 'online'], new: true, seoTitle: 'AI Prompt Builder — System, User, Assistant Roles | DevTools Online', seoDescription: 'Build structured AI prompts with System, User and Assistant roles online — export as OpenAI JSON or plain text. Free, no signup, runs in browser.' },
-  { id: 'ai-model-comparison', name: 'Model Comparison', description: 'Compare GPT, Claude, Gemini and open-source models — context window, pricing, strengths side by side online', category: 'ai', icon: '⚖️', tags: ['ai', 'model', 'compare', 'gpt', 'claude', 'gemini', 'llama', 'context', 'price', 'online'], new: true, privacy: 'network', networkNote: 'Model pricing data fetched from LiteLLM. No personal data is sent.', seoTitle: 'AI Model Comparison — GPT vs Claude vs Gemini | DevTools Online', seoDescription: 'Compare GPT, Claude, Gemini and open-source AI models — context window, pricing and strengths side by side. Free, no signup, data from LiteLLM.' },
-  { id: 'ai-json-to-prompt', name: 'JSON → Prompt', description: 'Convert JSON data into a natural language prompt — describe objects, arrays and values in readable sentences online', category: 'ai', icon: '🔀', tags: ['ai', 'json', 'prompt', 'convert', 'natural', 'language', 'describe', 'online'], new: true, seoTitle: 'JSON to Natural Language Prompt Converter | DevTools Online', seoDescription: 'Convert JSON data into a natural language AI prompt online — describe objects, arrays and values in readable sentences. Free, instant, no signup.' },
-  { id: 'ai-system-prompt', name: 'System Prompt Generator', description: 'Generate system prompts for AI assistants — choose use case, tone and constraints to get a ready-to-use prompt online', category: 'ai', icon: '⚙️', tags: ['ai', 'system', 'prompt', 'generator', 'assistant', 'chatbot', 'instruction', 'online'], new: true, seoTitle: 'AI System Prompt Generator | DevTools Online', seoDescription: 'Generate system prompts for AI assistants online — choose use case, tone and constraints to get a ready-to-use prompt. Free, instant, no signup.' },
+  { id: 'ai-token-counter', name: 'Token Counter', description: 'Estimate token count for GPT, Claude and Gemini models — track context usage and cost before calling the API online', category: 'ai', icon: '🪙', tags: ['ai', 'token', 'gpt', 'claude', 'gemini', 'openai', 'anthropic', 'count', 'context', 'online'], new: true, popular: true, seoTitle: 'AI Token Counter — GPT, Claude, Gemini | DevTools Online',
+    seoDescription: 'Estimate token count for GPT, Claude, and Gemini models online. Free tool to track context window usage and API costs before sending prompts.',
+    howToUse: '1. **Paste** your prompt text into the counter.\n2. **Select** the target model (e.g., GPT-4o, Claude 3.5).\n3. **Observe** token count and estimated cost update in real-time.\n4. **Optimize** your prompt to stay within context limits.',
+  },
+  { id: 'ai-cost-calculator', name: 'AI Cost Calculator', description: 'Calculate API cost for any AI model — enter input/output tokens and get exact pricing for GPT-4o, Claude, Gemini and more online', category: 'ai', icon: '💰', tags: ['ai', 'cost', 'price', 'gpt', 'claude', 'gemini', 'openai', 'anthropic', 'token', 'calculator', 'online'], new: true, privacy: 'network', networkNote: 'Pricing data fetched from LiteLLM. No prompt content or token data leaves your browser.', seoTitle: 'AI API Cost Calculator — GPT, Claude, Gemini | DevTools Online',
+    seoDescription: 'Calculate AI API costs for GPT-4, Claude, Gemini, and more online. Enter input/output tokens to get exact pricing based on current LiteLLM data.',
+    howToUse: '1. **Choose** your AI provider and model version.\n2. **Input** the number of tokens or words for input and output.\n3. **Calculate** the total USD cost instantly.\n4. **Compare** pricing across different models to optimize your budget.',
+  },
+  { id: 'ai-prompt-builder', name: 'Prompt Builder', description: 'Build structured AI prompts with System / User / Assistant roles — export as OpenAI JSON or plain text online', category: 'ai', icon: '🧱', tags: ['ai', 'prompt', 'system', 'user', 'assistant', 'openai', 'chatgpt', 'builder', 'json', 'online'], new: true, seoTitle: 'AI Prompt Builder — System, User, Assistant Roles | DevTools Online',
+    seoDescription: 'Build structured AI prompts with System, User, and Assistant roles online. Free tool to generate OpenAI-compatible JSON or plain text prompts instantly.',
+    howToUse: '1. **Add** message blocks for System, User, or Assistant roles.\n2. **Write** clear instructions and context in each block.\n3. **Preview** the formatted prompt as a JSON array or text.\n4. **Copy** the result for your API calls or LLM interactions.',
+  },
+  { id: 'ai-model-comparison', name: 'Model Comparison', description: 'Compare GPT, Claude, Gemini and open-source models — context window, pricing, strengths side by side online', category: 'ai', icon: '⚖️', tags: ['ai', 'model', 'compare', 'gpt', 'claude', 'gemini', 'llama', 'context', 'price', 'online'], new: true, privacy: 'network', networkNote: 'Model pricing data fetched from LiteLLM. No personal data is sent.', seoTitle: 'AI Model Comparison — GPT vs Claude vs Gemini | DevTools Online',
+    seoDescription: 'Compare GPT, Claude, Gemini, and Llama models online side-by-side. Free reference for context windows, pricing, and specific model strengths.',
+    howToUse: '1. **Filter** models by provider or capability.\n2. **Compare** key metrics like maximum tokens and per-million pricing.\n3. **Read** summaries of strengths and ideal use cases.\n4. **Select** the best model for your specific technical requirements.',
+  },
+  { id: 'ai-json-to-prompt', name: 'JSON → Prompt', description: 'Convert JSON data into a natural language prompt — describe objects, arrays and values in readable sentences online', category: 'ai', icon: '🔀', tags: ['ai', 'json', 'prompt', 'convert', 'natural', 'language', 'describe', 'online'], new: true, seoTitle: 'JSON to Natural Language Prompt Converter | DevTools Online',
+    seoDescription: 'Convert JSON data into natural language prompts online. Free tool to describe complex JSON objects and arrays in readable sentences for LLMs.',
+    howToUse: '1. **Paste** your JSON payload into the source editor.\n2. **Generate** a natural language description automatically.\n3. **Review** prompt to ensure it captures all data relationships.\n4. **Copy** the text to use in your AI model instructions.',
+  },
+  { id: 'ai-system-prompt', name: 'System Prompt Generator', description: 'Generate system prompts for AI assistants — choose use case, tone and constraints to get a ready-to-use prompt online', category: 'ai', icon: '⚙️', tags: ['ai', 'system', 'prompt', 'generator', 'assistant', 'chatbot', 'instruction', 'online'], new: true, seoTitle: 'AI System Prompt Generator | DevTools Online',
+    seoDescription: 'Generate optimized AI system prompts online. Choose use cases, tones, and constraints to build high-quality instructions for AI assistants instantly.',
+    howToUse: '1. **Select** a primary use case (e.g., Coding Assistant).\n2. **Choose** desired tone and set behavioral constraints.\n3. **Generate** a comprehensive system prompt.\n4. **Refine** and copy prompt for your model configuration.',
+  },
 ]
