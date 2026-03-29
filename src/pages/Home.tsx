@@ -21,7 +21,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const { slug } = useParams<{ slug: string }>()
-  
+
   const catFromSlug = useMemo(() => {
     if (slug?.endsWith('-tools')) {
       const catId = slug.replace('-tools', '')
@@ -184,33 +184,32 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
 
         {/* ── Category filter tabs ── */}
         <div className="flex gap-1.5 flex-wrap mb-6 -mt-2">
-            {[{ id: 'all', name: t.categories.all, icon: '🧰', color: 'gray' }, ...categories.filter(c => c.id !== 'all')].map(cat => (
-              <button
-                key={cat.id}
-                onClick={() => navigate(cat.id === 'all' ? '/' : `/${cat.id}-tools`)}
-                className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                  activeCategory === cat.id
-                    ? 'bg-primary-600 text-white'
-                    : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:border-primary-400 dark:hover:border-primary-600'
+          {[{ id: 'all', name: t.categories.all, icon: '🧰', color: 'gray' }, ...categories.filter(c => c.id !== 'all')].map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => navigate(cat.id === 'all' ? '/' : `/${cat.id}-tools`)}
+              className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${activeCategory === cat.id
+                ? 'bg-primary-600 text-white'
+                : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:border-primary-400 dark:hover:border-primary-600'
                 }`}
-              >
-                <span>{cat.icon}</span>
-                <span>{cat.name}</span>
-              </button>
-            ))}
+            >
+              <span>{cat.icon}</span>
+              <span>{cat.name}</span>
+            </button>
+          ))}
         </div>
 
         {activeCategory === 'all' && (
           <Helmet>
-            <title>{lang === 'vi' ? 'DevTools Online | Công cụ Lập trình viên Trực tuyến' : 'DevTools Online | Free Online Developer Tools'}</title>
+            <title>{lang === 'vi' ? 'DevTools Online | Công cụ Lập trình viên Trực tuyến' : 'DevTools Online | JSON, SQL, JWT & More Tools'}</title>
             <meta name="description" content={lang === 'vi' ? 'Hơn 120 công cụ lập trình viên trực tuyến miễn phí, bảo mật và chạy trên trình duyệt. Định dạng JSON, SQL, mã hóa Base64, Webhook và nhiều hơn nữa.' : '120+ free, secure, and browser-based developer tools. Format JSON, beautify SQL, encode Base64, test Webhooks, and more.'} />
             <link rel="canonical" href={SITE_URL} />
-            <meta property="og:title" content={lang === 'vi' ? 'DevTools Online | Công cụ Lập trình viên Trực tuyến' : 'DevTools Online | Free Online Developer Tools'} />
+            <meta property="og:title" content={lang === 'vi' ? 'DevTools Online | Công cụ Lập trình viên Trực tuyến' : 'DevTools Online | JSON, SQL, JWT & More Tools'} />
             <meta property="og:description" content={lang === 'vi' ? 'Bộ công cụ lập trình viên toàn diện nhất ngay trong trình duyệt của bạn.' : 'The most comprehensive developer toolbox right in your browser.'} />
             <meta property="og:url" content={SITE_URL} />
             <meta property="og:image" content={`${SITE_URL}/og-image.svg`} />
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={lang === 'vi' ? 'DevTools Online | Công cụ Lập trình viên Trực tuyến' : 'DevTools Online | Free Online Developer Tools'} />
+            <meta name="twitter:title" content={lang === 'vi' ? 'DevTools Online | Công cụ Lập trình viên Trực tuyến' : 'DevTools Online | JSON, SQL, JWT & More Tools'} />
             <meta name="twitter:description" content={lang === 'vi' ? 'Bộ công cụ lập trình viên toàn diện nhất ngay trong trình duyệt của bạn.' : 'The most comprehensive developer toolbox right in your browser.'} />
             <meta name="twitter:image" content={`${SITE_URL}/og-image.svg`} />
           </Helmet>
@@ -226,7 +225,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                 <>
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-xl">{cat?.icon}</span>
-                  <h3 className="font-semibold text-gray-900 dark:text-white">{t.categories[cat?.id as keyof typeof t.categories] || cat?.name}</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">{t.categories[cat?.id as keyof typeof t.categories] || cat?.name}</h3>
                     <span className="text-xs text-gray-400">({catTools.length})</span>
                   </div>
 
@@ -235,7 +234,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                     const currentLang = lang || 'en';
                     const catContent = categoryAboutTranslations[currentLang]?.[activeCategory] || categoryAboutTranslations['en']?.[activeCategory];
                     const catName = t.categories[activeCategory as keyof typeof t.categories] || cat?.name || activeCategory;
-                    
+
                     const seoTitle = catContent?.seoTitle || (currentLang === 'vi' ? `Công cụ ${catName} Trực tuyến Miễn phí | DevTools` : `Free Online ${catName} Tools | DevTools Online`);
                     const seoDesc = catContent?.seoDescription || (currentLang === 'vi' ? `Tổng hợp các công cụ ${catName} trực tuyến mạnh mẽ, bảo mật và hoàn toàn chạy trên trình duyệt. Không cần cài đặt, không lưu trữ dữ liệu người dùng.` : `A comprehensive collection of powerful, secure, and client-side ${catName} tools. No installation required, 100% private, works instantly in your browser.`);
 
@@ -268,15 +267,15 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                     const currentLang = lang || 'en';
                     const catDesc = categoryAboutTranslations[currentLang]?.[activeCategory] || categoryAboutTranslations['en']?.[activeCategory];
                     if (!catDesc) return null;
-                    
+
                     return (
                       <div className="mt-12 pt-10 border-t border-gray-200 dark:border-gray-800">
                         <div className="bg-white dark:bg-gray-950 rounded-2xl p-6 sm:p-8 border border-gray-100 dark:border-gray-900 shadow-sm">
                           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                             <span>{cat?.icon}</span>
-                             {currentLang === 'vi' ? `Về công cụ ${cat?.name}` : `About ${cat?.name} Tools`}
+                            <span>{cat?.icon}</span>
+                            {currentLang === 'vi' ? `Về công cụ ${cat?.name}` : `About ${cat?.name} Tools`}
                           </h2>
-                          <div 
+                          <div
                             className="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed
                               prose-a:text-primary-600 dark:prose-a:text-primary-400 prose-a:no-underline hover:prose-a:underline prose-a:font-medium
                               prose-strong:text-gray-900 dark:prose-strong:text-white prose-strong:font-bold"
@@ -454,7 +453,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
             <div>
               <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoSqlTitle}</h3>
               <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-               {t.seoSQL}
+                {t.seoSQL}
               </p>
             </div>
             <div>

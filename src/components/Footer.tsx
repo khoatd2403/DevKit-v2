@@ -108,6 +108,55 @@ export default function Footer() {
           ))}
         </div>
 
+        {/* Unique MCP Server Banner - Terminal AI Style */}
+        <a
+          href="https://www.npmjs.com/package/devtoolsonline-mcp"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative block mb-10 rounded-2xl p-[1px] bg-gradient-to-r from-primary-500 via-purple-500 to-blue-500 group overflow-hidden shadow-lg shadow-primary-500/20"
+          title="Install DevTools MCP Server"
+        >
+          {/* Animated glowing border backdrop */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-500 via-purple-500 to-blue-500 opacity-20 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
+          
+          <div className="relative flex flex-col sm:flex-row items-center justify-between gap-6 p-5 sm:px-6 bg-gray-900 dark:bg-black rounded-[15px] overflow-hidden">
+            {/* Ambient inner glow */}
+            <div className="absolute -left-10 top-0 w-32 h-32 bg-primary-500/20 rounded-full blur-3xl pointer-events-none transition-transform group-hover:scale-150 duration-700"></div>
+
+            <div className="flex items-start sm:items-center gap-5 z-10 w-full min-w-0">
+              {/* Fake Terminal window controls */}
+              <div className="hidden sm:flex flex-col gap-1.5 shrink-0 mt-1 sm:mt-0">
+                <span className="w-2.5 h-2.5 rounded-full bg-red-500 hover:bg-red-400 cursor-default"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-yellow-500 hover:bg-yellow-400 cursor-default"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-green-500 hover:bg-green-400 cursor-default"></span>
+              </div>
+              
+              <div className="flex-1 font-mono min-w-0">
+                <div className="flex flex-wrap items-center gap-2 mb-1.5 text-sm sm:text-base">
+                  <span className="text-primary-400/80 font-bold select-none">&gt;</span>
+                  <span className="text-gray-300">npx <span className="text-gray-400">-y</span></span>
+                  <span className="text-green-400 font-bold truncate">devtoolsonline-mcp</span>
+                  <span className="animate-pulse w-2 h-4 sm:h-5 bg-primary-400 ml-1 inline-block"></span>
+                </div>
+                <div className="flex items-center gap-2 mt-1 flex-wrap">
+                  <span className="text-gray-500 text-[11px] sm:text-xs flex items-center gap-1.5 tracking-wide">
+                     <span className="bg-primary-500/20 text-primary-400 px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold uppercase leading-none border border-primary-500/30">
+                       AI Agent Ready
+                     </span>
+                     Connect 15+ native tools to Claude & Cursor
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="z-10 shrink-0 w-full sm:w-auto">
+               <div className="flex items-center justify-center sm:justify-start gap-2 px-5 py-2.5 sm:py-2 bg-white/5 hover:bg-white/10 text-white text-xs sm:text-sm font-semibold rounded-xl transition-all font-mono backdrop-blur-sm border border-white/10 group-hover:border-primary-500/50 shadow-inner group-hover:shadow-primary-500/20">
+                 Explore API <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+               </div>
+            </div>
+          </div>
+        </a>
+
         {/* Bottom bar */}
         <div className="pt-6 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400 dark:text-gray-600">
           <p>{t.footerCopyright(year)}</p>

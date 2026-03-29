@@ -1,0 +1,72 @@
+{
+  "name": "devtoolsonline-mcp",
+  "version": "1.2.2",
+  "description": "Powerful Model Context Protocol (MCP) server providing 128+ developer tools for AI agents (Claude, Cursor, Windsurf, Zed).",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "mcp server",
+    "model-context-protocol",
+    "model context protocol",
+    "claude",
+    "cursor",
+    "windsurf",
+    "zed",
+    "cline",
+    "roo-code",
+    "ai-agent",
+    "developer-tools",
+    "dev-tools",
+    "dev tools",
+    "utilities",
+    "devtoolsonline",
+    "json-repair",
+    "json repair",
+    "json-formatter",
+    "json formatter",
+    "jwt-decoder",
+    "jwt decoder",
+    "string-case",
+    "productivity",
+    "anthropic",
+    "ai-tools",
+    "password-generator",
+    "password generator",
+    "uuid-generator",
+    "uuid generator",
+    "base64-encode",
+    "base64 encode",
+    "hash-generator",
+    "hash generator",
+    "timestamp-parser",
+    "timestamp parser",
+    "html-encode",
+    "html encode",
+    "lorem-ipsum",
+    "lorem ipsum"
+  ],
+  "type": "module",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "devtoolsonline-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --clean",
+    "start": "node dist/index.js",
+    "dev": "ts-node-esm src/index.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.1",
+    "typescript": "^5.3.3"
+  }
+}

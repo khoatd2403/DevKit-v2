@@ -526,7 +526,9 @@ export const tools: Tool[] = [
     tags: ['html', 'markdown', 'convert', 'md', 'online'],
     new: true,
     seoTitle: 'HTML to Markdown Converter | DevTools Online',
-    seoDescription: 'Convert HTML markup to clean Markdown syntax online — headings, links, images, tables, lists. Free, instant, no signup, copy or download output.',
+    seoDescription: 'Quickly convert HTML to clean, readable Markdown online. Perfect for developers and content creators seeking an instant, software-free way to transform HTML markup.',
+    howToUse: '1. **Paste** your HTML code into the input box.\n2. The tool will **instantly convert** it into Markdown format.\n3. **Copy the output** or download the result.\n\nThis HTML to Markdown converter works entirely in your browser, ensuring fast and secure processing.',
+    commonErrors: '- **Malformed HTML**: Ensure your input has valid opening and closing tags.\n- **Complex JS/CSS**: Scripts and styles are stripped as they are not valid Markdown.',
   },
 
   // Date & Time (new)

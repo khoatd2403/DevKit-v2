@@ -5,6 +5,7 @@ import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
 import { useShareableState } from '../hooks/useShareableState'
 import { SmartNextSteps } from '../components/SmartNextSteps'
+import { formatJson, autoFixJson, validateJson } from '../core/json'
 
 const SAMPLE = '{"name":"John Doe","age":30,"email":"john@example.com","address":{"city":"New York","zip":"10001"},"hobbies":["reading","coding","hiking"]}'
 
@@ -13,95 +14,29 @@ export default function JsonFormatter() {
   useShareableState(input, setInput)
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
-  const [indent, setIndent] = usePersistentState('json-indent', 2)
+  const [indent, setIndent] = usePersistentState<number | '\t'>('json-indent', 2)
 
   useEffect(() => {
-    if (!input.trim()) { setOutput(''); setError(''); return }
-    try {
-      const parsed = JSON.parse(input)
-      setOutput(JSON.stringify(parsed, null, indent))
-      setError('')
-    } catch (e) {
-      setError((e as Error).message)
-    }
+    const { output: res, error: err } = formatJson(input, indent)
+    setOutput(res)
+    setError(err)
   }, [input, indent])
 
   const handleAutoFix = () => {
-    try {
-      let s = input;
-      s = s.replace(/\u00A0/g, ' ');
-      s = s.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F\uFEFF]/g, '');
-      s = s.replace(/"([^"]*)"/g, (match) => {
-        return match.replace(/\n/g, '\\n').replace(/\r/g, '\\r');
-      });
-      s = s.replace(/\/\/.*/g, '');
-      s = s.replace(/\/\*[\s\S]*?\*\//g, '');
-      s = s.replace(/[\u201C\u201D\u201E\u201F\u2033\u2036]/g, '"');
-
-      const MAX_ATTEMPTS = 100;
-      for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-        s = s.replace(/'((?:\\.|[^'])*)'/g, (_, g1: string) =>
-          '"' + g1.replace(/"/g, '\\"').replace(/\\'/g, "'") + '"'
-        );
-        s = s.replace(/([{,]\s*)([a-zA-Z_$][a-zA-Z0-9_$]*)\s*:/g, '$1"$2":');
-        s = s.replace(/,\s*([}\]])/g, '$1');
-        try {
-          const parsed = JSON.parse(s);
-          const beautified = JSON.stringify(parsed, null, indent);
-          setInput(beautified);
-          setOutput(beautified);
-          setError('✨ Đã dọn dẹp sạch ký tự rác và định dạng lại JSON.');
-          return;
-        } catch (err) {
-          const msg = (err as Error).message;
-          if (msg.includes("Unexpected end") || msg.includes("unterminated")) {
-            const openBraces = (s.match(/{/g) || []).length;
-            const closeBraces = (s.match(/}/g) || []).length;
-            if (openBraces > closeBraces) { s += '}'; continue; }
-            const openBrackets = (s.match(/\[/g) || []).length;
-            const closeBrackets = (s.match(/\]/g) || []).length;
-            if (openBrackets > closeBrackets) { s += ']'; continue; }
-          }
-          const posMatch = msg.match(/position\s+(\d+)/);
-          if (!posMatch) throw err;
-          const errorPos = parseInt(posMatch[1], 10);
-          if (msg.includes("Expected ','") || msg.includes("Expected '}'")) {
-            let i = errorPos;
-            while (i > 0 && /\s/.test(s[i - 1])) i--;
-            s = s.slice(0, i) + ',' + s.slice(i);
-          } else if (msg.includes("Expected ':'")) {
-            s = s.slice(0, errorPos) + ':' + s.slice(errorPos);
-          } else if (msg.includes("Unexpected token") || msg.includes("Expected property name")) {
-            let start = errorPos;
-            while (start > 0 && /[a-zA-Z0-9_$.]/.test(s[start - 1])) start--;
-            let end = errorPos;
-            while (end < s.length && /[a-zA-Z0-9_$.]/.test(s[end])) end++;
-            if (end > start) {
-              const word = s.slice(start, end);
-              const map: any = { 'None': 'null', 'undefined': 'null', 'True': 'true', 'False': 'false', 'NaN': 'null' };
-              s = s.slice(0, start) + (map[word] || `"${word}"`) + s.slice(end);
-            } else {
-              s = s.slice(0, errorPos) + s.slice(errorPos + 1);
-            }
-          } else {
-            throw err;
-          }
-        }
-      }
-    } catch (e) {
-      setError(`Auto-fix bó tay: ${(e as Error).message}`);
+    const { output: res, error: err } = autoFixJson(input, indent)
+    if (res) {
+      setInput(res)
+      setOutput(res)
+      setError(err)
+    } else {
+      setError(err)
     }
   };
 
   const validate = () => {
-    if (!input.trim()) { setError('Input is empty'); return }
-    try {
-      JSON.parse(input)
-      setError('✅ Valid JSON')
-    } catch (e) {
-      setError((e as Error).message)
-    }
+    setError(validateJson(input))
   }
+
 
   return (
     <div className="space-y-4">

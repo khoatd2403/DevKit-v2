@@ -18,6 +18,10 @@ import PrivacyBadge from '../components/PrivacyBadge'
 import { ToolAbout } from '../components/ToolAbout'
 import { encodeShareData, decodeShareData } from '../utils/shareUtils'
 import { useToast } from '../context/ToastContext'
+import Footer from '../components/Footer'
+
+// Track which tool IDs have been fully loaded (cached by React.lazy)
+const loadedTools = new Set<string>()
 
 const PRO_TIPS: Record<string, { tip: string; tipId: string }> = {
   'json-formatter': { tipId: 'json-ctrl-enter', tip: 'Press Ctrl+Enter to format instantly without clicking the button.' },
@@ -290,17 +294,24 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
         </div>
 
         <div className="flex-1 overflow-y-auto">
-          <div className="max-w-[1600px] mx-auto px-4 py-8 sm:px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-              <div className="lg:col-span-3 space-y-6">
-                <div className="bg-white dark:bg-gray-900 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-sm border border-gray-100 dark:border-gray-800 tool-content min-h-[400px]">
-                  <Suspense fallback={<ToolLoader />}>
-                    <ToolErrorBoundary>
-                      <ToolComponent />
-                    </ToolErrorBoundary>
-                  </Suspense>
-                </div>
+          <div className="max-w-[1600px] mx-auto px-4 py-8 sm:px-6 space-y-8">
+            {/* Pro Tip Banner (Full Width Above Tool) */}
+            {PRO_TIPS[toolMeta.id] && (
+              <ProTipBanner toolId={toolMeta.id} tipId={PRO_TIPS[toolMeta.id].tipId} tip={PRO_TIPS[toolMeta.id].tip} />
+            )}
 
+            {/* Main Tool Component (Full Width 100%) */}
+            <div className="bg-white dark:bg-gray-900 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-sm border border-gray-100 dark:border-gray-800 tool-content min-h-[400px]">
+              <Suspense fallback={loadedTools.has(toolMeta.id) ? null : <ToolLoader onLoaded={() => loadedTools.add(toolMeta.id)} />}>
+                <ToolErrorBoundary>
+                  <ToolComponent />
+                </ToolErrorBoundary>
+              </Suspense>
+            </div>
+
+            {/* Bottom Content: SEO/About (Left) and Related/Feedback (Right) */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+              <div className="lg:col-span-3">
                 <ToolAbout
                   toolId={toolMeta.id}
                   toolName={toolMeta.name}
@@ -312,10 +323,6 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
               </div>
 
               <div className="space-y-6">
-                {PRO_TIPS[toolMeta.id] && (
-                  <ProTipBanner toolId={toolMeta.id} tipId={PRO_TIPS[toolMeta.id].tipId} tip={PRO_TIPS[toolMeta.id].tip} />
-                )}
-
                 <div className="bg-white dark:bg-gray-900 rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-800">
                   <h3 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                     <LayoutPanelLeft size={16} />
@@ -331,6 +338,23 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
                   </div>
                 </div>
 
+                <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl sm:rounded-3xl p-5 sm:p-6 text-white border border-gray-800 shadow-xl shadow-gray-900/10">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-xl">🤖</span>
+                    <h3 className="text-sm font-bold tracking-wide">For AI Agents</h3>
+                  </div>
+                  <p className="text-xs text-gray-400 mb-4 leading-relaxed">Empower Claude, Cursor, and Windsurf with these tools natively via MCP.</p>
+                  
+                  <div className="bg-black/80 border border-gray-800 rounded-xl p-3 flex flex-col gap-1 relative overflow-hidden group">
+                    <span className="text-[9px] uppercase text-gray-600 font-bold tracking-wider">NPM Command</span>
+                    <code className="text-xs font-mono text-green-400 break-all select-all">npx -y devtoolsonline-mcp</code>
+                  </div>
+                  
+                  <a href="https://www.npmjs.com/package/devtoolsonline-mcp" target="_blank" rel="noreferrer" className="block w-full text-center mt-4 py-2 border border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 rounded-xl text-xs font-bold transition-colors">
+                    Documentation
+                  </a>
+                </div>
+
                 <div className="bg-gradient-to-br from-primary-600 to-indigo-700 rounded-2xl sm:rounded-3xl p-5 sm:p-6 text-white">
                   <MessageSquare className="mb-4 opacity-50" />
                   <h3 className="text-lg font-bold mb-1">Need a feature?</h3>
@@ -342,6 +366,8 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
               </div>
             </div>
           </div>
+          
+          <Footer />
         </div>
 
         <SnippetDrawer
@@ -355,12 +381,81 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
   )
 }
 
-function ToolLoader() {
+function ToolLoader({ onLoaded }: { onLoaded?: () => void }) {
+  const [step, setStep] = useState(0)
+
+  useEffect(() => {
+    // Sequence timings to simulate actual terminal fetching behavior
+    const t1 = setTimeout(() => setStep(1), 150)
+    const t2 = setTimeout(() => setStep(2), 400)
+    const t3 = setTimeout(() => setStep(3), 600)
+    
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+      clearTimeout(t3)
+      // Mark as loaded when suspense resolves (component unmounts = content ready)
+      onLoaded?.()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
-    <div className="animate-pulse space-y-6 py-4">
-      <div className="h-8 bg-gray-100 dark:bg-gray-800 rounded w-1/4"></div>
-      <div className="h-48 bg-gray-100 dark:bg-gray-800 rounded-2xl w-full"></div>
-      <div className="h-48 bg-gray-100 dark:bg-gray-800 rounded-2xl w-full"></div>
+    <div className="w-full max-w-4xl mx-auto py-2">
+      {/* Fake Terminal Windows Header */}
+      <div className="flex items-center px-4 py-3 bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-t-2xl shadow-sm">
+        <div className="flex gap-2">
+          <div className="w-3 h-3 rounded-full bg-red-400"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+          <div className="w-3 h-3 rounded-full bg-green-400"></div>
+        </div>
+        <div className="flex-1 text-center text-xs font-mono tracking-widest text-gray-400 dark:text-gray-500">
+          bash - loading_module
+        </div>
+      </div>
+      
+      {/* Terminal Body */}
+      <div className="bg-gray-50 dark:bg-black border-x border-b border-gray-200 dark:border-gray-800 rounded-b-2xl p-6 min-h-[350px] flex flex-col gap-3 font-mono text-[13px] sm:text-sm shadow-inner relative overflow-hidden">
+        
+        {/* Grid overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(100,100,100,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(100,100,100,0.05)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none"></div>
+        
+        {/* Logs Animated Sequence */}
+        <div className="z-10 flex items-center gap-3 text-gray-500 dark:text-gray-400">
+          <span className="text-green-500 font-bold">➜</span>
+          <span className="text-blue-500 font-bold">~</span>
+          <span>Resolving dynamic import...</span>
+          {step >= 1 && <span className="text-green-500 font-bold ml-auto animate-in fade-in zoom-in duration-300">[OK]</span>}
+        </div>
+        
+        {step >= 1 && (
+          <div className="z-10 flex items-center gap-3 text-gray-600 dark:text-gray-300 animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <span className="text-green-500 font-bold">➜</span>
+            <span className="text-blue-500 font-bold">~</span>
+            <span>Downloading tool bundle...</span>
+            {step >= 2 && <span className="text-green-500 font-bold ml-auto animate-in fade-in zoom-in duration-300">[OK]</span>}
+          </div>
+        )}
+        
+        {step >= 2 && (
+          <div className="z-10 flex items-center gap-3 text-gray-600 dark:text-gray-300 animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <span className="text-green-500 font-bold">➜</span>
+            <span className="text-blue-500 font-bold">~</span>
+            <span>Compiling runtime context...</span>
+            {step >= 3 && <span className="text-green-500 font-bold ml-auto animate-in fade-in zoom-in duration-300">[OK]</span>}
+          </div>
+        )}
+
+        {step >= 3 && (
+          <div className="z-10 flex items-center gap-3 text-primary-600 dark:text-primary-400 font-bold mt-2 animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <span className="text-green-500 font-bold">➜</span>
+            <span className="text-blue-500 font-bold">~</span>
+            <span className="flex items-center">
+              Mounting User Interface<span className="animate-pulse w-2 h-4 sm:h-5 bg-primary-500 ml-2 block"></span>
+            </span>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
