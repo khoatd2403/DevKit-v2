@@ -82,7 +82,12 @@ export default function SslChecker() {
             className="tool-textarea pl-9 py-2.5 rounded-lg h-auto"
           />
         </div>
-        <button onClick={() => check()} disabled={loading} className="btn-primary px-5 flex items-center gap-2 disabled:opacity-60">
+        <button 
+          onClick={() => check()} 
+          disabled={loading} 
+          className="btn-primary px-5 flex items-center gap-2 disabled:opacity-60"
+          aria-label={loading ? "Checking SSL status" : "Check SSL status"}
+        >
           {loading ? <RefreshCw size={14} className="animate-spin" /> : 'Check'}
         </button>
       </div>

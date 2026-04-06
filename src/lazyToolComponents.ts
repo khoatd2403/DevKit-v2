@@ -125,4 +125,5 @@ export const lazyToolComponents: Record<string, React.LazyExoticComponent<React.
   'benchmark-builder': lazy(() => import('./tools/BenchmarkBuilder')),
   'og-preview': lazy(() => import('./tools/OpenGraphPreview')),
   'image-metadata-modifier': lazy(() => import('./tools/ImageMetadataModifier')),
+  'csp-parser': lazy(() => import('./tools/CspTool')),
 }

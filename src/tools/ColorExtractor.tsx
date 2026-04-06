@@ -189,7 +189,12 @@ export default function ColorExtractor() {
                       <p className="text-[10px] font-mono text-gray-400 truncate">{c.rgb} · {c.hsl}</p>
                     </div>
                     <span className="text-[10px] text-gray-400 w-8 text-right">{c.pct}%</span>
-                    <button onClick={() => copy(c.hex, c.hex)} className="btn-ghost p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button 
+                      onClick={() => copy(c.hex, c.hex)} 
+                      className="btn-ghost p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                      aria-label={`Copy color ${c.hex}`}
+                      title={`Copy ${c.hex}`}
+                    >
                       {copied === c.hex ? <Check size={11} className="text-green-500" /> : <Copy size={11} />}
                     </button>
                   </div>

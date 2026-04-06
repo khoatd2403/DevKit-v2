@@ -12,6 +12,7 @@ type SortOption = 'default' | 'az' | 'za' | 'popular' | 'new'
 
 export default function AllTools() {
   const { t, lang } = useLang()
+  const isVi = lang === 'vi'
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const activeCat = searchParams.get('cat') || 'all'
@@ -137,6 +138,7 @@ export default function AllTools() {
         <button
           onClick={() => navigate('/')}
           className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 mb-4 transition-colors"
+          aria-label={t.backToHome}
         >
           <ArrowLeft size={15} />
           {t.backToHome}
@@ -184,11 +186,12 @@ export default function AllTools() {
                   navigate(`/${cat.id}-tools`);
                 }
               }}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+              className={`flex items-center gap-2 px-3.5 py-2.5 sm:py-2 rounded-lg text-sm font-medium transition-colors border shadow-sm ${
                 activeCat === cat.id
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:border-primary-400 dark:hover:border-primary-600 hover:text-primary-600 dark:hover:text-primary-400'
+                  ? 'bg-primary-600 text-white border-primary-600'
+                  : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:border-primary-400 dark:hover:border-primary-600 hover:text-primary-600 dark:hover:text-primary-400'
               }`}
+              aria-label={`${t.categories[cat.id as keyof typeof t.categories] || cat.name}${count ? ` (${count} ${isVi ? 'công cụ' : 'tools'})` : ''}`}
             >
               <span>{cat.icon}</span>
               <span>{t.categories[cat.id as keyof typeof t.categories] || cat.name}</span>
@@ -224,7 +227,7 @@ export default function AllTools() {
         const catContent = categoryAboutTranslations[currentLang]?.[activeCat] || categoryAboutTranslations['en']?.[activeCat];
         const catName = t.categories[activeCat as keyof typeof t.categories] || cat?.name || activeCat;
         
-        const seoTitle = catContent?.seoTitle || (currentLang === 'vi' ? `Công cụ ${catName} Trực tuyến Miễn phí | DevTools` : `Free Online ${catName} Tools | DevTools Online`);
+        const seoTitle = catContent?.seoTitle || (currentLang === 'vi' ? `Công cụ ${catName} | DevTools` : `${catName} Tools | DevTools Online`);
         const seoDesc = catContent?.seoDescription || (currentLang === 'vi' ? `Tổng hợp các công cụ ${catName} trực tuyến mạnh mẽ, bảo mật và hoàn toàn chạy trên trình duyệt. Không cần cài đặt, không lưu trữ dữ liệu người dùng.` : `A comprehensive collection of powerful, secure, and client-side ${catName} tools. No installation required, 100% private, works instantly in your browser.`);
 
         const displayTools = tools.filter(t => t.category === activeCat);
@@ -272,7 +275,7 @@ export default function AllTools() {
             <div className="bg-white dark:bg-gray-950 rounded-2xl p-6 sm:p-8 border border-gray-100 dark:border-gray-900 shadow-sm">
               <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
                  <span>{cat?.icon}</span>
-                 {currentLang === 'vi' ? `Về công cụ ${cat?.name}` : `About ${cat?.name} Tools`}
+                 {t.categories[cat?.id as keyof typeof t.categories] || cat?.name}
               </h2>
               <div 
                 className="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed

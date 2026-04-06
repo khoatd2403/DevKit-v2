@@ -7,10 +7,8 @@ export interface JsonProcessResult {
 
 /**
  * Format string as beautified JSON.
- * @param input The JSON string to format
- * @param indent Number of spaces or '\t'
  */
-export const formatJson = (input: string, indent: number | string = 2): JsonProcessResult => {
+export function formatJson(input: string, indent: number | string = 2): JsonProcessResult {
   if (!input.trim()) return { output: '', error: '' };
   try {
     const parsed = JSON.parse(input);
@@ -24,12 +22,12 @@ export const formatJson = (input: string, indent: number | string = 2): JsonProc
       error: (e as Error).message
     };
   }
-};
+}
 
 /**
  * Validate if a string is valid JSON
  */
-export const validateJson = (input: string): string => {
+export function validateJson(input: string): string {
   if (!input.trim()) return 'Input is empty';
   try {
     JSON.parse(input);
@@ -37,43 +35,33 @@ export const validateJson = (input: string): string => {
   } catch (e) {
     return (e as Error).message;
   }
-};
+}
 
 /**
  * High-performance JSON fixer to clean common syntax errors.
  */
-export const autoFixJson = (input: string, indent: number | string = 2): JsonProcessResult => {
+export function autoFixJson(input: string, indent: number | string = 2): JsonProcessResult {
   if (!input.trim()) return { output: '', error: 'Input is empty' };
   
   try {
     let s = input;
-    // Clean non-breaking spaces and other control characters
     s = s.replace(/\u00A0/g, ' ');
     s = s.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F\uFEFF]/g, '');
     
-    // Fix common JSON formatting issues in values
     s = s.replace(/"([^"]*)"/g, (match) => {
       return match.replace(/\n/g, '\\n').replace(/\r/g, '\\r');
     });
     
-    // Remove comments
     s = s.replace(/\/\/.*/g, '');
     s = s.replace(/\/\*[\s\S]*?\*\//g, '');
-    
-    // Replace smart quotes
     s = s.replace(/[\u201C\u201D\u201E\u201F\u2033\u2036]/g, '"');
 
     const MAX_ATTEMPTS = 100;
     for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-      // Single quotes to double quotes for strings
       s = s.replace(/'((?:\\.|[^'])*)'/g, (_, g1: string) =>
         '"' + g1.replace(/"/g, '\\"').replace(/\\'/g, "'") + '"'
       );
-      
-      // Unquoted keys to quoted keys
       s = s.replace(/([{,]\s*)([a-zA-Z_$][a-zA-Z0-9_$]*)\s*:/g, '$1"$2":');
-      
-      // Remove trailing commas
       s = s.replace(/,\s*([}\]])/g, '$1');
       
       try {
@@ -84,8 +72,6 @@ export const autoFixJson = (input: string, indent: number | string = 2): JsonPro
         };
       } catch (err) {
         const msg = (err as Error).message;
-        
-        // Handle unexpected ends (missing braces/brackets)
         if (msg.includes("Unexpected end") || msg.includes("unterminated")) {
           const openBraces = (s.match(/{/g) || []).length;
           const closeBraces = (s.match(/}/g) || []).length;
@@ -99,7 +85,6 @@ export const autoFixJson = (input: string, indent: number | string = 2): JsonPro
         if (!posMatch) throw err;
         const errorPos = parseInt(posMatch[1], 10);
         
-        // Handle common missing tokens
         if (msg.includes("Expected ','") || msg.includes("Expected '}'")) {
           let i = errorPos;
           while (i > 0 && /\s/.test(s[i - 1])) i--;
@@ -128,4 +113,56 @@ export const autoFixJson = (input: string, indent: number | string = 2): JsonPro
   } catch (e) {
     return { output: '', error: `Auto-fix bó tay: ${(e as Error).message}` };
   }
-};
+}
+
+/**
+ * Remove all whitespace and format as single line.
+ */
+export function minifyJson(input: string): JsonProcessResult {
+  if (!input.trim()) return { output: '', error: '' };
+  try {
+    const parsed = JSON.parse(input);
+    return {
+      output: JSON.stringify(parsed),
+      error: ''
+    };
+  } catch (e) {
+    return {
+      output: '',
+      error: (e as Error).message
+    };
+  }
+}
+
+/**
+ * Recursively sort keys of JSON objects alphabetically.
+ */
+export function sortJsonKeys(input: string, indent: number | string = 2): JsonProcessResult {
+  if (!input.trim()) return { output: '', error: '' };
+  try {
+    const parsed = JSON.parse(input);
+    const sorted = sortObject(parsed);
+    return {
+      output: JSON.stringify(sorted, null, indent),
+      error: ''
+    };
+  } catch (e) {
+    return {
+      output: '',
+      error: (e as Error).message
+    };
+  }
+}
+
+function sortObject(obj: any): any {
+  if (obj === null || typeof obj !== 'object') return obj;
+  if (Array.isArray(obj)) return obj.map(sortObject);
+  
+  const sorted: any = {};
+  Object.keys(obj)
+    .sort()
+    .forEach(key => {
+      sorted[key] = sortObject(obj[key]);
+    });
+  return sorted;
+}

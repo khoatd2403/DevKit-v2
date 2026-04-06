@@ -1,38 +1,22 @@
 import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
-
-const STEPS = [
-  {
-    title: 'Welcome to DevTools Online! 🔧',
-    description: '119+ free developer tools — JSON formatter, Base64, regex tester, hash generator and more. All running in your browser. No sign-up needed.',
-    emoji: '👋',
-  },
-  {
-    title: 'Search everything with Ctrl+K',
-    description: 'Press Ctrl+K anytime to open the command palette and instantly find any tool by name or keyword.',
-    emoji: '⌨️',
-  },
-  {
-    title: 'Drag & drop files into any input',
-    description: 'Every text input supports drag & drop file import. Just drop a .json, .csv, .txt or any text file directly onto the input area.',
-    emoji: '📁',
-  },
-  {
-    title: 'Save your favorites & snippets',
-    description: 'Click ★ on any tool to bookmark it. Use the Snippets drawer to save text you use often. Your data is auto-saved across sessions.',
-    emoji: '⭐',
-  },
-]
+import { useLang } from '../context/LanguageContext'
 
 const STORAGE_KEY = 'devkit-onboarded'
 
 export default function OnboardingTour() {
+  const { t } = useLang()
   const [open, setOpen] = useState(false)
   const [step, setStep] = useState(0)
 
+  const STEPS = t.onboarding.steps
+
   useEffect(() => {
     if (localStorage.getItem(STORAGE_KEY) === null) {
-      setOpen(true)
+      const timer = setTimeout(() => {
+        setOpen(true)
+      }, 1500)
+      return () => clearTimeout(timer)
     }
   }, [])
 
@@ -67,6 +51,9 @@ export default function OnboardingTour() {
   if (!open) return null
 
   const current = STEPS[step]
+  // Predefined emojis for steps
+  const emojis = ['👋', '⌨️', '📁', '⭐']
+  const currentEmoji = emojis[step] || '✨'
   const isLast = step === STEPS.length - 1
 
   return (
@@ -79,12 +66,13 @@ export default function OnboardingTour() {
         {/* Skip button */}
         <div className="flex items-center justify-between px-5 pt-4 pb-0">
           <span className="text-xs text-gray-400 dark:text-gray-500">
-            Step {step + 1} of {STEPS.length}
+            {t.onboarding.step(step + 1, STEPS.length)}
           </span>
           <button
             onClick={finish}
             className="btn-ghost p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-            title="Skip tour"
+            title={t.onboarding.skip}
+            aria-label={t.onboarding.skip}
           >
             <X size={16} />
           </button>
@@ -93,7 +81,7 @@ export default function OnboardingTour() {
         {/* Content */}
         <div className="px-8 pt-6 pb-4 text-center">
           <div className="text-6xl mb-5 select-none" role="img" aria-label={current.title}>
-            {current.emoji}
+            {currentEmoji}
           </div>
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 leading-snug">
             {current.title}
@@ -125,21 +113,21 @@ export default function OnboardingTour() {
             disabled={step === 0}
             className="btn-ghost text-sm disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            Prev
+            {t.onboarding.prev}
           </button>
 
           <button
             onClick={finish}
             className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
           >
-            Skip tour
+            {t.onboarding.skip}
           </button>
 
           <button
             onClick={handleNext}
             className="btn-primary text-sm px-5"
           >
-            {isLast ? 'Done' : 'Next'}
+            {isLast ? t.onboarding.done : t.onboarding.next}
           </button>
         </div>
       </div>

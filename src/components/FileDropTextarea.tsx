@@ -94,6 +94,7 @@ export default function FileDropTextarea({
           onClick={() => onChange('')}
           className="absolute left-2 top-2 flex items-center gap-1 px-2 py-1 rounded-md text-xs text-gray-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors opacity-0 group-hover:opacity-100"
           title="Clear"
+          aria-label="Clear input"
         >
           ×
         </button>
@@ -105,6 +106,7 @@ export default function FileDropTextarea({
         onClick={() => fileRef.current?.click()}
         className="absolute right-2 top-2 flex items-center gap-1 px-2 py-1 rounded-md text-xs text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors opacity-0 group-hover:opacity-100"
         title="Import file"
+        aria-label="Import file"
       >
         <Upload size={11} /> Import
       </button>

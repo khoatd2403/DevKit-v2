@@ -58,7 +58,7 @@ function SmartDetectPanel({ pasteInput, setPasteInput, pasteRef, onSelectTool, o
           <Sparkles size={14} className="text-purple-500" />
           {t.smartDetectTitle}
         </div>
-        <button onClick={onBack} className="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+        <button onClick={onBack} className="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" aria-label={t.backToSearch}>
           {t.backToSearch}
         </button>
       </div>
@@ -102,6 +102,7 @@ function SmartDetectPanel({ pasteInput, setPasteInput, pasteRef, onSelectTool, o
                     key={tool.id}
                     onClick={() => onSelectTool(tool.id)}
                     className="flex items-center gap-2 px-3 py-2 rounded-lg text-left hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors group"
+                    aria-label={`${tool.name}: ${tool.description}`}
                   >
                     <span className="text-lg">{tool.icon}</span>
                     <div className="flex-1 min-w-0">
@@ -226,7 +227,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
             onChange={e => setQuery(e.target.value)}
           />
           {query && (
-            <button onClick={() => setQuery('')} className="text-gray-400 hover:text-gray-600">
+            <button onClick={() => setQuery('')} className="text-gray-400 hover:text-gray-600" aria-label="Clear search">
               <X size={14} />
             </button>
           )}
@@ -241,6 +242,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
               <button
                 onClick={() => { setDetectMode(true); setTimeout(() => pasteRef.current?.focus(), 50) }}
                 className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-primary-500 to-purple-500 text-white text-sm font-medium rounded-xl hover:from-primary-600 hover:to-purple-600 transition-all shadow-md hover:shadow-lg"
+                aria-label={t.smartDetectPrompt}
               >
                 <Sparkles size={14} />
                 {t.smartDetectPrompt}
@@ -275,7 +277,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
                         {tool.name}
                       </span>
                       {tool.new && (
-                        <span className="text-xs bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded-full">New</span>
+                        <span className="text-xs bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded-full">{t.new}</span>
                       )}
                     </div>
                     <p className="text-xs text-gray-400 truncate">{tool.description}</p>
@@ -289,7 +291,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
 
               {/* All Tools section */}
               <div className="px-4 py-2 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
-                All Tools ({tools.length})
+                {t.allTools} ({tools.length})
               </div>
               {tools.map((tool, i) => {
                 const globalIndex = recentToolObjects.length + i

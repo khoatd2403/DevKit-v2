@@ -88,6 +88,7 @@ export default function Footer() {
                       <button
                         onClick={item.onClick}
                         className="text-sm text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                        aria-label={item.label}
                       >
                         {item.label}
                       </button>
@@ -114,7 +115,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
           className="relative block mb-10 rounded-2xl p-[1px] bg-gradient-to-r from-primary-500 via-purple-500 to-blue-500 group overflow-hidden shadow-lg shadow-primary-500/20"
-          title="Install DevTools MCP Server"
+          title={t.footerExtra.mcpTitle}
         >
           {/* Animated glowing border backdrop */}
           <div className="absolute inset-0 bg-gradient-to-r from-primary-500 via-purple-500 to-blue-500 opacity-20 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
@@ -141,9 +142,9 @@ export default function Footer() {
                 <div className="flex items-center gap-2 mt-1 flex-wrap">
                   <span className="text-gray-500 text-[11px] sm:text-xs flex items-center gap-1.5 tracking-wide">
                      <span className="bg-primary-500/20 text-primary-400 px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] font-bold uppercase leading-none border border-primary-500/30">
-                       AI Agent Ready
+                       {t.footerExtra.aiReady}
                      </span>
-                     Connect 15+ native tools to Claude & Cursor
+                     {t.footerExtra.mcpDesc}
                   </span>
                 </div>
               </div>
@@ -151,7 +152,7 @@ export default function Footer() {
 
             <div className="z-10 shrink-0 w-full sm:w-auto">
                <div className="flex items-center justify-center sm:justify-start gap-2 px-5 py-2.5 sm:py-2 bg-white/5 hover:bg-white/10 text-white text-xs sm:text-sm font-semibold rounded-xl transition-all font-mono backdrop-blur-sm border border-white/10 group-hover:border-primary-500/50 shadow-inner group-hover:shadow-primary-500/20">
-                 Explore API <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                 {t.footerExtra.exploreApi} <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                </div>
             </div>
           </div>

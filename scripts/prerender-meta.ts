@@ -103,7 +103,7 @@ for (const cat of categories) {
 
     const catName = cat.name;
     const catContent = categoryAboutTranslations['en']?.[cat.id];
-    const pageTitle = catContent?.seoTitle || `Free Online ${catName} Tools | DevTools Online`;
+    const pageTitle = catContent?.seoTitle || `${catName} Tools | DevTools Online`;
     const pageDesc = catContent?.seoDescription || `Complete collection of powerful and secure ${catName} tools. 100% private client-side processing.`;
     const pageUrl = `${BASE_URL}/${cat.id}-tools`;
     
