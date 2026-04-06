@@ -18,6 +18,7 @@ interface HomeProps {
 
 export default function Home({ searchQuery: _searchQuery }: HomeProps) {
   const { t, lang } = useLang()
+  const isVi = lang === 'vi'
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const { slug } = useParams<{ slug: string }>()
@@ -150,12 +151,12 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
               </span>
             )}
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
             {tool.description}
           </p>
           <div className="flex flex-wrap gap-1 mt-2">
             {tool.tags.slice(0, 3).map(tag => (
-              <span key={tag} className="text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 px-1.5 py-0.5 rounded-md">
+              <span key={tag} className="text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 px-1.5 py-0.5 rounded-md">
                 {tag}
               </span>
             ))}
@@ -177,7 +178,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight">
             {t.heroTitle}
           </h1>
-          <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto text-sm">
+          <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto text-sm">
             {t.heroDesc}
           </p>
         </div>
@@ -188,13 +189,14 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
             <button
               key={cat.id}
               onClick={() => navigate(cat.id === 'all' ? '/' : `/${cat.id}-tools`)}
-              className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${activeCategory === cat.id
-                ? 'bg-primary-600 text-white'
-                : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:border-primary-400 dark:hover:border-primary-600'
+              className={`flex items-center gap-1.5 px-3.5 py-2.5 sm:py-2 rounded-lg text-sm font-medium transition-colors border shadow-sm ${activeCategory === cat.id
+                ? 'bg-primary-600 text-white border-primary-600'
+                : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:border-primary-400 dark:hover:border-primary-600'
                 }`}
+              aria-label={cat.id === 'all' ? t.categories.all : `${t.categories[cat.id as keyof typeof t.categories] || cat.name}`}
             >
               <span>{cat.icon}</span>
-              <span>{cat.name}</span>
+              <span>{t.categories[cat.id as keyof typeof t.categories] || cat.name}</span>
             </button>
           ))}
         </div>
@@ -226,7 +228,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-xl">{cat?.icon}</span>
                     <h3 className="font-semibold text-gray-900 dark:text-white">{t.categories[cat?.id as keyof typeof t.categories] || cat?.name}</h3>
-                    <span className="text-xs text-gray-400">({catTools.length})</span>
+                    <span className="text-xs text-gray-500">({catTools.length})</span>
                   </div>
 
                   {(() => {
@@ -235,7 +237,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                     const catContent = categoryAboutTranslations[currentLang]?.[activeCategory] || categoryAboutTranslations['en']?.[activeCategory];
                     const catName = t.categories[activeCategory as keyof typeof t.categories] || cat?.name || activeCategory;
 
-                    const seoTitle = catContent?.seoTitle || (currentLang === 'vi' ? `Công cụ ${catName} Trực tuyến Miễn phí | DevTools` : `Free Online ${catName} Tools | DevTools Online`);
+                    const seoTitle = catContent?.seoTitle || (currentLang === 'vi' ? `Công cụ ${catName} | DevTools` : `${catName} Tools | DevTools Online`);
                     const seoDesc = catContent?.seoDescription || (currentLang === 'vi' ? `Tổng hợp các công cụ ${catName} trực tuyến mạnh mẽ, bảo mật và hoàn toàn chạy trên trình duyệt. Không cần cài đặt, không lưu trữ dữ liệu người dùng.` : `A comprehensive collection of powerful, secure, and client-side ${catName} tools. No installation required, 100% private, works instantly in your browser.`);
 
                     const displayTools = tools.filter(t => t.category === activeCategory);
@@ -273,7 +275,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                         <div className="bg-white dark:bg-gray-950 rounded-2xl p-6 sm:p-8 border border-gray-100 dark:border-gray-900 shadow-sm">
                           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
                             <span>{cat?.icon}</span>
-                            {currentLang === 'vi' ? `Về công cụ ${cat?.name}` : `About ${cat?.name} Tools`}
+                            {t.categories[cat?.id as keyof typeof t.categories] || cat?.name}
                           </h2>
                           <div
                             className="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed
@@ -308,7 +310,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                     style={{ width: `${Math.min(100, (explored.length / tools.length) * 100)}%` }}
                   />
                 </div>
-                <p className="text-xs text-gray-400 dark:text-gray-500 mt-1.5">
+                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1.5">
                   {t.complete(Math.round((explored.length / tools.length) * 100))}
                   {explored.length === tools.length && ' ' + t.triedAll}
                 </p>
@@ -320,7 +322,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
               <div className="flex items-center gap-2 mb-3">
                 <span>✨</span>
                 <h2 className="font-semibold text-gray-900 dark:text-white text-sm">{t.toolOfDay}</h2>
-                <span className="text-xs text-gray-400">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}</span>
+                <span className="text-xs text-gray-500">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}</span>
               </div>
               <div
                 onClick={() => navigate(`/${todayTool.category}-tools/${todayTool.id}`)}
@@ -332,7 +334,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                     <h3 className="font-semibold text-gray-900 dark:text-white">{todayTool.name}</h3>
                     {todayTool.new && <span className="text-xs bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded-full border border-green-200 dark:border-green-800">{t.new}</span>}
                   </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{todayTool.description}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{todayTool.description}</p>
                 </div>
                 <span className="text-primary-600 dark:text-primary-400 text-sm font-medium shrink-0">{t.tryIt}</span>
               </div>
@@ -359,7 +361,8 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                         <button
                           onClick={(e) => { e.stopPropagation(); toggle(tool.id) }}
                           className="absolute top-1.5 right-1.5 bg-red-500 hover:bg-red-600 text-white rounded-full p-0.5 transition-colors"
-                          title="Remove from favorites"
+                          title={isVi ? 'Xóa khỏi yêu thích' : 'Remove from Favorites'}
+                          aria-label={isVi ? 'Xóa khỏi yêu thích' : 'Remove from Favorites'}
                         >
                           <X size={12} />
                         </button>
@@ -423,7 +426,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                 <div className="flex items-center gap-2 mb-4">
                   <span>🧭</span>
                   <h2 className="font-semibold text-gray-900 dark:text-white">{t.unexplored}</h2>
-                  <span className="text-xs text-gray-400 dark:text-gray-500">{t.unexploredRemaining(tools.length - explored.length)}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-500">{t.unexploredRemaining(tools.length - explored.length)}</span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                   {unexploredTools.map(tool => <ToolCard key={tool.id} tool={tool} />)}
@@ -446,25 +449,25 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div>
               <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoJsonTitle}</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                 {t.seoJSON}
               </p>
             </div>
             <div>
               <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoSqlTitle}</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                 {t.seoSQL}
               </p>
             </div>
             <div>
               <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoEncodingTitle}</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                 {t.seoCrypto}
               </p>
             </div>
             <div>
               <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{t.seoWebTitle}</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                 {t.seoWeb}
               </p>
             </div>

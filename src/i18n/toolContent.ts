@@ -2348,6 +2348,681 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
         textEN: 'Converting whole pages? Try',
         textVI: 'Chuyển đổi toàn bộ trang? Thử'
       }
+    },
+    'css-minifier': {
+      what: 'CSS Minifier is an online compression tool that removes whitespace, comments, and redundant characters from your CSS files to reduce file size and improve website loading speed.',
+      why: [
+        { title: 'Smaller File Size', desc: 'Reduces CSS file size by up to 50% for faster network transfer.' },
+        { title: 'Improved SEO', desc: 'Faster loading pages directly contribute to better search engine rankings.' },
+        { title: 'Syntax Safety', desc: 'Safely parses and compresses without breaking modern CSS grids or variables.' },
+        { title: 'Instant Output', desc: 'Get your production-ready CSS code instantly without setting up build tools.' }
+      ],
+      example: {
+        before: 'body { \n  color: red;\n}',
+        after: 'body{color:red}'
+      },
+      faqs: [
+        { q: 'Is it safe to minify CSS?', a: 'Yes, minification only removes unnecessary characters (like spaces and comments) without altering the functionality of the code.' },
+        { q: 'Will it break my media queries?', a: 'No, our parser fully supports `@media`, `@keyframes`, and custom CSS properties.' },
+        { q: 'Can I reverse the process?', a: 'Yes, you can use our CSS Formatter tool to restore formatting and indentation to minified files.' },
+        { q: 'Are my stylesheets saved?', a: 'No, all compression is performed securely within your browser.' }
+      ],
+      complementary: {
+        id: 'css-formatter',
+        name: 'CSS Formatter',
+        textEN: 'Need to make it readable again? Use',
+        textVI: 'Cần làm cho code dễ đọc lại? Dùng'
+      }
+    },
+    'html-minifier': {
+      what: 'HTML Minifier is a free online tool to reduce the size of your HTML documents. It removes unnecessary spaces, comments, and optional tags to optimize web pages for faster rendering.',
+      why: [
+        { title: 'Faster Page Loads', desc: 'Decreasing HTML payload improves the First Contentful Paint (FCP) metric.' },
+        { title: 'Bandwidth Savings', desc: 'Crucial for high-traffic sites to reduce server bandwidth consumption.' },
+        { title: 'Custom Settings', desc: 'Toggle options to keep or remove comments, empty attributes, and script tags.' },
+        { title: 'Local Processing', desc: 'Process entire websites without uploading your proprietary markup.' }
+      ],
+      example: {
+        before: '<div class="box">\n  <!-- Content -->\n  <p>Text</p>\n</div>',
+        after: '<div class="box"><p>Text</p></div>'
+      },
+      faqs: [
+        { q: 'What does HTML minification do?', a: 'It strips out all the formatting and comments meant for developers, leaving only the semantic code the browser needs.' },
+        { q: 'Does it minify inline JS and CSS?', a: 'Yes, if configured, it can also compress `<style>` and `<script>` blocks embedded within the HTML.' },
+        { q: 'Is minified HTML good for SEO?', a: 'Yes, page speed is a ranking factor, and minifying HTML is a core step in web optimization.' },
+        { q: 'Will it break my layout?', a: 'Only if your layout incorrectly depends on whitespace nodes. We ensure standard, safe minification.' }
+      ],
+      complementary: {
+        id: 'html-formatter',
+        name: 'HTML Formatter',
+        textEN: 'Need to edit the source? Use',
+        textVI: 'Cần chỉnh sửa mã nguồn? Sử dụng'
+      }
+    },
+    'html-preview': {
+      what: 'HTML/CSS/JS Preview is an interactive browser-based sandbox. Write frontend code in separate panels and see the results rendered live without setting up an IDE or local server.',
+      why: [
+        { title: 'Live Rendering', desc: 'The preview pane updates instantly as you type your HTML, CSS, or JS.' },
+        { title: 'No Setup Required', desc: 'Start prototyping immediately without configuring Webpack, Vite, or terminal commands.' },
+        { title: 'Isolated Environment', desc: 'Code runs in a secure iframe, preventing conflicts with the main website.' },
+        { title: 'Shareable Snippets', desc: 'Perfect for testing out Tailwind components, animations, or minimal bug reproductions.' }
+      ],
+      example: {
+        before: '[Code in HTML & CSS tabs]',
+        after: '[Fully styled interactive component rendered in the preview frame]'
+      },
+      faqs: [
+        { q: 'Can I include external libraries?', a: 'You can link external libraries like jQuery, React, or Bootstrap using standard `<script>` tags in the HTML panel.' },
+        { q: 'Is the preview mobile-responsive?', a: 'Yes, the preview container acts like a responsive window so you can test CSS media queries.' },
+        { q: 'How is this different from CodePen?', a: 'This is a lightweight, instantly available tool designed for quick, ephemeral testing without requiring an account.' },
+        { q: 'Can I save my work?', a: 'Currently, it is an ephemeral workspace. Copy your code to your local files before leaving the page.' }
+      ],
+      complementary: {
+        id: 'markdown-preview',
+        name: 'Markdown Preview',
+        textEN: 'Writing documentation? Try our',
+        textVI: 'Đang viết tài liệu? Thử'
+      }
+    },
+    'markdown-preview': {
+      what: 'Markdown Preview is a side-by-side editing tool that converts Markdown syntax into structured HTML in real-time. It completely supports GitHub Flavored Markdown (GFM) including tables and code blocks.',
+      why: [
+        { title: 'Real-time Conversion', desc: 'See your headers, lists, and links format instantly as you type.' },
+        { title: 'GFM Compliant', desc: 'Fully supports task lists, strikethrough, and tables commonly used on GitHub.' },
+        { title: 'Code Highlighting', desc: 'Automatically highlights syntax within fenced code blocks.' },
+        { title: 'HTML Export', desc: 'Copy the compiled HTML directly to use in blogs, newsletters, or CMS platforms.' }
+      ],
+      example: {
+        before: '## Hello\n- Item 1\n- Item 2',
+        after: 'rendered as a mapped <h2> and <ul> component.'
+      },
+      faqs: [
+        { q: 'What is Markdown?', a: 'It is a lightweight markup language that adds formatting elements to plain text.' },
+        { q: 'Can I write inline HTML?', a: 'Yes, standard inline HTML tags are supported and rendered correctly alongside Markdown.' },
+        { q: 'Does it support math equations?', a: 'Basic Markdown is supported, but advanced LaTeX Math rendering depends on the specific renderer configuration.' },
+        { q: 'How do I add a table?', a: 'You can use pipes (|) to build tables, or use our specialized Markdown Table Generator.' }
+      ],
+      complementary: {
+        id: 'html-to-markdown',
+        name: 'HTML to Markdown',
+        textEN: 'Need the reverse? See',
+        textVI: 'Cần thao tác ngược lại? Xem'
+      }
+    },
+    'meta-tag-generator': {
+      what: 'Meta Tag Generator is an SEO utility that helps you create standard <html> meta tags for Search Engines (Google) and Social Media sharing (Open Graph, Twitter Cards).',
+      why: [
+        { title: 'SEO Optimized', desc: 'Ensures you have the essential Title, Description, and Viewport tags.' },
+        { title: 'Social Ready', desc: 'Generates specific `og:` and `twitter:` tags so your links look great when shared on Facebook, X, or LinkedIn.' },
+        { title: 'Live Preview', desc: 'See how your snippet will appear in Google Search results before applying it.' },
+        { title: 'Copy and Paste', desc: 'Generates a clean <head> block ready directly for your index.html file.' }
+      ],
+      example: {
+        before: 'Title: My Website, Desc: Best tools',
+        after: '<meta name="description" content="Best tools">...'
+      },
+      faqs: [
+        { q: 'Why are Meta Tags important?', a: 'They provide search engines with vital information about your page, which improves indexing and click-through rates.' },
+        { q: 'What is Open Graph (OG)?', a: 'It is a protocol originally created by Facebook that allows web pages to become rich objects in a social graph (images, titles in link previews).' },
+        { q: 'How long should a meta description be?', a: 'Ideally between 150-160 characters. Our tool provides a character counter to help you stay within limits.' },
+        { q: 'Do keywords still matter?', a: 'The `<meta name="keywords">` tag is mostly ignored by Google today, but Title and Description remain critical.' }
+      ],
+      complementary: {
+        id: 'og-preview',
+        name: 'OG Preview',
+        textEN: 'Visualize your tags with',
+        textVI: 'Trực quan hóa thẻ với'
+      }
+    },
+    'css-formatter': {
+      what: 'CSS Formatter is a developer utility to beautify minified, single-line, or messy CSS code. It adds proper indentation, spaces, and line breaks to make stylesheets human-readable again.',
+      why: [
+        { title: 'Instant Beautification', desc: 'Unpack unreadable CSS into beautifully structured blocks.' },
+        { title: 'Custom Indentation', desc: 'Choose between 2 spaces, 4 spaces, or tab formatting to match your repo style.' },
+        { title: 'Error Highlighting', desc: 'Easily spot unclosed brackets or syntax errors in formatted code.' },
+        { title: 'Offline Capable', desc: 'The formatting executes locally, ensuring your proprietary designs remain secure.' }
+      ],
+      example: {
+        before: 'body{margin:0;padding:0}',
+        after: 'body {\n  margin: 0;\n  padding: 0;\n}'
+      },
+      faqs: [
+        { q: 'When should I use a CSS Formatter?', a: 'Use it when you need to inspect or edit minified CSS provided by a third-party library or legacy system.' },
+        { q: 'Does it change CSS functionality?', a: 'No, it only alters whitespace, tabs, and line returns without modifying selectors or values.' },
+        { q: 'Does it support SCSS or LESS?', a: 'While tailored for plain CSS, it can successfully format standard SCSS/LESS syntax in most cases.' },
+        { q: 'Can I format directly from a URL?', a: 'You must paste the CSS text into the tool, but you can copy it from any browser source view.' }
+      ],
+      complementary: {
+        id: 'css-minifier',
+        name: 'CSS Minifier',
+        textEN: 'Ready for production? Use our',
+        textVI: 'Sẵn sàng triển khai? Hãy dùng'
+      }
+    },
+    'js-formatter': {
+      what: 'JS Formatter is an online tool to format, beautify, and optionally minify JavaScript code. It enforces consistent styling styles similar to Prettier, making messy logic easy to read.',
+      why: [
+        { title: 'Clean Syntax', desc: 'Properly indents nested functions, loops, and promises.' },
+        { title: 'Minify Option', desc: 'Includes a toggle to compress JS for production by stripping whitespace.' },
+        { title: 'ES6+ Support', desc: 'Safely parses modern JavaScript features like arrow functions, async/await, and classes.' },
+        { title: 'Zero Config', desc: 'Get perfectly formatted code instantly without setting up `.prettierrc` files.' }
+      ],
+      example: {
+        before: 'function test(){console.log("hi");}',
+        after: 'function test() {\n  console.log("hi");\n}'
+      },
+      faqs: [
+        { q: 'What is code beautification?', a: 'It is the process of automatically formatting source code to improve readability without changing how it executes.' },
+        { q: 'Does it support TypeScript?', a: 'Yes, the parser can handle standard TypeScript definitions alongside JavaScript.' },
+        { q: 'Will it fix my syntax errors?', a: 'No, it formats valid code. If your script has a missing bracket, formatting may fail or output unexpectedly.' },
+        { q: 'Is it safe for proprietary code?', a: 'Yes, all code processing happens directly in your browser.' }
+      ],
+      complementary: {
+        id: 'ts-to-js',
+        name: 'TS to JS',
+        textEN: 'Need to compile TypeScript? Try',
+        textVI: 'Cần biên dịch TypeScript? Thử'
+      }
+    },
+    'url-parser': {
+      what: 'URL Parser is a diagnostic tool that breaks down complex web addresses into their individual components: Protocol, Hostname, Path, Query Parameters, and Hashes.',
+      why: [
+        { title: 'Query Parameter Extraction', desc: 'Automatically splits long query strings (e.g., ?id=1&ref=tw) into a clean, readable table.' },
+        { title: 'Security Auditing', desc: 'Easily isolate domains and subdomains to verify redirect links or detect phishing.' },
+        { title: 'Port Identification', desc: 'Accurately parses non-standard ports from localhost or development URLs.' },
+        { title: 'Copy Components', desc: 'One-click copy for exact paths or specific un-encoded query values.' }
+      ],
+      example: {
+        before: 'https://example.com:8080/path/to/page?user=123#section',
+        after: 'Protocol: https\nHost: example.com\nPort: 8080\nPath: /path/to/page\nQuery: user=123'
+      },
+      faqs: [
+        { q: 'What is a URL scheme?', a: 'The scheme (or protocol) dictates how the URL should be accessed, most commonly `http` or `https`.' },
+        { q: 'Can it decode URL parameters?', a: 'Yes, encoded values (like %20 for space) are typically decoded in the parameter breakdown for readability.' },
+        { q: 'What is a URL Hash/Fragment?', a: 'It is the part after the `#` symbol, usually directing the browser to a specific ID on the page.' },
+        { q: 'Is this useful for APIs?', a: 'Highly useful for developers needing to dissect complex REST API endpoint requests.' }
+      ],
+      complementary: {
+        id: 'url-encode-decode',
+        name: 'URL Encoder',
+        textEN: 'Need to encode a parameter? Use',
+        textVI: 'Cần mã hóa tham số? Dùng'
+      }
+    },
+    'http-status-codes': {
+      what: 'HTTP Status Codes tool is a comprehensive, searchable reference guide. It provides exact definitions, use cases, and fixes for every standardized 1xx to 5xx server response code.',
+      why: [
+        { title: 'Fast Search', desc: 'Lookup any code instantly, from a standard 200 OK to a cryptic 418 I\'m a teapot.' },
+        { title: 'Clear Definitions', desc: 'Plain English explanations of what the server is actually trying to tell the client.' },
+        { title: 'Developer Context', desc: 'Includes guidance on whether errors are client-side (4xx) or server-side (5xx).' },
+        { title: 'Always Available', desc: 'A quick bookmarkable cheat sheet for frontend and backend API developers.' }
+      ],
+      example: {
+        before: 'Search: 403',
+        after: '403 Forbidden: The client does not have access rights to the content.'
+      },
+      faqs: [
+        { q: 'What are 2xx codes?', a: '2xx series codes denote that the client\'s request was successfully received, understood, and accepted.' },
+        { q: 'What is the difference between 401 and 403?', a: '401 Unauthorized means the user is not authenticated. 403 Forbidden means they are authenticated, but lack permission for that specific resource.' },
+        { q: 'Why did I get a 500 status?', a: 'A 500 Internal Server Error means the backend application crashed or encountered an unexpected condition.' },
+        { q: 'Are these official?', a: 'Yes, the descriptions are based strictly on official IETF RFC definitions.' }
+      ],
+      complementary: {
+        id: 'http-request-builder',
+        name: 'HTTP Client',
+        textEN: 'Test an endpoint response natively with',
+        textVI: 'Kiểm tra phản hồi API trực tiếp bằng'
+      }
+    },
+    'mime-types': {
+      what: 'MIME Types Lookup is a comprehensive database connecting file extensions (.html, .mp4) to their standardized Media Types (text/html, video/mp4). Indispensable for configuring servers, upload forms, and API responses.',
+      why: [
+        { title: 'Reverse Lookup', desc: 'Type an extension to find its MIME type or paste a MIME type to find associated file extensions.' },
+        { title: 'Server Configuration', desc: 'Essential for configuring Nginx, Apache, or setting specific Content-Type metadata in S3 buckets.' },
+        { title: 'Form File Validation', desc: 'Secure your file uploads by verifying `accept` attributes on `<input type="file">` HTML tags.' },
+        { title: 'API Headers', desc: 'Find the exact specification needed to trigger JSON or application parsing across API interfaces.' }
+      ],
+      example: {
+        before: 'Extension: .svg',
+        after: 'MIME Type: image/svg+xml'
+      },
+      faqs: [
+        { q: 'What is a MIME type?', a: 'MIME (Multipurpose Internet Mail Extensions) is a standard that indicates the nature and format of a document or file.' },
+        { q: 'Why is Content-Type important?', a: 'Browsers use the Content-Type header (which contains the MIME type) to figure out how to process data, whether to display an image, render HTML, or prompt a download.' },
+        { q: 'What is application/octet-stream?', a: 'It is the default "unknown" or "binary" file type. Browsers will typically prompt the user to download it as an unknown file.' },
+        { q: 'Are these types official?', a: 'Yes, our lookup covers the standardized list maintained by IANA, along with common vendor-specific formats.' }
+      ],
+      complementary: {
+        id: 'user-agent-parser',
+        name: 'User-Agent Parser',
+        textEN: 'Parsing other request headers? Use',
+        textVI: 'Đang phân tích các header khác? Dùng'
+      }
+    },
+    'curl-to-code': {
+      what: 'Curl to Code Converter instantly translates complex cURL terminal commands into readable, native HTTP request code in JavaScript (Fetch, Axios), Python, or PHP. Avoid writing API boilerplate from scratch.',
+      why: [
+        { title: 'Multiple Languages', desc: 'Convert instantly to JS Fetch, Node, Axios, Python Requests, Go, or PHP.' },
+        { title: 'Header Extraction', desc: 'Automatically parses authentication bearers, custom cookies, and headers into code variables.' },
+        { title: 'Payload Formatting', desc: 'Smartly maps cURL `-d` or `--data` flags into appropriate JSON objects or URL-encoded strings.' },
+        { title: 'Reverse Engineering', desc: 'Copy a cURL request directly from Chrome DevTools Network Tab and paste it here to write your API caller.' }
+      ],
+      example: {
+        before: 'curl -X POST https://api.ex.com -d "key=1"',
+        after: 'fetch("https://api.ex.com", { method: "POST", body: "key=1" })'
+      },
+      faqs: [
+        { q: 'What is cURL?', a: 'It is a command-line tool used by developers to transfer data under various network protocols, most commonly HTTP.' },
+        { q: 'Can I copy cURL from my browser?', a: 'Yes! Open Chrome/Firefox DevTools, go to the Network tab, right-click any request and select "Copy as cURL", then paste it here.' },
+        { q: 'Are multipart/form-data uploads supported?', a: 'Yes, complex `-F` flags for file uploads are supported and converted appropriately depending on the target language.' },
+        { q: 'Is to-code processing local?', a: 'Yes, parsing the cURL command into code algorithms executes entirely in your browser.' }
+      ],
+      complementary: {
+        id: 'http-request-builder',
+        name: 'HTTP Client',
+        textEN: 'Send requests right here with',
+        textVI: 'Gửi request trực tiếp bằng'
+      }
+    },
+    'html-formatter': {
+      what: 'HTML Formatter is a specialized beautifier that cleans up messy, minified, or disorganized HTML markup. It applies consistent indentation, resolves nested tag structures, and organizes attributes logically.',
+      why: [
+        { title: 'Readability', desc: 'Transforms dense blocks of HTML code into an easily scannable, tree-like structure.' },
+        { title: 'Attribute Wrapping', desc: 'Toggle options to wrap long lines of data attributes for clearer component scanning.' },
+        { title: 'Safe formatting', desc: 'Intelligently handles `<pre>` and `<textarea>` tags, preventing destructive white-space changes.' },
+        { title: 'Template Support', desc: 'Maintains logic syntax for popular templating engines like Vue, React (JSX), or Blade.' }
+      ],
+      example: {
+        before: '<div><p>text</p></div>',
+        after: '<div>\n  <p>text</p>\n</div>'
+      },
+      faqs: [
+        { q: 'Will this alter my webpage layout?', a: 'Usually no, but HTML does treat space between inline elements (like `<span>`) as a text node, which could theoretically add a small space in rendered layouts.' },
+        { q: 'Is it safe for JSX?', a: 'Yes, it can seamlessly format JSX components commonly used in React.' },
+        { q: 'Does it check for unclosed tags?', a: 'While primarily a formatter, it attempts to intelligently close tags and align them, which often makes HTML errors immediately obvious visually.' },
+        { q: 'Can I format offline?', a: 'Yes, the formatter entirely operates via your local browser.' }
+      ],
+      complementary: {
+        id: 'html-minifier',
+        name: 'HTML Minifier',
+        textEN: 'Compress for production using',
+        textVI: 'Nén trước khi triển khai với'
+      }
+    },
+    'cidr-calculator': {
+      what: 'CIDR/IP Calculator is an enterprise-grade IPv4 network planner. Enter an IP address with a routing prefix (like 192.168.1.0/24) to instantly map out the subnet mask, broadcast address, and host ranges.',
+      why: [
+        { title: 'Precise Network Math', desc: 'Replaces complex binary subnetting with instant, accurate data displays.' },
+        { title: 'Complete Breakdown', desc: 'View Network ID, Broadcast IP, First/Last Usable Hosts, and Total IP counts.' },
+        { title: 'Wildcard Masking', desc: 'Calculates the wildcard mask needed for configuring Cisco ACLs and firewalls.' },
+        { title: 'Cloud Infrastructure', desc: 'Essential for defining subnets precisely in AWS VPCs or Azure Virtual Networks.' }
+      ],
+      example: {
+        before: 'CIDR Input: 10.0.0.0/24',
+        after: 'Mask: 255.255.255.0, Hosts: 254 Usable'
+      },
+      faqs: [
+        { q: 'What is CIDR Notation?', a: 'Classless Inter-Domain Routing (CIDR) is a method for allocating IP addresses and IP routing. E.g., /24 denotes a 24-bit subnet mask.' },
+        { q: 'Why are 2 IPs subtracted from the total hosts?', a: 'The first IP is reserved for the Network Address, and the last IP is reserved for the Broadcast Address.' },
+        { q: 'Does this calculate IPv6?', a: 'This tool currently focuses on the heavy mathematical transformations required for IPv4 subnets.' },
+        { q: 'Is the data accurate for server configs?', a: 'Yes, the calculations are strictly standard and completely safe to use for hardware routers or virtual cloud routing.' }
+      ],
+      complementary: {
+        id: 'ip-lookup',
+        name: 'IP Lookup',
+        textEN: 'Want to track a public IP? Try',
+        textVI: 'Cần tìm hiểu một IP public? Thử'
+      }
+    },
+    'http-headers-builder': {
+      what: 'HTTP Security Headers Builder is a visual interface that helps you generate robust server configuration headers—including CSP, CORS, and HSTS. Protect your web app against clickjacking and XSS attacks easily.',
+      why: [
+        { title: 'Content Security Policy (CSP)', desc: 'Safely build complex CSP rules to stop unauthorized script execution via visual toggles.' },
+        { title: 'CORS Configuration', desc: 'Generate precise `Access-Control-Allow-Origin` tags to safely enable cross-domain API requests.' },
+        { title: 'HSTS Enforcement', desc: 'Force secure HTTPS connections logically using Strict-Transport-Security configurations.' },
+        { title: 'Server Export', desc: 'Produces exportable formats ready to paste directly into Nginx, Apache (.htaccess), or Express.js middleware.' }
+      ],
+      example: {
+        before: '[Toggle CSP script-src "self"]',
+        after: 'Header set Content-Security-Policy "script-src \'self\';"'
+      },
+      faqs: [
+        { q: 'What is CORS?', a: 'Cross-Origin Resource Sharing is a security feature browsers use to restrict how resources on a web page can be requested from another domain outside the domain from which the first resource was served.' },
+        { q: 'Why do I need a CSP?', a: 'A CSP acts as an allowlist for content (like JavaScript or images). If a hacker injects malicious code, the browser will refuse to run it because it isn\'t on your CSP allowlist.' },
+        { q: 'What does X-Frame-Options do?', a: 'It prevents other websites from embedding your site inside an `<iframe>`, neutralizing clickjacking attacks.' },
+        { q: 'Do these headers slow down my site?', a: 'No, they are pure metadata processed instantly by the user\'s browser.' }
+      ],
+      complementary: {
+        id: 'http-status-codes',
+        name: 'Status Codes',
+        textEN: 'Learn server responses with',
+        textVI: 'Tìm hiểu phản hồi server với'
+      }
+    },
+    'robots-txt': {
+      what: 'robots.txt Generator is a visual rule builder for search engine crawlers. Easily define which directories of your website Googlebot, Bingbot, or other scrapers are permitted to access.',
+      why: [
+        { title: 'Prevent Indexing', desc: 'Secure admin panels, API endpoints, or private documents from appearing in public search results.' },
+        { title: 'Crawl Delay Management', desc: 'Specify specific crawl delays to prevent aggressive bots from overloading your server resources.' },
+        { title: 'Sitemap Integration', desc: 'Append your XML sitemap URL directly to the file to accelerate the discovery of healthy pages.' },
+        { title: 'Valid Output', desc: 'Guarantees the strict plain-text formatting required by standard bot protocols.' }
+      ],
+      example: {
+        before: '[Disallow /admin/ for All Bots]',
+        after: 'User-agent: *\nDisallow: /admin/'
+      },
+      faqs: [
+        { q: 'Where do I put the robots.txt file?', a: 'It must be placed in the absolute root directory of your website (e.g., https://yourdomain.com/robots.txt).' },
+        { q: 'Does "Disallow" hide my site completely?', a: 'It stops ethical bots (like Google) from crawling it, but a URL can still be indexed if linked from elsewhere. It is not a security measure.' },
+        { q: 'What is a User-Agent in this context?', a: 'The User-Agent identifies the specific search bot. `Googlebot` targets Google, while `*` acts as a wildcard for all search engine bots.' },
+        { q: 'Can I test my robots.txt file?', a: 'You can test the file using the robots testing tool inside your Google Search Console dashboard.' }
+      ],
+      complementary: {
+        id: 'sitemap-generator',
+        name: 'Sitemap Builder',
+        textEN: 'Next, build your website map with',
+        textVI: 'Tiếp theo, tạo bản đồ với'
+      }
+    },
+    'sitemap-generator': {
+      what: 'XML Sitemap Generator builds a search engine compliant map of your website. Paste a list of URLs to assign standard XML tags like change frequency, priority, and last modification dates for rapid SEO discovery.',
+      why: [
+        { title: 'Visual XML Building', desc: 'Avoid manually typing cumbersome `<urlset>` and `<loc>` tags out by hand.' },
+        { title: 'SEO Priorities', desc: 'Rank relative importance of pages (from 0.1 to 1.0) guiding bots to your cornerstone content.' },
+        { title: 'Change Frequency', desc: 'Alert search engines precisely how often a page updates, from `hourly` to `yearly`.' },
+        { title: 'Download Output', desc: 'One-click bulk export of the `sitemap.xml` file ready to be uploaded to your root folder.' }
+      ],
+      example: {
+        before: 'https://example.com/blog\nPriority: 0.8 / Freq: weekly',
+        after: '<url>\n  <loc>https://example.com/blog</loc>\n  <changefreq>weekly</changefreq>\n</url>'
+      },
+      faqs: [
+        { q: 'What does a sitemap do?', a: 'It acts as a literal map for search engines like Google and Bing, ensuring they discover and catalog all your pages rather than waiting for external links.' },
+        { q: 'Does Priority affect Google Rankings?', a: 'Google has stated they largely ignore the `priority` tag now, but `lastmod` (last modification date) remains highly influential for crawling.' },
+        { q: 'How do I submit this to Google?', a: 'Submit the URL of your sitemap via the Google Search Console dashboard.' },
+        { q: 'Can I include images or video?', a: 'This tool generates the standard webpage URL sitemap format; specialized image/video XML tags require custom mapping.' }
+      ],
+      complementary: {
+        id: 'robots-txt',
+        name: 'Robots.txt Generator',
+        textEN: 'Make sure crawlers can find it with',
+        textVI: 'Đảm bảo bot tìm thấy nó qua'
+      }
+    },
+    'ts-to-js': {
+      what: 'TypeScript to JavaScript is an instant, browser-based transpiler. It strips TypeScript typings, interfaces, and decorators from code snippets to produce executable, backwards-compatible JavaScript.',
+      why: [
+        { title: 'Instant Compilation', desc: 'Test TS snippets and see the resulting JS output immediately without running `tsc` in the terminal.' },
+        { title: 'Clean Striping', desc: 'Removes typings cleanly without altering the underlying core business logic of the script.' },
+        { title: 'Target Adjustments', desc: 'Optionally view how modern ES6+ features transpile down into older ES5 functions.' },
+        { title: 'Client-Side Parsing', desc: 'Powered by an in-browser TypeScript engine, your confidential app logic remains totally private.' }
+      ],
+      example: {
+        before: 'function greet(name: string): string { return `Hi ${name}`; }',
+        after: 'function greet(name) { return `Hi ${name}`; }'
+      },
+      faqs: [
+        { q: 'Why convert TS back to JS?', a: 'Sometimes you need to paste a quick solution found online (written in TS) into an older Node or pure JS legacy environment.' },
+        { q: 'Does it check for type errors?', a: 'This tool performs a "transpile only" operation—it strips types but does not halt or warn regarding deep TypeScript strictness errors.' },
+        { q: 'Are Enums supported?', a: 'Yes, TypeScript Enums are fully transpiled into their standard JavaScript IIFE implementations.' },
+        { q: 'Is it completely free?', a: 'Yes, it provides unlimited compilations without requiring any server queries.' }
+      ],
+      complementary: {
+        id: 'js-formatter',
+        name: 'JS Formatter',
+        textEN: 'Format the output with',
+        textVI: 'Định dạng kết quả với'
+      }
+    },
+    'dns-lookup': {
+      what: 'DNS Lookup is a diagnostic network tool that queries Domain Name System records. Retrieve A, AAAA, MX, TXT, NS, and SOA records using Cloudflare\'s fast DNS-over-HTTPS infrastructure directly from the browser.',
+      why: [
+        { title: 'Propagation Check', desc: 'Verify if your latest DNS changes have properly propagated globally without relying on OS cache.' },
+        { title: 'Mail Server Audit', desc: 'Easily fetch MX records and TXT (SPF/DKIM) to diagnose email delivery failures.' },
+        { title: 'Record Discovery', desc: 'Uncover associated subdomains, pointing IP addresses, or root Name Servers (NS) in one click.' },
+        { title: 'Always Accurate', desc: 'We proxy through Cloudflare DoH (1.1.1.1) to bypass any local ISP DNS hijacking or stalling.' }
+      ],
+      example: {
+        before: 'Query Domain: example.com, Type: A',
+        after: 'Result: 93.184.215.14 (TTL: 3600)'
+      },
+      faqs: [
+        { q: 'What is an A record?', a: 'An A (Address) record maps a domain name directly to the IPv4 address of the computer hosting the domain.' },
+        { q: 'What is a TXT record used for?', a: 'TXT records hold text information. They are highly critical today for email security policies like SPF, DKIM, and DMARC validations.' },
+        { q: 'What is a CNAME?', a: 'A Canonical Name record maps an alias name to a true or canonical domain name, often used to tie `www` to the root domain.' },
+        { q: 'Why might a server not be found?', a: 'If you recently changed hosting, DNS changes can take up to 24-48 hours to fully update across all global nodes.' }
+      ],
+      complementary: {
+        id: 'ip-lookup',
+        name: 'IP Lookup',
+        textEN: 'Locate the IP result with',
+        textVI: 'Định vị IP trả về bằng'
+      }
+    },
+    'ip-lookup': {
+      what: 'IP Lookup maps public IP addresses to their approximate geographic locations. It queries global GeoIP databases to reveal the City, Region, Country, ISP (Internet Service Provider), and ASN associated with the address.',
+      why: [
+        { title: 'Cybersecurity Auditing', desc: 'Identify the origin of suspicious traffic or unauthorized server access attempts.' },
+        { title: 'Global Precision', desc: 'Locates IPv4 and IPv6 addresses with pinpoint country and city-level accuracy.' },
+        { title: 'ISP Detection', desc: 'Highlights the specific telecom provider hosting the network connection.' },
+        { title: 'Developer Context', desc: 'Helps developers test region-locked content rendering properly based on IP spoofing.' }
+      ],
+      example: {
+        before: 'IP Input: 8.8.8.8',
+        after: 'Result: Mountain View, United States (Google LLC)'
+      },
+      faqs: [
+        { q: 'Can it track a physical street address?', a: 'No, public GeoIP databases only resolve down to the generalized city or zip code level for privacy reasons.' },
+        { q: 'What is my IP address?', a: 'When you open the tool, it automatically detects and displays the public IP of the device you are currently using.' },
+        { q: 'What is an ASN?', a: 'An Autonomous System Number identifies the specific organization or ISP managing that IP block, such as Comcast or Amazon AWS.' },
+        { q: 'Is IPv6 supported?', a: 'Yes, it natively resolves modern 128-bit IPv6 address notations perfectly.' }
+      ],
+      complementary: {
+        id: 'cidr-calculator',
+        name: 'CIDR Subnets',
+        textEN: 'Plan network allocations with',
+        textVI: 'Định hướng mạng phụ với'
+      }
+    },
+    'ssl-checker': {
+      what: 'SSL Certificate Checker is a security auditing tool. Enter a HTTPS domain to instantly interrogate the server\'s cryptographic certificate, verifying its issuer, validity dates, subject, and any security chain errors.',
+      why: [
+        { title: 'Expiration Monitoring', desc: 'Check exactly how many days are left until a certificate expires to prevent website downtime.' },
+        { title: 'Issuer Validation', desc: 'Verify if the certificate is signed by a trusted Certificate Authority (CA) like Let\'s Encrypt or DigiCert.' },
+        { title: 'Security Chains', desc: 'Detect missing intermediate certificates that cause browser warning screens on mobile devices.' },
+        { title: 'Algorithm Details', desc: 'View the cryptographic algorithm used, such as RSA or modern ECC (Elliptic Curve Cryptography).' }
+      ],
+      example: {
+        before: 'Scan: https://example.com',
+        after: 'Valid: Yes | Expires: 45 Days | CA: DigiCert'
+      },
+      faqs: [
+        { q: 'What happens if SSL expires?', a: 'Browsers like Chrome will throw a prominent red "Your connection is not private" warning, completely blocking traffic to your site.' },
+        { q: 'What is an SSL chain?', a: 'Your server certificate is signed by an intermediate certificate, which is signed by a root. If this chain is broken, older devices won\'t trust your site.' },
+        { q: 'Can I check local IPs?', a: 'The service requires a publicly resolvable hostname to perform the external handshake test.' },
+        { q: 'Why is HTTPS so important?', a: 'Beyond encrypting user data to prevent theft, it is a required ranking signal for Google SEO positioning.' }
+      ],
+      complementary: {
+        id: 'dns-lookup',
+        name: 'DNS Lookup',
+        textEN: 'Check server records with',
+        textVI: 'Kiểm tra bản ghi máy chủ với'
+      }
+    },
+    'http-request-builder': {
+      what: 'HTTP Client/Request Builder is a postman-like utility built directly into your browser. Construct, test, and debug API requests including custom Headers, Bearer Tokens, and JSON body payloads easily.',
+      why: [
+        { title: 'Multiple HTTP Methods', desc: 'Supports all standard REST methods: GET, POST, PUT, DELETE, PATCH, OPTIONS.' },
+        { title: 'Auth Handling', desc: 'Easily append Bearer Tokens, API Keys, or Basic Auth directly into the request headers.' },
+        { title: 'JSON Payloads', desc: 'Features a syntax-highlighted editor specifically for crafting JSON request bodies.' },
+        { title: 'Detailed Responses', desc: 'View the raw JSON response, exact status code, response headers, and elapsed latency time.' }
+      ],
+      example: {
+        before: 'Send POST to /api/users with { "name": "John" }',
+        after: 'Response: 201 Created\n{ "id": 1 }'
+      },
+      faqs: [
+        { q: 'How does it handle CORS?', a: 'Client-side browsers enforce CORS. If the target API doesn\'t return the `Access-Control-Allow-Origin` header for your domain, the request will be blocked.' },
+        { q: 'Can I test local APIs (localhost)?', a: 'Yes, because the fetch occurs from your local browser, you can point the tool at `http://localhost:3000` assuming CORS allows it.' },
+        { q: 'Is Postman better?', a: 'Our tool is built for fast, ephemeral testing without requiring desktop installations or managing account collections.' },
+        { q: 'Are my tokens saved?', a: 'No, it is a stateless tool. No API keys or headers are ever stored on a server.' }
+      ],
+      complementary: {
+        id: 'http-status-codes',
+        name: 'Status Codes',
+        textEN: 'Decipher the response code using',
+        textVI: 'Giải nghĩa mã phản hồi bằng'
+      }
+    },
+    'user-agent-parser': {
+      what: 'User-Agent Parser decodes browser identification strings. When a device visits a server, it sends a User-Agent string. This tool parses that string into readable data: OS, Browser, Device Type, and Rendering Engine.',
+      why: [
+        { title: 'Analytics Accuracy', desc: 'Test how your analytics software will interpret traffic from obscure bots or new devices.' },
+        { title: 'Device Detection', desc: 'Identify whether a request came from a Mobile, Tablet, or Desktop interface.' },
+        { title: 'Browser Specifics', desc: 'Extracts exact versions of Chrome, Safari, Firefox, or WebView embeddings.' },
+        { title: 'Bot Identification', desc: 'Easily spot signatures from Googlebot, Bingbot, or malicious scraping servers.' }
+      ],
+      example: {
+        before: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1... Safari...',
+        after: 'Device: Apple iPhone\nOS: iOS 16.6\nBrowser: Safari Mobile'
+      },
+      faqs: [
+        { q: 'What is a User-Agent?', a: 'It is a standard HTTP header that software utilizes to identify itself to the network servers it connects to.' },
+        { q: 'Why do so many browsers say "Mozilla/5.0"?', a: 'Historical compatibility. In the 90s, servers only sent advanced pages to Mozilla (Netscape), so all other browsers started spoofing the name to get modern layouts.' },
+        { q: 'Can User-Agents be spoofed?', a: 'Yes, it is highly spoofable by developers or VPNs, so it should not be relied upon for strict security measures.' },
+        { q: 'Is this reliable for responsive design?', a: 'No. Modern web development relies on CSS Media Queries for responsiveness, not User-Agent sniffing.' }
+      ],
+      complementary: {
+        id: 'http-headers-builder',
+        name: 'Headers Setup',
+        textEN: 'Learn more about HTTP requests with',
+        textVI: 'Tìm hiểu thêm về HTTP request với'
+      }
+    },
+    'og-preview': {
+      what: 'Open Graph (OG) Previewer simulates how a URL will look when shared on major social media platforms. It scrapes the meta tags to render a visual card mimicking Facebook, Twitter/X, and LinkedIn displays.',
+      why: [
+        { title: 'Social Snippet Testing', desc: 'Ensure your thumbnail image, title, and description crop correctly across platforms.' },
+        { title: 'Meta Scraping', desc: 'Instantly fetches the live data directly from the target URL\'s `<head>` section.' },
+        { title: 'Twitter Card Validation', desc: 'Verify if your website properly triggers the `summary_large_image` format on X/Twitter.' },
+        { title: 'Debugging Missing Images', desc: 'Quickly identify if a 404 error or a missing `og:image` tag is causing broken social links.' }
+      ],
+      example: {
+        before: 'URL input: https://youtube.com',
+        after: '[Renders Facebook Card with video thumbnail and custom title]'
+      },
+      faqs: [
+        { q: 'What is an Open Graph Image?', a: 'It is the designated thumbnail image (`<meta property="og:image">`) platforms use when someone shares your link.' },
+        { q: 'Why is the image not fetching?', a: 'It could be blocked by CORS policies, the image URL might be relative instead of absolute, or the bot might be blocked by your servers firewall.' },
+        { q: 'Does Twitter use OG tags?', a: 'Twitter has its own `twitter:*` tags, but strongly falls back to using Facebook\'s standard `og:` tags if its own are missing.' },
+        { q: 'How do I clear the cached image on Facebook?', a: 'You must use the official Facebook Sharing Debugger tool to scrape the new version.' }
+      ],
+      complementary: {
+        id: 'meta-tag-generator',
+        name: 'Meta Tag Generator',
+        textEN: 'Need to create the tags first? Try',
+        textVI: 'Cần thiết kế thẻ meta trước? Thử'
+      }
+    },
+    'css-filter-generator': {
+      what: 'CSS Filter Generator is a visual utility for applying complex color transformations to uploaded images. Use sliders to adjust blur, brightness, contrast, hue-rotation, and sepia, extracting the pure CSS code instantly.',
+      why: [
+        { title: 'Visual Sliders', desc: 'Edit values interactively while watching the live image preview change in real-time.' },
+        { title: 'Non-Destructive', desc: 'Applies visual changes using CSS without altering the original image file.' },
+        { title: 'Backdrop Filters', desc: 'Generates the modern `backdrop-filter` syntax required for glassy, blurred UI components.' },
+        { title: 'Instant Code', desc: 'Copies a complete, cross-browser compatible `filter` property block.' }
+      ],
+      example: {
+        before: '[Slider: Blur 5px, Grayscale 100%]',
+        after: 'filter: blur(5px) grayscale(100%);'
+      },
+      faqs: [
+        { q: 'What are CSS filters?', a: 'They are native browser rendering features that apply graphical effects (like blurring or color shifting) to an element before it is drawn to the screen.' },
+        { q: 'Does this affect page performance?', a: 'Heavy use of large `blur()` filters, specifically `backdrop-filter`, can cause performance lag on older mobile devices.' },
+        { q: 'Can I use this for hover states?', a: 'Yes! It is extremely common to apply a grayscale filter by default, and transition to a normal color filter on `:hover`.' },
+        { q: 'Are CSS filters cross-browser compatible?', a: 'Yes, standard filters are supported across all modern browsers today.' }
+      ],
+      complementary: {
+        id: 'hex-to-rgba',
+        name: 'Color Converter',
+        textEN: 'Working with web colors? Use',
+        textVI: 'Làm việc với màu sắc? Dùng'
+      }
+    },
+    'px-to-rem': {
+      what: 'PX to REM Converter is an indispensable calculator for frontend developers focused on mobile accessibility. It translates static pixel sizes into scalable REM or EM units based on the root font size.',
+      why: [
+        { title: 'Accessibility Compliance', desc: 'REM units allow all fonts and layouts to scale smoothly if visually impaired users increase their browser default text size.' },
+        { title: 'Custom Root Sizes', desc: 'Adjust the base calculation away from the standard 16px to match any specific design system.' },
+        { title: 'Reverse Calculation', desc: 'Instantly calculate REM back to Pixels to understand what size a legacy layout is rendering.' },
+        { title: 'Responsive Design', desc: 'Essential for building scalable, fluid architectures required by frameworks like TailwindCSS.' }
+      ],
+      example: {
+        before: 'Input: 32px (Root 16px)',
+        after: 'Output: 2rem'
+      },
+      faqs: [
+        { q: 'What is a REM?', a: 'REM stands for "Root EM". It is a relative unit equal to the computed font-size of the `<html>` root element (typically 16px).' },
+        { q: 'What is the difference between EM and REM?', a: 'REM is relative to the root element. EM is relative to the font size of its direct parent container, leading to compounding scaling issues.' },
+        { q: 'Why use REM instead of Pixels?', a: 'Pixels are absolute. If a user increases their system font size for readability, pixel-bound sites break, while REM-based sites scale perfectly.' },
+        { q: 'Is 1rem always 16px?', a: 'Yes, inherently in all browsers. However, many developers apply CSS (`html { font-size: 62.5%; }`) to make 1rem equal 10px for easier math.' }
+      ],
+      complementary: {
+        id: 'css-minifier',
+        name: 'CSS Minifier',
+        textEN: 'Ready to minify your CSS? See',
+        textVI: 'Sẵn sàng nén file CSS? Xem'
+      }
+    },
+    'svg-previewer': {
+      what: 'SVG Viewer and Editor is a dedicated environment to visualize raw SVG code. Paste scalable vector code into the interface to immediately see the graphic rendered, making scaling and color debugging simple.',
+      why: [
+        { title: 'Real-time Vector Render', desc: 'Edit XML tags `<path>` or `<circle>` and watch the graphic update synchronously.' },
+        { title: 'ViewBox Verification', desc: 'Identify cropped vectors caused by incorrect `viewBox` syntax parameters.' },
+        { title: 'Color Tweaking', desc: 'Quickly find and modify hardcoded `fill` or `stroke` hex properties for icon sets.' },
+        { title: 'No App Required', desc: 'Preview your vector assets perfectly without opening heavy tools like Adobe Illustrator or Figma.' }
+      ],
+      example: {
+        before: '<svg height="50" width="50"><circle r="25" fill="red" /></svg>',
+        after: '[Renders a 50x50 red circle]'
+      },
+      faqs: [
+        { q: 'What is an SVG?', a: 'Scalable Vector Graphics is an XML-based format for 2D images. Unlike JPGs, SVGs scale infinitely without any pixelation or blur.' },
+        { q: 'Why is my SVG cut off?', a: 'Your content likely extends outside the coordinates established in the `<svg viewBox="...">` attribute.' },
+        { q: 'How do I change the SVG color via CSS?', a: 'You must use the `fill` or `stroke` properties in CSS, not `color`, and ensure the SVG paths do not have inline fill styles acting as overrides.' },
+        { q: 'Can I include animations?', a: 'Yes, if your SVG contains inline CSS animations or `<animate>` tags, they will render live in the preview pane.' }
+      ],
+      complementary: {
+        id: 'html-preview',
+        name: 'HTML Sandbox',
+        textEN: 'Put the SVG in a layout with',
+        textVI: 'Đưa file SVG vào layout bằng'
+      }
+    },
+    'csp-parser': {
+      what: 'The Content Security Policy (CSP) tool is an advanced security utility for generating, parsing, and evaluating CSP headers. It helps developers mitigate Cross-Site Scripting (XSS), data injection, and other code execution attacks by providing a structured way to define allowed resources.',
+      why: [
+        { title: 'Mitigate XSS', desc: 'Prevent malicious scripts from running in your application by strictly defining which domains are trusted.' },
+        { title: 'Interactive Builder', desc: 'Easily construct complex policies by selecting safe directives and adding trusted origins visually.' },
+        { title: 'Security Evaluator', desc: 'Analyze existing policies for common vulnerabilities like "unsafe-inline" or broad wildcards.' },
+        { title: '100% Privacy', desc: 'All parsing and auditing happen in your browser; your security policies are never sent to our servers.' }
+      ],
+      example: {
+        before: "default-src 'self'; script-src https://trusted.com",
+        after: "Content-Security-Policy: default-src 'self'; script-src https://trusted.com"
+      },
+      faqs: [
+        { q: 'What is a Content Security Policy (CSP)?', a: 'CSP is an HTTP header that allows site administrators to declare approved sources of content that browsers may load on that page, reducing the risk of XSS.' },
+        { q: 'Why is "unsafe-inline" dangerous?', a: 'It allows the execution of inline scripts and styles, which is the primary mechanism for XSS attacks. CSP aims to disable this by default.' },
+        { q: 'Can I test my CSP without breaking the site?', a: 'Yes, you can use the Content-Security-Policy-Report-Only header to monitor issues without actually blocking anything.' },
+        { q: 'Does this tool support all CSP directives?', a: 'Yes, it supports all major directives including fetch, navigation, and reporting directives.' }
+      ],
+      complementary: {
+        id: 'html-encode-decode',
+        name: 'HTML Encoder',
+        textEN: 'Preventing XSS also requires encoding. Use our',
+        textVI: 'Ngăn chặn XSS cũng cần mã hóa. Dùng ngay'
+      }
     }
   },
   vi: {
@@ -4538,6 +5213,831 @@ export const toolAboutTranslations: Record<string, Record<string, ToolAboutConte
         name: 'Case Converter',
         textEN: 'Need traditional variable formats? Use',
         textVI: 'Cần định dạng biến truyền thống? Dùng'
+      }
+    },
+    'string-escape': {
+      what: 'String Escape/Unescape là tiện ích giúp mã hóa hoặc giải mã chuỗi văn bản để chèn an toàn vào JavaScript, JSON, HTML hoặc URL. Nó dịch các ký tự đặc biệt thành các ký tự escape chuẩn.',
+      why: [
+        { title: 'Đa định dạng', desc: 'Hỗ trợ JavaScript/JSON (\\n, \\", \\t), HTML Entities (&amp;, &lt;), và URI (mã hóa URL).' },
+        { title: 'Giải mã ngược', desc: 'Dễ dàng chuyển các chuỗi escape khó hiểu trở về định dạng văn bản gốc, dễ đọc.' },
+        { title: 'Bảo mật Cú pháp', desc: 'Ngăn ngừa lỗi cú pháp và lỗ hổng XSS bằng cách dọn dẹp dữ liệu trước khi chèn vào code.' },
+        { title: 'Xử lý tức thì', desc: 'Chuyển đổi theo thời gian thực trực tiếp trên trình duyệt mà không cần tải trang lại.' }
+      ],
+      example: {
+        before: 'Input: <div>"Hello"</div>',
+        after: 'HTML Escaped: &lt;div&gt;&quot;Hello&quot;&lt;/div&gt;'
+      },
+      faqs: [
+        { q: 'String escaping là gì?', a: 'Là việc thay thế các ký tự đặc biệt bằng chuỗi ký tự thay thế để máy tính hiểu đó là văn bản thông thường chứ không phải là lệnh điều khiển (code).' },
+        { q: 'JSON escape có khác JavaScript không?', a: 'JSON nghiêm ngặt hơn; nó bắt buộc dùng ngoặc kép và một số ký tự thoát (backslash) cụ thể, điều mà công cụ này tự động xử lý.' },
+        { q: 'URI encoding là gì?', a: 'Nó chuyển các ký tự như dấu cách thành %20 để có thể truyền tải an toàn trên internet như một phần của mạng URL.' },
+        { q: 'Công cụ này có chống SQL Injection không?', a: 'Không, công cụ này định dạng chuỗi cho frontend và cấu trúc dữ liệu. Để an toàn với SQL, bạn phải sử dụng prepared statements ở backend.' }
+      ],
+      complementary: {
+        id: 'html-to-markdown',
+        name: 'HTML to Markdown',
+        textEN: 'Need to convert markup instead? Try',
+        textVI: 'Muốn chuyển đổi mã HTML? Thử'
+      }
+    },
+    'html-to-markdown': {
+      what: 'HTML to Markdown Converter là công cụ xóa bỏ các thẻ HTML cồng kềnh và dịchเนื้อ dung sang cú pháp Markdown thuần túy. Hoàn hảo cho việc di chuyển dữ liệu bài đăng blog, tài liệu hoặc file README.',
+      why: [
+        { title: 'Dịch thuật chính xác', desc: 'Chuyển đổi hoàn hảo các thẻ tiêu đề, danh sách, liên kết, hình ảnh và khối code sang chuẩn Markdown.' },
+        { title: 'Làm sạch Code', desc: 'Tự động gỡ bỏ các inline styles, classes (lớp), và scripts không cần thiết để chỉ giữ lại cấu trúc.' },
+        { title: 'Hỗ trợ GFM', desc: 'Hoàn toàn tương thích với GitHub Flavored Markdown, bao gồm hỗ trợ tạo bảng và task list.' },
+        { title: 'Nhanh gọn', desc: 'Không cần cài cắm tool command-line—chuyển đổi toàn bộ mã nguồn web ngay trên trình duyệt.' }
+      ],
+      example: {
+        before: '<strong>Đậm</strong> và <em>Nghiêng</em>',
+        after: '**Đậm** và *Nghiêng*'
+      },
+      faqs: [
+        { q: 'Nó có hỗ trợ bảng biểu (table) phức tạp không?', a: 'Có, các thẻ HTML bảng cơ bản (<tr>, <td>) sẽ được dịch sang định dạng bảng Markdown (bằng ký tự |) nếu tương thích.' },
+        { q: 'Điều gì xảy ra với code CSS?', a: 'Các thẻ <style> và inline CSS sẽ bị loại bỏ hoàn toàn, do Markdown chỉ làm nhiệm vụ cấu trúc văn bản.' },
+        { q: 'Tôi có thể chuyển ngược lại được không?', a: 'Có thể, bạn hãy sử dụng công cụ Markdown Preview của chúng tôi để render Markdown lại thành HTML.' },
+        { q: 'Dữ liệu có bị tải lên máy chủ không?', a: 'Không, mọi thuật toán phân tích (parsing engine) chạy cục bộ bằng trình duyệt của bạn.' }
+      ],
+      complementary: {
+        id: 'markdown-table',
+        name: 'Markdown Table',
+        textEN: 'Need to build tables visually? Use our',
+        textVI: 'Cần tạo bảng trực quan? Dùng'
+      }
+    },
+    'text-sorter': {
+      what: 'Text Sorter là tiện ích trực tuyến để sắp xếp bảng chữ cái, đảo ngược, xóa dòng trùng lặp và xáo trộn văn bản. Giúp dọn dẹp dữ liệu lộn xộn, tổ chức file config hoặc xáo trộn danh sách trong tích tắc.',
+      why: [
+        { title: 'Sắp xếp nâng cao', desc: 'Xếp theo alphabet (A-Z, Z-A), theo số học hoặc sắp xếp theo độ dài của từng dòng.' },
+        { title: 'Lọc trùng lặp', desc: 'Xóa ngay lập tức mọi dòng bị lặp lại từ một tệp dữ liệu lớn chỉ với một cú click.' },
+        { title: 'Xáo trộn ngẫu nhiên', desc: 'Tính năng Shuffle hoàn hảo cho việc xáo trộn danh sách quay số, chia việc hoặc randomize thẻ bài.' },
+        { title: 'Tùy chọn viết hoa/thường', desc: 'Bật tắt chế độ phân biệt chữ hoa, chữ thường để tinh chỉnh kết quả sort dữ liệu tốt nhất.' }
+      ],
+      example: {
+        before: 'Zebra\nApple\nApple',
+        after: 'Apple\nZebra (Xếp Alphabet + Lọc trùng)'
+      },
+      faqs: [
+        { q: 'Nó sắp xếp số liệu thế nào?', a: 'Nếu chọn sắp xếp theo số, số 2 sẽ đứng trước số 10. (Chế độ Alphabet mặc định sẽ xếp 10 trước 2).' },
+        { q: 'Nó có xóa dòng trống (blank lines) không?', a: 'Có, bạn có thể tích chọn mục tự động loại bỏ các khoảng trắng hoặc dòng rỗng khi sort.' },
+        { q: 'Giới hạn số dòng là bao nhiêu?', a: 'Tool dễ dàng xử lý mượt mà hàng chục nghìn dòng mà không bị treo trình duyệt.' },
+        { q: 'Loại bỏ trùng lặp hoạt động ra sao?', a: 'Nó sẽ scan danh sách và chỉ giữ lại bản ghi xuất hiện đầu tiên của mỗi dòng chữ giống hệt nhau.' }
+      ],
+      complementary: {
+        id: 'word-frequency',
+        name: 'Word Frequency',
+        textEN: 'Find common words with our',
+        textVI: 'Tìm các từ lặp lại với'
+      }
+    },
+    'word-frequency': {
+      what: 'Word Frequency Counter là công cụ phân tích quét văn bản để đếm chính xác số lần lặp lại của mỗi từ hoặc ký tự. Nó tính toán phần trăm và xếp hạng mức độ sử dụng từ cao xuống thấp.',
+      why: [
+        { title: 'Tối ưu hóa từ khóa', desc: 'Rất cần thiết cho SEO writer để đảm bảo mật độ keyword mục tiêu mà không bị nhồi nhét (overstuffing).' },
+        { title: 'Bộ lọc từ vô nghĩa', desc: 'Tùy chọn loại bỏ các từ xuất hiện nhiều nhưng không có ý nghĩa (như "và", "là", "của") để đo lường chủ đề thực sự.' },
+        { title: 'Chế độ Từ / Ký tự', desc: 'Chuyển đổi linh hoạt giữa đếm số lượng nguyên chữ (word) hoặc đếm từng ký tự riêng lẻ (character).' },
+        { title: 'Xuất dữ liệu', desc: 'Copy trực tiếp danh sách rớt hạng để phân tích sâu hơn bằng các phần mềm Excel, Spreadsheet.' }
+      ],
+      example: {
+        before: 'táo táo chuối',
+        after: 'táo: 2 (66%), chuối: 1 (33%)'
+      },
+      faqs: [
+        { q: 'Nó có phân biệt chữ hoa chữ thường không?', a: 'Mặc định code sẽ chuyển mọi chữ cái về viết thường để đếm "Táo" và "táo" là chung một từ, tuy nhiên bạn có thể tùy chỉnh lại.' },
+        { q: 'Bộ lọc từ vô nghĩa (Stop words) là gì?', a: 'Đó là những từ chêm, liên từ phổ biến với ít ý nghĩa độc lập. Loại bỏ chúng giúp thuật toán tìm ra "key theme" tốt hơn.' },
+        { q: 'Tôi có thể đếm tần suất code lập trình không?', a: 'Hoàn toàn được, nó rất hữu ích để đếm tần suất hàm số hoặc biến số nào được lặp lại nhiều nhất trong script.' },
+        { q: 'Quá trình phân tích có bị lưu lại?', a: 'Mọi dữ liệu văn bản hoàn toàn được phân tích khép kín tại trình duyệt của bạn.' }
+      ],
+      complementary: {
+        id: 'text-stats',
+        name: 'Text Statistics',
+        textEN: 'Want broader metrics? Try',
+        textVI: 'Cần các chỉ số tổng quan? Thử'
+      }
+    },
+    'text-stats': {
+      what: 'Text Statistics là bảng điều khiển tổng hợp phân tích cấu trúc và mức độ dễ đọc của bài viết. Cung cấp số lượng từ, độ dài câu, chỉ số đoạn văn và ước tính thời gian đọc bài.',
+      why: [
+        { title: 'Tính thời gian đọc', desc: 'Ước tính thuật toán chính xác khoảng thời gian một độc giả trung bình cần để đọc hết văn bản của bạn.' },
+        { title: 'Điểm dễ đọc (Readability)', desc: 'Chỉ ra các câu văn quá dài hoặc cấu trúc phức tạp, giúp bạn cải thiện cách tiếp cận người đọc.' },
+        { title: 'Đếm cấu trúc', desc: 'Theo dõi mọi thứ, từ đếm số lượng ký tự cơ bản tới đếm số lượng câu và chia nhỏ đoạn văn.' },
+        { title: 'Cập nhật trực tiếp', desc: 'Mọi bảng điều khiển chỉ số thay đổi ngay khi bạn vừa gõ phím, hoạt động như một trợ lý viết content.' }
+      ],
+      example: {
+        before: '[Dán bài viết vào khung]',
+        after: 'Từ: 500, Câu: 35, Thời gian đọc: 2 phút'
+      },
+      faqs: [
+        { q: 'Thời gian đọc được tính toán như thế nào?', a: 'Công cụ dựa trên tốc độ đọc tiêu chuẩn của người trưởng thành là khoảng 200 đến 250 từ một phút.' },
+        { q: 'Nó có đếm dấu câu làm ký tự không?', a: 'Có, tool hiển thị chi tiết đếm ký tự bao gồm khoảng trắng và có/không có dấu câu.' },
+        { q: 'Điều này có giúp gì cho việc luyện viết?', a: 'Bằng cách chỉ ra những câu quá dài dòng, nó thúc đẩy người viết hướng tới cụm từ ngắn gọn, súc tích hơn.' },
+        { q: 'Sử dụng công cụ này có mất tiền không?', a: 'Không, Text Statistics tool là miễn phí 100% không yêu cầu đăng nhập.' }
+      ],
+      complementary: {
+        id: 'string-inspector',
+        name: 'String Inspector',
+        textEN: 'Need technical byte counts? Use',
+        textVI: 'Cần đếm byte kỹ thuật số? Sử dụng'
+      }
+    },
+    'markdown-table': {
+      what: 'Markdown Table Generator là công cụ GUI trực quan cho phép bạn thiết kế, định dạng và điền dữ liệu bảng dễ dàng trước khi xuất ra cú pháp Markdown sạch. Hoàn hảo dùng cho README GitHub, Notion.',
+      why: [
+        { title: 'Giao diện dạng lưới', desc: 'Thêm dòng, cột và soạn thảo chữ hệt như làm việc trên Excel/Spreadsheet.' },
+        { title: 'Căn lề (Alignment)', desc: 'Chỉ với một cú click chuột để căn trái, giữa, phải cho toàn bộ dữ liệu cột.' },
+        { title: 'Kết xuất tức thì', desc: 'Đoạn mã Markdown sẽ tự động thành hình ngay phía bên dưới bảng theo real-time.' },
+        { title: 'Import dữ liệu cũ', desc: 'Cho phép copy-paste file CSV hoặc bảng Markdown cũ vào lưới để dễ dàng chỉnh sửa hoặc sửa lỗi.' }
+      ],
+      example: {
+        before: '[Nhập dữ liệu vào lưới Excel]',
+        after: '| Tiêu đề | Tiêu đề |\n| :--- | ---: |\n| Dữ liệu | Dữ liệu |'
+      },
+      faqs: [
+        { q: 'Tại sao tự gõ bảng Markdown lại khó?', a: 'Vì quy cách chuẩn bắt buộc phải tạo hình bằng ký tự pipe (|) và dấu gạch (-). Thêm bớt nội dung dài có thể làm lệch toàn bộ bảng nếu làm thủ công.' },
+        { q: 'Nó có hỗ trợ GitHub Flavored Markdown?', a: 'Có, cú pháp cấu trúc tạo ra tương thích 100% với GFM và sẽ hiển thị hoàn hảo ở mọi nền tảng kể cả GitLab.' },
+        { q: 'Tôi có paste thử từ Excel được không?', a: 'Bạn chuyển dữ liệu từ Excel sang bảng rất dễ bằng tổ hợp phím copy/paste thông thường.' },
+        { q: 'Công cụ có hỗ trợ Mobile?', a: 'Có, mặc dù việc thiết kế số lượng lớn cột lưới (grid) thường được tối ưu màn hình máy tính bàn (Desktop).' }
+      ],
+      complementary: {
+        id: 'html-to-markdown',
+        name: 'HTML to Markdown',
+        textEN: 'Converting whole pages? Try',
+        textVI: 'Chuyển đổi toàn bộ trang web? Thử'
+      }
+    },
+    'css-minifier': {
+      what: 'CSS Minifier là công cụ nén trực tuyến giúp loại bỏ các khoảng trắng, comment và các ký tự thừa từ tệp CSS của bạn nhằm giảm dung lượng và tăng tốc độ tải trang web.',
+      why: [
+        { title: 'Giảm dung lượng file', desc: 'Giảm tối đa 50% kích thước tệp CSS để truyền tải mạng nhanh hơn.' },
+        { title: 'Cải tiến SEO', desc: 'Thời gian tải trang nhanh đóng góp trực tiếp vào thứ hạng tốt hơn trên công cụ tìm kiếm.' },
+        { title: 'Bảo toàn Cú pháp', desc: 'Phân tích và nén an toàn mà không làm hỏng modern CSS grids hay variables.' },
+        { title: 'Kết quả tức thì', desc: 'Nhận ngay mã CSS chuẩn production mà không cần phải cài đặt build tools phức tạp.' }
+      ],
+      example: {
+        before: 'body { \n  color: red;\n}',
+        after: 'body{color:red}'
+      },
+      faqs: [
+        { q: 'Nén CSS có an toàn không?', a: 'Có, việc nén chỉ loại bỏ các ký tự không cần thiết (như dấu cách và chú thích) mà không làm thay đổi chức năng của mã.' },
+        { q: 'Nó có làm hỏng media queries không?', a: 'Không, trình phân tích mã của chúng tôi hỗ trợ đầy đủ `@media`, `@keyframes` và các thuộc tính CSS tùy chỉnh.' },
+        { q: 'Tôi có thể hoàn tác lại được không?', a: 'Có, bạn hãy sử dụng công cục CSS Formatter của chúng tôi để khôi phục định dạng và thụt lề cho file.' },
+        { q: 'Css của tôi có bị lưu lại không?', a: 'Không, mọi quá trình nén chữ diễn ra an toàn ngay bên trong trình duyệt của bạn.' }
+      ],
+      complementary: {
+        id: 'css-formatter',
+        name: 'CSS Formatter',
+        textEN: 'Need to make it readable again? Use',
+        textVI: 'Cần làm cho code dễ đọc lại? Dùng'
+      }
+    },
+    'html-minifier': {
+      what: 'HTML Minifier là công cụ trực tuyến miễn phí giúp giảm kích thước mã HTML. Nó xóa các dấu cách thừa, chú thích (comments) và các thẻ không cần thiết để tối ưu hóa, giúp web load nhanh hơn.',
+      why: [
+        { title: 'Trang web tải nhanh hơn', desc: 'Giảm thiểu kích thước file HTML giúp cải thiện chỉ số quan trọng First Contentful Paint (FCP).' },
+        { title: 'Tiết kiệm Băng thông', desc: 'Quan trọng đối với các trang web có lượng truy cập cao để giảm tải tiêu thụ băng thông máy chủ.' },
+        { title: 'Cài đặt Tùy chọn', desc: 'Tùy chỉnh bật/tắt giữ lại comment, các thuộc tính trống và thẻ kịch bản (script flags).' },
+        { title: 'Xử lý Nội bộ', desc: 'Giải quyết toàn bộ cấu trúc nền website của bạn mà không hề tải mã nguồn lên mạng.' }
+      ],
+      example: {
+        before: '<div class="box">\n  <!-- Content -->\n  <p>Text</p>\n</div>',
+        after: '<div class="box"><p>Text</p></div>'
+      },
+      faqs: [
+        { q: 'Trình nén HTML hoạt động như thế nào?', a: 'Nó loại bỏ tất cả các định dạng và chú thích dành riêng cho lập trình viên, chỉ giữ lại mã ngữ nghĩa để trình duyệt đọc.' },
+        { q: 'Nó có nén inline JS và CSS không?', a: 'Có, nếu được cấu hình, nó cũng có thể nén các khối `<style>` và `<script>` được nhúng trực tiếp.' },
+        { q: 'HTML rút gọn có tốt cho SEO không?', a: 'Có, tốc độ truy cập trang là một yếu tố xếp hạng. Nén HTML là một bước cốt lõi trong tối ưu web.' },
+        { q: 'Điều này có làm hỏng layout của tôi?', a: 'Chỉ khi layout của bạn phụ thuộc sai cách vào khoảng trắng. Chúng tôi đảm bảo nén an toàn và chuẩn xác.' }
+      ],
+      complementary: {
+        id: 'html-formatter',
+        name: 'HTML Formatter',
+        textEN: 'Need to edit the source? Use',
+        textVI: 'Cần chỉnh sửa mã nguồn? Sử dụng'
+      }
+    },
+    'html-preview': {
+      what: 'HTML/CSS/JS Preview là bộ sandbox tương tác ngay trên trình duyệt. Bạn có thể viết frontend code trong các ô riêng biệt và xem kết quả hiển thị trực tiếp mà không cần cài IDE hay local server.',
+      why: [
+        { title: 'Dựng hình Sinh động', desc: 'Màn hình preview cập nhật ngay mỗi khi bạn type nội dung HTML, CSS hay JS.' },
+        { title: 'Không cần Setup', desc: 'Bắt đầu dựng prototype ngay tức thì mà không cần cài Webpack, Vite hay mở terminal.' },
+        { title: 'Môi trường Cô lập', desc: 'Code chạy trong một iframe bảo mật nhúng độc lập, tránh bị xung đột với hệ thống web chính.' },
+        { title: 'Hỗ trợ Đoạn trích', desc: 'Cực kì hoàn hảo cho việc test nháp các Tailwind components, check animation hoặc lỗi hiển thị nhỏ.' }
+      ],
+      example: {
+        before: '[Viết Code vào 3 ô HTML & CSS & JS]',
+        after: '[Hiển thị thành component cực kỳ sắc nét ở khung bên dưới]'
+      },
+      faqs: [
+        { q: 'Tôi có thể thêm thư viện ngoài (external library) được không?', a: 'Bạn cứ thoải mái nhúng file từ CDN script của React, jQuery hay Bootstrap thông qua thẻ `<script>` ở ô HTML.' },
+        { q: 'Khung preview có thu phóng (responsive) không?', a: 'Có nhé, khung view đó mô phỏng chính xác khung windows để test các mã lệnh responsive CSS @media.' },
+        { q: 'Tool này khác CodePen ở điểm nào?', a: 'Đây là giải pháp kiểm tra siêu nhẹ, tốc độ tức thì dành cho mục đích xử lý ngay mà không yêu cầu tạo tài khoản tốn thời gian.' },
+        { q: 'Bản nháp của tôi có được save không?', a: 'Đây là workspace thời vụ. Đừng quên lưu lại code về máy trước khi bạn đóng trình duyệt.' }
+      ],
+      complementary: {
+        id: 'markdown-preview',
+        name: 'Markdown Preview',
+        textEN: 'Writing documentation? Try our',
+        textVI: 'Đang viết tài liệu? Thử'
+      }
+    },
+    'markdown-preview': {
+      what: 'Markdown Preview là một công cụ chỉnh sửa song song (side-by-side) giúp biên dịch thẳng cú pháp Markdown thành HTML theo thời gian thực. Hỗ trợ toàn bộ cú pháp GitHub Flavored Markdown (GFM).',
+      why: [
+        { title: 'Dịch thuật Tức thời', desc: 'Nhìn thấy các headers, list, hay link chuẩn xác ngay trên màn hình khi bạn bắt đầu gõ chữ.' },
+        { title: 'Chuẩn định dạng GFM', desc: 'Hoàn toàn tương thích và hiển thị tốt với strikethrough (gạch ngang), bảng biểu và checklist của GitHub.' },
+        { title: 'Code Highlighting', desc: 'Tự động tô màu đánh dấu mã nguồn (syntax) ở vùng fenced code blocks chuyên nghiệp.' },
+        { title: 'Xuất mã HTML', desc: 'Chỉ định trực tiếp copy các tệp HTML xuất ra dùng cho blog, newsletter, hoặc các nền tảng CMS.' }
+      ],
+      example: {
+        before: '## Hello\n- Item 1\n- Item 2',
+        after: 'Sẽ chuyển thành một khối <h2> kèm list <ul> tương ứng bên màn hình.'
+      },
+      faqs: [
+        { q: 'Markdown là gì?', a: 'Đó là loại ngôn ngữ đánh dấu nhẹ và thông minh chuyên được gán vào văn bản thuần túy (plain text) để định dạng tiện lợi.' },
+        { q: 'Tôi có thể viết thẻ HTML vào trong nội dung Markdown không?', a: 'Được, mọi chuẩn đánh dấu HTML vẫn có hiệu lực khi bạn nhúng trực tiếp nội dung vào Markdown.' },
+        { q: 'Nó hỗ trợ vẽ phương trình toán học (Math equations) không?', a: 'Hiện nay tool chỉ hỗ trợ các chuẩn cơ bản nhất. Công thức Toán học nâng cao (LaTeX) cần trình biên dịch riêng.' },
+        { q: 'Làm thế nào để thêm một cái Table (Bảng)?', a: 'Sử dụng phím thẳng | để cách cột, hoặc dùng tool "Markdown Table Generator" chuyên biệt của chúng tôi.' }
+      ],
+      complementary: {
+        id: 'html-to-markdown',
+        name: 'HTML to Markdown',
+        textEN: 'Need the reverse? See',
+        textVI: 'Cần thao tác ngược lại? Xem'
+      }
+    },
+    'meta-tag-generator': {
+      what: 'Meta Tag Generator là tiện ích SEO giúp bạn tạo ra các đoạn mã <html> tiêu chuẩn cho Google và tương thích chia sẻ nội dung bài báo lên MXH thông qua Open Graph và Twitter Cards.',
+      why: [
+        { title: 'Tối ưu cho SEO', desc: 'Đảm bảo trang web chưa đầy đủ những thẻ thông tin nền tảng nhất: Title, Description, Viewport.' },
+        { title: 'Tương tác MXH', desc: 'Tạo thẻ `og:` và `twitter:` chuẩn chỉnh giúp việc chia sẻ link bài viết lên Facebook, LinkedIn hiển thị hoàn hảo.' },
+        { title: 'Live/Mockup View', desc: 'Đánh giá chi tiết cách bản nháp bài viết trình diễn sẽ trông ra sao trên page của Google Search.' },
+        { title: 'Copy & Paste', desc: 'Tự động hóa ra thẻ <head> code siêu sạch đã được đóng gói trực tiếp, bỏ vào file index.html là chạy.' }
+      ],
+      example: {
+        before: 'Tiêu đề: Tool Đỉnh Nhất, Mô tả: Cập nhật web',
+        after: '<meta name="description" content="Cập nhật web">...'
+      },
+      faqs: [
+        { q: 'Thẻ Meta (Meta Tags) đánh dấu mục tiêu quan trọng?', a: 'Sự thật thì chúng cung cấp trực quan thông tin dữ liệu về website, cải thiện tỷ lệ nhấp trang (CTR) và tương tác click.' },
+        { q: 'Thế Open Graph (OG) là gì?', a: 'Đây là các tệp thông tin nền dựa trên protocol từ Facebook xây dựng. Có khả năng nhúng ảnh thumbnail, tóm tắt mô tả khi share link.' },
+        { q: 'Description SEO thì nên dài bao nhiêu thế?', a: 'Luôn dao động tầm 150-160 ký tự. Và vì vậy, tool của chúng mình tích hợp sẵn bộ đếm ký tự phòng viết lố chữ.' },
+        { q: 'Tag Keywords (từ khóa) còn hiệu quả thực tế không?', a: 'Thực ra thẻ `<meta name="keywords">` giờ bị Google bỏ xó rùi, nhưng 2 mục Title và Description thì bắt buộc cần!' }
+      ],
+      complementary: {
+        id: 'og-preview',
+        name: 'OG Preview',
+        textEN: 'Visualize your tags with',
+        textVI: 'Trực quan hóa thẻ với'
+      }
+    },
+    'css-formatter': {
+      what: 'CSS Formatter là một công cụ lập trình dùng để làm đẹp mã CSS bị nén cứng (minified) hoặc viết lộn xộn. Nó tự động thụt lề chuẩn, tạo dòng trống khiến chuỗi stylesheet trở lại gọn gàng, có thể đọc được bằng mắt thường.',
+      why: [
+        { title: 'Làm Đẹp Code Tức Thì', desc: 'Gỡ gối những chuỗi CSS nằm bẹp một dòng dài ngoằng hóa thành các block cấu trúc đẹp mặt.' },
+        { title: 'Custom Tùy Chọn Lề', desc: 'Chọn indent (thụt lề) giữa mức 2 spaces, 4 spaces hoặc dùng theo phím Tab chuẩn style repo của nhóm.' },
+        { title: 'Đánh Dấu Lỗi (Highlights)', desc: 'Phát hiện ngay những dấu đóng ngoặc ({ }) mất hút hoặc các syntax dở hơi bên ngoài.' },
+        { title: 'Làm Việc Offline', desc: 'Tất cả lệnh định dạng thực thi bên trong Javascript của bạn, file design của bạn vẫn an toàn tuyệt hảo.' }
+      ],
+      example: {
+        before: 'body{margin:0;padding:0}',
+        after: 'body {\n  margin: 0;\n  padding: 0;\n}'
+      },
+      faqs: [
+        { q: 'Tôi phải dùng format này thay đổi CSS khi nào cục thể?', a: 'Hãy bắt đầu áp dụng khi bạn mò các source CSS minified sẵn nhúng trên mạng hoặc debug cho một project nào đó đã cũ kỹ.' },
+        { q: 'Việc format có đổi lại hoạt động của source cũ hông?', a: 'Không hề sao hết, chúng chỉ là phân loại lại dòng chữ, thêm khoảng không gian cách dòng, không ăn sâu vào tham số CSS.' },
+        { q: 'Bạn tool có convert SCSS / LESS được à?', a: 'Tool thiết kế đặc trị code thuần túy của CSS, nhưng vẫn có thể giải cứu khá tốt SCSS/LESS tùy từng tình huống cụ thể nha bạn.' },
+        { q: 'Tool có paste link CSS từ ngoài web lấy được không?', a: 'Tool đòi hỏi nhập text chay từ trong máy ra thui. Hãy view source HTML từ chrome rồi hẵng copy sang nghen.' }
+      ],
+      complementary: {
+        id: 'css-minifier',
+        name: 'CSS Minifier',
+        textEN: 'Ready for production? Use our',
+        textVI: 'Sẵn sàng triển khai? Hãy dùng'
+      }
+    },
+    'js-formatter': {
+      what: 'JS Formatter là một công cụ dọn dẹp format trang nhã dùng riêng biệt cho file code JavaScript. Áp dụng chuẩn quy tắc phong cách như tool Prettier danh tiếng, mang lại nét thẩm mỹ gọn gối cho đống hỗn loạn logic js rắc rối.',
+      why: [
+        { title: 'Code Cú Pháp (Syntax) Thuần', desc: 'Căn gióng ngoặc đúng chỗ nhất là với logic functions xếp chồng, hay hàm lặp cấu trúc promises.' },
+        { title: 'Sẵn Sàng Compile & Cắt gọt', desc: 'Khả năng nén JS dùng sản xuất production cũng được đính kèm giúp dọn luôn đoạn hở cho lẹ nếu rảnh.' },
+        { title: 'Base Mới ES6+ Bất tử', desc: 'Máy phân tích chạy ngon lành với những thẻ từ arrow functions, async/await hay các class hiện đại nhất.' },
+        { title: 'KHÔNG đòi hỏi Set-up', desc: 'Hưởng ngay kết quả đẹp hoàn hảo mười phân mà không phải lao đầu cài config file `.prettierrc` mỏi mệt.' }
+      ],
+      example: {
+        before: 'function test(){console.log("hi");}',
+        after: 'function test() {\n  console.log("hi");\n}'
+      },
+      faqs: [
+        { q: 'Cái gọi là Beautification (Làm đẹp code) chính xác bản chất là gì cơ?', a: 'Nó biến chuỗi xử lý gõ rối ren tự động sắp xếp quy chuẩn và nhìn sang đẹp mà không xáo trộn tính chất code source nhé.' },
+        { q: 'Phần JS này có bắt luôn với Typescript cho sành điệu ko?', a: 'Đúng thế, khả năng parser thông minh đã đủ cân tốt luồng cấu trúc Typescript standard chung một đường đua.' },
+        { q: 'Liệu sau code hư syntax thì nó tự edit lỗi giùm khum?', a: 'Chia tay rồi, nó chỉ format trên source chạy đúng hoy nha. Nếu có dấu câu đánh sai cú pháp nó fail chạy tiếp ngay đó.' },
+        { q: 'Xử lý cho ứng dụng kiếm tiền có dễ mất trộm ko?', a: 'Tất cả mọi dữ liệu process là nằm ngầm trên browser offline cá nhân thui. Hoàn toàn bảo mật đỉnh chóp.' }
+      ],
+      complementary: {
+        id: 'ts-to-js',
+        name: 'TS to JS',
+        textEN: 'Need to compile TypeScript? Try',
+        textVI: 'Cần biên dịch TypeScript? Thử'
+      }
+    },
+    'url-parser': {
+      what: 'URL Parser là công cụ dò tìm để mổ xẻ bẻ khóa toàn bộ cấu trúc địa chỉ web gộp làm các phần tách biệt như: Protocol (Giao thức), Hostname, Đường dẫn truy xuất (Path), Các tham số truy vấn (Queries) và thẻ băm (Hashes).',
+      why: [
+        { title: 'Giúp Mổ Xẻ Query Parameter', desc: 'Chia tự động nguyên dàn chuỗi queries (?id=1&ref=tw) cắt thành danh sách bảng đẹp đọc là hiểu ngay.' },
+        { title: 'Check Kiểm Toán Phishing', desc: 'Dễ dàng loại luôn cái đám URL lằng nhằng nhận biết website lừa đảo, tên miền phụ sub-domains bẩn trỏ Redirect.' },
+        { title: 'Soi Số Hiệu (Port)', desc: 'Scan bắt sóng phát một cổng dev localhost phi tiêu chuẩn lẫn những đuôi link giấu mặt từ code nội bộ.' },
+        { title: 'Chọn Gắp URL Cụ Thể Từng Mảng', desc: 'Một nhát copy liền cho tham số queries gỡ mã hóa, cực tiện thay thế thao tác chọn bằng tay sai sót hoài.' }
+      ],
+      example: {
+        before: 'https://example.com:8080/path/to/page?user=123#section',
+        after: 'Protocol: https\nHost: example.com\nPort: 8080\nPath: /path/to/page\nQuery: user=123'
+      },
+      faqs: [
+        { q: 'Protocol hay cái Cấu Trúc URL kia định nghĩa là ra sao?', a: 'Đó là loại giao thức scheme vận hành quy tắc để biết website kia phải giao tiếp theo đường hầm nào, phổ biến nhất vẫn là `http` hoặc thẻ an toàn `https`.' },
+        { q: 'Nó có translate chuyển lại (Decode) mớ mã số Parameter không zạ?', a: 'Yes rồi, các từ vô danh hóa %20 tương quan với khoảng trống (space bar) sẽ trở lột xác lại con chữ giúp dân mạng nhìn ra luôn.' },
+        { q: 'Phần sau dấu `#` Hashes/Fragment nhét zo có để làm chi?', a: 'Đây chính là lệnh tắt rẽ điều tiết chuyển dòng browser hạ màn focus đúng ngay cái thẻ ID bạn set trên chính page đó để nhảy tưng tưng á.' },
+        { q: 'Cái công cụ này đụng chạm API kiểu gì đây?', a: 'Không thể thiếu nó nếu bạn phải thao test một endpoint REST API dài rườm rà bủa vây cả nùi thông số requests dính liền tù tì.' }
+      ],
+      complementary: {
+        id: 'url-encode-decode',
+        name: 'URL Encoder',
+        textEN: 'Need to encode a parameter? Use',
+        textVI: 'Cần mã hóa tham số? Dùng'
+      }
+    },
+    'http-status-codes': {
+      what: 'Trung tâm tham chiếu HTTP Status Codes là nơi tổng thống kê danh mục chỉ mục tìm kiếm và dò tìm chuẩn mọi bộ mã trạng thái phản hồi máy chủ 1xx tới tận 5xx đứt kết nối cho Web dev.',
+      why: [
+        { title: 'Tra Cứu Khẩn Cấp Bằng Số', desc: 'Hộp tìm kiếm nhả result trong vài miligiây. Kể cả check 200 OK thông dụng lẫn thằng báo lỗi kì quặc 418 I\'m a teapot trà gốm.' },
+        { title: 'Trình Bày Văn Phong Dễ Hiểu', desc: 'Hạn chế mọi lý thuyết loằn ngoằn, chỉ cho biết trực tiếp Server/Máy Chủ bị vấn đề trăn trở nhức rốn nào cần fix.' },
+        { title: 'Góc Nhìn Thực Tế Của Developer', desc: 'Sàng lọc thông báo để lập trình viên tự soi ngay do front-end điền sai (4xx client side) hay do back-end làm bay màu (5xx server side).' },
+        { title: 'Cuốn Tự Điển Tra Cứu Luôn Online', desc: 'Một giải pháp save Bookmark nằm nguyên góc trình duyệt đắc lực đối phó vấn đề API nhức óc.' }
+      ],
+      example: {
+        before: 'Tìm mã: 403',
+        after: '403 Forbidden: Ứng dụng client đã truy cập thành công tài nguyên máy chủ. Nhưng anh ta lại không có quyền truy cứu.'
+      },
+      faqs: [
+        { q: 'Dãy bộ status mã code đầu 2xx ngụ ý cái giề?', a: 'Biểu trưng tất cả mọi đầu việc thành công viên mãn. Dữ liệu request truyền từ client lên đã tiếp nhận gọn lẹ mà chả gặp vấn đề sập bẫy chi.' },
+        { q: 'Điểm phân định giữ con 401 và 403 (Authorized/Forbidden) ra sao ta?', a: '401 Unauthorized dịch là dân mạng này chưa cung cấp login bảo mật nha! Trong khi 403 Forbidden thì hắn có log vô hẳn xong mà server cấm ổng chạm zô tính năng cấp cao đó (như Admin only chẳng hạn).' },
+        { q: 'Chết dở tự dưng bắn ra mã 500 là ăn hành hả Tool?', a: 'Vâng 500 Internal Server Error đồng nghĩa app trên phía Backend chập mạch báo chập hỏng cục nợ rồi. Hay có điều dở hơi bất ngờ khiến Server nín thở chịu chết.' },
+        { q: 'Thông tin có mang chuẩn chỉ chính hãng không ạ?', a: 'Quy chuẩn miêu tả ập theo sát từng định nghĩa trong cái bảng biên thảo quy chuẩn chính ngạch RFC từ hội IETF á.' }
+      ],
+      complementary: {
+        id: 'http-request-builder',
+        name: 'HTTP Client',
+        textEN: 'Test an endpoint response natively with',
+        textVI: 'Kiểm tra phản hồi API trực tiếp bằng'
+      }
+    },
+    'mime-types': {
+      what: 'Trung tâm tra cứu MIME Types là một hệ cơ sở dữ liệu giúp bạn tra diện chéo giữa định dạng tệp đuôi mở rộng (.html, .mp4) sang chuẩn định dạng Web Media (text/html, video/mp4). Đóng vai trò cực kỳ quan trọng mỗi khi tinh chỉnh chuẩn Server, form Upload file hay mã nguồn định tuyến API.',
+      why: [
+        { title: 'Tra Cứu Hai Chiều', desc: 'Có thể điền chuẩn ext để xem thử loại file gì, hay điền luôn text MIME type để lần ngược ra cái phần đuôi file.' },
+        { title: 'Thiết Lập Máy Chủ Server', desc: 'Kiến thức cốt lõi giúp cài Nginx, hệ Apache, hoặc đẩy metadata tĩnh lên các kho lưu trữ AWS S3 bucket.' },
+        { title: 'Check Mã Tải File Mạng', desc: 'Xác thực an toàn chuỗi danh sách mã tệp cho phép upload từ người dùng qua thuộc tính thẻ `<input type="file" accept="mã-ở-đây">`.' },
+        { title: 'Đánh dấu API Đầu ra', desc: 'Quy chuẩn bắt buộc truyền Header Content-Type để máy quét biết đọc file kiểu API JSON text hay là luồng file down về.' }
+      ],
+      example: {
+        before: 'Đuôi mở rộng: .svg',
+        after: 'Định dạng MIME Type là: image/svg+xml'
+      },
+      faqs: [
+        { q: 'Cái hệ chuẩn thông số MIME type bắt nguồn từ đâu?', a: 'Từ cụm từ Multipurpose Internet Mail Extensions - vốn là công thức truyền thống để máy tính trao đổi với nhau là tôi đang gởi 1 bức thư hay là 1 tấm ảnh đấy.' },
+        { q: 'Vậy chốt lại Header Content-Type quan trọng cái mức nào vậy?', a: 'Là trình duyệt Web sẽ luôn hóng cái mã đó để quyết định coi sẽ in hình ảnh lên thẻ Image bự, show thành dãy Text nhạt nhẽo hay cưỡng chế báo hộp thoại Lưu Ảnh bắt download liền tay.' },
+        { q: 'Định hệ vô danh application/octet-stream là thế nào thưa tool?', a: 'Đây là loại file bí ẩn (lõi nhị phân). Rơi vô trường hợp này, Chrome sẽ không tự hiện mở ra cho xem đâu mà bắt người dùng tự Save as về máy tính đó.' },
+        { q: 'Trang tool tra cứu chuẩn không?', a: 'Thông số toàn bộ tham chiếu sát sườn từ nguồn IANA cung cấp, pha lẫn với vài thể loại hãng đặc quyền riêng.' }
+      ],
+      complementary: {
+        id: 'user-agent-parser',
+        name: 'User-Agent Parser',
+        textEN: 'Parsing other request headers? Use',
+        textVI: 'Đang phân tích các thông số truy cập khác? Dùng'
+      }
+    },
+    'curl-to-code': {
+      what: 'Curl to Code Converter biên dịch thần tốc mọi tổ hợp lệnh Terminal cURL khô khan dài ngoằng, bung trọn thành source code chuẩn JavaScript (Fetch, Axios), hàm Python hay dạng PHP sài liều.',
+      why: [
+        { title: 'Bắn Code Các Nền Tảng Chéo', desc: 'Quăng cURL sang biến thành chuỗi cấu trúc JS Fetch, hàm Node.js Axios ngon, hay hàm thư viện Requests xịn xò của Python.' },
+        { title: 'Cởi Nút Các Bộ Header', desc: 'Bộ máy soi gỡ tự động tách lấy mấy khóa Auth, chuỗi Cookie và Headers rùi gom vô danh sách object dễ đọc.' },
+        { title: 'Xử Lưu Payload Xịn Mịn', desc: 'Bóc tách mã `-d` hay lệnh `--data` cURL nhét gọn vào chuẩn biến dạng cục JSON hoặc chuỗi String sạch sẽ.' },
+        { title: 'Vũ Khí Copy Ăn cắp API', desc: 'Bạn chỉ cần Click chuột vô thẻ Network Tab (Chrome F12) ấn Copy as cURL, đem Paste thẳng vô tool là lấy hết bí kíp Request của bên thứ ba chập cái cụp!' }
+      ],
+      example: {
+        before: 'curl -X POST https://api.vi -d "key=1"',
+        after: 'Dịch qua fetch("https://api.vi", { method: "POST", body: "key=1" })'
+      },
+      faqs: [
+        { q: 'cURL này bản thân gốc là gì dị?', a: 'Tên dòng lệnh lẫy lừng của thế giới lập trình dùng chuyên trị giao tiếp truyền tải HTTP API siêu việt.' },
+        { q: 'Copy luôn từ browser chôm code được không?', a: 'Chắc chắn được! Nhấp F12 bật DevTools Network tab lên, hốt đại 1 link ưng ý, Click phải vô chọn "Copy -> Copy as cURL (bash)", dán lẹ vô tool là nổ mã nha.' },
+        { q: 'Trường hợp mấy file up hình nặng xài Upload form-data nhận code không?', a: 'Sẽ vẫn render và format ra từng cấu hình FormData tùy mắm muối đặc trưng của mỗi Language bạn chọn xuất ra.' },
+        { q: 'Máy chủ Tool này xử lý sao?', a: 'Bộ core logic nằm trọn bên Javascript trình duyệt local nha, ko hề rò rỉ chôm thông tin API cURL nhạy cảm.' }
+      ],
+      complementary: {
+        id: 'http-request-builder',
+        name: 'HTTP Client',
+        textEN: 'Send requests right here with',
+        textVI: 'Gửi request trực tiếp bằng'
+      }
+    },
+    'html-formatter': {
+      what: 'HTML Formatter là cái cây chổi thần kỳ chuyên quẩy làm đẹp lại (Beautify) một file HTML bị minified hóa cục nén hay code ẩu cẩu thả. Nó san phẳng lại cấu trúc cây, thụt lề ngoặc đúng chuẩn tổ chức dễ nhìn.',
+      why: [
+        { title: 'Tạo Cấu Trúc Khả Kiến Dễ Nhìn', desc: 'Chẻ nhỏ đống HTML ùn cục, lôi ra dạng cây cha-con thò thụt rất trực quan siêu sạch sẽ.' },
+        { title: 'Option Wrap Thẻ Attribute', desc: 'Mấy thẻ nào dính chi chít nhồi cả đống class đuôi dài loằng ngoằng sẽ bị uốn Wrap rớt dòng thông minh cho dễ liếc mắt.' },
+        { title: 'Không Phá Hỏng Giao Diện Dạng Riêng', desc: 'Xử lý cực kỳ cẩn trọng nhạy bén vụ thẻ trống thẻ rỗng `<pre>`, `<textarea>` để không tự dưng chèn vô khoảng cách ảo.' },
+        { title: 'Gồng Đỡ Mọi Engine Templates', desc: 'Code kiểu gì cũng sơi tuốt, kể cả framework JSX huyền thoại React, hay rải Component Vue cho tới render Blade thuần túy.' }
+      ],
+      example: {
+        before: '<div><p>text</p></div>',
+        after: '<div>\n  <p>text</p>\n</div>'
+      },
+      faqs: [
+        { q: 'Edit xong vậy có làm sai cái Layout UI đang làm rớt xuống không?', a: 'Chạy ngon lắm nhưng đôi khi lưu ý xíu thẻ inline elements (ví như `<span>`) nó vẫn lượm dính khoảng trống dấu space cách lề thui.' },
+        { q: 'Chơi khô máu format cục bộ file JSX bên React nổi hông?', a: 'Vô tư bạn hỉ, Format tool dư sức cân nắn bóp dòng cho tụi Component xịn sò vô khuôn phát một à.' },
+        { q: 'Lỡ như thẻ HTML bị viết quên thiếu dấu đóng tag `>` thì sao?', a: 'Do nó cố dồn lực làm chuẩn DOM cây lên vô tình vỉa phô lồ lộ ra lỗi sai sai bằng mắt cho bạn liếc thấy liền lun đó.' },
+        { q: 'Copy xài có lộ source code ko?', a: 'Local Engine nằm lỳ trong CPU của trình duyệt rồi nghen, chạy offline phà phà.' }
+      ],
+      complementary: {
+        id: 'html-minifier',
+        name: 'HTML Minifier',
+        textEN: 'Compress for production using',
+        textVI: 'Nén trước khi triển khai với'
+      }
+    },
+    'cidr-calculator': {
+      what: 'Kỹ sư quy hoạch IPv4 CIDR/IP Calculator siêu khủng. Nhập thử một mã IP kèm mạng dải tiền tố (VD: 192.168.1.0/24) để công cụ xẻ dọc thông số hiển thị luôn cấu trúc subnet mask chuẩn xác.',
+      why: [
+        { title: 'Lấy Toán Học Vượt Đau Đầu', desc: 'Chỉ cần enter cái mã Subneting mệt mỏi hệ số nhị phân là bảng biểu đáp đầy thông tin kỹ thuật hiển thị ngay tức khắc.' },
+        { title: 'Công Bố Cấu Trúc Data Khối', desc: 'Ra ngay được mã Network ID khai sinh, địa chỉ Broadcast IP tận cùng số cuối, với cả chốt lại khoảng First/Last host dùng xài mạng là bao cục IP luôn.' },
+        { title: 'Khớp Định Mức Wildcard', desc: 'Sòng phẳng quy đổi thông số đảo Wildcard mask cực hữu ích khi quẹt thẻ thiết lập Rule chặn tường lửa Firewalls của mấy hãng Cisco.' },
+        { title: 'Triển Khai Mạng Trong Mạng Ngầm Đám Mây', desc: 'Là thiết bị bỏ túi bất ly thân của dân Network chạy VPC trển hệ AWS Amazon hay Cloud Microsoft Azure Virtual Networks.' }
+      ],
+      example: {
+        before: 'Nhập dải số CIDR: 10.0.0.0/24',
+        after: 'Thông số trả -> Mask: 255.255.255.0, Hosts: khả dụng 254 IP'
+      },
+      faqs: [
+        { q: 'Cái cú pháp hình dáng CIDR Notation là gì dậy ông?', a: 'Đấy là thuật ngỗ xưng danh mạng Classless Inter-Domain Routing (CIDR) dùng khoanh đo cắm cọc cấp độ IP với dải routing nhanh. Cái /24 tương đương khai 1 subnet mask 24 bits liền á.' },
+        { q: 'Vì sao lượng tổng tài nguyên máy chủ Usable IP khống lại khống mất chi tận 2 cục IP rồi mới báo?', a: 'Quy chuẩn cố lõi toàn cầu quy định rùi, cái cục IP nằm đầu chóp phải khai lưu cho Network Address, còn đuôi IP bé nhất cuối là cúng dường làm cổng cho ngài tín hiệu Broadcast Address.' },
+        { q: 'Sức mạnh này có nhai được cho bên thiết lập dải bộ hệ IPv6 không?', a: 'Khả năng tool lúc này đành ngả rẽ tập trung thuần túy cho bộ khung số tính toán hóc xương rờm rà của đàn anh IPv4 trọn vẹn thui ha.' },
+        { q: 'Dám chắc độ chuẩn không để config lên Firewall server thật kìa?', a: 'Cam đoan độ lầy của số chuẩn mượt thuật toán cực ngon, chớ băn khoăn chém gió mà set luôn lên hệ router switch vật lý thật đi.' }
+      ],
+      complementary: {
+        id: 'ip-lookup',
+        name: 'IP Lookup',
+        textEN: 'Want to track a public IP? Try',
+        textVI: 'Cần tìm hiểu một IP public? Thử'
+      }
+    },
+    'http-headers-builder': {
+      what: 'Trung tâm Xếp hình mã Config bảo mật siêu khủng (HTTP Security Headers Builder). Hệ GUI hỗ trợ đổ ra config mã code headers Server tự động có Content Security Policy CSP và Cross-Origin CORS trị Hacker XSS.',
+      why: [
+        { title: 'Content Security Policy (Khóa Mõm CSP)', desc: 'Tính năng thả kéo tắt mở giúp ghép ra list danh sách CSP cho phép web tự Veto quyết liệt ko chạy Code Script độc của Hacker (XSS).' },
+        { title: 'Chốt Sổ Cross-Origin CORS', desc: 'Nhả Code chuẩn mực config tag `Access-Control-Allow-Origin` tránh đụng chạm bị Block chặn API rẽ ngôi sang các tên miền Web App khác.' },
+        { title: 'Lệnh Khiển Chế HSTS', desc: 'Thiết quân lệnh tự ép tải Website trượt băng mượt cấu trúc chuyển tiếp HTTP mỏng tanh sang cục https cao giá chuẩn bảo vệ với thông số Strict-Transport-Security.' },
+        { title: 'Xuất Cảng Config Tích Tắc', desc: 'Ra output mã text bốc lên dán dính y đúc vào tệp .htaccess của hệ Apache, thả vào Nginx Server, vô luôn trạm trạm Middleware Code Express.js cái là dính cứng.' }
+      ],
+      example: {
+        before: '[Chọn click tick mã CSP thẻ script-src dạng "self"]',
+        after: 'Lòi ra -> Header set Content-Security-Policy "script-src \'self\';"'
+      },
+      faqs: [
+        { q: 'Định nghĩa gốc cội CORS bản chất thâm thúy là z?', a: 'Mấy cái web trình duyệt hay chơi chiêu bảo tàng an ninh vây kính bằng rule Cross-Origin Resource Sharing ranh mãnh cấm đoán code AJAX của trang ta lết qua site host khác để xào bát tài nguyên file của người ta thui a.' },
+        { q: 'Chi rứa mà nhọc cái của nợ CSP vậy ta?', a: 'Hắn giống anh dân phòng sừng sỏ ôm cuộn danh sách khách VIP whitelist cho qua cổng. Phải đúng Script JavaScript hay file ảnh anh chỉ định mới được chạy, lũ trộm chèn lén bị hất cẳng cái vèo.' },
+        { q: 'Lá chắn X-Frame-Options nhét đệm thêm làm chi zạ?', a: 'Dùng khóa tay mấy chiêu trò Clickjacking ma sói đem trộm nguyên con web của ta bọc bên trong thẻ màn thính `<iframe>` giăng rình dụ Click ảo bên trang bẩn của tụi hắn.' },
+        { q: 'Nhét cái đống Header râu ria dày đặc vô chả tạ Server ì ạch à?', a: 'Hoàn toàn No, tệp Header chỉ mang định dạng siêu text mỏng nhẹ lướt gió qua luồng mạng mà thôi thưa sếp.' }
+      ],
+      complementary: {
+        id: 'http-status-codes',
+        name: 'Status Codes',
+        textEN: 'Learn server responses with',
+        textVI: 'Tìm hiểu phản hồi server với'
+      }
+    },
+    'robots-txt': {
+      what: 'Thiết kế hệ lệnh lập trình viên ảo (robots.txt Generator) quy hoạch tầm soát máy bộ máy tìm kiếm (Googlebot). Hướng mục tiêu rõ ràng khu vực Cấm chặn bốc hơi dọn đường hay chỉ nẻo mời Gọi thân ái.',
+      why: [
+        { title: 'Tuyệt Thuật Ẩn Mình (Ngừng Đánh Index)', desc: 'Ngưng ngay sự tọc mạch của tụi rình rập Google lục lọi nhầm chỗ chốn cấm địa thiêng liêng như thư mục Admin, URL chứa hàm xử lý dữ liệu API.' },
+        { title: 'Khéo Điều Nhịp Thở Bot Đọc', desc: 'Tính năng chèn chỉ tiêu tham số nhịp Delay Crawl ngăn những con Bots trâu bò rảnh háng vô tư chộp dữ dội nhai cạn sập cmn Server bắng tài nguyên Load.' },
+        { title: 'Link Nhanh Gọi Sơ Đồ Sitemap', desc: 'Lệnh rải trực diện 1 cục gắn móc điểm nhắm vô cái map gốc của web (URL xml sitemap) định vị để tàu chiến Bot ùa vô xúc hốt các page ruột lẹ.' },
+        { title: 'Format Đúng Kiểu Bot Trắng Đen', desc: 'Đảm bảo trật tự cấu trúc Plain-text gõ máy xám xịt ko sai 1 li 1 milimets bớt cho vụ gõ Code lộn nhầm dòng lủng Củ.' }
+      ],
+      example: {
+        before: '[Set chặn Cấm (Disallow) đường x /admin/ Cho All Các Bot Nằm]',
+        after: 'Form Xuất Ra -> User-agent: *\nDisallow: /admin/'
+      },
+      faqs: [
+        { q: 'Chép cái thẻ tệp rởm robots.txt đó dán đâu cho ngầu thế?', a: 'Bắt buộc ép góc vô thẳng con máy chủ Root nền tảng gốc ở trên cao nhất đó (e.g. gõ thanh tải tên https://domaincuaong.com/robots.txt đó mường tượng chưa).' },
+        { q: 'Lưu lệnh thẻ Cấm Tuyệt (Disallow) là web tôi thành tàng hình bóng đêm rồi chứ lị?', a: 'Sai nha bạn, cấm thằng bạn ngoan (Kiểu mấy con G bot search bự bự thoai), chứ có đứa nào lỡ ném cài backlink site link lạ đi trỏ vô là trang ổng phơi mình y rứa vẫn cho list lên Index được mờ.' },
+        { q: 'Họ gọi chữ danh xưng User-Agent thế là trỏ đi đâu ai biết đặng chưa?', a: 'Tên con thẻ xác định biệt danh của mỗi chủng đội quân Bot máy quét. VD để là `Googlebot` hắn target khoanh mỗi cục mạng Google, còn thả chốt con `*` thì kêu All Các Loại Khai Mở Bầu Máy Đi Qua Cho Tôi.' },
+        { q: 'Có phương thức nào Review kiểm chứng chéo tệp Robots ko nhỉ?', a: 'Yên tâm chèn nhét tệp này trên web rồi nhào vô khu Search Console thần thánh của ngài Gút-Gồ để tool check file là an tâm 100% nhe.' }
+      ],
+      complementary: {
+        id: 'sitemap-generator',
+        name: 'Sitemap Builder',
+        textEN: 'Next, build your website map with',
+        textVI: 'Tiếp theo, tạo bản đồ với'
+      }
+    },
+    'sitemap-generator': {
+      what: 'Cỗ Máy Xây Dựng Bản Đồ Nhện Công Nghệ XML Sitemap (XML Sitemap Generator). Gói trọn cả ngàn link website 1 list danh sách chốc nhát vô thẻ bọc xịn XML, điểm số quyền hạn Ranking, số đo thời gian làm SEO nảy mầm.',
+      why: [
+        { title: 'Lắp Ghép Module Cây Cấu Trúc Tag', desc: 'Sụp trốn cảnh tay to đánh gõ mấy cái dấu góc ngoặc rườm rà dài chát `<urlset>` và code dòng nhét link `<loc>` vô vọng.' },
+        { title: 'Dàn Hệ Độ Đậm Nhạt SEO Priorities', desc: 'Trải chuỗi tỷ trọng chỉ tiêu từ dòng 0.1 rác tới thẻ đỏ ưu tiên vàng 1.0 nhằm hô gọi mấy đứa Spider Bot hãy dồn sự tập chú cho list con cưng mấu chốt mình nha.' },
+        { title: 'Đặt Móc Thông báo Cập Nhật Web', desc: 'Check thẻ để đánh thanh cảnh báo tần suất tệp cập nhật dữ dội (thay đổi `hourly` liên thanh tới cả dạng `yearly` già lụ khụ).' },
+        { title: 'Xúc Tiến Tải Liền Tay', desc: 'Hoàn hảo xong nháy 1 cú là tải đóng cục file `sitemap.xml` liền ra chờ bê ném lên máy chủ mài ăn.' }
+      ],
+      example: {
+        before: 'Dán: https://zxc.com/blog\nĐộ ưu tiên: 0.8 / Nhịp cập nhật: Tuần (weekly)',
+        after: 'Thành -> <url>\n  <loc>https://zxc.com/blog</loc>\n  <changefreq>weekly</changefreq>\n</url>'
+      },
+      faqs: [
+        { q: 'Thật Ra Cái Bản Đồ Này Là Sinh Ra Vì Mục Đích Giảng Đạo Gì Nhỉ?', a: 'Như là cái Bản Đồ Đô Thị dâng lên đôi mắt mấy đấng Vị Thần Máy Quét như Goolge chao ôi, tụi tui nộp hết dở khóc mọi xó URL bài post đó tụi ngài tự gom zô Index mà chả màng ngồi đợi backlink có hay Không Có cũng đc nè.' },
+        { q: 'Xếp Số Ưu Tiên (Priority) liệu nhét căng kim thì có giúp lên TOP bứt trend?', a: 'Mấy đại lão ở Tòa Google đã thẳng mặt tạt nước lạnh báo ổng lờ lơ đi thẻ đó dồi, tuy thế thẻ đánh mốc giờ đồng hồ update (`lastmod`) vẫn còn có sức nặng hút linh hồn kinh khủng nha ẩu.' },
+        { q: 'Code File ngon rồi zờ đẩy lên sòng Tòa Google bằng đường mô nhỉ?', a: 'Úp File lên hosting rùi nhảy vào Gút-gồ Search Console ném Link sitemap gửi qua cái một thôi à.' },
+        { q: 'Có ôm sọn nhét chung được Video với thẻ cấu trúc ảnh Hình zô cái sitemap này lun không ông anh?', a: 'Này form chuẩn phổ thông webpage links thôi ổng ạ, mấy định dạng lạ bốc chìm ảnh với tệp video nó có mảng format XML khác nha!' }
+      ],
+      complementary: {
+        id: 'robots-txt',
+        name: 'Robots.txt Generator',
+        textEN: 'Make sure crawlers can find it with',
+        textVI: 'Đảm bảo bot tìm thấy nó qua'
+      }
+    },
+    'ts-to-js': {
+      what: 'TypeScript to JavaScript là chiếc xẻng quét sạch bùn trình biên dịch thần sầu nháy qua Browser. Dọn tước thẻ nhãn dán Types, dập Class hệ decorator rườm rà chẻ biến mớ ruột TS ra thành món code JS dân túy siêu tinh gọn mượt.',
+      why: [
+        { title: 'Tốc Biên Compile Môt Cú Nổ', desc: 'Thả vô thử check nghiệm miếng code dòng TS liền ra dĩa kết quả dĩa JS tức thì để vóc lại khỏi mở terminal lên đấm lệnh `tsc` chày cối.' },
+        { title: 'Tác Tách Nhãn Gôm Tươi Tẩy Sạch', desc: 'Gỡ cấu trúc dạng thẻ Types, vạc bứng bộ khung bảo lưu được luồng lõi Code tư duy thực chất mượt mà khỏi hoen ố ngót méo chạy fail.' },
+        { title: 'Chảo Định Hình Nhắm Đích Biến Đổi', desc: 'Khả ái xem coi dòng logic ngầu ES6 thời nay bị cào bằng chắp gọt tuột lại format thời cổ đại của chuẩn JS nền ES5 ra làm s.' },
+        { title: 'Phân Tích Bào Tại Tách Lõi Client-Side', desc: 'Một trái tim động Cỗ TypeScript êm ả lọt thỏm ngay bên trong Cố máy Browser nhai nuốt trọn đảm bảo logic cơ quan công ty tuyệt đối lưu giấu giếm.' }
+      ],
+      example: {
+        before: 'Code vào -> function greet(name: string): string { return `Hi ${name}`; }',
+        after: 'Rụng trứng -> function greet(name) { return `Hi ${name}`; }'
+      },
+      faqs: [
+        { q: 'Thắc Mắc Khảo Sự Why lôi cái Của Mắc Nợ Chát Typescript Lùi Về Chơi Kéo Lùi Thành JS Đời Đầu Vậy?', a: 'Do thỉnh thoảng trớ trêu gặp được anh Tây giỏi Share cục Code ngon quá nhặt vào trong cái sọt Rác File Project Cổ điển Thuần Node / JS truyền thống dở ói đâu dùng đồ đắt tiền TS dính rễ đẻ zô chớ sao.' },
+        { q: 'Mụ Này Có Chạy Rà Rối Kiểm Duyệt Thẻ Lỗi Type Mấy Cậu Kiêu Ngạo Hay Đòi Đi Kèm Khi Lỗi Khum?', a: 'Xin lỗi công cụ là loại Lười Biếng cẩu thả Transpile-Only (Chỉ quẳng bỏ gỡ Types) mà méo màng bẻ Còi ngưng báo lỗi Check đỏ rực theo đạo luật Typescript quy củ Khắc Tinh đâu, Cứ có Code là Bú.' },
+        { q: 'Thế cái thẻ Enum có độn Biên thành món ngon ko thế?', a: 'Biên độ rớt trứng 100%, cái thẻ bộ Enums bị vò qua cối xay Transpiler và ói ra dạng bọc thẻ mộc nguyên chuẩn JavaScript cơ hàm IIFE nhe.' },
+        { q: 'Đồ Trơi Kiểu z Miễn là chát Tiền Hông Chời?', a: 'Free không mất Cắt, Múc vã Compile test tỷ dải lệnh mà không bào máy Chủ miếng Server Mạng Lưới Nhện nào luôn.' }
+      ],
+      complementary: {
+        id: 'js-formatter',
+        name: 'JS Formatter',
+        textEN: 'Format the output with',
+        textVI: 'Định dạng kết quả với'
+      }
+    },
+    'dns-lookup': {
+      what: 'Cung Chắn Radar hệ Mạng Lưới (DNS Lookup) Đổ xô soi tìm tung Mạng Domain Name System. Lọc phím đục moi lấy mớ ngọc A, AAAA, MX xịn, TXT lõi rùa, NS lẫn Cặp Mắt SOA sài ké lõi luồng Server DNS xuyên HTTP rực sáng cực tốc của hãng Cloudflare đâm trực ngập từ Giao thức Browser.',
+      why: [
+        { title: 'Kính Viễn Vọng Lan Truyền Bản Đồ', desc: 'Làm lệnh Verify soi chứng nhận đám Update Setup Hệ đổi chuyển Nhãn DNS đang lưu thông chảy rần dọc mạng địa cầu có cập bến thông chưa, éo chờ ông ISP báo nợ cache cũ nữa.' },
+        { title: 'Soi Y Khoa Cho Dòng Chảy Mail', desc: 'Khoắng tìm gắp thẻ cấu trức MX dính kèm TXT (Bộ Sậu An Ninh SPF/DKIM) nắn bóp check mớ luồng mail nghẽn tắc mạch Mắc Lỗi rớt vào Spam bốc mùi.' },
+        { title: 'Mẻ Lưới Giăng Săn Bắt Thẻ Lạ', desc: 'Có nhát Click rành rành bóc phốt mớ Dải Subdomain lót ổ đẻ thêm vô cái IP mục tiêu Server kia và nắn tay xem dàn đầu mối Mẹ Root bự Name Servers (NS) nấp ở lỗ nào.' },
+        { title: 'Bắn Code Cực Đỉnh Bất Khả Tẩy', desc: 'Cứ đấm thẳng luồng Truyền mạng ảo đệm ngầm DoH xé giò tụi Cloudflare mã (1.1.1.1) đánh chặn mọi lá chắn Cướp đường DNS của ông mạng Lô Khồ đang núp.' }
+      ],
+      example: {
+        before: 'Domain rà quét: example.com, Kiểu Type lấy: Thẻ A',
+        after: 'Lòi Bản Mạch Ra: 93.184.215.14 (Mức sống TTL: 3600 giây)'
+      },
+      faqs: [
+        { q: 'Hỏi 1 xíu Thẻ A Record (Cục Máu Chữ A) nó nói lên cái quần què gì zậy?', a: 'Cái Mức Kỷ Lục Hình Trạng chữ A Address nó cắm ghim đường thẳng Map một Cổng tên miền nhảy cái Cạch đáp sầm vào dãy địa chỉ IP 4 số cực chuẩn (IPv4) của Cỗ Server con Máy đang bứng chứa mã nguồn Web rủng rỉnh đó chớ cái gì.' },
+        { q: 'Đống TXT Chữ Xám xịt mang trọng trách Rương Gỗ Chứa cái ôn diệt nhan Đạo gì hả tool?', a: 'Nó nắm lưu văn bản siêu phàm. Cấp độ Tối Khẩn lúc bấy giờ giành giật Mạng Sống Sót An Ninh chống chết ỉu mấy lá Thư Điện Tử của Công Ty dở mồm ko có chữ SPF, bùa chú DKIM sịn sò và con mộc chót chuẩn bộ DMARC là Bay Màu rớt xác.' },
+        { q: 'Chuyên Hệ Danh Canonical Gì Ấy (Mã CNAME) Mọc Rễ Chỗ Mô Nựa Vậy Mụ Nội Ơi?', a: 'Tụi Nó Biến Ảo Ma xưng tráp Bản sao Cạnh Cái Nhãn tên Cung Cấp Domain (Ví dụ cục tên Canonical kia) Bẻ Lái Xì nhan qua cái tên Miền Bự Khác luôn, kiểu cắm đầu chạy xe `www` bắt đè lái sang Root Domain tên thẳng tắp éo có chữ W vậy hà.' },
+        { q: 'Server bị Khóa Lô rùi Kêu Server Tìm Không Ra Tung Tích Là Trượt Cáp rùi Hở?', a: 'Níu Bồ Mới Vừa Chuyển Rời nhà mạng hosting đổi qua đổi lại ném DNS vọt tung lên á nha, Thường Nó Lề mề ủ đông tới khoảng 24 dái dẳng đến 48 Cái Giờ Mảng mới chảy Dàn Khắp trạm mạng Node Quả Địa Cầu này cơ ông cố.' }
+      ],
+      complementary: {
+        id: 'ip-lookup',
+        name: 'IP Lookup',
+        textEN: 'Locate the IP result with',
+        textVI: 'Định vị IP trả về bằng'
+      }
+    },
+    'ip-lookup': {
+      what: 'Hệ thống Định Vị Vệ Tinh IP Lookup tra lục ngược địa chỉ IP public ra vị trí tọa độ địa lý. Kéo thả kho dữ liệu GeoIP toàn cầu bóc phốt ngay Thành phố, Vùng miền, Quốc gia, Nhà cung cấp ISP và số hiệu mảng ASN đứng sau cái IP đó.',
+      why: [
+        { title: 'Chốt Chặn Kiểm Tra Ninh Bảo Phẫu', desc: 'Soi dấu vết nguồn gốc luồng truy cập có mùi đáng ngờ hay lôi cổ mấy lần đăng nhập chui vô Server.' },
+        { title: 'Bản Đồ Chỉ Yểm Tọa Độ', desc: 'Truy quét cạn đáy trọn bộ IP đời cũ IPv4 lẫn chuẩn mã IPv6 dài ngoằng gom về sai số cực hẹp tới từng Thành Phố con.' },
+        { title: 'Điểm Mặt Chỉ Tên ISP', desc: 'Báo thẳng mặt tên nhà đài Dịch vụ viễn thông (FPT, Viettel, VNPT) đang ôm cái IP giấu mặt.' },
+        { title: 'Testing Phân Luồng Vùng', desc: 'Phục vụ dàn Dev Test kịch bản luồng User bị xích theo Vùng miền do lách Fake IP check nội dung.' }
+      ],
+      example: {
+        before: 'Ném IP vào cối: 8.8.8.8',
+        after: 'Chỉ Về: Mountain View, United States (Công Ty Google LLC)'
+      },
+      faqs: [
+        { q: 'Cái công cụ này có tra vô cái địa chỉ nhà ông đó đang ở luôn không vậy?', a: 'Xin lỗi công nghệ không cho phép, mấy file GeoIP public bị siết luật quyền riêng tư dữ dội chỉ quy trả mức vùng mã số Zip Code hay Tỉnh Thành là giới hạn nhé.' },
+        { q: 'IP máy em đang vô xem là gì vậy Mụ?', a: 'Dễ òm, vừa bước mở Tool lên là tụi mị dò quét tự điền luôn cái mã số IP public của mạng mẻo thiết bị bạn đang ôm trên bàn luôn ó.' },
+        { q: 'Mã ASN báo số đó là cái giống gì z?', a: 'Số hiệu System tự trị Autonomous. Kiểu biển số kiểm soát chỉ điểm gốc gác cái Tổ Chức hay nhà Mạng cục bộ nào (VD kiểu VNPT AWS) đang ôm quản nguyên dải IP to chà bá á.' },
+        { q: 'Cái mã IP đuôi ngộ đời chuẩn IPv6 có quét vô khớp được ko?', a: 'Bao trọn ổ luôn anh em ơi, định dạng IPv6 128-bit lằn nhằng vướng víu máy tra cực ngọt chả sót nhát nào.' }
+      ],
+      complementary: {
+        id: 'cidr-calculator',
+        name: 'CIDR Subnets',
+        textEN: 'Plan network allocations with',
+        textVI: 'Định hướng mạng phụ với'
+      }
+    },
+    'ssl-checker': {
+      what: 'Chuyên Viên Kiểm Định Chéo Chứng Chỉ SSL. Rót nhanh liên kết HTTPS bắt máy quét chọc dò ngay độ uy tín mã hóa Server coi Giấy Phép còn thọ không, Tổ chức nào cấp, có hụt cái rễ lá Chain nào dẫn tới mất vạch Xanh bảo mật ko.',
+      why: [
+        { title: 'Trông Coi Ngày Rớt Mạng (Expired)', desc: 'Tính chính xác bong bóng bao cái ngày lùi đồng hồ là cái chứng chỉ tạch Rụp ngăn cái cảnh sập Web gián đoạn nhục mặt.' },
+        { title: 'Xét Hạch Đơn Vị Cấp Chứ (Issuer)', desc: 'Scan dò bộ mã Authority (CA) đang ký tên bảo lãnh đó đến từ nhà dòng uy tín bự Let\'s Encrypt siêu cấp hay có hãng mờ ám.' },
+        { title: 'Soi Liên Kết Đứt Đoạn Chains', desc: 'Bắt lỗi những tấm chứng nhận tầng giữa Intermediate bị khai rớt khiến dt android quẳng vô Lỗi không an toàn cực gắt.' },
+        { title: 'Rã Thuật Toán Nền', desc: 'Sâu thẳm móc lòi công nghệ bọc mã đang ôm cục dữ liệu Web là RSA cũ mem hay công nghệ mã bảo mật mỏng nhẹ bẻ cong Elliptic Curve (ECC).' }
+      ],
+      example: {
+        before: 'Quét Mạng: https://example.com',
+        after: 'Tình Trạng Hợp lệ: Ngon | Sang hạn: 45 Ngày nữa | Quản Lý: Hãng DigiCert'
+      },
+      faqs: [
+        { q: 'Thế lỡ để trượt ngày quá hạn cái thẻ bảo lãnh SSL thì tan nát web hong?', a: 'Tuyệt vọng cmn lun. Bật Google Chrome lên ấn dô web nó thả tấm bảng đỏ to chữ mập "Kết nối mờ ám dính bảo mật" chận đứng mọi giọt máu traffic đổ dô.' },
+        { q: 'Gì mà SSL chain (dây xích Chứng Chỉ) nghe ngợp z?', a: 'Tấm Bằng bảo an máy chủ của bồ cần có ông lớn hạng xoàng chứng nhận, tới phiên ông xoàng đó lại đc Cầm Đầu rễ mốc bự chà bá ký tên. Đứt 1 nhát giữa dòng mấy cái thiết bị cùi cùi nó từ mặt trang liều.' },
+        { q: 'Quăng ip ảo Local IP (localhost) vào đấm thử tool này bắt hình ảnh được khom?', a: 'Phi vụ bắt tay SSL này buộc phải nhả cái Hostname xịn (Link bốc khói qua rễ mốc) để máy soi chọc dò mạng lướt tay ngoài chứ đồ cục bộ chịu bó.' },
+        { q: 'Ráng nâng cấp vô con HTTPS để chi cho cực người zới?', a: 'Ko chỉ có chống phường Hacker dòm trộm Pass mà là chuẩn mực đạo diện Sống Chết Đút Lót cho bảng sếp hạng Google SEO nữa đại ca ạ.' }
+      ],
+      complementary: {
+        id: 'dns-lookup',
+        name: 'DNS Lookup',
+        textEN: 'Check server records with',
+        textVI: 'Kiểm tra bản ghi máy chủ với'
+      }
+    },
+    'http-request-builder': {
+      what: 'Máy Đánh API (HTTP Client) chìm đắm ngay trong Browser, đóng vai cái bóng postman hạng nhẹ. Rắp xếp nhào vô kiểm lỗi API, nhồi Header tuỳ biến, ép thẻ Bearer Token Auth lẫn sấy cục Data JSON xịn vào.',
+      why: [
+        { title: 'Quẩy Chuẩn Đầy Đủ HTTP', desc: 'Mọi dòng Method bạo gân REST chuẩn xác nhất đều có lật mặt: GET lấy vội, POST quăng kho rùi DELETE sát ván hay dòng cập nhật PATCH siêu ảo.' },
+        { title: 'Nhét Auth Gắn Khóa Chìa', desc: 'Rải nhanh cái mã Token gớm ói, đính cái tag API Keys hay gài Basic Auth chùi vô cái giếng Headers.' },
+        { title: 'Trộn Ruột Mồi JSON Payload', desc: 'Thửa nguyên cái Textbox khoác thêm tô ánh sáng Cú Pháp mượt chuẩn nắn vuốt nguyên cục Text Body gởi nhét Data gọn hơ.' },
+        { title: 'Rọi Kết Quả Soi Rụng Trứng', desc: 'Kéo lên nguyên mâm ruột rà cái Data JSON khạc ra, dòng trạng thái xịn Code rành rành báo Lỗi hay Xịt, Thời gian chạy ms Delay.' }
+      ],
+      example: {
+        before: 'Gọi phương thức POST sút vô /api/users ôm { "name": "John" }',
+        after: 'Khạc Báo Ra: 201 Created (Đã Sanh Em) -> { "id": 1 }'
+      },
+      faqs: [
+        { q: 'Đụng chặn vụ tường thành CORS ác ma thì máy Đánh này nó giải nén cỡ mô được?', a: 'Bản chất trình duyệt gồ gân ép CORS rồi ông ơi. Níu cái Host mục tiêu bên đường méo vứt trả mâm Header lệnh cho qua cửa `Access-Control-Allow-Origin` đâm ra ông Browser nhà mềnh block chết tươi đéo gởi lệnh đi nhé.' },
+        { q: 'Kiếm đồ xài API mâm nhà (localhost) bấm được ko máy trẩu kia?', a: 'Chơi tuốt nha, cơ cấu Fetch bốc nổ trực diện ngay cỗ máy browser local ông mà, nới chọt link về thẳng `http://localhost:3000` mà oánh tung miễn sao khum vướng CORS cục bộ nha.' },
+        { q: 'Sao ko bê mẹ cái app khủng Postman dô máy tính cho xong cớ sự?', a: 'Bạn mến ơi bộ của tụi mình hất gọn sài một loáng ko bắt gồng gánh setup cái phầm mềm phình u cả ghi ghi, nín tạo tài khoản hay xếp đống Collection chi cho phiền thời vàng ngọc.' },
+        { q: 'Mấy Cái API key cực gắt của tui chèn dzô có bị ai chôm hông dzị bà?', a: 'Mái Thỏi luôn. Cái của nợ này Code kiểu Cụt (Stateless) đéo dây rễ nối vào máy chủ rớt mẩu Key nhạy cảm nha.' }
+      ],
+      complementary: {
+        id: 'http-status-codes',
+        name: 'Status Codes',
+        textEN: 'Decipher the response code using',
+        textVI: 'Giải nghĩa mã phản hồi bằng'
+      }
+    },
+    'user-agent-parser': {
+      what: 'Máy bẻ mã User-Agent Parser dịch nghĩa bộ dãy nhận diện Trình duyệt Web. Khách vào trang nào thì đổ vào Server cái thẻ text kinh khủng gọi User-Agent. Đút thẻ đó vô Tool dịch trần trụi ra ngay Bộ OS, Tên Trình Duyệt, Đời Máy Device cộm cán và Bọc Lõi Engine.',
+      why: [
+        { title: 'Chỉnh Kho Thông Số Đo Lường Chính Mạch', desc: 'Quăng thử máy cái đoạn code tào lao Bot mạng dỏm dô xét máy coi đống tool Tracking đo lường website đánh giá sai ra sao.' },
+        { title: 'Úp Lồng Bắt Thiết Bị Mềm', desc: 'Khui vỏ vạch chấn phân tỏ luôn cục truy cập ném ra Mobile gập gọn, Mấy cái lố Tablet hay là ông Tướng màn bành Desktop.' },
+        { title: 'Mổ Rã Bản Phiên Bản Web Browser', desc: 'Lọc lòi xương bắt dính lấy bản đuôi số chính xác từ lò Chrome, Safari chảnh, Cáo lửa Firefox hay mớ app WebView đính vô.' },
+        { title: 'Hiển Thể Lũ Robot Máy Quét', desc: 'Chỉ tay điểm mặt đống mã thẻ cạo râu của nhà Gút-gồ Googlebot, Bingbot lang thang hay sạp Bot bẩn Đi Cào ăn trộm dữ liệu web nhà.' }
+      ],
+      example: {
+        before: 'Dãy Code cộm cộm: Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1... Safari...',
+        after: 'Đuổi Theo Ra Thông Tin -> Loại Máy: Apple iPhone | Vỏ OS: iOS 16.6 | Hãng Duyệt: Safari Mobile'
+      },
+      faqs: [
+        { q: 'Rút cụp bộ lõi của danh xưng User-Agent là giồi mô?', a: 'Là mảnh dòng chỉ báo HTTP cố định sinh xài để mà app phần mềm nó ra mắt với đám quản lý lưới mạng rằng thì là em từ đâu xài hãng chi chèo trôi vô kết nối nè anh.' },
+        { q: 'Hỏi chớ sao con ml trình nào cũng điệu rước chữ mào đầu bằng "Mozilla/5.0"?', a: 'Cái Mớ tàn tích Lịch sữ đó ông Nội. Đợt Năm 90 lụt, đám máy Web server nó chỉ lót gạch êm đưa cấu trúc đẹp nhất cho mình thằng Mozilla Cáo Lửa (Thời Netscape) ăn thoai, thế thế đám sau ăn ké làm điệu bắt chước giả vờ đổi tên Mạo Danh để được bục nhận dạng bố mài.' },
+        { q: 'Nếu lật mạo cái User-Agent có dễ ăn khum rứa?', a: 'Trời thần ơi, lỏ vô cùng tận rễ đâm Fake giả cạo bằng VPN tool sành sành luôn á, chớ nên vịn tin nó đổ đổ tường làm rào bảo an nhạy nha.' },
+        { q: 'Đè cái Thông Code mày phân giải đổ mầm dàn CSS vỡ Layout Responsive là bao ngon chứ mẻ?', a: 'Xin Khứa Tỉnh giấc nghen. Chuẩn HTML đương đại thăng hoa mướt mượt phải nhờ Cánh Gánh Media Queries @media chớ ko phải soi giòi User-Agent cổ lỗ sĩ đâu ba à.' }
+      ],
+      complementary: {
+        id: 'http-headers-builder',
+        name: 'Headers Setup',
+        textEN: 'Learn more about HTTP requests with',
+        textVI: 'Tìm hiểu thêm về HTTP request với'
+      }
+    },
+    'og-preview': {
+      what: 'Xưởng Mockup Hình Chia Sẻ Open Graph (OG). Ném link bài vô máy nó vét lôi tọt mấy thẻ meta tĩnh lên rồi phơi một màn Preview ngồn ngộn in hệt cách tấm Thumb hình rớt thỏm bên dòng News Feed bự Facebook, bài Xanh dương bên X/Twitter hoặc cái ô trang LinkedIn cứng nhắc.',
+      why: [
+        { title: 'Trắc nghiệm Hình Dáng Lọt Sổ', desc: 'Canh lọt tỷ lệ bao trọn khung Tấm Ảnh Thumbnail vi diệu, Giữ độ dài Dòng Tiêu Đề khum bị cụt hứng ba chấm `...` ngang ngược.' },
+        { title: 'Bốc Hốt Khảo Lực Code Máy', desc: 'Vào tận sâu bên trong bộ `<head>` gốc link trang chém rót Live dồn mấy cục Meta lên rải mắt check.' },
+        { title: 'Đấm Dính Thẻ Vàng Twitter Card Mỏ Hỗn', desc: 'Kiểm duyệt đè check cái dòng xài kiểu hiển thị `summary_large_image` to nẹt mỡ của mạng Chim xanh cho web nhà bạn khum rớt mạng.' },
+        { title: 'Trầm Chữa Bệnh Hụt Mất Ảnh Image Link', desc: 'Lên đồng gỡ bom rớt ảnh Thumbnail ra trang gẫy do quên thọt thẻ cắm `og:image` vô đầu file Code hay báo link dỏm Error 404 xui xẻo.' }
+      ],
+      example: {
+        before: 'Ném URL dzô ô: https://youtube.com',
+        after: '[Thả hiện cái Demo Thẻ Card Facebook chà bá đi kèm Tựa Gồm video có ngàm chữ Xịn Xò]'
+      },
+      faqs: [
+        { q: 'Bà mẹ Thế hình Ộp sần Thẻ OG (Open Graph Image) thực tiễn nói lên cái vẹo gì?', a: 'Là món hàng đại sứ hình đại diện ảnh (`<meta property="og:image">`) mấy cõi Mạng xã Hội bóc xài đi chưng bầy lúc thiên hạ giựt copy link trang bồ Share thả lên ván mạng.' },
+        { q: 'Check miết mà khung ảnh éo thèm rớt lên Màn là Lỗi Chín Suối do mô?', a: 'Có điềm dính đạn tường chính CORS Block mịe đường chéo web rùi đó, Link URL ảnh nhúng ngu chèn bằng Link cụt tương đối hổng đủ ngòi cành https, hoặc Server ông quỷ ôm firewall phập khóa mạng con mẹ tụi Crawler Bot Scrap chặn lấy thôu chớ j nữa.' },
+        { q: 'Thằng cục Mạng Xanh Twitter X có cắn đồ chung Tag của cha đẻ OG khứ?', a: 'Nó khoái trùm riêng món thẻ hệ nhà nó dạng `twitter:*` dọn sẵn, cơ mà níu bí bách ứ có là lão lại nhai lại sơi chực trọn đám Tag `og:` của hội FB thoai, méo thèm chết đối là chắc.' },
+        { q: 'Đăng hình XONG Edit chán cmn chê mà ông FaceBook vẫn nhè lòi cái ảnh lởm cũ kĩ ko chịu gỡ ra Update z?', a: 'Bộ đồ lòng mắm thúi đó nó ôm hình Cache cực lố khựa nha, Vác cái Link dẩy thẳng vô Trang Gỡ Bom chính thức Sharing Debugger của Facebook mà nã cái lệnh Scrape dọt ép dọn lại cho xạch bộ lưu ảnh rác đó hẵng đăng.' }
+      ],
+      complementary: {
+        id: 'meta-tag-generator',
+        name: 'Meta Tag Generator',
+        textEN: 'Need to create the tags first? Try',
+        textVI: 'Cần thiết kế thẻ meta trước? Thử'
+      }
+    },
+    'css-filter-generator': {
+      what: 'Giàn Lọc Màu Hình Ảo Ma Box CSS Filter. Ống tạo kỹ xảo hệ số Code dập thay mầu Ảnh Đỉnh nhất quả Trái Nho. Quạt mấy Thanh Đẩy nắn bóp Filter tăng Độ Blur sương khói, Gồng nhịp Rực Mầu Brightness chói cháy, Hue xoay tua đảo pha và Trữ Màn hình Ảo Code lòi copy dính y chang cực chiến.',
+      why: [
+        { title: 'Vê Cần Kéo Trực Móc Live', desc: 'Trượt Ngón quẩy hệ số ưng ý cái Vèo dính mắt cảm nghiệm Lôi Ánh sáng Hình ảnh nhẩy màu Tinh Tế Phê Cố luôn.' },
+        { title: 'Mảng Sạch Tẩy Ko Sây Sát Xương Cốt', desc: 'Toàn xơi mảng Filter Phủ CSS nhú viền màng nổi mà Vạn Lần Tệp Hình Của Ảnh Tươi Roi Rói chả cắn hỏng rụng Pixel.' },
+        { title: 'Chiêu Trí Trò Nhòe mờ Gương Kính Phản', desc: 'Gồng Lên Sinh Lệnh Phổ Thông đắt tiền Nhất Tấm `backdrop-filter` Chuyên mần Ui Thiết Kế Nền Kính Kính mờ cào Nhám cực Đỉnh Cao.' },
+        { title: 'Bứng Code Nhanh Khớp Trình', desc: 'Copy chực Lấy Phắt Nguyên Nhát Chổi Đoạn cục Code Filter Trải Mượt Cross-browser hổng trượt Cái Lệnh Thần Trí Nào.' }
+      ],
+      example: {
+        before: '[Cần Đẩy kéo Set độ tụ: Độ mờ nhòe Blur 5px, Lái Màu Xám Tro 100%]',
+        after: 'Form Xuất Ra -> filter: blur(5px) grayscale(100%);'
+      },
+      faqs: [
+        { q: 'Vạch lá tìm sâm cái CSS filters này Là cái Trò ngón nghề Ma Quỷ Nơi Chốn Mô Vã?', a: 'Chuẩn bài Nó chắp hệ Tính Năng Đồ Sộ tích Trữ Nhẵn nhụi sẵn Bọc Lót của cõi Trình Duyệt Nhòe dập hình chép (thổi Cục Sương mù chà Đập Thay Áo chao đảo Màu Mẻ) Phủ Nhừ Cục Phần tử Ui Cứng ngắt trước Khi Thở cái Dập in rực vào khung Màn vi tính Phẳng Á ha.' },
+        { q: 'Đè Ép Ba cái Cực phẩm Răng này Trôi rạt thì Website có dính Lầy Gánh Vác Tạ Tụt Giật Lòi k?', a: 'Phang Thả Phanh Tràn hệ Nước Trái Filter `blur()` Bự mảng Khủng Hoảng, Và ố Là rầm Cùng Con Lệnh cực Nặng Nhất trần đời `backdrop-filter`, Thì Cam Đoan mấy Con Cục Gạch đt Mỏng manh đời Cổ Đại vuốt Nó Lết Khựng Hụt Nhịp Giật cục liền nhé Tướng quân.' },
+        { q: 'Chén Món Lệnh ảo Màu filter Cài Cắm đính Vào Khi Mình dứ rà Con chuột (:hover) thì Mượt Không?', a: 'Cực Chiến Ganh Điệu Nha Mệnh Quan!! Xài Thuật Ma Dồn lót mặc Nền Tối Ảnh Vệ Trắng Xám Trụ Default Cỡ bự, Lôi chọc cái Mã lệnh Chuẩn đổi Trả lại Filter màu Gốc Nổi Nhất Lúc Dính Biến`:hover` Rà Nhúm Vào là đỉnh chóp thiên hạ.' },
+        { q: 'Chuỗi Lệnh Code CSS Xào bộ Filters rưới Qua Trình Cổ Đồ Mạng Đeo Kính Cross-Browser Trụ Vững Lòi ko?', a: 'Đại Lực Sĩ Bao Test nha Quý Zị, Bản chuẩn Chuỗi Hệ thống Đã được Vi Tính Mạng Cõi Internet Trình Browser Gồng nhét Update full Giáp hỗ trợ Toàn Cõi rồi nên Cứ An Sinh xài láng láng.' }
+      ],
+      complementary: {
+        id: 'hex-to-rgba',
+        name: 'Color Converter',
+        textEN: 'Working with web colors? Use',
+        textVI: 'Làm việc với màu sắc? Dùng'
+      }
+    },
+    'px-to-rem': {
+      what: 'Bo mạch Chuyển Chuẩn Chuyển đổi mã PX Thành mã Khổ Biến REM. Cỗ máy siêu đo độ cho Nhóm Cừu Dev Frontend Quẩy Code Trải Màn Hình dính ngàm Accessibility mượt nhất. Dội thẳng dải số Cháy màn hình (Pixels tịnh) Vung Vỡ hóa về Đơn Vị giãn Nở Cao Thấp Hệ Hệ (REM hay em Dựa vô Size chữ Root mẹ gốc Gộp cực Ngọt).',
+      why: [
+        { title: 'Ghép Trục Bẻ Nhẹ Khớp Chuẩn Ánh Mắt (A11y)', desc: 'Biến chuẩn Độ Dãn REM Phục Tùng Cấp Cứu Khi ngài Có Độ Nhìn Yếu Kém Xài lệnh Zoom Size Tổng Dịch hệ Thống Trình Web Khung Lớn Tướng Đùng Thì Toàn Khung Layout Scale Chảy Ngọt Bùng Cháy Lên Trơn Tru.' },
+        { title: 'Tinh Lọc Con Số Gốc Cọc (Custom Phông Size)', desc: 'Xẹt lại Nền tỷ Base Môn Lực tính Rời rạc chuẩn Base Cổ (16px) Giã Đập Vặn Xuyên Không Chống trọi mớ Chuẩn Design Cứng ngắt Của System Bựa Thiết kẽ Đòi Nhét vô.' },
+        { title: 'Tảo Đảo Ngược Hậu Truy Biến', desc: 'Dịch số Róc rách Ngược Hệ từ Dòng REM thô Cổ Hoán Đổi về Pixels Để Ngâm Chừng Coi Kích thước thật lúc Đắp Cái Code Legacy Đời Cũ Trơn Ra Là Cỡ Nào.' },
+        { title: 'Đỉnh Cấp Thiết Kế Phản Hồi Giãn Gân', desc: 'Thứ Căn Cơ Sống Còn của hội Trình Code Khung Ui giãn Chảy Khối To Nhỏ Fluid Trơn Phẳng Khi Phò tá với các hệ Nền Tailwinds Cốt Bọc Nứt Ui.' }
+      ],
+      example: {
+        before: 'Dạt Input thả mã: 32px (Size Gốc Root cấy 16px vô)',
+        after: 'Ném Lệnh Khạc Cục Mã Ouput ra: 2rem cưng dẻo'
+      },
+      faqs: [
+        { q: 'Cái mả tổ thuật Toán Mật ngữ REM nó Răn Đe Là Điềm gìm v?', a: 'REM Núp vỏ bọc ý Tứ Cùm Cụm "Root EM". Đó Chẳng qua là Mức thước Tỷ Đương Cứng Hệ quy Dựa Giẫm Khum theo Điểm Số Font-size Bự được Đôn ngầm cố hữu chìm của cái Thẻ Mẹ Rễ `<html>` Phía Đầu Web Gốc (Đa phần Chốt Cự tại ngưỡng Đâm là 16px).' },
+        { q: 'Thế cái cục ẻ EM Zới Cục Bựa REM Nó khác Đèo Mấy Nhau cái Khướt Gì?', a: 'REM là Hệ Báo Cha Nội Thẳng Tắp Tằng Giữ chuẩn cọc Mép ở Thẻ Root Thần Linh To Nhất. Còn Ông EM ẻ thì Ẻ Ra số Tí Tẹo Liên Kết Theo Dõi Bám Size của Cha Nuôi Bọc Ngay ngoài Hắn (parent), Dễ Sinh Trò Mẹ Nhân Đôn Ra Kép Lỗi Khối Hệ Số Cấp số Nhân Lũy Thừa Tràn Ui nát Layout.' },
+        { q: 'Sài cái Lõi Tượng To Pixels cho Vững Đội Ui Khỏi Nhảy ko dc À Sài REM Vắt Vi Óc làm Éo Chi mệt Z?', a: 'Pixel Nó là Hệ Mọc Rễ Chết Tỉnh Chưng bưng Cảm. Lỡ Đụng mấy Khách Bức Mắt Quá Đẩy thanh Size System Phồng Chữ Căng lên Coi thì Web ôm số pixel sập Dính Lỗi Gãy Layout, Còn Bụng Trang nào xài REM Nó Đè Giãn Căng Theo Khớp Phều Phào tỷ Lệ Vô Khuyết luôn Đỉnh Gió.' },
+        { q: 'Có Mảng nào Chém Là 1rem Muôn Thủa Chốt Chặn Bằng Tĩnh 16px Xịt Xịt Phủi đít ko Nhỉ?', a: 'Ràng Trọn Khớp Xương Trình Browser Chìm Nghỉm Default Đều Dính ngấm vậy Nghen. Lạ chổ dân DEV gian Xảo thường Lén nhét đút luật CSS (`html { font-size: 62.5%; }`) Cóp chép Buộc Đè con 1rem Vắt Xuống Mức Nhanh Múc Gọn Cho Về Bằng Bắn 10px Chia nhẩm Trừ Toán Quái nhẩm Đầu Lạnh Lẹ Không dính số Lẻ Nát Óng.' }
+      ],
+      complementary: {
+        id: 'css-minifier',
+        name: 'CSS Minifier',
+        textEN: 'Ready to minify your CSS? See',
+        textVI: 'Sẵn sàng nén file CSS? Xem'
+      }
+    },
+    'svg-previewer': {
+      what: 'Xưởng Trưng Bày SVG Ngợp Hiển Thị Bức Phanh Điêu Khắc Lệnh Code Vec-tơ. Nhồi Vứt Bó Thẻ Scalable vector Thuần XML Đút Bóp Vô Cửa Sổ Là Đánh Đớp Phình Trưng Liền Bóng Vẽ Nét Đỉnh Cao, Khúc Gỡ Lỗi Soi Đường Thần Tiên Siêu Nét Dẹp Giảm Độ Giãn Mầu Rõ Phân Minh Mộc.' ,
+      why: [
+        { title: 'Kết Dính Vector Cuộn Ảnh Hiện Không Tạm Thời Gian Nhanh', desc: 'Rọi Soi Khảm Vành Vã Cầm Nhịp Bẻ Khúc Giữa Những Mầm Ô Dòng Code `<path>` Lắc Hông Cấu `<circle>` Quét Mắt Màn Chảy Vẽ Ảnh Khớp Chéo Xoè Răng Update Tuốt Trượt Ngay Sắc Lẹm.' },
+        { title: 'Tầm Soạt Chuẩn Cân Mắt Ma Viewbox', desc: 'Gõ Điểm Nổ Truy Tung Đoạn Vector Tụt Lõi Biên Nét Đứt Đoạn Lề Góc Do Hệ Phân Đường Mã Cấm Canh Góc Sai Biến Parameter Ngớ ngẩn Của Khung Đô `viewBox` Quấy rối.' },
+        { title: 'Nắn Bóp Bảng Phối Trộn Mầu Ma Cầm', desc: 'Bóc Gỡ Rút Khảm Cặp Màu Nhốt Chết Trầm Thẻ `fill` Che Nhòa Hay Vuốt Khứa Nét Lăn Gỡ Chốt Lệnh Cứng Lì Rạn Cứng Hex Color Chuyên Đặc Tri Bắt Mạch Bọn Thẻ Hệ Bộ Lệnh Chùm Nút UI Icon Sets Siêu Khoai.' },
+        { title: 'Dẹp Ngang Bộ Tool Xài Mềm Nặng Ui', desc: 'Can Cứ Ngồi Cận Cảnh Chễm Chệ Gọn Góc Hình Hiển Vector Hoành Tráng Căng Kéo Khum Cần Nhờ Cửa Xài Mấy Con Yêu Quái Phần Mềm Siêu Ngốn Lương Khủng Hút Năng Tượng Trâu Bò Chẳng Đụng Gới Đám Cẩu Adobe Illustrator Vặt Hoặc Khung Hình Banh Cổ Figma Chạm Tới Đâu Rách Đó Lâu Lắc Đơ Máy Nát Óc Ra Bắt Đi Đợi Răng.' }
+      ],
+      example: {
+        before: 'Ném Liền Code Ổ Dữ Cục Nhỏ Ti Hí Vô Lò Mổ Bụng -> <svg height="50" width="50"><circle r="25" fill="red" /></svg>',
+        after: '[Nảy Sánh Sáng Tung Túe Dội Phòi Ra Cái Vòng Tròn Màu Cục Huyết Tròn Bự Xịn Dòm Đỏ Lừ Phủ Mức Góc Cắt 50x50 Sôi Máu Nặng Sắc Vãi Kứt]'
+      },
+      faqs: [
+        { q: 'Hỏi Thiệt Nhé Mã Quỷ Qủy SVG Định Hình Sinh Thú Rì Đó Thím Dạ?', a: 'Dạng Scalable Vector Graphics Thực Trạng Nó Là Cái Rễ Bức Ảnh XML Tọng Vẽ Hệ 2 Chiều. Tắt Mảng Gạch So Nó Với Cái Thằng JPG Ảo Diệu Kém Tắm Nó Thì Nhóm SVG Ăn Trọn Độ Bẻ Vặn Rút Mở Tùy Táng Éo Cảm Thấy Khúc Đời Hình Vỡ Tanh Bành Hay Tèm Lem Mờ Xó Pixel Khéo Đi Ra Quần Bẩn Ảnh.' },
+        { q: 'Cái Rễ Đệt Gì Mã Ảnh Ông Nội SVG Mình Mới Hút Vô Khuyết Mẹ Góc Mảnh Nát Tươm Góc Nhọn Chết V?', a: 'Ngó Vào Lõm Cảnh Móc Túi Cũ Đám Quỷ Trong Lũ Vector Hết Chịu Rời Khung Canh Trạm Rào Hố Cắm Tụ Băng Nhảy Sầm Vượt Trội Sạch Cõi Ngoài Thang Trầm Tọa Độ Quăng Giỡn Định Mức Tọa Chễm Ngút Mà Khung Lõi Thuộc Tính Quỷ Lệ Tạo Sinh Mã `<svg viewBox="...">` Găm Chết.' },
+        { q: 'Có Rãnh Nhòm Thổi Độc Chỉ Cho Cách Hú Rút Rũa Lệnh Edit Đổi Vết Máo Color Phủ Dài Đè Màu Ám SVG Kéo Hệ Lệnh CSS Sóng Dây?', a: 'Biến Cho Dài Đuôi Nhất Thiết Đỉnh Là Quát Răn Ôn Lệnh Cài Đè Vào Thuộc Tính CSS Rút Cái `fill` Nền (Trét Đặc Cõi Trắng) Hoặc Buộc Cong Viền Lệnh `stroke`, Ko Cho Đẩy Sài Quẹt Nút Bấm Lệ Làng `color`. Đặc Chấp Cuông Lưu Tâm Kênh Tới Chổ Dưới Cái Khe Mảng Sống Đất Có Cho Nhét Các Miếng Sượng Mã Điểm Inline Fill Style Buộc Cứng Ám Phá Giải Dỡ Hay Ép Code Kẹt Nhốt Màu Khum Lấn Đè Tràn Gãy Biến Ảo Color Bóp Cổ Quyền CSS Dân Dạ Cột Thôi Nha Nha.' },
+        { q: 'Gom Tụ Hút Máy Ép Quẳng Nhấn Gài Nút Lệ Đè Phóng Búa Animation Gẫy Động Múa Khúc Cuối Khum Mẹ Ới?', a: 'Rát Xịn Cắn Sâu Đỉnh Cao Nha Xào Mượt Òi, Níu Trong Giàn Óc Nhét Bụng SVG Gói Băng Dính Rơm Mớ Thuật Hiệu Ứng Lệnh Lòi Dây Tương Thông Rung Thổi Bóng Css Nhúng Trữ Sạc, Dạ Đút Tụ Văng Các Góc Giấu Khum Kín Thẻ Ma Mài `<animate>` Khen Đẹp Múa Tung Áp Áp Quẩy Cháy, Chớp Soái Sẽ Liên Hồi Liền Mặt Lảy Ngay Nốt Tại Khung Khảm Mảnh Preview Đập Rát Sàn Sàn Nha Bạn Hảo Tỷ Ty Mụ Thím Rồi Ó Ó.' }
+      ],
+      complementary: {
+        id: 'html-preview',
+        name: 'HTML Sandbox',
+        textEN: 'Put the SVG in a layout with',
+        textVI: 'Đưa file SVG vào layout bằng'
+      }
+    },
+    'csp-parser': {
+      what: 'Công cụ Content Security Policy (CSP) là một tiện ích bảo mật nâng cao dùng để tạo, phân tích và đánh giá các tiêu đề CSP. Nó giúp lập trình viên ngăn chặn các cuộc tấn công Cross-Site Scripting (XSS), tiêm dữ liệu và các cuộc tấn công thực thi mã khác bằng cách xác định các nguồn tài nguyên được phép truy cập.',
+      why: [
+        { title: 'Ngăn chặn XSS', desc: 'Chặn đứng các script độc hại chạy trong ứng dụng bằng cách xác định nghiêm ngặt các domain đáng tin cậy.' },
+        { title: 'Trình xây dựng Trực quan', desc: 'Dễ dàng xây dựng các chính sách phức tạp bằng cách chọn các chỉ thị an toàn và thêm các nguồn tin cậy một cách trực quan.' },
+        { title: 'Đánh giá Bảo mật', desc: 'Phân tích các chính sách hiện có để tìm các lỗ hổng phổ biến như "unsafe-inline" hoặc các ký tự đại diện quá rộng.' },
+        { title: 'Quyền riêng tư 100%', desc: 'Mọi quá trình phân tích và tạo mã đều diễn ra trong trình duyệt của bạn; chính sách bảo mật của bạn không bao giờ được gửi lên máy chủ của chúng tôi.' }
+      ],
+      example: {
+        before: "default-src 'self'; script-src https://trusted.com",
+        after: "Content-Security-Policy: default-src 'self'; script-src https://trusted.com"
+      },
+      faqs: [
+        { q: 'Content Security Policy (CSP) là gì?', a: 'CSP là một tiêu đề HTTP cho phép quản trị viên trang web khai báo các nguồn nội dung được phê duyệt mà trình duyệt có thể tải trên trang đó, giúp giảm nguy cơ XSS.' },
+        { q: 'Tại sao "unsafe-inline" lại nguy hiểm?', a: 'Nó cho phép thực thi các script và style nội dòng (inline), đây là cơ chế chính cho các cuộc tấn công XSS. CSP hướng tới việc vô hiệu hóa điều này theo mặc định.' },
+        { q: 'Tôi có thể kiểm tra CSP mà không làm hỏng trang web không?', a: 'Có, bạn có thể sử dụng tiêu đề Content-Security-Policy-Report-Only để theo dõi các vấn đề mà không thực sự chặn bất cứ thứ gì.' },
+        { q: 'Công cụ này có hỗ trợ tất cả các chỉ thị CSP không?', a: 'Có, nó hỗ trợ tất cả các chỉ thị chính bao gồm fetch, navigation và các chỉ thị báo cáo.' }
+      ],
+      complementary: {
+        id: 'html-encode-decode',
+        name: 'HTML Encoder',
+        textEN: 'Preventing XSS also requires encoding. Use our',
+        textVI: 'Ngăn chặn XSS cũng cần mã hóa. Dùng ngay'
       }
     }
   }

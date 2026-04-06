@@ -24,7 +24,7 @@ export default function Header({ onMenuClick, onSearchChange: _onSearchChange, o
 
   return (
     <header className="h-14 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 flex items-center px-4 gap-3 shrink-0 z-10">
-      <button onClick={onMenuClick} className="btn-ghost p-2">
+      <button onClick={onMenuClick} className="btn-ghost p-2" aria-label={t.menu}>
         <Menu size={18} />
       </button>
 
@@ -32,6 +32,7 @@ export default function Header({ onMenuClick, onSearchChange: _onSearchChange, o
       <button
         onClick={onOpenCmd}
         className="flex-1 max-w-lg flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg text-sm text-gray-400 transition-colors text-left"
+        aria-label={t.searchPlaceholder}
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -51,6 +52,7 @@ export default function Header({ onMenuClick, onSearchChange: _onSearchChange, o
               onClick={() => navigate(`/${tool.category}-tools/${tool.id}`)}
               className="btn-ghost p-1.5 text-lg leading-none"
               title={tool.name}
+              aria-label={tool.name}
             >
               {tool.icon}
             </button>
@@ -64,6 +66,7 @@ export default function Header({ onMenuClick, onSearchChange: _onSearchChange, o
           onClick={onChangelog}
           className="btn-ghost p-2 relative"
           title={t.whatsNew}
+          aria-label={t.whatsNew}
         >
           <Newspaper size={18} />
           {hasNewChangelog && (
@@ -77,6 +80,7 @@ export default function Header({ onMenuClick, onSearchChange: _onSearchChange, o
           rel="noopener noreferrer"
           className="btn-ghost p-2"
           title="GitHub"
+          aria-label="GitHub"
         >
           <Github size={18} />
         </a>

@@ -2,7 +2,8 @@ import React from 'react';
 import { useLang } from '../context/LanguageContext';
 import { toolAboutTranslations, ToolAboutContent } from '../i18n/toolContent';
 import { parse } from 'marked';
-import { BookOpen, AlertCircle } from 'lucide-react';
+import { BookOpen, AlertCircle, Star } from 'lucide-react';
+import { usePersistentState } from '../hooks/usePersistentState';
 import { tools } from '../tools-registry';
 
 interface ToolAboutProps {
@@ -15,7 +16,8 @@ interface ToolAboutProps {
 }
 
 export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category, onSupport, howToUse, commonErrors }) => {
-  const { lang } = useLang();
+  const { t, lang } = useLang();
+  const [userRating, setUserRating] = usePersistentState<number>(`devkit-rating-${toolId}`, 0);
 
   // Use 'vi' or 'en' from the translation store, fallback to 'en'
   const currentLang = (lang === 'vi' ? 'vi' : 'en') as 'en' | 'vi';
@@ -90,7 +92,6 @@ export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category
   };
 
   const content = specificContent || getGenericContent();
-  const isVi = currentLang === 'vi';
 
   return (
     <div className="mt-16 pt-12 border-t border-gray-200 dark:border-gray-800">
@@ -99,7 +100,7 @@ export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <section>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              {isVi ? `${toolName} là gì?` : `What is a ${toolName}?`}
+              {t.toolAbout.what(toolName)}
             </h2>
             <div 
               className="text-gray-600 dark:text-gray-400 leading-relaxed"
@@ -112,7 +113,7 @@ export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category
                   💡
                 </div>
                 <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                  {isVi ? content.complementary.textVI : content.complementary.textEN}{' '}
+                  {lang === 'vi' ? content.complementary.textVI : content.complementary.textEN}{' '}
                   <a 
                     href={(() => {
                       if (!content.complementary) return '#';
@@ -129,7 +130,7 @@ export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category
           </section>
           <section>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              {isVi ? `Tại sao nên sử dụng ${toolName}?` : `Why Use an Online ${toolName}?`}
+              {t.toolAbout.why(toolName)}
             </h2>
             <ul className="space-y-3">
               {content.why.map((item, i) => (
@@ -154,7 +155,7 @@ export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category
                     <BookOpen size={18} />
                   </div>
                   <h2 className="text-xl font-bold text-gray-900 dark:text-white leading-none">
-                    {isVi ? `Cách sử dụng ${toolName} Online` : `How to use ${toolName} Online`}
+                    {t.toolAbout.how(toolName)}
                   </h2>
                 </div>
                 <div
@@ -170,7 +171,7 @@ export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category
                     <AlertCircle size={18} />
                   </div>
                   <h2 className="text-xl font-bold text-gray-900 dark:text-white leading-none">
-                    {isVi ? 'Lỗi thường gặp' : 'Common Errors'}
+                    {t.toolAbout.commonErrors}
                   </h2>
                 </div>
                 <div
@@ -186,7 +187,7 @@ export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category
         {content.example && (
           <section className="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-6 border border-gray-100 dark:border-gray-800">
             <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-              {isVi ? 'Ví dụ minh họa' : 'Visual Example'}
+              {t.toolAbout.example}
             </h2>
             {typeof content.example === 'string' ? (
               <div className="bg-white dark:bg-gray-950 p-4 rounded border border-gray-200 dark:border-gray-800 text-primary-600 dark:text-primary-400 font-mono text-center text-sm md:text-lg">
@@ -195,13 +196,13 @@ export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
                 <div className="space-y-2">
-                  <span className="text-gray-400 uppercase tracking-wider">{isVi ? 'Trước' : 'Before'}</span>
+                  <span className="text-gray-400 uppercase tracking-wider">{t.toolAbout.before}</span>
                   <div className="bg-white dark:bg-gray-950 p-3 rounded border border-gray-200 dark:border-gray-800 text-gray-500 truncate">
                     {content.example.before}
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <span className="text-gray-400 uppercase tracking-wider">{isVi ? 'Sau' : 'After'}</span>
+                  <span className="text-gray-400 uppercase tracking-wider">{t.toolAbout.after}</span>
                   <div className="bg-white dark:bg-gray-950 p-3 rounded border border-gray-200 dark:border-gray-800 text-primary-600 dark:text-primary-400 whitespace-pre overflow-x-auto">
                     {content.example.after}
                   </div>
@@ -214,7 +215,7 @@ export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category
         {/* FAQ */}
         <section>
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-            {isVi ? 'Câu hỏi thường gặp' : 'Frequently Asked Questions'}
+            {t.toolAbout.faq}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {content.faqs.map((item, i) => (
@@ -226,15 +227,38 @@ export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category
           </div>
         </section>
 
+        {/* Tool Rating Section */}
+        <section className="pt-12 border-t border-gray-100 dark:border-gray-900 text-center">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-4 uppercase tracking-widest opacity-60">
+              {t.toolAbout.rate(toolName)}
+            </h3>
+            <div className="flex items-center justify-center gap-2 mb-2">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  onClick={() => setUserRating(star)}
+                  className={`p-1.5 transition-all transform active:scale-125 ${userRating >= star ? 'text-yellow-400 scale-110' : 'text-gray-200 dark:text-gray-700 hover:text-yellow-200'}`}
+                >
+                  <Star size={32} fill={userRating >= star ? 'currentColor' : 'none'} />
+                </button>
+              ))}
+            </div>
+            <p className="text-sm text-gray-500 italic">
+              {userRating > 0 
+                ? t.toolAbout.thanksRating
+                : t.toolAbout.ratingHelp}
+            </p>
+        </section>
+
         {/* Support Link */}
         <div className="text-center pt-8">
           <p className="text-gray-400 text-sm">
-            {isVi ? 'Vẫn còn câu hỏi? ' : 'Still have questions? '}
+            {t.toolAbout.stillQuestions}{' '}
             <button
               onClick={onSupport}
               className="text-primary-600 font-medium hover:underline"
             >
-              {isVi ? 'Liên hệ hỗ trợ' : 'Contact Support'}
+              {t.toolAbout.contactSupport}
             </button>
           </p>
         </div>

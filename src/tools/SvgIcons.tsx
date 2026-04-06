@@ -283,6 +283,7 @@ export default function SvgIcons() {
                 key={icon.id}
                 onClick={() => setSelected(icon)}
                 title={icon.id}
+                aria-label={`Select icon ${icon.name}`}
                 className={`aspect-square flex items-center justify-center p-1.5 rounded-lg transition-all hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:scale-110 ${
                   selected?.id === icon.id
                     ? 'bg-primary-100 dark:bg-primary-900/50 ring-1 ring-primary-500'
@@ -341,7 +342,7 @@ export default function SvgIcons() {
                 <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">{selected.name}</p>
                 <p className="text-xs text-gray-400 mt-0.5 font-mono">{selected.prefix}</p>
               </div>
-              <button onClick={() => setSelected(null)} className="btn-ghost p-1 shrink-0 ml-2">
+              <button onClick={() => setSelected(null)} className="btn-ghost p-1 shrink-0 ml-2" aria-label="Close details">
                 <X size={14} />
               </button>
             </div>
@@ -378,6 +379,7 @@ export default function SvgIcons() {
                     key={c}
                     onClick={() => setColor(c)}
                     title={c}
+                    aria-label={`Pick color ${c}`}
                     className={`w-5 h-5 rounded-full transition-all hover:scale-110 ring-offset-1 ring-offset-white dark:ring-offset-gray-900 ${color.toLowerCase() === c.toLowerCase() ? 'ring-2 ring-gray-700 dark:ring-gray-300 scale-110' : ''}`}
                     style={{ backgroundColor: c }}
                   />

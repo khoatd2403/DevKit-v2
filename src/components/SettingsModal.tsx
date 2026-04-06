@@ -109,7 +109,7 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
         const parsed = JSON.parse(raw) as Record<string, unknown>
 
         if (!('_version' in parsed)) {
-          setImportError('Invalid file: missing _version key.')
+          setImportError(t.settingsExtra.invalidFile)
           setImportStatus('error')
           return
         }
@@ -124,7 +124,7 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
         setImportStatus('success')
         setImportError('')
       } catch {
-        setImportError('Could not parse file. Make sure it is a valid DevTools Online JSON export.')
+        setImportError(t.settingsExtra.parseError)
         setImportStatus('error')
       }
     }
@@ -166,7 +166,7 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
             </div>
             <h2 className="font-semibold text-gray-900 dark:text-white">{t.settingsTitle}</h2>
           </div>
-          <button onClick={onClose} className="btn-ghost p-1.5">
+          <button onClick={onClose} className="btn-ghost p-1.5" aria-label={t.close}>
             <X size={16} />
           </button>
         </div>
@@ -205,6 +205,7 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
                     key={a.id}
                     onClick={() => setAccent(a.id)}
                     title={a.label}
+                    aria-label={a.label}
                     className={`w-7 h-7 rounded-full ring-offset-2 ring-offset-white dark:ring-offset-gray-900 transition-all ${accent === a.id ? 'ring-2 ring-gray-800 dark:ring-white scale-110' : 'hover:scale-110'}`}
                     style={{ backgroundColor: a.color }}
                   />
@@ -222,6 +223,7 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
                     key={s.id}
                     onClick={() => setBgShade(s.id)}
                     className={`flex flex-col items-center gap-1 p-2 rounded-lg border transition-all text-center ${bgShade === s.id ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/30' : 'border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700'}`}
+                    aria-label={`${t.background}: ${s.label}`}
                   >
                     <span className="text-xs font-medium text-gray-700 dark:text-gray-300">{s.label}</span>
                     <span className="text-[10px] text-gray-400">{s.desc}</span>
@@ -255,53 +257,6 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
             </div>
           </div>
 
-          <div className="h-px bg-gray-100 dark:bg-gray-800" />
-
-          {/* ── Editor ──────────────────────────────────────────────────────── */}
-          <div className="bg-gray-50 dark:bg-gray-800/60 rounded-xl p-4 space-y-4">
-            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-              {t.editor}
-            </p>
-
-            {/* Font size */}
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-sm font-medium text-gray-800 dark:text-gray-200">{t.fontSize}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t.fontSizeDesc}</p>
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <button
-                  onClick={() => setFontSize(fontSize - 1)}
-                  disabled={fontSize <= 10}
-                  className="w-7 h-7 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                  −
-                </button>
-                <span className="text-sm font-mono text-gray-800 dark:text-gray-200 w-8 text-center">{fontSize}</span>
-                <button
-                  onClick={() => setFontSize(fontSize + 1)}
-                  disabled={fontSize >= 20}
-                  className="w-7 h-7 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-
-            {/* Line wrap */}
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-sm font-medium text-gray-800 dark:text-gray-200">{t.lineWrap}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t.lineWrapDesc}</p>
-              </div>
-              <button
-                onClick={() => setLineWrap(!lineWrap)}
-                className={`relative w-10 h-6 rounded-full transition-colors focus:outline-none ${lineWrap ? 'bg-primary-600' : 'bg-gray-300 dark:bg-gray-600'}`}
-              >
-                <span className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${lineWrap ? 'left-5' : 'left-1'}`} />
-              </button>
-            </div>
-          </div>
 
           <div className="h-px bg-gray-100 dark:bg-gray-800" />
 
@@ -335,7 +290,7 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
               <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200">{t.exportSettings}</h3>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">{t.exportDesc}</p>
-            <button onClick={exportData} className="btn-primary text-sm flex items-center gap-2">
+            <button onClick={exportData} className="btn-primary text-sm flex items-center gap-2" aria-label={t.exportSettings}>
               <Download size={14} />
               {t.exportSettings}
             </button>
@@ -354,7 +309,7 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
             <input ref={fileRef} type="file" accept=".json" className="hidden" onChange={handleFileChange} />
 
             {importStatus === 'idle' && (
-              <button onClick={() => fileRef.current?.click()} className="btn-secondary text-sm flex items-center gap-2">
+              <button onClick={() => fileRef.current?.click()} className="btn-secondary text-sm flex items-center gap-2" aria-label={t.chooseFile}>
                 <Upload size={14} />
                 {t.chooseFile}
               </button>
@@ -364,8 +319,8 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
               <div className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-xl px-4 py-3 space-y-2">
                 <p className="text-sm font-medium text-green-700 dark:text-green-300">{t.importSuccess}</p>
                 <div className="flex items-center gap-2">
-                  <button onClick={() => window.location.reload()} className="btn-primary text-xs">{t.reloadNow}</button>
-                  <button onClick={() => setImportStatus('idle')} className="btn-secondary text-xs">{t.importAnother}</button>
+                  <button onClick={() => window.location.reload()} className="btn-primary text-xs" aria-label={t.reloadNow}>{t.reloadNow}</button>
+                  <button onClick={() => setImportStatus('idle')} className="btn-secondary text-xs" aria-label={t.importAnother}>{t.importAnother}</button>
                 </div>
               </div>
             )}
@@ -374,7 +329,7 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
               <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl px-4 py-3 space-y-2">
                 <p className="text-sm font-medium text-red-700 dark:text-red-300">{t.importFailed}</p>
                 <p className="text-xs text-red-600 dark:text-red-400">{importError}</p>
-                <button onClick={() => { setImportStatus('idle'); fileRef.current?.click() }} className="btn-secondary text-xs">Try Again</button>
+                <button onClick={() => { setImportStatus('idle'); fileRef.current?.click() }} className="btn-secondary text-xs" aria-label={t.settingsExtra.tryAgain}>{t.settingsExtra.tryAgain}</button>
               </div>
             )}
           </div>
@@ -393,6 +348,7 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
               <button
                 onClick={handleClearData}
                 className="text-sm px-3 py-1.5 rounded-lg border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors font-medium flex items-center gap-2"
+                aria-label={t.clearBtn}
               >
                 <Trash2 size={14} />
                 {t.clearBtn}
@@ -404,11 +360,12 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
                   <button
                     onClick={handleClearData}
                     className="text-sm px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-medium transition-colors flex items-center gap-1.5"
+                    aria-label={t.clearYes}
                   >
                     <Trash2 size={13} />
                     {t.clearYes}
                   </button>
-                  <button onClick={() => setClearConfirm(false)} className="btn-secondary text-sm">{t.cancel}</button>
+                  <button onClick={() => setClearConfirm(false)} className="btn-secondary text-sm" aria-label={t.cancel}>{t.cancel}</button>
                 </div>
               </div>
             )}
@@ -420,7 +377,7 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
           <span className="text-xs text-gray-400 dark:text-gray-600">
             {t.pressEscToClose.split('Esc')[0]}<kbd className="bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-gray-500 font-mono">Esc</kbd>{t.pressEscToClose.split('Esc')[1]}
           </span>
-          <button onClick={onClose} className="btn-secondary text-sm">{t.close}</button>
+          <button onClick={onClose} className="btn-secondary text-sm" aria-label={t.close}>{t.close}</button>
         </div>
       </div>
     </div>

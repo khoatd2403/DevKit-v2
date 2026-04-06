@@ -3,23 +3,115 @@
 @tailwind utilities;
 
 /* ─── Prism syntax tokens ───────────────────────────────────────── */
-.token.comment,.token.prolog,.token.doctype,.token.cdata { color:#6b7280; font-style:italic; }
-.token.punctuation { color:#6b7280; }
-.token.property,.token.tag,.token.boolean,.token.number,.token.constant,.token.symbol,.token.deleted { color:#e45649; }
-.token.selector,.token.attr-name,.token.string,.token.char,.token.builtin,.token.inserted { color:#50a14f; }
-.token.operator,.token.entity,.token.url { color:#c18401; }
-.token.atrule,.token.attr-value,.token.keyword { color:#a626a4; font-weight:600; }
-.token.function,.token.class-name { color:#4078f2; }
-.token.regex,.token.important,.token.variable { color:#e45649; }
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6b7280;
+  font-style: italic;
+}
 
-.dark .token.comment,.dark .token.prolog,.dark .token.doctype,.dark .token.cdata { color:#5c6370; font-style:italic; }
-.dark .token.punctuation { color:#abb2bf; }
-.dark .token.property,.dark .token.tag,.dark .token.boolean,.dark .token.number,.dark .token.constant,.dark .token.symbol,.dark .token.deleted { color:#e06c75; }
-.dark .token.selector,.dark .token.attr-name,.dark .token.string,.dark .token.char,.dark .token.builtin,.dark .token.inserted { color:#98c379; }
-.dark .token.operator,.dark .token.entity,.dark .token.url { color:#d19a66; }
-.dark .token.atrule,.dark .token.attr-value,.dark .token.keyword { color:#c678dd; font-weight:600; }
-.dark .token.function,.dark .token.class-name { color:#61afef; }
-.dark .token.regex,.dark .token.important,.dark .token.variable { color:#e06c75; }
+.token.punctuation {
+  color: #6b7280;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #e45649;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #50a14f;
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+  color: #c18401;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #a626a4;
+  font-weight: 600;
+}
+
+.token.function,
+.token.class-name {
+  color: #4078f2;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #e45649;
+}
+
+.dark .token.comment,
+.dark .token.prolog,
+.dark .token.doctype,
+.dark .token.cdata {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.dark .token.punctuation {
+  color: #abb2bf;
+}
+
+.dark .token.property,
+.dark .token.tag,
+.dark .token.boolean,
+.dark .token.number,
+.dark .token.constant,
+.dark .token.symbol,
+.dark .token.deleted {
+  color: #e06c75;
+}
+
+.dark .token.selector,
+.dark .token.attr-name,
+.dark .token.string,
+.dark .token.char,
+.dark .token.builtin,
+.dark .token.inserted {
+  color: #98c379;
+}
+
+.dark .token.operator,
+.dark .token.entity,
+.dark .token.url {
+  color: #d19a66;
+}
+
+.dark .token.atrule,
+.dark .token.attr-value,
+.dark .token.keyword {
+  color: #c678dd;
+  font-weight: 600;
+}
+
+.dark .token.function,
+.dark .token.class-name {
+  color: #61afef;
+}
+
+.dark .token.regex,
+.dark .token.important,
+.dark .token.variable {
+  color: #e06c75;
+}
 
 @layer base {
   body {
@@ -31,25 +123,26 @@
     --editor-font-size: 13px;
 
     /* Accent color palette — blue (default) */
-    --p50:  239 246 255;
+    --p50: 239 246 255;
     --p100: 219 234 254;
     --p200: 191 219 254;
     --p300: 147 197 253;
-    --p400: 96  165 250;
-    --p500: 59  130 246;
-    --p600: 37  99  235;
-    --p700: 29  78  216;
-    --p800: 30  64  175;
-    --p900: 30  58  138;
+    --p400: 96 165 250;
+    --p500: 59 130 246;
+    --p600: 37 99 235;
+    --p700: 29 78 216;
+    --p800: 30 64 175;
+    --p900: 30 58 138;
 
     /* Background shade — default (gray) */
-    --bg-main:  249 250 251;
-    --bg-dark:  3   7   18;
+    --bg-main: 249 250 251;
+    --bg-dark: 3 7 18;
   }
 
   body {
     background-color: rgb(var(--bg-main));
   }
+
   .dark body {
     background-color: rgb(var(--bg-dark));
   }
@@ -78,9 +171,17 @@
 
 @layer utilities {
   @keyframes slide-up {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
+
   .animate-slide-up {
     animation: slide-up 0.2s ease-out;
   }
@@ -94,15 +195,11 @@
 
 @layer components {
   .tool-textarea {
-    @apply w-full font-mono text-sm bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700
-           rounded-lg p-3 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500
-           text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-600;
+    @apply w-full font-mono text-sm bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-3 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400;
   }
 
   .tool-textarea-output {
-    @apply w-full font-mono text-sm bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700
-           rounded-lg p-3 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500
-           text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-600;
+    @apply w-full font-mono text-sm bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 rounded-lg p-3 resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400;
   }
 
   .tool-textarea,
@@ -117,41 +214,38 @@
   }
 
   .btn-primary {
-    @apply px-4 py-2.5 sm:py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium
+    @apply px-4 py-3 sm:py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium
            text-sm transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
-           disabled:opacity-50 disabled:cursor-not-allowed;
+           disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] sm:min-h-[40px] flex items-center justify-center;
   }
 
   .btn-secondary {
-    @apply px-4 py-2.5 sm:py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700
+    @apply px-4 py-3 sm:py-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700
            text-gray-700 dark:text-gray-300 rounded-lg font-medium text-sm transition-all active:scale-95
-           focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2;
+           focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 min-h-[44px] sm:min-h-[40px] flex items-center justify-center;
   }
 
   .btn-ghost {
-    @apply px-3 py-1.5 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200
-           hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-sm transition-colors;
+    @apply px-3 py-2 sm:py-1.5 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200
+           hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-sm transition-colors min-h-[40px] sm:min-h-[32px] flex items-center justify-center;
   }
 
   .tool-card {
-    @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800
-           rounded-xl p-4 hover:shadow-md hover:border-primary-300 dark:hover:border-primary-700
-           transition-all cursor-pointer;
+    @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-4 hover:shadow-md hover:border-primary-300 dark:hover:border-primary-700 transition-all cursor-pointer;
   }
 
   .section-title {
-    @apply text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 px-3 py-2;
+    @apply text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-gray-400 px-3 py-2;
   }
 
   .sidebar-item {
-    @apply flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-gray-600 dark:text-gray-400
+    @apply flex items-center gap-3 px-3 py-3 sm:py-2.5 rounded-lg text-base sm:text-sm text-gray-600 dark:text-gray-400
            hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100
-           transition-colors cursor-pointer;
+           transition-colors cursor-pointer min-h-[48px] sm:min-h-[40px];
   }
 
   .sidebar-item.active {
-    @apply bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300
-           font-medium border border-primary-200 dark:border-primary-800;
+    @apply bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300 font-medium border border-primary-200 dark:border-primary-800;
   }
 
   /* ─── Tool design system ──────────────────────────────────────────── */
@@ -178,10 +272,11 @@
 
   /* Individual tab button — add .active or use data-active="true" */
   .tool-tab {
-    @apply px-4 py-1.5 capitalize transition-colors
+    @apply px-5 py-2 sm:py-1.5 capitalize transition-colors
            text-gray-600 dark:text-gray-400
-           hover:bg-gray-100 dark:hover:bg-gray-800;
+           hover:bg-gray-100 dark:hover:bg-gray-800 min-h-[44px] sm:min-h-[36px] flex items-center justify-center;
   }
+
   .tool-tab.active {
     @apply bg-primary-600 text-white hover:bg-primary-600;
   }
@@ -190,46 +285,43 @@
   .tool-msg {
     @apply text-sm px-3 py-2 rounded-lg border;
   }
+
   .tool-msg--error {
-    @apply bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400
-           border-red-200 dark:border-red-800;
+    @apply bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-red-200 dark:border-red-800;
   }
+
   .tool-msg--success {
-    @apply bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400
-           border-green-200 dark:border-green-800;
+    @apply bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800;
   }
+
   .tool-msg--warning {
-    @apply bg-yellow-50 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400
-           border-yellow-200 dark:border-yellow-800;
+    @apply bg-yellow-50 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 border-yellow-200 dark:border-yellow-800;
   }
+
   .tool-msg--info {
-    @apply bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400
-           border-primary-200 dark:border-primary-800;
+    @apply bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 border-primary-200 dark:border-primary-800;
   }
 
   /* Output result card (label + copy + mono value) */
   .tool-result-card {
     @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-3;
   }
+
   .tool-result-card-header {
     @apply flex items-center justify-between mb-1;
   }
 
   /* Row item with copy button (password list, hash rows…) */
   .tool-result-row {
-    @apply flex items-center gap-2 bg-white dark:bg-gray-900
-           border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2;
+    @apply flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2;
   }
 
   /* Hint / note text below a section */
   .tool-note {
-    @apply text-xs text-gray-400 dark:text-gray-500 mt-1;
+    @apply text-xs text-gray-500 dark:text-gray-400 mt-1;
   }
 
   .tool-select {
-    @apply bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 
-           text-gray-900 dark:text-gray-100 rounded-lg px-3 py-1.5 text-sm
-           focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all
-           cursor-pointer hover:border-gray-300 dark:hover:border-gray-700;
+    @apply bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-100 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all cursor-pointer hover:border-gray-300 dark:hover:border-gray-700;
   }
 }

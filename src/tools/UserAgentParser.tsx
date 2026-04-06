@@ -146,7 +146,7 @@ export default function UserAgentParser() {
           className="tool-textarea font-mono text-xs resize-none"
           placeholder="Paste a User-Agent string..."
         />
-        <button onClick={copy} className="absolute top-2 right-2 btn-ghost text-xs px-2 py-1 flex items-center gap-1">
+        <button onClick={copy} className="absolute top-2 right-2 btn-ghost text-xs px-2 py-1 flex items-center gap-1" aria-label="Copy User-Agent">
           {copied ? <Check size={11} className="text-green-500" /> : <Copy size={11} />}
         </button>
       </div>

@@ -67,7 +67,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
           <span className="font-semibold text-gray-900 dark:text-white leading-none">
             DevTools <span className="text-green-500">Online</span><span className="text-gray-400 dark:text-gray-600 font-normal text-sm">.dev</span>
           </span>
-          <button onClick={onClose} className="ml-auto btn-ghost p-2 lg:hidden">
+          <button onClick={onClose} className="ml-auto btn-ghost p-2 lg:hidden" aria-label={t.close}>
             <X size={20} />
           </button>
         </div>
@@ -100,6 +100,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
                 <button
                   onClick={() => setFavExpanded(prev => !prev)}
                   className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-gray-600 dark:text-gray-400 font-medium hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100"
+                  aria-label={favExpanded ? t.collapse : t.expand}
                 >
                   <Star size={14} className="shrink-0 text-yellow-500" />
                   <span className="flex-1 text-left truncate">{t.favorites}</span>
@@ -135,7 +136,8 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
                               toggleFav(tool.id);
                             }}
                             className="opacity-0 group-hover:opacity-100 p-1 hover:bg-red-50 dark:hover:bg-red-900/20 text-gray-400 hover:text-red-500 rounded transition-all shrink-0"
-                            title={isVi ? 'Xóa khỏi yêu thích' : 'Remove from Favorites'}
+                            title={t.footerExtra.removeFromFav}
+                            aria-label={t.footerExtra.removeFromFav}
                           >
                             <X size={12} />
                           </button>
@@ -164,6 +166,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
                           ? 'text-primary-700 dark:text-primary-300 font-semibold'
                           : 'text-gray-600 dark:text-gray-400 font-medium hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100'
                         }`}
+                      aria-label={`${isOpen ? t.collapse : t.expand} ${t.categories[cat.id as keyof typeof t.categories] || cat.name}`}
                     >
                       <span className="text-base leading-none">{cat.icon}</span>
                       <span className="flex-1 text-left truncate">{t.categories[cat.id as keyof typeof t.categories] || cat.name}</span>
@@ -206,6 +209,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
           <button
             onClick={onSettings}
             className="sidebar-item w-full"
+            aria-label={t.settings}
           >
             <Settings size={14} className="shrink-0" />
             <span className="text-sm">{t.settings}</span>
@@ -215,6 +219,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
           <button
             onClick={onChangelog}
             className="sidebar-item w-full"
+            aria-label={t.whatsNew}
           >
             <Newspaper size={14} className="shrink-0" />
             <span className="text-sm">{t.whatsNew}</span>
@@ -225,6 +230,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
           <button
             onClick={onFeedback}
             className="sidebar-item w-full"
+            aria-label={t.feedback}
           >
             <MessageSquare size={14} className="shrink-0" />
             <span className="text-sm">{t.feedback}</span>

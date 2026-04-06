@@ -128,7 +128,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
               <p className="text-xs text-gray-400 mt-0.5">on <span className="text-primary-600 dark:text-primary-400 font-medium">{selectedTool}</span></p>
             )}
           </div>
-          <button onClick={onClose} className="btn-ghost p-1.5">
+          <button onClick={onClose} className="btn-ghost p-1.5" aria-label={t.close}>
             <X size={16} />
           </button>
         </div>
@@ -154,8 +154,8 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
               <ExternalLink size={13} /> {t.feedbackOpenGithub}
             </a>
             <div className="flex gap-2 mt-2">
-              <button onClick={reset} className="btn-secondary text-sm">{t.feedbackSendAnother}</button>
-              <button onClick={onClose} className="btn-primary text-sm">{t.done}</button>
+              <button onClick={reset} className="btn-secondary text-sm" aria-label={t.feedbackSendAnother}>{t.feedbackSendAnother}</button>
+              <button onClick={onClose} className="btn-primary text-sm" aria-label={t.done}>{t.done}</button>
             </div>
           </div>
         ) : (
@@ -167,6 +167,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
                 <button
                   onClick={() => setTypeOpen(o => !o)}
                   className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg border text-sm font-medium transition-colors ${current.color}`}
+                  aria-label={`${t.feedbackType}: ${feedbackTypeData.label}`}
                 >
                   {current.icon}
                   <span className="flex-1 text-left">{feedbackTypeData.label}</span>
@@ -179,6 +180,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
                         key={tp.id}
                         onClick={() => { setType(tp.id); setTypeOpen(false) }}
                         className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 ${type === tp.id ? 'font-medium' : ''}`}
+                        aria-label={t.feedbackTypes[tp.id].label}
                       >
                         <span className={tp.color.split(' ')[0]}>{tp.icon}</span>
                         {t.feedbackTypes[tp.id].label}
@@ -199,6 +201,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
                 <button
                   onClick={() => { setToolOpen(o => !o); setToolSearch('') }}
                   className="w-full flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-sm bg-white dark:bg-gray-900 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
+                  aria-label={t.feedbackRelatedTool}
                 >
                   <Wrench size={13} className="text-gray-400 shrink-0" />
                   <span className={`flex-1 text-left ${selectedTool ? 'text-gray-800 dark:text-gray-200' : 'text-gray-400'}`}>
@@ -208,6 +211,8 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
                     <span
                       onClick={e => { e.stopPropagation(); setSelectedTool('') }}
                       className="text-gray-400 hover:text-gray-600 p-0.5"
+                      aria-label="Clear selection"
+                      role="button"
                     >
                       <X size={12} />
                     </span>
@@ -235,6 +240,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
                           key={tl.id}
                           onClick={() => { setSelectedTool(tl.name); setToolOpen(false) }}
                           className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${selectedTool === tl.name ? 'font-medium text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'}`}
+                          aria-label={tl.name}
                         >
                           <span>{tl.icon}</span>
                           <span className="flex-1 truncate">{tl.name}</span>
@@ -278,6 +284,7 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
                   onClick={copyMarkdown}
                   disabled={!message.trim()}
                   className="mt-1.5 flex items-center gap-1.5 text-xs text-primary-600 dark:text-primary-400 hover:underline disabled:opacity-40 disabled:no-underline"
+                  aria-label={t.feedbackCopyMarkdown}
                 >
                   {copied ? <Check size={12} className="text-green-500" /> : <Copy size={12} />}
                   {copied ? t.feedbackCopied : t.feedbackCopyMarkdown}
@@ -291,11 +298,12 @@ export default function FeedbackModal({ open, onClose, toolName }: FeedbackModal
                 {t.pressEscToClose.split('Esc')[0]} <kbd className="bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-gray-500 font-mono">Esc</kbd> {t.pressEscToClose.split('Esc')[1]}
               </span>
               <div className="flex gap-2">
-                <button onClick={onClose} className="btn-secondary text-sm">{t.cancel}</button>
+                <button onClick={onClose} className="btn-secondary text-sm" aria-label={t.cancel}>{t.cancel}</button>
                 <button
                   onClick={handleSubmit}
                   disabled={!message.trim() || isOverLimit}
                   className="btn-primary text-sm"
+                  aria-label={t.feedbackSubmit}
                 >
                   {t.feedbackSubmit}
                 </button>

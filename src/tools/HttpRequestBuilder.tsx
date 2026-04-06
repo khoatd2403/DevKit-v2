@@ -86,7 +86,11 @@ function KVEditor({ rows, onChange, placeholder = 'Key' }: { rows: KV[]; onChang
             className="flex-1 text-xs font-mono bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary-500" />
           <input value={r.value} onChange={e => update(i, 'value', e.target.value)} placeholder="Value"
             className="flex-1 text-xs font-mono bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary-500" />
-          <button onClick={() => remove(i)} className="text-gray-400 hover:text-red-500 transition-colors flex-shrink-0">
+          <button 
+            onClick={() => remove(i)} 
+            className="text-gray-400 hover:text-red-500 transition-colors flex-shrink-0"
+            aria-label="Remove row"
+          >
             <Trash2 size={13} />
           </button>
         </div>

@@ -3,6 +3,7 @@ import { BookMarked, Copy, Trash2, X, Search, Plus, Check } from 'lucide-react'
 import { useSnippets } from '../hooks/useSnippets'
 import { useToast } from '../context/ToastContext'
 import { tools } from '../tools-registry'
+import { useLang } from '../context/LanguageContext'
 
 interface SnippetDrawerProps {
   open: boolean
@@ -11,24 +12,12 @@ interface SnippetDrawerProps {
   onLoad: (content: string) => void
 }
 
-function relativeTime(ts: number): string {
-  const diff = Date.now() - ts
-  const mins = Math.floor(diff / 60_000)
-  if (mins < 1) return 'just now'
-  if (mins < 60) return `${mins}m ago`
-  const hrs = Math.floor(mins / 60)
-  if (hrs < 24) return `${hrs}h ago`
-  const days = Math.floor(hrs / 24)
-  if (days < 30) return `${days} day${days !== 1 ? 's' : ''} ago`
-  const months = Math.floor(days / 30)
-  return `${months} month${months !== 1 ? 's' : ''} ago`
-}
-
 function getToolName(id: string): string {
   return tools.find(t => t.id === id)?.name ?? id
 }
 
 export default function SnippetDrawer({ open, onClose, toolId, onLoad }: SnippetDrawerProps) {
+  const { t } = useLang()
   const { snippets, save, remove, update } = useSnippets(toolId)
   const { showToast } = useToast()
   const [search, setSearch] = useState('')
@@ -40,6 +29,19 @@ export default function SnippetDrawer({ open, onClose, toolId, onLoad }: Snippet
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null)
   const editInputRef = useRef<HTMLInputElement>(null)
   const labelInputRef = useRef<HTMLInputElement>(null)
+
+  function relativeTime(ts: number): string {
+    const diff = Date.now() - ts
+    const mins = Math.floor(diff / 60_000)
+    if (mins < 1) return t.time.justNow
+    if (mins < 60) return t.time.minsAgo(mins)
+    const hrs = Math.floor(mins / 60)
+    if (hrs < 24) return t.time.hrsAgo(hrs)
+    const days = Math.floor(hrs / 24)
+    if (days < 30) return t.time.daysAgo(days)
+    const months = Math.floor(days / 30)
+    return t.time.monthsAgo(months)
+  }
 
   // Focus label input when drawer opens
   useEffect(() => {
@@ -77,7 +79,7 @@ export default function SnippetDrawer({ open, onClose, toolId, onLoad }: Snippet
     save(label, content)
     setNewLabel('')
     setNewContent('')
-    showToast('Snippet saved', 'success')
+    showToast(t.snippetSaved, 'success')
   }
 
   const handleCopy = (content: string, id: string) => {
@@ -90,7 +92,7 @@ export default function SnippetDrawer({ open, onClose, toolId, onLoad }: Snippet
     if (confirmDeleteId === id) {
       remove(id)
       setConfirmDeleteId(null)
-      showToast('Snippet deleted', 'info')
+      showToast(t.snippetDeleted, 'info')
     } else {
       setConfirmDeleteId(id)
       // Auto-cancel confirm after 3s
@@ -129,11 +131,12 @@ export default function SnippetDrawer({ open, onClose, toolId, onLoad }: Snippet
         {/* Header */}
         <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-200 dark:border-gray-700 shrink-0">
           <BookMarked size={16} className="text-primary-500 shrink-0" />
-          <h2 className="font-semibold text-gray-900 dark:text-white text-sm flex-1">Snippets</h2>
+          <h2 className="font-semibold text-gray-900 dark:text-white text-sm flex-1">{t.snippetsTitle}</h2>
           <button
             onClick={onClose}
             className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            title="Close"
+            title={t.close}
+            aria-label={t.close}
           >
             <X size={16} />
           </button>
@@ -141,20 +144,20 @@ export default function SnippetDrawer({ open, onClose, toolId, onLoad }: Snippet
 
         {/* Save current section */}
         <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700 shrink-0 space-y-2">
-          <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Save snippet</p>
+          <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">{t.saveSnippet}</p>
           <input
             ref={labelInputRef}
             type="text"
             value={newLabel}
             onChange={e => setNewLabel(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && handleSave()}
-            placeholder="Snippet name..."
+            placeholder={t.snippetName}
             className="w-full text-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-1.5 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
           />
           <textarea
             value={newContent}
             onChange={e => setNewContent(e.target.value)}
-            placeholder="Content to save..."
+            placeholder={t.contentToSave}
             rows={3}
             className="w-full text-sm font-mono bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-1.5 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
           />
@@ -162,9 +165,10 @@ export default function SnippetDrawer({ open, onClose, toolId, onLoad }: Snippet
             onClick={handleSave}
             disabled={!newLabel.trim() || !newContent.trim()}
             className="w-full flex items-center justify-center gap-1.5 px-3 py-1.5 bg-primary-600 hover:bg-primary-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors"
+            aria-label={t.saveSnippet}
           >
             <Plus size={14} />
-            Save snippet
+            {t.saveSnippet}
           </button>
         </div>
 
@@ -176,11 +180,15 @@ export default function SnippetDrawer({ open, onClose, toolId, onLoad }: Snippet
               type="text"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder="Search snippets..."
+              placeholder={t.searchSnippets}
               className="flex-1 bg-transparent text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none"
             />
             {search && (
-              <button onClick={() => setSearch('')} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+              <button 
+                onClick={() => setSearch('')} 
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                aria-label="Clear search"
+              >
                 <X size={12} />
               </button>
             )}
@@ -194,8 +202,8 @@ export default function SnippetDrawer({ open, onClose, toolId, onLoad }: Snippet
               <BookMarked size={32} className="text-gray-300 dark:text-gray-600" />
               <p className="text-sm text-gray-400 dark:text-gray-500">
                 {search
-                  ? `No snippets matching "${search}"`
-                  : 'No snippets yet. Save text you use often.'}
+                  ? t.noSnippetsMatch(search)
+                  : t.noSnippetsYet}
               </p>
             </div>
           ) : (
@@ -219,7 +227,7 @@ export default function SnippetDrawer({ open, onClose, toolId, onLoad }: Snippet
                     ) : (
                       <span
                         className="flex-1 text-sm font-medium text-gray-900 dark:text-gray-100 cursor-text select-none truncate"
-                        title="Double-click to rename"
+                        title={t.renameSnippet}
                         onDoubleClick={() => {
                           setEditingId(snippet.id)
                           setEditingLabel(snippet.label)
@@ -251,14 +259,16 @@ export default function SnippetDrawer({ open, onClose, toolId, onLoad }: Snippet
                     <button
                       onClick={() => { onLoad(snippet.content) }}
                       className="flex items-center gap-1 px-2 py-1 text-xs text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded transition-colors font-medium"
-                      title="Load into tool"
+                      title={t.loadIntoTool}
+                      aria-label={`${t.loadIntoTool} ${snippet.label}`}
                     >
-                      Load
+                      {t.loadIntoTool}
                     </button>
                     <button
                       onClick={() => handleCopy(snippet.content, snippet.id)}
                       className="p-1 rounded text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                      title="Copy to clipboard"
+                      title={t.copyToClipboard}
+                      aria-label={`${t.copyToClipboard} ${snippet.label}`}
                     >
                       {copiedId === snippet.id ? <Check size={13} className="text-green-500" /> : <Copy size={13} />}
                     </button>
@@ -269,7 +279,8 @@ export default function SnippetDrawer({ open, onClose, toolId, onLoad }: Snippet
                           ? 'text-red-500 bg-red-50 dark:bg-red-900/30'
                           : 'text-gray-400 hover:text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700'
                       }`}
-                      title={confirmDeleteId === snippet.id ? 'Click again to confirm delete' : 'Delete snippet'}
+                      title={confirmDeleteId === snippet.id ? t.confirmDeleteSnippet : t.deleteSnippet}
+                      aria-label={`${t.deleteSnippet} ${snippet.label}`}
                     >
                       <Trash2 size={13} />
                     </button>

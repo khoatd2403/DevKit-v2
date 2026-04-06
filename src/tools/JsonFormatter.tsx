@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { usePersistentState } from '../hooks/usePersistentState'
-import { Trash2, WrapText, Wand2, Sparkles, FileText } from 'lucide-react'
+import { Trash2, WrapText, Wand2, Sparkles, FileText, Download } from 'lucide-react'
 import CopyButton from '../components/CopyButton'
 import FileDropTextarea from '../components/FileDropTextarea'
 import { useShareableState } from '../hooks/useShareableState'
 import { SmartNextSteps } from '../components/SmartNextSteps'
-import { formatJson, autoFixJson, validateJson } from '../core/json'
+import { formatJson, autoFixJson, validateJson, minifyJson, sortJsonKeys } from '../core/json'
 
 const SAMPLE = '{"name":"John Doe","age":30,"email":"john@example.com","address":{"city":"New York","zip":"10001"},"hobbies":["reading","coding","hiking"]}'
 
@@ -37,6 +37,39 @@ export default function JsonFormatter() {
     setError(validateJson(input))
   }
 
+  const handleMinify = () => {
+    const { output: res, error: err } = minifyJson(input)
+    if (res) {
+      setInput(res)
+      setOutput(res)
+      setError(err)
+    } else {
+      setError(err)
+    }
+  }
+
+  const handleSort = () => {
+    const { output: res, error: err } = sortJsonKeys(input, indent)
+    if (res) {
+      setInput(res)
+      setOutput(res)
+      setError(err)
+    } else {
+      setError(err)
+    }
+  }
+
+  const handleDownload = () => {
+    if (!output) return
+    const blob = new Blob([output], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'formatted.json'
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
 
   return (
     <div className="space-y-4">
@@ -55,6 +88,23 @@ export default function JsonFormatter() {
               {v === '\t' ? 'Tab' : `${v} spaces`}
             </button>
           ))}
+        </div>
+
+        <div className="flex items-center gap-1.5 border-l border-gray-200 dark:border-gray-700 pl-3">
+          <button
+            onClick={handleMinify}
+            className="btn-ghost text-xs px-2 py-1 rounded hover:bg-primary-50 dark:hover:bg-primary-900/30 text-gray-600 dark:text-gray-400 font-medium transition-colors"
+            title="Remove all whitespace"
+          >
+            Nén (Minify)
+          </button>
+          <button
+            onClick={handleSort}
+            className="btn-ghost text-xs px-2 py-1 rounded hover:bg-primary-50 dark:hover:bg-primary-900/30 text-gray-600 dark:text-gray-400 font-medium transition-colors"
+            title="Sort object keys alphabetically"
+          >
+            Sắp xếp (Sort)
+          </button>
         </div>
       </div>
 
@@ -87,7 +137,18 @@ export default function JsonFormatter() {
         <div>
           <div className="tool-output-header">
             <label className="tool-label">Formatted Output</label>
-            <CopyButton text={output} toast="JSON copied" />
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleDownload}
+                disabled={!output}
+                className="btn-ghost text-xs flex items-center gap-1.5 text-gray-500 hover:text-primary-600 disabled:opacity-50 transition-colors"
+                title="Download as .json file"
+              >
+                <Download size={14} />
+                Tải về
+              </button>
+              <CopyButton text={output} toast="JSON copied" />
+            </div>
           </div>
           <textarea
             className="tool-textarea-output h-80"

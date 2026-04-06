@@ -2,6 +2,7 @@ import type { Tool, Category } from './types'
 
 export const categories: Category[] = [
   { id: 'all', name: 'All Tools', icon: '🧰', color: 'gray' },
+  { id: 'security', name: 'Security', icon: '🛡️', color: 'red' },
   { id: 'json', name: 'JSON', icon: '📋', color: 'yellow' },
   { id: 'encoding', name: 'Encoding', icon: '🔐', color: 'blue' },
   { id: 'crypto', name: 'Crypto & Hash', icon: '🔒', color: 'red' },
@@ -133,7 +134,7 @@ export const tools: Tool[] = [
     id: 'hash-generator',
     name: 'Hash Generator',
     description: 'Generate MD5, SHA1, SHA256, SHA512 hashes online',
-    category: 'crypto',
+    category: 'security',
     icon: '🔒',
     tags: ['hash', 'md5', 'sha1', 'sha256', 'sha512', 'crypto', 'online'],
     popular: true,
@@ -146,7 +147,7 @@ export const tools: Tool[] = [
     id: 'password-generator',
     name: 'Password Generator',
     description: 'Generate strong, secure passwords online',
-    category: 'crypto',
+    category: 'security',
     icon: '🔑',
     tags: ['password', 'generator', 'security', 'random', 'online'],
     popular: true,
@@ -158,7 +159,7 @@ export const tools: Tool[] = [
     id: 'bcrypt',
     name: 'BCrypt Hash',
     description: 'Generate and verify BCrypt password hashes online',
-    category: 'crypto',
+    category: 'security',
     icon: '🛡️',
     tags: ['bcrypt', 'hash', 'password', 'security', 'online'],
     new: true,
@@ -961,5 +962,17 @@ export const tools: Tool[] = [
   { id: 'ai-system-prompt', name: 'System Prompt Generator', description: 'Generate system prompts for AI assistants — choose use case, tone and constraints to get a ready-to-use prompt online', category: 'ai', icon: '⚙️', tags: ['ai', 'system', 'prompt', 'generator', 'assistant', 'chatbot', 'instruction', 'online'], new: true, seoTitle: 'AI System Prompt Generator | DevTools Online',
     seoDescription: 'Generate optimized AI system prompts online. Choose use cases, tones, and constraints to build high-quality instructions for AI assistants instantly.',
     howToUse: '1. **Select** a primary use case (e.g., Coding Assistant).\n2. **Choose** desired tone and set behavioral constraints.\n3. **Generate** a comprehensive system prompt.\n4. **Refine** and copy prompt for your model configuration.',
+    supportsShare: true
   },
+  {
+    id: 'csp-parser',
+    name: 'CSP Tool',
+    description: 'Generate and evaluate Content Security Policy headers to secure your web applications.',
+    icon: '🛡️',
+    category: 'security',
+    tags: ['security', 'csp', 'xss', 'headers'],
+    supportsShare: true,
+    seoTitle: 'CSP Generator & Evaluator - Secure your Website with Content Security Policy',
+    seoDescription: 'Interactive tools to build and analyze Content Security Policy (CSP). Check for security flaws and generate protected headers instantly.'
+  }
 ]

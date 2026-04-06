@@ -1,4 +1,5 @@
 import { Shield, Wifi } from 'lucide-react'
+import { useLang } from '../context/LanguageContext'
 
 interface PrivacyBadgeProps {
   privacy?: 'local' | 'network'
@@ -8,11 +9,13 @@ interface PrivacyBadgeProps {
 }
 
 export default function PrivacyBadge({ privacy = 'local', networkNote, variant = 'badge' }: PrivacyBadgeProps) {
+  const { t } = useLang()
+
   if (privacy === 'local') {
     return (
       <span className="inline-flex items-center gap-1 text-xs text-green-600 dark:text-green-500">
         <Shield size={11} className="shrink-0" />
-        <span className="hidden sm:inline">No data sent to server</span>
+        <span className="hidden sm:inline">{t.privacy.noDataSent}</span>
       </span>
     )
   }
@@ -23,8 +26,8 @@ export default function PrivacyBadge({ privacy = 'local', networkNote, variant =
       <div className="tool-msg tool-msg--warning flex items-start gap-2 mb-4">
         <Wifi size={14} className="shrink-0 mt-0.5" />
         <span>
-          <strong>Network request:</strong>{' '}
-          {networkNote ?? 'This tool sends data to an external service to function.'}
+          <strong>{t.privacy.networkRequest}</strong>{' '}
+          {networkNote ?? t.privacy.networkNote}
         </span>
       </div>
     )
@@ -33,7 +36,7 @@ export default function PrivacyBadge({ privacy = 'local', networkNote, variant =
   return (
     <span className="inline-flex items-center gap-1 text-xs text-amber-600 dark:text-amber-500">
       <Wifi size={11} className="shrink-0" />
-      <span className="hidden sm:inline">Uses network</span>
+      <span className="hidden sm:inline">{t.privacy.usesNetwork}</span>
     </span>
   )
 }

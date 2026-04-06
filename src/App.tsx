@@ -1,20 +1,11 @@
-import { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { useState, useEffect, lazy, Suspense } from 'react'
+import { BrowserRouter, Routes, Route, useLocation, useParams } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 import CommandPalette from './components/CommandPalette'
-import FeedbackModal from './components/FeedbackModal'
-import ChangelogModal from './components/ChangelogModal'
-import ShortcutsModal from './components/ShortcutsModal'
-import SettingsModal from './components/SettingsModal'
-import OnboardingTour from './components/OnboardingTour'
-import ToastContainer from './components/ToastContainer'
-import CookieBanner from './components/CookieBanner'
 import Home from './pages/Home'
 import ToolPage from './pages/ToolPage'
-import SplitPage from './pages/SplitPage'
-import AllTools from './pages/AllTools'
 import { ThemeContext } from './context/ThemeContext'
 import type { ThemeMode } from './context/ThemeContext'
 import { LiveModeProvider } from './context/LiveModeContext'
@@ -26,6 +17,17 @@ import { LanguageProvider } from './context/LanguageContext'
 import { FavoritesProvider } from './hooks/useFavorites'
 import { LATEST_VERSION } from './version'
 import { X } from 'lucide-react'
+
+// Lazy load non-critical components
+const FeedbackModal = lazy(() => import('./components/FeedbackModal'))
+const ChangelogModal = lazy(() => import('./components/ChangelogModal'))
+const ShortcutsModal = lazy(() => import('./components/ShortcutsModal'))
+const SettingsModal = lazy(() => import('./components/SettingsModal'))
+const OnboardingTour = lazy(() => import('./components/OnboardingTour'))
+const ToastContainer = lazy(() => import('./components/ToastContainer'))
+const CookieBanner = lazy(() => import('./components/CookieBanner'))
+const AllTools = lazy(() => import('./pages/AllTools'))
+const SplitPage = lazy(() => import('./pages/SplitPage'))
 
 function getSystemDark() {
   return globalThis.matchMedia('(prefers-color-scheme: dark)').matches
@@ -210,14 +212,16 @@ function AppInner() {
                 hasNewChangelog={hasNewChangelog}
               />
               <main className="flex-1 overflow-y-auto">
-                <Routes>
-                  <Route path="/" element={<Home searchQuery={searchQuery} />} />
-                  <Route path="/:categorySlug/:toolId" element={<ToolPage onFeedback={(toolName) => { setFeedbackTool(toolName); setFeedbackOpen(true) }} />} />
-                  <Route path="/tool/:toolId" element={<ToolPage onFeedback={(toolName) => { setFeedbackTool(toolName); setFeedbackOpen(true) }} />} />
-                  <Route path="/:slug" element={<Home searchQuery={searchQuery} />} />
-                  <Route path="/split" element={<SplitPage />} />
-                  <Route path="/tools" element={<AllTools />} />
-                </Routes>
+                <Suspense fallback={<div className="h-full w-full flex items-center justify-center bg-gray-50 dark:bg-gray-950"><div className="w-8 h-8 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div></div>}>
+                  <Routes>
+                    <Route path="/" element={<Home searchQuery={searchQuery} />} />
+                    <Route path="/:categorySlug/:toolId" element={<ToolPageWithKey onFeedback={(toolName) => { setFeedbackTool(toolName); setFeedbackOpen(true) }} />} />
+                    <Route path="/tool/:toolId" element={<ToolPageWithKey onFeedback={(toolName) => { setFeedbackTool(toolName); setFeedbackOpen(true) }} />} />
+                    <Route path="/:slug" element={<Home searchQuery={searchQuery} />} />
+                    <Route path="/split" element={<SplitPage />} />
+                    <Route path="/tools" element={<AllTools />} />
+                  </Routes>
+                </Suspense>
               </main>
             </div>
           </div>
@@ -236,24 +240,35 @@ function AppInner() {
                 <button onClick={install} className="bg-white text-primary-600 text-sm font-medium px-3 py-1.5 rounded-lg hover:bg-primary-50 transition-colors">
                   Install
                 </button>
-                <button onClick={handleDismissBanner} className="text-primary-200 hover:text-white p-1">
+                <button 
+                  onClick={handleDismissBanner} 
+                  className="text-primary-200 hover:text-white p-1"
+                  aria-label="Dismiss banner"
+                >
                   <X size={16} />
                 </button>
               </div>
             </div>
           )}
 
-          <CommandPalette open={cmdOpen} onClose={() => setCmdOpen(false)} />
-          <FeedbackModal open={feedbackOpen} onClose={() => setFeedbackOpen(false)} toolName={feedbackTool} />
-          <ChangelogModal open={changelogOpen} onClose={() => setChangelogOpen(false)} />
-          <ShortcutsModal open={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
-          <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
-          <OnboardingTour />
-          <ToastContainer />
-          <CookieBanner />
+          <Suspense fallback={null}>
+            <CommandPalette open={cmdOpen} onClose={() => setCmdOpen(false)} />
+            <FeedbackModal open={feedbackOpen} onClose={() => setFeedbackOpen(false)} toolName={feedbackTool} />
+            <ChangelogModal open={changelogOpen} onClose={() => setChangelogOpen(false)} />
+            <ShortcutsModal open={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
+            <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+            <OnboardingTour />
+            <ToastContainer />
+            <CookieBanner />
+          </Suspense>
       </LiveModeProvider>
     </ThemeContext.Provider>
   )
+}
+
+function ToolPageWithKey({ onFeedback }: { onFeedback: (name?: string) => void }) {
+  const { toolId } = useParams<{ toolId: string }>()
+  return <ToolPage key={toolId} onFeedback={onFeedback} />
 }
 
 export default function App() {

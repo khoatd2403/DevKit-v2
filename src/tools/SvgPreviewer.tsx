@@ -174,23 +174,26 @@ export default function SvgPreviewer() {
           {/* Controls */}
           <div className="flex flex-wrap items-center gap-2 min-h-[36px]">
             <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
-              <button onClick={() => setZoom(z => Math.max(0.25, z - 0.25))} className="p-1 hover:bg-white dark:hover:bg-gray-700 rounded transition-colors">
+              <button onClick={() => setZoom(z => Math.max(0.25, z - 0.25))} className="p-1 hover:bg-white dark:hover:bg-gray-700 rounded transition-colors" aria-label="Zoom out">
                 <ZoomOut size={13} />
               </button>
               <span className="text-xs font-mono w-12 text-center text-gray-600 dark:text-gray-400">{Math.round(zoom * 100)}%</span>
-              <button onClick={() => setZoom(z => Math.min(4, z + 0.25))} className="p-1 hover:bg-white dark:hover:bg-gray-700 rounded transition-colors">
+              <button onClick={() => setZoom(z => Math.min(4, z + 0.25))} className="p-1 hover:bg-white dark:hover:bg-gray-700 rounded transition-colors" aria-label="Zoom in">
                 <ZoomIn size={13} />
               </button>
-              <button onClick={() => setZoom(1)} className="p-1 hover:bg-white dark:hover:bg-gray-700 rounded transition-colors ml-1">
+              <button onClick={() => setZoom(1)} className="p-1 hover:bg-white dark:hover:bg-gray-700 rounded transition-colors ml-1" aria-label="Reset zoom">
                 <RotateCcw size={11} />
               </button>
             </div>
 
             <div className="flex gap-1">
               {BACKGROUNDS.map(b => (
-                <button key={b.label} onClick={() => setBg(b.value)}
+                <button 
+                  key={b.label} 
+                  onClick={() => setBg(b.value)}
                   title={b.label}
-                  className={`w-6 h-6 rounded border-2 transition-all ${bg === b.value ? 'border-primary-500 scale-110' : 'border-gray-200 dark:border-gray-700'} ${b.value === 'grid' ? '' : ''}`}
+                  aria-label={`Set background color to ${b.label}`}
+                  className={`w-6 h-6 rounded border-2 transition-all ${bg === b.value ? 'border-primary-500 scale-110' : 'border-gray-200 dark:border-gray-700'}`}
                   style={b.value === 'grid'
                     ? { backgroundImage: 'repeating-conic-gradient(#9ca3af 0% 25%, white 0% 50%)', backgroundSize: '8px 8px' }
                     : b.value === 'transparent'

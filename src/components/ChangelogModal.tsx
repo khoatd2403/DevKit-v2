@@ -79,7 +79,7 @@ export default function ChangelogModal({ open, onClose }: ChangelogModalProps) {
               <p className="text-xs text-gray-400">{t.changelogDesc}</p>
             </div>
           </div>
-          <button onClick={onClose} className="btn-ghost p-1.5"><X size={16} /></button>
+          <button onClick={onClose} className="btn-ghost p-1.5" aria-label={t.close}><X size={16} /></button>
         </div>
 
         {/* Content */}
@@ -137,7 +137,7 @@ export default function ChangelogModal({ open, onClose }: ChangelogModalProps) {
           >
             {t.changelogFullHistory}
           </a>
-          <button onClick={onClose} className="btn-primary text-sm">{t.gotIt}</button>
+          <button onClick={onClose} className="btn-primary text-sm" aria-label={t.gotIt}>{t.gotIt}</button>
         </div>
       </div>
     </div>

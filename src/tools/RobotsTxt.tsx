@@ -104,7 +104,7 @@ export default function RobotsTxt() {
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Rule Block {bi + 1}</span>
               {blocks.length > 1 && (
-                <button onClick={() => removeBlock(block.id)} className="text-red-500 hover:text-red-700 dark:text-red-400 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20">
+                <button onClick={() => removeBlock(block.id)} className="text-red-500 hover:text-red-700 dark:text-red-400 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20" aria-label="Remove this rule block">
                   <Trash2 size={14} />
                 </button>
               )}
@@ -161,7 +161,7 @@ export default function RobotsTxt() {
                       placeholder="/path/"
                     />
                     {block.rules.length > 1 && (
-                      <button onClick={() => removeRule(block.id, ri)} className="p-1.5 rounded hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 hover:text-red-700 dark:text-red-400">
+                      <button onClick={() => removeRule(block.id, ri)} className="p-1.5 rounded hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 hover:text-red-700 dark:text-red-400" aria-label="Remove this path rule">
                         <Trash2 size={13} />
                       </button>
                     )}

@@ -15,7 +15,24 @@ const LanguageContext = createContext<LanguageContextType>({
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => {
-    return (localStorage.getItem('devkit-language') as Lang) ?? 'en'
+    const saved = localStorage.getItem('devkit-language') as Lang
+    if (saved) return saved
+
+    // Detect browser language
+    const browserLang = navigator.language.toLowerCase()
+    
+    if (browserLang.startsWith('vi')) return 'vi'
+    if (browserLang.startsWith('zh')) return 'zh-CN'
+    if (browserLang.startsWith('ja')) return 'ja'
+    if (browserLang.startsWith('ko')) return 'ko'
+    if (browserLang.startsWith('es')) return 'es'
+    if (browserLang.startsWith('fr')) return 'fr'
+    if (browserLang.startsWith('de')) return 'de'
+    if (browserLang.startsWith('pt')) return 'pt'
+    if (browserLang.startsWith('ru')) return 'ru'
+
+    // Final fallback: English
+    return 'en'
   })
 
   const setLang = (l: Lang) => {

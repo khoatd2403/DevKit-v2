@@ -541,7 +541,11 @@ export default function TextDiff({ initialData }: { initialData?: string | null 
         ))}
 
         {/* Swap button */}
-        <button type="button" onClick={() => { setLeft(right); setRight(left); }} title="Swap A ↔ B"
+        <button 
+          type="button" 
+          onClick={() => { setLeft(right); setRight(left); }} 
+          title="Swap A ↔ B"
+          aria-label="Swap original and modified text"
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 hidden lg:flex w-8 h-8 items-center justify-center bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-full shadow-sm text-gray-400 hover:text-primary-600 hover:border-primary-400 transition-all">
           <ArrowLeftRight size={14} />
         </button>
@@ -579,17 +583,25 @@ export default function TextDiff({ initialData }: { initialData?: string | null 
           <div className="ml-auto flex items-center gap-2">
             {hasDiff && hunkCount > 0 && (
               <div className="flex items-center gap-1">
-                <button type="button" onClick={() => setActiveHunk(h => Math.max(0, h - 1))}
+                <button 
+                  type="button" 
+                  onClick={() => setActiveHunk(h => Math.max(0, h - 1))}
                   disabled={activeHunk === 0}
-                  className="w-6 h-6 flex items-center justify-center rounded text-gray-500 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+                  className="w-6 h-6 flex items-center justify-center rounded text-gray-500 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                  aria-label="Previous difference"
+                >
                   <ChevronUp size={14} />
                 </button>
                 <span className="text-gray-500 tabular-nums min-w-[2.5rem] text-center">
                   {activeHunk + 1}/{hunkCount}
                 </span>
-                <button type="button" onClick={() => setActiveHunk(h => Math.min(hunkCount - 1, h + 1))}
+                <button 
+                  type="button" 
+                  onClick={() => setActiveHunk(h => Math.min(hunkCount - 1, h + 1))}
                   disabled={activeHunk === hunkCount - 1}
-                  className="w-6 h-6 flex items-center justify-center rounded text-gray-500 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+                  className="w-6 h-6 flex items-center justify-center rounded text-gray-500 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                  aria-label="Next difference"
+                >
                   <ChevronDown size={14} />
                 </button>
               </div>

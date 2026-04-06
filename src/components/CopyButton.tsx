@@ -15,7 +15,7 @@ export default function CopyButton({ text, label, toast, className = '' }: { tex
   }
 
   return (
-    <button onClick={copy} className={`btn-ghost text-xs flex items-center gap-1 ${className}`} title="Copy to clipboard (Ctrl+Shift+C)">
+    <button onClick={copy} className={`btn-ghost text-xs flex items-center gap-1 ${className}`} title="Copy to clipboard (Ctrl+Shift+C)" aria-label={copied ? 'Copied' : (label ?? 'Copy')}>
       {copied ? <Check size={12} className="text-green-500" /> : <Copy size={12} />}
       {copied ? 'Copied!' : (label ?? 'Copy')}
     </button>
