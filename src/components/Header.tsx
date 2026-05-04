@@ -49,7 +49,7 @@ export default function Header({ onMenuClick, onSearchChange: _onSearchChange, o
           {quickTools.map(tool => (
             <button
               key={tool.id}
-              onClick={() => navigate(`/${tool.category}-tools/${tool.id}`)}
+              onClick={() => navigate(`/${tool.category}-tools/${tool.id}/`)}
               className="btn-ghost p-1.5 text-lg leading-none"
               title={tool.name}
               aria-label={tool.name}

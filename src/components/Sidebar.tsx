@@ -84,8 +84,8 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
           </div>
           {/* All Tools */}
           <div
-            className={`sidebar-item ${location.pathname === '/tools' ? 'active' : ''}`}
-            onClick={() => navigate('/tools')}
+            className={`sidebar-item ${location.pathname === '/tools' || location.pathname === '/tools/' ? 'active' : ''}`}
+            onClick={() => navigate('/tools/')}
           >
             <span className="text-sm shrink-0">🧰</span>
             <span>{t.allTools}</span>
@@ -126,7 +126,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
                         <div
                           key={tool.id}
                           className={`sidebar-item-group flex items-center gap-1.5 px-2 py-1.5 group cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 ${currentToolId === tool.id ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 font-semibold shadow-sm' : ''}`}
-                          onClick={() => navigate(`/${tool.category}-tools/${tool.id}`)}
+                          onClick={() => navigate(`/${tool.category}-tools/${tool.id}/`)}
                         >
                           <span className="text-sm shrink-0">{tool.icon}</span>
                           <span className="truncate flex-1 text-sm">{tool.name}</span>
@@ -185,7 +185,7 @@ export default function Sidebar({ open, onClose, onFeedback, onChangelog, onSett
                           <div
                             key={tool.id}
                             className={`sidebar-item py-1.5 ${currentToolId === tool.id ? 'active' : ''}`}
-                            onClick={() => navigate(`/${tool.category}-tools/${tool.id}`)}
+                            onClick={() => navigate(`/${tool.category}-tools/${tool.id}/`)}
                           >
                             <span className="truncate flex-1 text-sm">{tool.name}</span>
                             {tool.new && (

@@ -5,16 +5,16 @@ const today = new Date().toISOString().split('T')[0]
 
 const urls = [
   { loc: `${BASE_URL}/`, priority: '1.0', changefreq: 'weekly' },
-  { loc: `${BASE_URL}/tools`, priority: '0.8', changefreq: 'weekly' },
+  { loc: `${BASE_URL}/tools/`, priority: '0.8', changefreq: 'weekly' },
   // Category landing pages
   ...categories.filter(c => c.id !== 'all').map(c => ({
-    loc: `${BASE_URL}/${c.id}-tools`,
+    loc: `${BASE_URL}/${c.id}-tools/`,
     priority: '0.8',
     changefreq: 'weekly',
   })),
   // Tool pages
   ...tools.map(t => ({
-    loc: `${BASE_URL}/${t.category}-tools/${t.id}`,
+    loc: `${BASE_URL}/${t.category}-tools/${t.id}/`,
     priority: t.popular ? '0.9' : '0.7',
     changefreq: 'monthly',
   })),
