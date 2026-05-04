@@ -47,7 +47,7 @@ for (const tool of tools) {
         '@type': 'ListItem',
         'position': 1,
         'name': 'Home',
-        'item': BASE_URL
+        'item': `${BASE_URL}/`
       },
       {
         '@type': 'ListItem',
@@ -85,6 +85,7 @@ for (const tool of tools) {
   const html = baseHtml
     .replace(/<title[^>]*>[^<]*<\/title>/, '')
     .replace(/<meta[^>]*name="description"[^>]*>/g, '')
+    .replace(/<meta\s[^<]*name="keywords"[^<]*\/?>/g, '')
     .replace(/<link[^>]*rel="canonical"[^>]*>/g, '')
     .replace(/<meta[^>]*property="og:[^>]*>/g, '')
     .replace(/<meta[^>]*name="twitter:[^>]*>/g, '')
