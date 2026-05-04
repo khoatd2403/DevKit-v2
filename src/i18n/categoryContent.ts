@@ -66,7 +66,9 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         From simple case transformations like <a href="/string-tools/case-converter/">Case Converter</a> (supporting camelCase, PascalCase, snake_case, etc.) to advanced text cleanup with our <a href="/string-tools/text-remove-duplicates/">Remove Duplicates</a> and <a href="/string-tools/text-sort/">Text Sort</a> tools, we provide everything needed for precise text management. If you're looking for differences between two versions of a script or document, our <a href="/string-tools/text-diff/">Text Diff</a> utility highlights changes line-by-line, helping you track revisions instantly.
         <br/><br/>
         Analysis tools are also included to help you understand your content better. You can use our <a href="/string-tools/word-counter/">Word Counter</a> to get detailed statistics on characters, words, and reading time. For those working with internationalization or special symbols, the <a href="/converter-tools/ascii-converter/">ASCII Converter</a> helps you identify and transform character codes with ease. All string operations happen entirely in your browser, maintaining full privacy for your source text and documents.
-      `
+      `,
+      seoTitle: 'String Tools: Case Converter, Word Counter & Text Diff | DevTools Online',
+      seoDescription: 'Free online string tools — convert case, count words, sort lines, find diffs and remove duplicates. 100% client-side processing, no signup required.'
     },
     datetime: {
       description: `
@@ -75,7 +77,9 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         The <a href="/datetime-tools/unix-timestamp-converter/">Unix Timestamp Converter</a> is a favorite among backend developers, allowing for seamless conversion between human-readable dates and machine-friendly epochs. For frontend engineers working with the Temporal API or legacy Date objects, our <a href="/datetime-tools/iso-date-converter/">ISO Date Converter</a> ensures that your strings follow the correct standards. We also offer a <a href="/datetime-tools/date-calculator/">Date Calculator</a> to find the difference between two points in time, perfect for project management or calculating age/Durations.
         <br/><br/>
         Precision is paramount when working with temporal data. All our calculations are performed locally using the latest ECMAScript Date standards, ensuring that you get reliable results without any server-side dependencies. From determining week numbers to converting between different world clocks, our date utilities help you master the complexities of time with confidence.
-      `
+      `,
+      seoTitle: 'Date & Time Tools: Unix Timestamp & Date Calculator | DevTools Online',
+      seoDescription: 'Free online date and time utilities. Convert Unix timestamps, ISO dates, calculate duration between dates. Instant, accurate, runs entirely in your browser.'
     },
     generator: {
       description: `
@@ -84,7 +88,9 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         For UI designers and developers, our <a href="/generator-tools/lorem-ipsum-generator/">Lorem Ipsum Generator</a> creates professional-looking placeholder text for mockups. When it comes to security, the <a href="/generator-tools/password-generator/">Password Generator</a> and <a href="/generator-tools/uuid-generator/">UUID Generator</a> provide unique, unpredictable identifiers that are crucial for account security and database primary keys. We also offer specialized generators like the <a href="/generator-tools/qr-code-generator/">QR Code Generator</a> to help you bridge the gap between digital and physical platforms effortlessly.
         <br/><br/>
         Every generator on DevTools Online uses cryptographically strong PRNGs (Pseudo-Random Number Generators) when appropriate, ensuring that your keys and passwords are truly secure. Because the generation happens completely in your browser, we never store or track the data you create. This makes our platform the ideal choice for developers looking for high-quality, private data generation for their next project.
-      `
+      `,
+      seoTitle: 'Generators: Lorem Ipsum, UUID, Password & QR Code | DevTools Online',
+      seoDescription: 'Generate placeholder text, UUIDs, secure passwords, and QR codes online. Cryptographically strong, browser-only — no data sent to any server.'
     },
     converter: {
         description: `
@@ -93,49 +99,74 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
           For engineers working closer to the hardware or low-level protocols, our <a href="/converter-tools/binary-to-text/">Binary to Text</a> and <a href="/converter-tools/number-converter/">Number Base Converter</a> (supporting Binary, Octal, Decimal, and Hexadecimal) are indispensable. For developers working with CSS and web design, our <a href="/color-tools/color-converter/">Color Converter</a> allows you to seamlessly switch between HEX, RGB, and HSL values, ensuring that your branding remains consistent across all digital environments.
           <br/><br/>
           Accuracy and reliability are the foundations of this category. All conversion logic is implemented with strict attention to mathematical precision and international standards. By performing all calculations locally, we provide instant feedback and maintain absolute privacy for your data. Optimize your engineering workflow with our fast, reliable, and secure conversion suite.
-        `
+        `,
+        seoTitle: 'Converter Tools: Binary, Number Base & Color | DevTools Online',
+        seoDescription: 'Free online converters for binary, hex, decimal, octal numbers, color formats and more. Precise client-side conversion with zero latency.'
     },
     number: {
         description: `
           Mathematical precision and numerical analysis are fundamental to every computing task. Our <strong>Number Tools</strong> category provides essential utilities for basic arithmetic, scientific calculation, and data summarization. Whether you're a student checking homework, a financial analyst calculating percentages, or a developer performing complex bitwise operations, these tools provide the accuracy you need.
           <br/><br/>
           From the <a href="/number-tools/calculator/">Standard Calculator</a> for quick arithmetic to specialized tools like the <a href="/string-tools/list-summarizer/">List Summarizer</a> for statistical analysis (Sum, Average, Min, Max), we cover the spectrum of numerical tasks. All numerical processes occur safely within your browser context, ensuring that your financial or research data is never transmitted to an external server. Master your numbers with our secure and precise numerical suite.
-        `
+        `,
+        seoTitle: 'Number Tools: Calculator, Statistics & Math Utilities | DevTools Online',
+        seoDescription: 'Online math and number utilities. Calculate, summarize lists (sum/avg/min/max), perform precise arithmetic locally — no signup, instant results.'
     },
     color: {
         description: `
           Color is the visual language of the web. Our <strong>Color Tools</strong> category is a comprehensive studio for designers and developers to create, transform, and analyze color palettes. From choosing the perfect brand accent to ensuring accessibility and contrast, these tools help you build visually stunning and highly functional user interfaces.
           <br/><br/>
           The <a href="/color-tools/color-picker/">Color Picker</a> and <a href="/color-tools/color-converter/">Color Converter</a> are the foundation of this category, allowing you to sample and translate colors across HEX, RGB, and HSL formats. For those aiming for optimal readability, our <a href="/color-tools/contrast-checker/">Contrast Checker</a> ensures your text meets WCAG accessibility guidelines. We also include a <a href="/color-tools/color-palette-generator/">Color Palette Generator</a> to help you discover harmonious color schemes effortlessly. All color operations are processed locally, providing instant visual feedback and ensuring that your design assets remain private.
-        `
+        `,
+        seoTitle: 'Color Tools: Picker, Converter & WCAG Contrast Checker | DevTools Online',
+        seoDescription: 'Pick, convert and analyze colors online. HEX, RGB, HSL converter, WCAG contrast checker and palette generator — all client-side, no signup.'
     },
     ai: {
         description: `
           Artificial Intelligence is transforming the way we build and interact with software. Our <strong>AI Tools</strong> category brings the power of modern machine learning directly to your browser. From text analysis to advanced code generation, these tools leverage state-of-the-art models to help you work smarter, faster, and more creatively.
           <br/><br/>
           Our AI-powered utilities are designed to integrate seamlessly into your development workflow. Whether you need an <a href="/formatter-tools/ai-code-formatter/">AI Code Formatter</a> that understands the semantics of your logic or a <a href="/generator-tools/ai-readme-generator/">README Generator</a> to document your projects automatically, we provide the cutting-edge features you need. By focusing on browser-driven AI where possible, we maintain a focus on speed and ease of use. Explore the future of software engineering with our evolving suite of AI-enhanced development tools.
-        `
+        `,
+        seoTitle: 'AI Tools: Token Counter, Cost Calculator & Prompt Builder | DevTools Online',
+        seoDescription: 'AI developer utilities — count tokens, estimate API costs for GPT/Claude/Gemini, build prompts and compare models. Free, instant, runs in your browser.'
     },
     formatter: {
         description: `
           Clean code is the foundation of maintainable software engineering. Our <strong>Formatter Tools</strong> category provides professional beautification utilities for all major programming and markup languages. Whether you are dealing with minified production code or inconsistent styles from a legacy project, these tools help you restore order and readability instantly.
           <br/><br/>
           We provide high-performance formatters for <a href="/formatter-tools/html-formatter/">HTML</a>, <a href="/formatter-tools/css-formatter/">CSS</a>, <a href="/formatter-tools/js-formatter/">JavaScript</a>, and <a href="/json-tools/json-formatter/">JSON</a>. These tools wrap complex logic into simple interfaces, allowing you to customize indentation, spacing, and quote styles with precision. All formatting operations happen entirely in your browser, keeping your source code secure and private. Eliminate technical debt and improve team collaboration with our secure formatting suite.
-        `
+        `,
+        seoTitle: 'Code Formatter Tools: HTML, CSS, JS, SQL, XML, YAML | DevTools Online',
+        seoDescription: 'Beautify and format code instantly — HTML, CSS, JavaScript, SQL, XML, YAML formatters with customizable indentation. Free, client-side, no signup.'
     },
     misc: {
         description: `
           Efficiency in development often comes from the small, specialized tasks that don't fit into major categories but are essential nonetheless. Our <strong>Miscellaneous Tools</strong> collection is a treasure chest of specialized utilities for various niche tasks, from file management to developer productivity hacks.
           <br/><br/>
           Explore our collection for tools like <a href="/misc-tools/crontab-generator/">Crontab Generator</a> for scheduling tasks or <a href="/misc-tools/image-metadata-modifier/">Image Metadata Modifier</a> to protect your privacy. This category is constantly evolving with new utilities based on community feedback. Like all our categories, these tools are focused on privacy and performance, running completely locally within your browser context. Simplify your day-to-day developer life with our growing suite of essential miscellaneous utilities.
-        `
+        `,
+        seoTitle: 'Misc Developer Tools: Crontab, Image Metadata & QR | DevTools Online',
+        seoDescription: 'Specialized developer utilities — crontab generator, image metadata modifier, QR codes and more niche tools. Privacy-first, runs entirely in browser.'
     },
     dotnet: {
         description: `
           Developing specialized applications within the Microsoft ecosystem requires precise tools and configurations. Our <strong>.NET / C# Tools</strong> category is designed specifically for developers working with the .NET runtime and C# language, offering utilities that streamline cross-platform development and configuration management.
           <br/><br/>
           From analyzing <a href="/dotnet-tools/nuget-package-viewer/">NuGet package structures</a> to formatting <a href="/dotnet-tools/csharp-formatter/">C# code snippets</a>, we provide the essential utilities for the modern .NET workload. Whether you are building cloud-native apps with ASP.NET Core or desktop utilities, these tools help you maintain high standards of code quality and security. All .NET tools are optimized for client-side execution, ensuring that your proprietary logic and configuration settings remain absolutely private.
-        `
+        `,
+        seoTitle: '.NET / C# Tools: NuGet Viewer, C# Formatter & SQL to LINQ | DevTools Online',
+        seoDescription: 'Online .NET and C# utilities — NuGet package analysis, C# code formatting, SQL to LINQ, connection string builder. Built for ASP.NET Core developers.'
+    },
+    security: {
+      description: `
+        Security is a critical concern in modern software engineering. Our <strong>Security Tools</strong> category provides a comprehensive set of utilities for password generation, hashing, token decoding, and certificate analysis. Whether you are hardening user authentication, debugging an OAuth2 flow, or auditing TLS certificates, these tools deliver instant, accurate results without ever leaving your browser.
+        <br/><br/>
+        At the foundation, our <a href="/generator-tools/password-generator/">Password Generator</a> creates cryptographically strong credentials using browser-native CSPRNG, while the <a href="/crypto-tools/hash-generator/">Hash Generator</a> computes MD5, SHA-1, SHA-256, SHA-512 and Bcrypt fingerprints for files and strings. For modern API development, the <a href="/encoding-tools/jwt-decoder/">JWT Decoder</a> inspects header and payload claims, and the <a href="/web-tools/ssl-checker/">SSL Certificate Checker</a> verifies expiry, issuer and SAN entries via Certificate Transparency logs.
+        <br/><br/>
+        Every operation runs entirely in your browser memory — your passwords, tokens, certificates and keys never touch a server. This privacy-first architecture makes DevTools Online a safe environment to handle sensitive credentials and security artifacts during development, debugging or incident response.
+      `,
+      seoTitle: 'Security Tools: Password Gen, Hash, JWT Decoder & SSL Checker | DevTools Online',
+      seoDescription: 'Free online security utilities — strong password generator, MD5/SHA hash, JWT decoder, SSL certificate checker. Cryptographically strong, client-side only.'
     }
   },
   vi: {
@@ -196,7 +227,9 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         Công cụ <a href="/datetime-tools/unix-timestamp-converter/">Đổi Unix Timestamp</a> là "vật bất ly thân" của các nhà phát triển backend, cho phép chuyển đổi mượt mà giữa ngày tháng dễ đọc và định dạng epoch của máy tính. Đối với các kỹ sư frontend, <a href="/datetime-tools/iso-date-converter/">Đổi ISO Date</a> đảm bảo các chuỗi thời gian của bạn luôn tuân thủ đúng tiêu chuẩn quốc tế. Chúng tôi cũng cung cấp <a href="/datetime-tools/date-calculator/">Máy tính ngày tháng</a> để tìm khoảng cách giữa hai mốc thời gian, cực kỳ hữu ích cho việc quản lý dự án.
         <br/><br/>
         Độ chính xác là yếu tố hàng đầu khi làm việc với dữ liệu thời gian. Tất cả các phép toán đều được thực hiện cục bộ bằng các tiêu chuẩn ECMAScript mới nhất, đảm bảo kết quả đáng tin cậy mà không phụ thuộc vào máy chủ. Từ việc xác định số tuần trong năm đến chuyển đổi giữa các múi giờ thế giới, chúng tôi giúp bạn làm chủ sự phức tạp của thời gian một cách tự tin.
-      `
+      `,
+      seoTitle: 'Công cụ Ngày giờ: Đổi Unix Timestamp & Tính Ngày | DevTools',
+      seoDescription: 'Công cụ ngày giờ trực tuyến: chuyển đổi Unix timestamp, ISO Date, tính khoảng cách giữa các mốc thời gian. Chính xác, tức thì, ngay trong trình duyệt.'
     },
     generator: {
       description: `
@@ -205,44 +238,82 @@ export const categoryAboutTranslations: Record<string, Record<string, CategoryAb
         Với các nhà thiết kế và phát triển UI, <a href="/generator-tools/lorem-ipsum-generator/">Lorem Ipsum Generator</a> giúp tạo văn bản giữ chỗ chuyên nghiệp cho các bản thiết kế. Về mặt bảo mật, <a href="/generator-tools/password-generator/">Tạo mật khẩu</a> và <a href="/generator-tools/uuid-generator/">Tạo UUID</a> cung cấp các mã định danh duy nhất, không thể đoán trước—yếu tố sống còn cho bảo mật tài khoản và khóa chính của cơ sở dữ liệu. Chúng tôi cũng cung cấp các công cụ chuyên biệt như <a href="/generator-tools/qr-code-generator/">Tạo mã QR</a> để giúp bạn kết nối thế giới thực và thế giới số một cách dễ dàng.
         <br/><br/>
         Mọi công cụ tại DevTools Online đều sử dụng các bộ tạo số giả ngẫu nhiên mạnh về mặt mật mã khi cần thiết, đảm bảo các khóa và mật khẩu của bạn thực sự an toàn. Vì quá trình tạo dữ liệu diễn ra hoàn toàn trong trình duyệt, chúng tôi không bao giờ lưu trữ hoặc theo dõi dữ liệu bạn tạo ra.
-      `
+      `,
+      seoTitle: 'Bộ Tạo Dữ liệu: Lorem Ipsum, UUID, Mật khẩu & QR | DevTools',
+      seoDescription: 'Tạo văn bản giữ chỗ, UUID, mật khẩu mạnh và mã QR ngay trên trình duyệt. Mạnh về mật mã, không gửi dữ liệu lên server, miễn phí.'
     },
     converter: {
         description: `
           Chuyển đổi dữ liệu là một trụ cột cốt lõi của khoa học máy tính và kỹ thuật hiện đại. Danh mục <strong>Công cụ Converter</strong> của chúng tôi cung cấp một bộ tiện ích chuyên nghiệp để dịch dữ liệu giữa các hệ thống số, đơn vị đo lường và thông số kỹ thuật đa dạng.
           <br/><br/>
           Dành cho các kỹ sư làm việc với các giao thức cấp thấp, <a href="/converter-tools/binary-to-text/">Binary to Text</a> và <a href="/converter-tools/number-converter/">Chuyển đổi cơ số</a> là những công cụ vô giá. Đồng thời, các nhà phát triển web có thể sử dụng <a href="/color-tools/color-converter/">Color Converter</a> để làm việc với các hệ màu sắc một cách chuyên nghiệp. Mọi logic đều được thực hiện cục bộ, đảm bảo tính an toàn và tiện lợi tối đa.
-        `
+        `,
+        seoTitle: 'Công cụ Converter: Binary, Hex, Octal & Đổi Cơ Số | DevTools',
+        seoDescription: 'Chuyển đổi nhị phân, hex, decimal, octal và các định dạng dữ liệu khác. Chính xác tuyệt đối, chạy trên trình duyệt với độ trễ bằng 0.'
     },
     number: {
         description: `
           Độ chính xác toán học là yếu tố hàng đầu trong mọi tác vụ tính toán. Danh mục <strong>Công cụ Number</strong> cung cấp các tiện ích cho số học cơ bản, phân tích dữ liệu và các phép toán khoa học. Từ <a href="/number-tools/calculator/">Máy tính tổng hợp</a> đến các công cụ <a href="/string-tools/list-summarizer/">Tóm tắt danh sách</a>, chúng tôi giúp bạn quản lý các con số một cách hiệu quả và an toàn tuyệt đối ngay tại trình duyệt.
-        `
+        `,
+        seoTitle: 'Công cụ Số học: Máy Tính, Tóm Tắt Danh Sách | DevTools',
+        seoDescription: 'Tiện ích toán học và số học trực tuyến. Máy tính, tóm tắt danh sách (sum, avg, min, max), thực hiện phép toán chính xác ngay trong trình duyệt.'
     },
     color: {
         description: `
           Màu sắc tạo nên linh hồn cho giao diện người dùng. Danh mục <strong>Công cụ Color</strong> cung cấp một studio đầy đủ cho các nhà thiết kế để khám phá và tạo ra những bảng màu tuyệt đẹp. Sử dụng <a href="/color-tools/color-picker/">Color Picker</a> để chọn màu và <a href="/color-tools/contrast-checker/">Contrast Checker</a> để đảm bảo độ tương phản đạt chuẩn WCAG, giúp ứng dụng của bạn không chỉ đẹp mà còn dễ tiếp cận.
-        `
+        `,
+        seoTitle: 'Công cụ Màu sắc: Color Picker, Converter & Contrast | DevTools',
+        seoDescription: 'Chọn, chuyển đổi và phân tích màu sắc trực tuyến. HEX, RGB, HSL converter, kiểm tra độ tương phản WCAG, tạo bảng màu — chạy hoàn toàn trên trình duyệt.'
     },
     ai: {
         description: `
           Tương lai của phát triển phần mềm gắn liền với Trí tuệ nhân tạo. Danh mục <strong>Công cụ AI</strong> mang các mô hình ngôn ngữ và máy học hiện đại vào quy trình làm việc của bạn. Hãy trải nghiệm các công cụ như <a href="/formatter-tools/ai-code-formatter/">AI Code Formatter</a> để tối ưu hóa mã nguồn hoặc các tiện ích tự động hóa khác để giải phóng sức sáng tạo của bạn.
-        `
+        `,
+        seoTitle: 'Công cụ AI: Đếm Token, Tính Chi Phí API & Prompt Builder | DevTools',
+        seoDescription: 'Bộ tiện ích AI cho lập trình viên — đếm token, tính phí API GPT/Claude/Gemini, tạo prompt và so sánh model. Miễn phí, chạy ngay trên trình duyệt.'
     },
     formatter: {
         description: `
           Mã nguồn sạch là chìa khóa để bảo trì dự án lâu dài. Danh mục <strong>Công cụ Formatter</strong> cung cấp các tiện ích làm đẹp mã chuyên nghiệp cho <a href="/formatter-tools/html-formatter/">HTML</a>, <a href="/formatter-tools/css-formatter/">CSS</a> và <a href="/formatter-tools/js-formatter/">JavaScript</a>. Hãy biến các đoạn code lộn xộn thành cấu trúc chuẩn xác chỉ với một lần nhấn, hoàn toàn bảo mật và riêng tư.
-        `
+        `,
+        seoTitle: 'Bộ Format Code: HTML, CSS, JS, SQL, XML, YAML | DevTools',
+        seoDescription: 'Làm đẹp và format code tức thì — HTML, CSS, JavaScript, SQL, XML, YAML với tùy chỉnh thụt lề. Miễn phí, chạy phía client, không cần đăng ký.'
     },
     misc: {
         description: `
           Những tiện ích nhỏ nhưng có võ thường giúp tăng đáng kể năng suất làm việc. Danh mục <strong>Công cụ Miscellaneous</strong> tập hợp các tính năng đa dạng từ <a href="/misc-tools/crontab-generator/">Tạo Crontab</a> đến quản lý metadata hình ảnh. Chúng tôi luôn cập nhật các tiện ích mới nhất dựa trên nhu cầu của cộng đồng nhà phát triển.
-        `
+        `,
+        seoTitle: 'Công cụ Misc: Crontab, Metadata Hình ảnh, QR Code | DevTools',
+        seoDescription: 'Tiện ích chuyên biệt cho lập trình viên — tạo crontab, sửa metadata hình ảnh, mã QR và nhiều tool khác. Bảo mật, chạy hoàn toàn trên trình duyệt.'
     },
     dotnet: {
         description: `
           Dành riêng cho các nhà phát triển trong hệ sinh thái Microsoft, danh mục <strong>Công cụ .NET / C#</strong> giúp quản lý NuGet và định dạng mã C# chuyên nghiệp. Các công cụ được thiết kế để tối ưu hóa quy trình làm việc với ASP.NET Core và các ứng dụng .NET hiện đại, đảm bảo hiệu suất và độ bảo mật cao nhất.
-        `
+        `,
+        seoTitle: 'Công cụ .NET / C#: NuGet Viewer, C# Formatter & SQL to LINQ | DevTools',
+        seoDescription: 'Tiện ích .NET và C# trực tuyến — phân tích NuGet, format C#, SQL to LINQ, connection string builder. Dành cho lập trình viên ASP.NET Core hiện đại.'
+    },
+    web: {
+      description: `
+        Web hiện đại được xây dựng trên nền tảng HTML, CSS và cấu hình chuẩn xác. Bộ <strong>Công cụ Web</strong> được thiết kế để giúp lập trình viên frontend và nhà thiết kế web tinh chỉnh code, tối ưu hiệu suất và gỡ lỗi layout phức tạp một cách dễ dàng. Từ làm đẹp markup lộn xộn đến môi trường thử nghiệm chuyên dụng, các công cụ này tăng tốc chu trình "build-test-fix" trong phát triển web.
+        <br/><br/>
+        Để kiểm tra biểu thức chính quy theo thời gian thực, <a href="/web-tools/regex-tester/">Regex Tester</a> cung cấp môi trường để xây và test pattern cho xác thực dữ liệu hoặc biến đổi văn bản. Các nhà phát triển làm việc với Markdown có thể dùng <a href="/web-tools/markdown-previewer/">Markdown Previewer</a> để xem nội dung render bên cạnh source. Để debug API và dịch vụ web, <a href="/web-tools/dns-lookup/">DNS Lookup</a>, <a href="/web-tools/ssl-checker/">SSL Checker</a> và <a href="/web-tools/http-request-builder/">HTTP Request Builder</a> giúp bạn kiểm tra cấu hình mạng và endpoint một cách chuyên nghiệp.
+        <br/><br/>
+        Tất cả Công cụ Web được tối ưu cho môi trường trình duyệt hiện đại. Bằng cách thực thi mọi biến đổi cục bộ, chúng tôi tránh độ trễ của round-trip server đồng thời giữ source code và tài nguyên cá nhân của bạn an toàn tuyệt đối.
+      `,
+      seoTitle: 'Công cụ Web: Regex, DNS, SSL, HTTP Request Builder | DevTools',
+      seoDescription: 'Tiện ích thiết yếu cho phát triển web. Test regex, tra DNS, kiểm tra SSL, xây HTTP request, xem trước Markdown. Tăng tốc workflow frontend, độ trễ bằng 0.'
+    },
+    security: {
+      description: `
+        Bảo mật là mối quan tâm hàng đầu trong kỹ thuật phần mềm hiện đại. Danh mục <strong>Công cụ Bảo mật</strong> cung cấp một bộ tiện ích toàn diện để tạo mật khẩu, băm dữ liệu, giải mã token và phân tích chứng chỉ. Cho dù bạn đang củng cố xác thực người dùng, debug luồng OAuth2 hay kiểm tra chứng chỉ TLS, các công cụ này đều mang lại kết quả tức thì và chính xác mà không bao giờ rời khỏi trình duyệt của bạn.
+        <br/><br/>
+        Ở nền tảng, <a href="/generator-tools/password-generator/">Password Generator</a> tạo thông tin đăng nhập mạnh về mật mã sử dụng CSPRNG của trình duyệt, còn <a href="/crypto-tools/hash-generator/">Hash Generator</a> tính toán dấu vân tay MD5, SHA-1, SHA-256, SHA-512 và Bcrypt cho file và chuỗi. Đối với phát triển API hiện đại, <a href="/encoding-tools/jwt-decoder/">JWT Decoder</a> xem xét nội dung header và payload, và <a href="/web-tools/ssl-checker/">SSL Certificate Checker</a> xác minh hạn sử dụng, nhà phát hành và SAN entries qua Certificate Transparency logs.
+        <br/><br/>
+        Mọi thao tác chạy hoàn toàn trong bộ nhớ trình duyệt — mật khẩu, token, chứng chỉ và khóa của bạn không bao giờ chạm tới server. Kiến trúc privacy-first này biến DevTools Online thành môi trường an toàn để xử lý thông tin nhạy cảm trong quá trình phát triển, debug hoặc xử lý sự cố.
+      `,
+      seoTitle: 'Công cụ Bảo mật: Tạo Mật khẩu, Hash, JWT Decoder & SSL | DevTools',
+      seoDescription: 'Tiện ích bảo mật trực tuyến — tạo mật khẩu mạnh, hash MD5/SHA, giải mã JWT, kiểm tra chứng chỉ SSL. Mạnh về mật mã, chạy hoàn toàn trên client.'
     }
   }
 };
