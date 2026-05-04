@@ -44,7 +44,7 @@ export default function AllTools() {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
       "name": catName,
-      "url": `${SITE_URL}/${activeCat}-tools`,
+      "url": `${SITE_URL}/${activeCat}-tools/`,
       "description": seoDesc,
       "isPartOf": {
         "@type": "WebSite",
@@ -67,7 +67,7 @@ export default function AllTools() {
           "@type": "ListItem",
           "position": 2,
           "name": catName,
-          "item": `${SITE_URL}/${activeCat}-tools`
+          "item": `${SITE_URL}/${activeCat}-tools/`
         }
       ]
     };
@@ -93,7 +93,7 @@ export default function AllTools() {
   const ToolCard = ({ tool }: { tool: Tool }) => (
     <div
       className="tool-card"
-      onClick={() => navigate(`/${tool.category}-tools/${tool.id}`)}
+      onClick={() => navigate(`/${tool.category}-tools/${tool.id}/`)}
     >
       <div className="flex items-start gap-3">
         <span className="text-2xl shrink-0">{tool.icon}</span>
@@ -183,7 +183,7 @@ export default function AllTools() {
                 if (cat.id === 'all') {
                   setSearchParams({});
                 } else {
-                  navigate(`/${cat.id}-tools`);
+                  navigate(`/${cat.id}-tools/`);
                 }
               }}
               className={`flex items-center gap-2 px-3.5 py-2.5 sm:py-2 rounded-lg text-sm font-medium transition-colors border shadow-sm ${
@@ -207,10 +207,10 @@ export default function AllTools() {
         <Helmet>
           <title>{lang === 'vi' ? 'Tất cả Công cụ Lập trình | DevTools Online' : 'All Developer Tools | DevTools Online'}</title>
           <meta name="description" content={lang === 'vi' ? 'Khám phá toàn bộ 120+ công cụ lập trình viên trực tuyến miễn phí của chúng tôi. Mọi thứ từ JSON, SQL đến Bảo mật và Chuyển đổi.' : 'Explore our complete collection of 120+ free online developer tools. Everything from JSON and SQL to Security and Conversion tools.'} />
-          <link rel="canonical" href={`${SITE_URL}/tools`} />
+          <link rel="canonical" href={`${SITE_URL}/tools/`} />
           <meta property="og:title" content={lang === 'vi' ? 'Tất cả Công cụ Lập trình | DevTools Online' : 'All Developer Tools | DevTools Online'} />
           <meta property="og:description" content={lang === 'vi' ? 'Danh sách đầy đủ các tiện ích lập trình viên chạy trên trình duyệt.' : 'A complete list of browser-based developer utilities.'} />
-          <meta property="og:url" content={`${SITE_URL}/tools`} />
+          <meta property="og:url" content={`${SITE_URL}/tools/`} />
           <meta property="og:image" content={`${SITE_URL}/og-image.svg`} />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={lang === 'vi' ? 'Tất cả Công cụ Lập trình | DevTools Online' : 'All Developer Tools | DevTools Online'} />

@@ -156,7 +156,7 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": toolMeta.name,
-      "url": `${SITE_URL}/${toolMeta.category}-tools/${toolMeta.id}`,
+      "url": `${SITE_URL}/${toolMeta.category}-tools/${toolMeta.id}/`,
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Any",
       "softwareVersion": "1.0",
@@ -198,13 +198,13 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
           "@type": "ListItem",
           "position": 2,
           "name": categoryName,
-          "item": `${SITE_URL}/${toolMeta.category}-tools`
+          "item": `${SITE_URL}/${toolMeta.category}-tools/`
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": toolMeta.name,
-          "item": `${SITE_URL}/${toolMeta.category}-tools/${toolMeta.id}`
+          "item": `${SITE_URL}/${toolMeta.category}-tools/${toolMeta.id}/`
         }
       ]
     };
@@ -290,12 +290,12 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
         <title>{toolMeta.seoTitle || `${toolMeta.name} | DevTools Online`}</title>
         <meta name="description" content={toolMeta.seoDescription || toolMeta.description} />
         <meta name="keywords" content={toolMeta.tags.join(', ')} />
-        <link rel="canonical" href={`${SITE_URL}/${toolMeta.category}-tools/${toolMeta.id}`} />
+        <link rel="canonical" href={`${SITE_URL}/${toolMeta.category}-tools/${toolMeta.id}/`} />
 
         <meta property="og:title" content={toolMeta.seoTitle || `${toolMeta.name} | DevTools Online`} />
         <meta property="og:description" content={toolMeta.seoDescription || toolMeta.description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${SITE_URL}/${toolMeta.category}-tools/${toolMeta.id}`} />
+        <meta property="og:url" content={`${SITE_URL}/${toolMeta.category}-tools/${toolMeta.id}/`} />
         <meta property="og:image" content={`${SITE_URL}/og/${toolMeta.id}.png`} />
         <meta property="og:site_name" content="DevTools Online" />
 
@@ -321,7 +321,7 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
               <div className="flex flex-col min-w-0 flex-1">
                 <div className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-400 font-medium whitespace-nowrap">
                   <span>{categories.find(c => c.id === toolMeta.category)?.icon}</span>
-                  <span className="hover:text-primary-600 cursor-pointer" onClick={() => navigate(`/${toolMeta.category}-tools`)}>
+                  <span className="hover:text-primary-600 cursor-pointer" onClick={() => navigate(`/${toolMeta.category}-tools/`)}>
                     {categoryName}
                   </span>
                   <ChevronRight size={10} className="text-gray-500 shrink-0" />
@@ -419,7 +419,7 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
                   </h3>
                   <div className="space-y-1.5">
                     {relatedTools.map(tool => (
-                      <Link key={tool.id} to={`/${tool.category}-tools/${tool.id}`} className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                      <Link key={tool.id} to={`/${tool.category}-tools/${tool.id}/`} className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
                         <span className="text-xl">{tool.icon}</span>
                         <span className="text-sm font-medium text-gray-900 dark:text-white truncate">{tool.name}</span>
                       </Link>

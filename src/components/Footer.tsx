@@ -14,21 +14,21 @@ export default function Footer() {
     {
       title: t.footerTools,
       items: [
-        { label: 'JSON Formatter', href: '/json-tools/json-formatter' },
-        { label: 'Base64 Encode/Decode', href: '/encoding-tools/base64-encode-decode' },
-        { label: 'UUID Generator', href: '/generator-tools/uuid-generator' },
-        { label: 'Password Generator', href: '/generator-tools/password-generator' },
-        { label: 'Regex Tester', href: '/web-tools/regex-tester' },
+        { label: 'JSON Formatter', href: '/json-tools/json-formatter/' },
+        { label: 'Base64 Encode/Decode', href: '/encoding-tools/base64-encode-decode/' },
+        { label: 'UUID Generator', href: '/generator-tools/uuid-generator/' },
+        { label: 'Password Generator', href: '/generator-tools/password-generator/' },
+        { label: 'Regex Tester', href: '/web-tools/regex-tester/' },
       ],
     },
     {
       title: t.footerCategories,
       items: [
-        { label: t.categories.json, href: '/json-tools' },
-        { label: t.categories.encoding, href: '/encoding-tools' },
-        { label: t.categories.crypto, href: '/crypto-tools' },
-        { label: t.categories.color, href: '/color-tools' },
-        { label: t.categories.formatter, href: '/formatter-tools' },
+        { label: t.categories.json, href: '/json-tools/' },
+        { label: t.categories.encoding, href: '/encoding-tools/' },
+        { label: t.categories.crypto, href: '/crypto-tools/' },
+        { label: t.categories.color, href: '/color-tools/' },
+        { label: t.categories.formatter, href: '/formatter-tools/' },
       ],
     },
     {

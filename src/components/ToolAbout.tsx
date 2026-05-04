@@ -118,7 +118,7 @@ export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category
                     href={(() => {
                       if (!content.complementary) return '#';
                       const comp = tools.find(t => t.id === content.complementary?.id);
-                      return comp ? `/${comp.category}-tools/${comp.id}` : `/tool/${content.complementary?.id}`;
+                      return comp ? `/${comp.category}-tools/${comp.id}/` : `/tool/${content.complementary?.id}/`;
                     })()}
                     className="text-primary-600 dark:text-primary-400 font-semibold hover:underline"
                   >

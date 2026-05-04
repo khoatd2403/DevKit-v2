@@ -169,9 +169,9 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
   const select = useCallback((toolId: string) => {
     const tool = tools.find(t => t.id === toolId)
     if (tool) {
-      navigate(`/${tool.category}-tools/${tool.id}`)
+      navigate(`/${tool.category}-tools/${tool.id}/`)
     } else {
-      navigate(`/tool/${toolId}`)
+      navigate(`/tool/${toolId}/`)
     }
     onClose()
   }, [navigate, onClose])

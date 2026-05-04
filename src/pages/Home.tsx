@@ -60,7 +60,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
       "name": catName,
-      "url": `${SITE_URL}/${activeCategory}-tools`,
+      "url": `${SITE_URL}/${activeCategory}-tools/`,
       "description": seoDesc,
       "isPartOf": {
         "@type": "WebSite",
@@ -83,7 +83,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
           "@type": "ListItem",
           "position": 2,
           "name": catName,
-          "item": `${SITE_URL}/${activeCategory}-tools`
+          "item": `${SITE_URL}/${activeCategory}-tools/`
         }
       ]
     };
@@ -132,7 +132,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
   const newTools = tools.filter(t => t.new)
 
   const ToolCard = ({ tool }: { tool: Tool }) => (
-    <div className="tool-card" onClick={() => navigate(`/${tool.category}-tools/${tool.id}`)}>
+    <div className="tool-card" onClick={() => navigate(`/${tool.category}-tools/${tool.id}/`)}>
       <div className="flex items-start gap-3">
         <span className="text-2xl shrink-0">{tool.icon}</span>
         <div className="min-w-0 flex-1">
@@ -188,7 +188,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
           {[{ id: 'all', name: t.categories.all, icon: '🧰', color: 'gray' }, ...categories.filter(c => c.id !== 'all')].map(cat => (
             <button
               key={cat.id}
-              onClick={() => navigate(cat.id === 'all' ? '/' : `/${cat.id}-tools`)}
+              onClick={() => navigate(cat.id === 'all' ? '/' : `/${cat.id}-tools/`)}
               className={`flex items-center gap-1.5 px-3.5 py-2.5 sm:py-2 rounded-lg text-sm font-medium transition-colors border shadow-sm ${activeCategory === cat.id
                 ? 'bg-primary-600 text-white border-primary-600'
                 : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:border-primary-400 dark:hover:border-primary-600'
@@ -247,10 +247,10 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                       <Helmet>
                         <title>{seoTitle}</title>
                         <meta name="description" content={seoDesc} />
-                        <link rel="canonical" href={`${SITE_URL}/${activeCategory}-tools`} />
+                        <link rel="canonical" href={`${SITE_URL}/${activeCategory}-tools/`} />
                         <meta property="og:title" content={seoTitle} />
                         <meta property="og:description" content={seoDesc} />
-                        <meta property="og:url" content={`${SITE_URL}/${activeCategory}-tools`} />
+                        <meta property="og:url" content={`${SITE_URL}/${activeCategory}-tools/`} />
                         <meta property="og:image" content={catContent?.seoImage || `${SITE_URL}/og/categories/${activeCategory}.png` || (firstTool ? `${SITE_URL}/og/${firstTool.id}.png` : `${SITE_URL}/og-image.svg`)} />
                         <meta name="twitter:title" content={seoTitle} />
                         <meta name="twitter:description" content={seoDesc} />
@@ -325,7 +325,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
                 <span className="text-xs text-gray-500">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}</span>
               </div>
               <div
-                onClick={() => navigate(`/${todayTool.category}-tools/${todayTool.id}`)}
+                onClick={() => navigate(`/${todayTool.category}-tools/${todayTool.id}/`)}
                 className="cursor-pointer bg-gradient-to-br from-primary-50 to-purple-50 dark:from-primary-950/40 dark:to-purple-950/40 border border-primary-200 dark:border-primary-800 rounded-lg sm:rounded-xl p-4 sm:p-5 flex items-center gap-4 hover:shadow-md transition-shadow"
               >
                 <span className="text-4xl">{todayTool.icon}</span>
@@ -413,7 +413,7 @@ export default function Home({ searchQuery: _searchQuery }: HomeProps) {
             {/* ── Browse All ── */}
             <div className="mb-8 text-center">
               <button
-                onClick={() => navigate('/tools')}
+                onClick={() => navigate('/tools/')}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-primary-400 dark:hover:border-primary-600 transition-colors"
               >
                 {t.browseAll(tools.length)}

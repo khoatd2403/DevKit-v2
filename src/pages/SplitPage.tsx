@@ -103,7 +103,7 @@ export default function SplitPage() {
           onToolChange={updateA}
           onClose={() => {
             const tool = tools.find(t => t.id === toolA);
-            navigate(tool ? `/${tool.category}-tools/${toolA}` : `/tool/${toolA}`);
+            navigate(tool ? `/${tool.category}-tools/${toolA}/` : `/tool/${toolA}/`);
           }}
         />
         <ToolPanel
@@ -111,7 +111,7 @@ export default function SplitPage() {
           onToolChange={updateB}
           onClose={() => {
             const tool = tools.find(t => t.id === toolB);
-            navigate(tool ? `/${tool.category}-tools/${toolB}` : `/tool/${toolB}`);
+            navigate(tool ? `/${tool.category}-tools/${toolB}/` : `/tool/${toolB}/`);
           }}
         />
       </div>

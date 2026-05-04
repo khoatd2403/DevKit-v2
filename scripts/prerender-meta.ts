@@ -15,7 +15,7 @@ const baseHtml = readFileSync(join(distDir, 'index.html'), 'utf-8')
 for (const tool of tools) {
   const pageTitle = tool.seoTitle || `${tool.name} | DevTools Online`
   const pageDesc = tool.seoDescription || tool.description
-  const pageUrl = `${BASE_URL}/${tool.category}-tools/${tool.id}`
+  const pageUrl = `${BASE_URL}/${tool.category}-tools/${tool.id}/`
   const ogImage = `${BASE_URL}/og/${tool.id}.png`
   const cat = categories.find(c => c.id === tool.category)
   const catName = cat?.name || tool.category
@@ -53,7 +53,7 @@ for (const tool of tools) {
         '@type': 'ListItem',
         'position': 2,
         'name': catName,
-        'item': `${BASE_URL}/${tool.category}-tools`
+        'item': `${BASE_URL}/${tool.category}-tools/`
       },
       {
         '@type': 'ListItem',
@@ -105,7 +105,7 @@ for (const cat of categories) {
     const catContent = categoryAboutTranslations['en']?.[cat.id];
     const pageTitle = catContent?.seoTitle || `${catName} Tools | DevTools Online`;
     const pageDesc = catContent?.seoDescription || `Complete collection of powerful and secure ${catName} tools. 100% private client-side processing.`;
-    const pageUrl = `${BASE_URL}/${cat.id}-tools`;
+    const pageUrl = `${BASE_URL}/${cat.id}-tools/`;
     
     // Pick first tool for the image
     const firstToolInCat = tools.find(t => t.category === cat.id);
