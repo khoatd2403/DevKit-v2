@@ -4,11 +4,16 @@
   status = 301
   force = true
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# SPA fallback handled by public/_redirects.
+# Edge function og-meta removed: prerendered HTML now provides per-tool meta
+# tags directly, so the runtime injection is redundant and adds cold-start.
 
-[[edge_functions]]
-  path = "/tool/*"
-  function = "og-meta"
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Netlify-CDN-Cache-Control = "public, max-age=3600, must-revalidate"
