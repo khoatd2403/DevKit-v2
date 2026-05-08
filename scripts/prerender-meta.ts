@@ -171,4 +171,70 @@ for (const cat of categories) {
     process.stdout.write('+')
 }
 
+// 3. Prerender Legal / About / Contact pages
+console.log('\nPre-rendering legal pages...')
+const legalPages = [
+  {
+    slug: 'privacy',
+    title: 'Privacy Policy | DevTools Online',
+    description: 'DevTools Online privacy policy. Learn what data we collect, how we use cookies, and your rights as a user.',
+  },
+  {
+    slug: 'terms',
+    title: 'Terms of Service | DevTools Online',
+    description: 'Terms and conditions for using DevTools Online — a free collection of browser-based developer tools.',
+  },
+  {
+    slug: 'about',
+    title: 'About DevTools Online',
+    description: 'DevTools Online is a free, privacy-first collection of 120+ developer utilities. Every tool runs entirely in your browser — no sign-up, no tracking, no data sent to a server.',
+  },
+  {
+    slug: 'contact',
+    title: 'Contact Us | DevTools Online',
+    description: 'Get in touch with the DevTools Online team — report a bug, request a feature, or ask a question.',
+  },
+]
+
+for (const page of legalPages) {
+  const pageUrl = `${BASE_URL}/${page.slug}/`
+  const ogImage = `${BASE_URL}/og-image.svg`
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': `${BASE_URL}/` },
+      { '@type': 'ListItem', 'position': 2, 'name': page.title.split(' | ')[0], 'item': pageUrl },
+    ],
+  }
+
+  const metaTags = `
+    <title>${page.title}</title>
+    <meta name="description" content="${page.description}" />
+    <link rel="canonical" href="${pageUrl}" />
+    <meta data-rh="true" property="og:title" content="${page.title}" />
+    <meta data-rh="true" property="og:description" content="${page.description}" />
+    <meta data-rh="true" property="og:url" content="${pageUrl}" />
+    <meta data-rh="true" property="og:image" content="${ogImage}" />
+    <meta data-rh="true" property="og:type" content="website" />
+    <meta data-rh="true" name="twitter:card" content="summary" />
+    <meta data-rh="true" name="twitter:title" content="${page.title}" />
+    <meta data-rh="true" name="twitter:description" content="${page.description}" />
+    <script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>`
+
+  const html = baseHtml
+    .replace(/<title[^>]*>[^<]*<\/title>/, '')
+    .replace(/<meta[^>]*name="description"[^>]*>/g, '')
+    .replace(/<link[^>]*rel="canonical"[^>]*>/g, '')
+    .replace(/<meta[^>]*property="og:[^>]*>/g, '')
+    .replace(/<meta[^>]*name="twitter:[^>]*>/g, '')
+    .replace('<head>', `<head>${metaTags}`)
+
+  const outDir = join(distDir, page.slug)
+  mkdirSync(outDir, { recursive: true })
+  writeFileSync(join(outDir, 'index.html'), html)
+  process.stdout.write('=')
+}
+
 console.log(`\nPre-rendered all pages successfully.`)

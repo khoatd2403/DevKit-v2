@@ -28,6 +28,10 @@ const ToastContainer = lazy(() => import('./components/ToastContainer'))
 const CookieBanner = lazy(() => import('./components/CookieBanner'))
 const AllTools = lazy(() => import('./pages/AllTools'))
 const SplitPage = lazy(() => import('./pages/SplitPage'))
+const Privacy = lazy(() => import('./pages/Privacy'))
+const Terms = lazy(() => import('./pages/Terms'))
+const About = lazy(() => import('./pages/About'))
+const Contact = lazy(() => import('./pages/Contact'))
 
 function getSystemDark() {
   return globalThis.matchMedia('(prefers-color-scheme: dark)').matches
@@ -220,6 +224,14 @@ function AppInner() {
                     <Route path="/:slug" element={<Home searchQuery={searchQuery} />} />
                     <Route path="/split" element={<SplitPage />} />
                     <Route path="/tools" element={<AllTools />} />
+                    <Route path="/privacy" element={<Privacy />} />
+                    <Route path="/privacy/" element={<Privacy />} />
+                    <Route path="/terms" element={<Terms />} />
+                    <Route path="/terms/" element={<Terms />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/about/" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/contact/" element={<Contact />} />
                   </Routes>
                 </Suspense>
               </main>
