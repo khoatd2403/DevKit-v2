@@ -6,6 +6,10 @@ const today = new Date().toISOString().split('T')[0]
 const urls = [
   { loc: `${BASE_URL}/`, priority: '1.0', changefreq: 'weekly' },
   { loc: `${BASE_URL}/tools/`, priority: '0.8', changefreq: 'weekly' },
+  { loc: `${BASE_URL}/about/`, priority: '0.5', changefreq: 'monthly' },
+  { loc: `${BASE_URL}/contact/`, priority: '0.4', changefreq: 'yearly' },
+  { loc: `${BASE_URL}/privacy/`, priority: '0.3', changefreq: 'yearly' },
+  { loc: `${BASE_URL}/terms/`, priority: '0.3', changefreq: 'yearly' },
   // Category landing pages
   ...categories.filter(c => c.id !== 'all').map(c => ({
     loc: `${BASE_URL}/${c.id}-tools/`,

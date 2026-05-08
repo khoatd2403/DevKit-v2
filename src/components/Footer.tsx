@@ -159,8 +159,19 @@ export default function Footer() {
         </a>
 
         {/* Bottom bar */}
-        <div className="pt-6 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400 dark:text-gray-600">
-          <p>{t.footerCopyright(year)}</p>
+        <div className="pt-6 border-t border-gray-100 dark:border-gray-800 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between text-xs text-gray-400 dark:text-gray-600">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            <p>{t.footerCopyright(year)}</p>
+            <nav aria-label="Legal" className="flex items-center gap-3">
+              <a href="/privacy/" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Privacy</a>
+              <span aria-hidden="true">·</span>
+              <a href="/terms/" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Terms</a>
+              <span aria-hidden="true">·</span>
+              <a href="/about/" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">About</a>
+              <span aria-hidden="true">·</span>
+              <a href="/contact/" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Contact</a>
+            </nav>
+          </div>
           <div className="flex items-center gap-3">
             <p className="flex items-center gap-1">
               {t.footerBuiltWith.split('{heart}')[0]} <Heart size={11} className="text-red-400 fill-red-400" /> {t.footerBuiltWith.split('{heart}')[1]}
