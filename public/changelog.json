@@ -1,5 +1,14 @@
 [
   {
+    "date": "May 2026",
+    "changes": [
+      {
+        "type": "improvement",
+        "text": "defer AdSense script + remove duplicate theme-color meta"
+      }
+    ]
+  },
+  {
     "date": "March 2026",
     "changes": [
       {

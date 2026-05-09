@@ -36,7 +36,6 @@
   <meta data-rh="true" name="twitter:image" content="https://devtoolsonline.dev/og-image.svg" />
 
   <!-- Additional SEO signals -->
-  <meta name="theme-color" content="#3b82f6" />
   <meta name="application-name" content="DevTools Online" />
   <meta name="generator" content="Vite + React" />
   <!-- Google tag (gtag.js) -->
@@ -49,10 +48,26 @@
     gtag('config', 'G-82R6DB13QB');
   </script>
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8382573400952687"
-    crossorigin="anonymous"></script>
+  <!-- Google AdSense — verification meta loads immediately so reviewer/crawler sees it,
+       script defers to after window.load so it doesn't block LCP/INP on first paint. -->
   <meta name="google-adsense-account" content="ca-pub-8382573400952687" />
+  <script>
+    (function () {
+      function loadAdsense() {
+        var s = document.createElement('script');
+        s.async = true;
+        s.crossOrigin = 'anonymous';
+        s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8382573400952687';
+        document.head.appendChild(s);
+      }
+      if (document.readyState === 'complete') {
+        // page already loaded — defer slightly to free main thread
+        setTimeout(loadAdsense, 800);
+      } else {
+        window.addEventListener('load', function () { setTimeout(loadAdsense, 800); }, { once: true });
+      }
+    })();
+  </script>
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
     {
