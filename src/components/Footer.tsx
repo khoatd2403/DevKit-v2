@@ -34,6 +34,7 @@ export default function Footer() {
     {
       title: t.footerProject,
       items: [
+        { label: 'Blog', href: '/blog/' },
         { label: 'GitHub', href: REPO, external: true },
         { label: t.footerReportBug, href: BUG_URL, external: true },
         { label: t.footerFeatureRequest, href: FEATURE_URL, external: true },

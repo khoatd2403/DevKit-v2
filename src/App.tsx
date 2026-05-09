@@ -32,6 +32,9 @@ const Privacy = lazy(() => import('./pages/Privacy'))
 const Terms = lazy(() => import('./pages/Terms'))
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
+const BlogIndex = lazy(() => import('./pages/BlogIndex'))
+const BlogPost = lazy(() => import('./pages/BlogPost'))
+const BlogTag = lazy(() => import('./pages/BlogTag'))
 
 function getSystemDark() {
   return globalThis.matchMedia('(prefers-color-scheme: dark)').matches
@@ -232,6 +235,12 @@ function AppInner() {
                     <Route path="/about/" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/contact/" element={<Contact />} />
+                    <Route path="/blog" element={<BlogIndex />} />
+                    <Route path="/blog/" element={<BlogIndex />} />
+                    <Route path="/blog/tag/:tag" element={<BlogTag />} />
+                    <Route path="/blog/tag/:tag/" element={<BlogTag />} />
+                    <Route path="/blog/:slug" element={<BlogPost />} />
+                    <Route path="/blog/:slug/" element={<BlogPost />} />
                   </Routes>
                 </Suspense>
               </main>
