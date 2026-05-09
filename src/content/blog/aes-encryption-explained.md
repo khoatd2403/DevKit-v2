@@ -15,12 +15,12 @@ tags:
   - Crypto
   - Tutorial
 cover: "/og-image.svg"
-excerpt: "AES is the symmetric encryption standard. AES-256-GCM is what you should reach for. The math is hard, the usage is short — half a dozen rules and you'll avoid the classic mistakes."
+excerpt: "AES is the symmetric encryption standard. AES-256-GCM is what you should reach for. The math is hard, the usage is short, half a dozen rules and you'll avoid the classic mistakes."
 ---
 
 You need to encrypt some data. You read four blog posts. They mention AES, RSA, ChaCha20, ECDH, GCM, CBC, IV, nonce, salt, KDF, and HMAC. You close the tabs and go ask Slack.
 
-The good news: in 2026, the answer for most "encrypt this small thing" problems is one specific combination — **AES-256-GCM** — and the rules for using it correctly fit on one page.
+The good news: in 2026, the answer for most "encrypt this small thing" problems is one specific combination — **AES-256-GCM**: and the rules for using it correctly fit on one page.
 
 ## What AES is
 
@@ -69,7 +69,7 @@ function decrypt(blob, key) {
 
 That's it. Four imports, two functions. Pass it a 32-byte key and a string. Get back a `Buffer`. Reverse the process to decrypt.
 
-You can also paste a string into [AES Encrypt / Decrypt](/crypto-tools/aes-encrypt/) for one-off encryption — it does AES-256-GCM in your browser.
+You can also paste a string into [AES Encrypt / Decrypt](/crypto-tools/aes-encrypt/) for one-off encryption, it does AES-256-GCM in your browser.
 
 ## The five rules
 
@@ -99,7 +99,7 @@ const key = crypto.pbkdf2Sync(password, salt, 600000, 32, 'sha256')
 
 ### 2. Never reuse an IV with the same key
 
-This is the rule everyone breaks. The IV (initialization vector) doesn't need to be secret, but it must be **unique per encryption** under the same key. For AES-GCM, IV reuse is catastrophic — it leaks the plaintext.
+This is the rule everyone breaks. The IV (initialization vector) doesn't need to be secret, but it must be **unique per encryption** under the same key. For AES-GCM, IV reuse is catastrophic, it leaks the plaintext.
 
 ```js
 // ❌ WRONG: hardcoded IV
@@ -113,7 +113,7 @@ const iv = Buffer.from(String(counter++).padStart(12, '0'))
 const iv = crypto.randomBytes(12)
 ```
 
-GCM specifies 12-byte (96-bit) IVs. With random IVs, the chance of collision is ~2^-32 after 2^32 messages — fine for most apps, but if you encrypt billions of messages, switch to a counter-based deterministic IV with explicit storage.
+GCM specifies 12-byte (96-bit) IVs. With random IVs, the chance of collision is ~2^-32 after 2^32 messages, fine for most apps, but if you encrypt billions of messages, switch to a counter-based deterministic IV with explicit storage.
 
 ### 3. Always check the auth tag
 
@@ -133,7 +133,7 @@ If you skip the tag check or set it incorrectly, GCM degrades to a non-authentic
 
 ### 4. Don't roll your own framing
 
-The encrypted output needs to package: the IV, the tag, and the ciphertext. The example above concatenates them in a fixed order. That works, but be **strict** — define the format once and never change it without versioning.
+The encrypted output needs to package: the IV, the tag, and the ciphertext. The example above concatenates them in a fixed order. That works, but be **strict**: define the format once and never change it without versioning.
 
 A defensive pattern:
 
@@ -145,7 +145,7 @@ If you ever need to change the algorithm or rotate keys, the version byte tells 
 
 ### 5. Don't reach for asymmetric crypto unless you need it
 
-RSA, ECDSA, ECDH — these are slow (1000x slower than AES) and have their own footguns. Use them only for key exchange or signatures. For "encrypt some data with a key both ends know," AES-GCM is faster, simpler, and safer.
+RSA, ECDSA, ECDH, these are slow (1000x slower than AES) and have their own footguns. Use them only for key exchange or signatures. For "encrypt some data with a key both ends know," AES-GCM is faster, simpler, and safer.
 
 The hybrid pattern is standard:
 
@@ -158,7 +158,7 @@ This is how TLS, age, and most modern systems work.
 
 Almost never, in new code. CBC has issues:
 
-- **No authentication built in** — pair with HMAC, or you're vulnerable to padding oracle attacks
+- **No authentication built in**: pair with HMAC, or you're vulnerable to padding oracle attacks
 - **Padding** required, opens attack surfaces
 - **Slower than CTR/GCM** on modern hardware
 
@@ -197,7 +197,7 @@ If the encryption key sits in the same database as the encrypted data, anyone wi
 
 ### Forgetting to authenticate associated data
 
-GCM has an "AAD" (additional authenticated data) field — extra data covered by the tag but not encrypted. Use it for context that should be tied to the ciphertext:
+GCM has an "AAD" (additional authenticated data) field, extra data covered by the tag but not encrypted. Use it for context that should be tied to the ciphertext:
 
 ```js
 cipher.setAAD(Buffer.from('user_id=42'))
@@ -231,7 +231,7 @@ The cleanest mental model: **AES-256-GCM, random IV, store IV + tag with the cip
 
 **Related tools on DevTools Online:**
 
-- [AES Encrypt / Decrypt](/crypto-tools/aes-encrypt/) — AES-256-GCM in your browser
-- [Hash Generator](/security-tools/hash-generator/) — for HMAC and integrity checks
-- [Password Generator](/security-tools/password-generator/) — for generating high-entropy keys
-- [Base64 Encode / Decode](/encoding-tools/base64-encode-decode/) — for serializing ciphertext
+- [AES Encrypt / Decrypt](/crypto-tools/aes-encrypt/). AES-256-GCM in your browser
+- [Hash Generator](/security-tools/hash-generator/), for HMAC and integrity checks
+- [Password Generator](/security-tools/password-generator/), for generating high-entropy keys
+- [Base64 Encode / Decode](/encoding-tools/base64-encode-decode/), for serializing ciphertext

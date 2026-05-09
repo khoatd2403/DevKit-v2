@@ -25,8 +25,13 @@ export default function CookieBanner() {
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">We use cookies</p>
           <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-            We use essential cookies to save your preferences (theme, favorites, recent tools).
-            No tracking or analytics cookies are used.
+            We use essential cookies for your preferences (theme, favorites) and analytics
+            cookies (Google Analytics) plus advertising cookies (Google AdSense) to keep the
+            site free. Tool input never leaves your browser.{' '}
+            <a href="/privacy/" className="text-primary-600 dark:text-primary-400 hover:underline">
+              Learn more
+            </a>
+            .
           </p>
           <div className="flex items-center gap-2 mt-3">
             <button

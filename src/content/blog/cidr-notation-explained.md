@@ -17,9 +17,26 @@ cover: "/og-image.svg"
 excerpt: "CIDR is just IP address ranges in shorthand. /24 means 256 addresses, /16 means 65,536, and the math for everything in between is the same boring power of two."
 ---
 
-You're configuring a security group. The wizard asks for a "CIDR block." You type `0.0.0.0/0` because you remember that's "everything." You should be more specific — but with what? `192.168.1.0/24`? `/25`? `/26`? Why are these the only valid numbers?
+CIDR prefix → number of addresses, in one table:
 
-This is the post that makes CIDR boring (in a good way).
+| Prefix | Addresses | Usable hosts | Common use |
+|---|---|---|---|
+| `/32` | 1 | 1 | Single host |
+| `/30` | 4 | 2 | Point-to-point link |
+| `/29` | 8 | 6 | Tiny subnet |
+| `/28` | 16 | 14 | Small subnet |
+| `/27` | 32 | 30 | Small office |
+| `/26` | 64 | 62 | App subnet |
+| `/24` | 256 | 254 | Standard subnet |
+| `/22` | 1,024 | 1,022 | Larger subnet |
+| `/20` | 4,096 | 4,094 | VPC subnet (cloud) |
+| `/16` | 65,536 | 65,534 | Whole VPC |
+| `/8` | 16,777,216 | many | Big block |
+| `/0` | all of IPv4 | all | "everything" (default route) |
+
+The math behind the table is just powers of two: prefix `/N` covers 2^(32-N) addresses. The first and last of any block are reserved (network + broadcast), which is why "usable" is total minus 2.
+
+The rest of this post is the rules around that math, the cloud-specific gotchas, and why some CIDR notations look valid but aren't.
 
 ## CIDR in one sentence
 
@@ -65,13 +82,13 @@ For most subnets, the first address is the **network address** (e.g., `192.168.1
 
 So `/24` has 256 total addresses but **254 usable**. `/30` has 4 total, 2 usable. `/31` and `/32` are special exceptions used for point-to-point links.
 
-This matters in cloud setups: AWS reserves additional addresses (network, gateway, DNS, future, broadcast) — typically the first 4 and last 1 of any subnet. So an AWS `/24` has 251 usable addresses.
+This matters in cloud setups: AWS reserves additional addresses (network, gateway, DNS, future, broadcast), typically the first 4 and last 1 of any subnet. So an AWS `/24` has 251 usable addresses.
 
 [CIDR Calculator](/web-tools/cidr-calculator/) shows the breakdown for any prefix.
 
 ### Rule 3: address must align with the prefix
 
-`192.168.1.5/24` is **not** a valid CIDR network — it's an IP within the `/24` network `192.168.1.0/24`. The address part of a CIDR block must have all host bits zeroed.
+`192.168.1.5/24` is **not** a valid CIDR network, it's an IP within the `/24` network `192.168.1.0/24`. The address part of a CIDR block must have all host bits zeroed.
 
 | Valid | Why |
 |---|---|
@@ -81,11 +98,11 @@ This matters in cloud setups: AWS reserves additional addresses (network, gatewa
 | `192.168.1.5/24` | last 8 bits ≠ 0 ❌ |
 | `10.0.0.0/7` | last 25 bits not all zero (10 = 00001010, bit 25 is 1) ❌ |
 
-Tools like firewalls usually mask off invalid bits silently — they treat `192.168.1.5/24` as `192.168.1.0/24`. Don't rely on that. Write valid CIDR.
+Tools like firewalls usually mask off invalid bits silently, they treat `192.168.1.5/24` as `192.168.1.0/24`. Don't rely on that. Write valid CIDR.
 
 ## Why prefixes go in increments
 
-Prefixes are bit-aligned. You can have a `/24` (256 addresses) or a `/25` (128) but not "150 addresses" — there's no prefix length that gives you 150.
+Prefixes are bit-aligned. You can have a `/24` (256 addresses) or a `/25` (128) but not "150 addresses", there's no prefix length that gives you 150.
 
 The granularity halves with each step:
 
@@ -97,7 +114,7 @@ The granularity halves with each step:
 /28 = 16
 ```
 
-To allocate "around 150 addresses," round up to the next valid size: `/24` (256). Or split the need across multiple subnets — but that's usually more pain than it's worth.
+To allocate "around 150 addresses," round up to the next valid size: `/24` (256). Or split the need across multiple subnets, but that's usually more pain than it's worth.
 
 ## Splitting a network into smaller subnets
 
@@ -173,7 +190,7 @@ Modern tooling uses CIDR. Older tools (ifconfig output, certain Cisco configs) u
 allow inbound from 1.2.3.4/32
 ```
 
-This is correct! `/32` means "exactly this address." Don't write just `1.2.3.4` — most validators want the prefix.
+This is correct! `/32` means "exactly this address." Don't write just `1.2.3.4`, most validators want the prefix.
 
 ### Confusing /24 with class C
 
@@ -215,7 +232,7 @@ CIDR is one of those topics where the boring foundation pays off forever. Twenty
 
 **Related tools on DevTools Online:**
 
-- [CIDR / IP Calculator](/web-tools/cidr-calculator/) — paste a CIDR, see range, mask, host count
-- [DNS Lookup](/web-tools/dns-lookup/) — for verifying which IP a hostname resolves to
-- [IP Geolocation](/web-tools/ip-lookup/) — see where an IP is located
-- [HTTP Request Builder](/web-tools/http-request-builder/) — test connectivity to specific IPs
+- [CIDR / IP Calculator](/web-tools/cidr-calculator/), paste a CIDR, see range, mask, host count
+- [DNS Lookup](/web-tools/dns-lookup/), for verifying which IP a hostname resolves to
+- [IP Geolocation](/web-tools/ip-lookup/), see where an IP is located
+- [HTTP Request Builder](/web-tools/http-request-builder/), test connectivity to specific IPs

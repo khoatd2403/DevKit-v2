@@ -18,15 +18,15 @@ cover: "/og-image.svg"
 excerpt: "Prettier and ESLint do different jobs. Half the JavaScript ecosystem treats them as alternatives. The other half configures both badly and they fight. Here's how to wire them up so they don't."
 ---
 
-A new project. You install Prettier. You install ESLint. You run them. Prettier reformats your code one way, ESLint complains about the new formatting. You fix the ESLint warnings. Prettier reformats again. Welcome to the second-most-common JavaScript tooling fight (after "should we use TypeScript").
+"Prettier vs ESLint" is the framing the JavaScript ecosystem has run with for nearly a decade. It's also incoherent. Asking "Prettier or ESLint" is like asking "ruler or pencil" — they're not alternatives, they're tools for different jobs, and any tutorial that tells you to choose between them is starting from a confused premise.
 
-The good news: Prettier and ESLint do **different things**, and once you set them up correctly, they don't fight. The bad news: half of all tutorials describe how to make them fight better.
+What's actually true: ESLint catches **bugs**. Prettier catches **inconsistency**. The thing that looks like overlap — both handle the `indent` rule — is the source of the conflict, and the fix is to disable one side's overlap, not pick a winner. Below is the actual setup that stops the fight, plus why I think the entire stylistic-rules layer of ESLint should be deprecated.
 
 ## What each one actually does
 
 ### Prettier: a formatter
 
-Prettier reads your code, throws away your formatting, and re-prints the AST with its own opinionated rules. Tabs vs spaces, line width, trailing commas — Prettier decides. You get a small handful of options:
+Prettier reads your code, throws away your formatting, and re-prints the AST with its own opinionated rules. Tabs vs spaces, line width, trailing commas. Prettier decides. You get a small handful of options:
 
 ```json
 {
@@ -44,11 +44,11 @@ That's mostly it. The point is consistency, not flexibility. Prettier's pitch: b
 
 ESLint reads your code and flags potential **bugs** and **anti-patterns**:
 
-- `no-unused-vars` — you imported it, never used it
-- `no-undef` — referencing a variable that doesn't exist
-- `react/exhaustive-deps` — `useEffect` dependency array is incomplete
-- `@typescript-eslint/no-explicit-any` — using `any`
-- `eqeqeq` — using `==` instead of `===`
+- `no-unused-vars`, you imported it, never used it
+- `no-undef`, referencing a variable that doesn't exist
+- `react/exhaustive-deps`, `useEffect` dependency array is incomplete
+- `@typescript-eslint/no-explicit-any`, using `any`
+- `eqeqeq`, using `==` instead of `===`
 
 These are **semantic** rules. They have nothing to do with how your code looks; they're about what your code does or doesn't do.
 
@@ -72,7 +72,7 @@ And Prettier has:
 
 You write code. Prettier formats with 2-space indent. ESLint flags the result as "expected 4 spaces." You're stuck.
 
-The official fix is **`eslint-config-prettier`** — a config that disables all of ESLint's stylistic rules:
+The official fix is **`eslint-config-prettier`**: a config that disables all of ESLint's stylistic rules:
 
 ```js
 // eslint.config.js (flat config, modern)
@@ -80,7 +80,7 @@ import prettierConfig from 'eslint-config-prettier'
 
 export default [
   // your usual ESLint configs
-  prettierConfig  // last — turns off conflicting rules
+  prettierConfig  // last, turns off conflicting rules
 ]
 ```
 
@@ -160,9 +160,9 @@ The downside: configuration is longer. Prettier is "no opinions allowed"; stylis
 
 If you use Biome, Deno, or Bun, they have built-in formatters and linters in one tool. Single binary, no config wars. Worth considering for new projects:
 
-- **Biome** — formatter + linter, drop-in replacement for both
-- **Deno fmt + Deno lint** — built into Deno
-- **Bun's bunfig.toml fmt** — Bun's formatter
+- **Biome**: formatter + linter, drop-in replacement for both
+- **Deno fmt + Deno lint**: built into Deno
+- **Bun's bunfig.toml fmt**: Bun's formatter
 
 These are the future of "one tool" JS tooling. In 2026, Biome is mature; some teams have migrated and never looked back.
 
@@ -174,11 +174,11 @@ Some senior devs hate Prettier's choices and want them tweaked. Prettier resists
 
 Prettier handles more than JavaScript:
 
-- **JSON** — formatting, no semantic checking
-- **CSS / SCSS / Less** — yes
-- **HTML / Markdown** — yes
-- **YAML** — yes (good for config consistency)
-- **GraphQL** — yes, when you install a plugin
+- **JSON**: formatting, no semantic checking
+- **CSS / SCSS / Less**: yes
+- **HTML / Markdown**: yes
+- **YAML**: yes (good for config consistency)
+- **GraphQL**: yes, when you install a plugin
 
 For these formats:
 
@@ -194,7 +194,7 @@ Predictable result: stylistic rules fire on Prettier's output. Always include `e
 
 ### Using Prettier and `eslint-plugin-prettier` together
 
-`eslint-plugin-prettier` runs Prettier inside ESLint. Useful if you want a single command, but it's slow and noisy. The recommended approach since 2023 is to run Prettier and ESLint **separately** — they're parallelizable, and the `--fix` flag on each handles auto-fixing without the cross-tool overhead.
+`eslint-plugin-prettier` runs Prettier inside ESLint. Useful if you want a single command, but it's slow and noisy. The recommended approach since 2023 is to run Prettier and ESLint **separately**: they're parallelizable, and the `--fix` flag on each handles auto-fixing without the cross-tool overhead.
 
 ### Different Prettier configs in different files of the project
 
@@ -212,7 +212,7 @@ WebStorm: built-in support for both, just enable in Preferences → Tools → Ac
 
 ## What about formatting other languages?
 
-The same model — a formatter and a linter, separately — applies to most languages:
+The same model, a formatter and a linter, separately, applies to most languages:
 
 | Language | Formatter | Linter |
 |---|---|---|
@@ -231,7 +231,7 @@ The pattern is the same: formatter handles "looks consistent," linter handles "c
 2. **Editor**: enable format-on-save and lint-on-save. Don't manually run `npm run format` 100 times a day.
 3. **Disagreements about formatting**: stop. Pick Prettier and move on. The 5 minutes you'd spend tuning indent rules are 5 minutes you don't get back.
 4. **For other languages**: install the language's standard formatter + linter pair. Don't roll custom formatting.
-5. **For online formatting**: paste into the right tool — [JSON Formatter](/json-tools/json-formatter/), [SQL Formatter](/formatter-tools/sql-formatter/), [HTML Minifier](/formatter-tools/html-minifier/).
+5. **For online formatting**: paste into the right tool, [JSON Formatter](/json-tools/json-formatter/), [SQL Formatter](/formatter-tools/sql-formatter/), [HTML Minifier](/formatter-tools/html-minifier/).
 
 The summary: formatter and linter are different jobs. Use both. Configure them so they don't overlap. The result: zero formatting arguments, fewer bugs, and the time you used to spend in CR comments is now available for actual work.
 
@@ -239,7 +239,7 @@ The summary: formatter and linter are different jobs. Use both. Configure them s
 
 **Related tools on DevTools Online:**
 
-- [JSON Formatter](/json-tools/json-formatter/) — for ad-hoc JSON
-- [SQL Formatter](/formatter-tools/sql-formatter/) — beautify SQL queries
-- [CSS Minifier](/formatter-tools/css-minifier/) — production CSS
-- [HTML Minifier](/formatter-tools/html-minifier/) — strip whitespace from HTML
+- [JSON Formatter](/json-tools/json-formatter/), for ad-hoc JSON
+- [SQL Formatter](/formatter-tools/sql-formatter/), beautify SQL queries
+- [CSS Minifier](/formatter-tools/css-minifier/), production CSS
+- [HTML Minifier](/formatter-tools/html-minifier/), strip whitespace from HTML

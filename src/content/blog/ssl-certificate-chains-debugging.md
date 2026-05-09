@@ -1,7 +1,7 @@
 ---
 title: "SSL/TLS Certificate Chains: Why Your Cert Works in Chrome but Fails in curl"
 slug: "ssl-certificate-chains-debugging"
-description: "The most common TLS bug isn't an expired cert — it's an incomplete certificate chain. How chains work, why browsers paper over the issue, and how to debug it in 60 seconds."
+description: "The most common TLS bug isn't an expired cert, it's an incomplete certificate chain. How chains work, why browsers paper over the issue, and how to debug it in 60 seconds."
 date: "2026-05-09"
 author: "DevTools Online Team"
 keywords:
@@ -18,7 +18,9 @@ cover: "/og-image.svg"
 excerpt: "Browsers fix incomplete certificate chains for you. curl, Java, Python, and most server-to-server tools don't. Half the 'TLS works in browser but fails everywhere else' bugs trace back to a missing intermediate cert."
 ---
 
-You set up TLS for `api.example.com`. It loads in Chrome with the green padlock. Your iOS app connects fine. Then a customer reports: "Your API returns SSL errors when called from our Java service." Their `curl` shows:
+First time I saw "unable to get local issuer certificate" was a Tuesday morning. We had renewed the cert the night before. Production looked fine in every browser. Then enterprise customers started filing tickets that their batch jobs couldn't reach our API. We spent half the day digging through nginx config, suspecting CipherSuites, before someone ran `openssl s_client -showcerts` and saw only the leaf cert. The intermediate had been left out of `nginx.conf`. We swapped `cert.pem` for `fullchain.pem`, reloaded, and ten thousand customer cron jobs unstuck themselves.
+
+Browsers had hidden the bug because Chrome and Safari fetch missing intermediates automatically. `curl` doesn't. Java doesn't. Go doesn't. Most server-to-server clients don't. So you ship "TLS works in browser, fails everywhere else" without realizing the leaf-only cert was the cause. This is the debugging walk-through I wish someone had given me that morning.
 
 ```
 curl: (60) SSL certificate problem: unable to get local issuer certificate
@@ -75,7 +77,7 @@ A simpler check, in a browser:
 3. Certificate → Details
 4. The chain should show 2-3 levels: leaf, intermediate, root
 
-[SSL Certificate Checker](/web-tools/ssl-checker/) on DevTools Online queries Certificate Transparency logs — useful to see what cert is currently issued for a domain, including its issuer chain.
+[SSL Certificate Checker](/web-tools/ssl-checker/) on DevTools Online queries Certificate Transparency logs, useful to see what cert is currently issued for a domain, including its issuer chain.
 
 ## What "the full chain" means
 
@@ -83,7 +85,7 @@ Most CAs give you, at issuance:
 
 - **Your certificate** (leaf)
 - **The intermediate certificate(s)**
-- **The root** (sometimes — but you don't need this; clients have it)
+- **The root** (sometimes, but you don't need this; clients have it)
 
 For Let's Encrypt:
 
@@ -95,7 +97,7 @@ For Let's Encrypt:
 /etc/letsencrypt/live/example.com/privkey.pem     # private key
 ```
 
-**Use `fullchain.pem`** for your nginx / Apache / haproxy `ssl_certificate` directive. Don't use `cert.pem` alone — that's the most common cause of incomplete chains.
+**Use `fullchain.pem`** for your nginx / Apache / haproxy `ssl_certificate` directive. Don't use `cert.pem` alone, that's the most common cause of incomplete chains.
 
 For nginx:
 
@@ -175,9 +177,9 @@ For most apps, just trust the system root store and let the chain validate norma
 
 When clients verify a cert, they may also check whether it's been revoked:
 
-- **CRL** (Certificate Revocation List) — list of revoked serial numbers, downloaded periodically
-- **OCSP** (Online Certificate Status Protocol) — query the CA: "is this cert revoked?"
-- **OCSP stapling** — the server fetches OCSP and includes the response in TLS handshake
+- **CRL** (Certificate Revocation List), list of revoked serial numbers, downloaded periodically
+- **OCSP** (Online Certificate Status Protocol), query the CA: "is this cert revoked?"
+- **OCSP stapling**: the server fetches OCSP and includes the response in TLS handshake
 
 In 2026, OCSP stapling is the standard. Enable it in your server config (`ssl_stapling on` in nginx). Without stapling, clients may make additional connections to the CA to check revocation, adding latency.
 
@@ -185,12 +187,12 @@ In 2026, OCSP stapling is the standard. Enable it in your server config (`ssl_st
 
 When a TLS connection fails:
 
-1. **Confirm the cert exists and isn't expired** — visit in browser, or [SSL Checker](/web-tools/ssl-checker/).
-2. **Check the chain length** — `openssl s_client -showcerts -connect example.com:443` should show the leaf AND intermediates.
-3. **Verify hostname** — the SAN list must include the hostname being requested.
-4. **Test with curl** — `curl -v https://example.com`. If browser works but curl doesn't, it's a chain or AIA issue.
-5. **Compare to a known-good site** — `openssl s_client -connect google.com:443` should always succeed. If it doesn't, it's a client-side problem (CA bundle missing, wrong system time).
-6. **Check ALPN/SNI** — if you're behind a load balancer, the wrong cert may be served if SNI isn't set right.
+1. **Confirm the cert exists and isn't expired**: visit in browser, or [SSL Checker](/web-tools/ssl-checker/).
+2. **Check the chain length**: `openssl s_client -showcerts -connect example.com:443` should show the leaf AND intermediates.
+3. **Verify hostname**: the SAN list must include the hostname being requested.
+4. **Test with curl**: `curl -v https://example.com`. If browser works but curl doesn't, it's a chain or AIA issue.
+5. **Compare to a known-good site**: `openssl s_client -connect google.com:443` should always succeed. If it doesn't, it's a client-side problem (CA bundle missing, wrong system time).
+6. **Check ALPN/SNI**: if you're behind a load balancer, the wrong cert may be served if SNI isn't set right.
 
 ## Recommended workflow
 
@@ -198,7 +200,7 @@ When a TLS connection fails:
 2. **For existing servers**: verify chain with `openssl s_client -showcerts`. Should show 2-3 certs.
 3. **For renewals**: automate (Certbot, acme.sh, Caddy, AWS ACM). Manual renewals will eventually fail.
 4. **For monitoring**: set up cert expiry alerts at 30 and 7 days. [SSL Checker](/web-tools/ssl-checker/) for ad-hoc checks; UptimeRobot or Grafana for ongoing.
-5. **For debugging client errors**: ask "does it work in curl?" — that's your AIA chasing test.
+5. **For debugging client errors**: ask "does it work in curl?", that's your AIA chasing test.
 
 The takeaway: certificate chains are like a chain of references in a paper. If you only cite the latest source and not the citations it references, your reader (the client) can't trust your work. Send the full chain, every time.
 
@@ -206,7 +208,7 @@ The takeaway: certificate chains are like a chain of references in a paper. If y
 
 **Related tools on DevTools Online:**
 
-- [SSL Certificate Checker](/web-tools/ssl-checker/) — see what cert is issued for a domain
-- [DNS Lookup](/web-tools/dns-lookup/) — verify domain resolution and CAA records
-- [HTTP Request Builder](/web-tools/http-request-builder/) — test against your TLS endpoint
-- [Hash Generator](/security-tools/hash-generator/) — for cert pinning SPKI hashes
+- [SSL Certificate Checker](/web-tools/ssl-checker/), see what cert is issued for a domain
+- [DNS Lookup](/web-tools/dns-lookup/), verify domain resolution and CAA records
+- [HTTP Request Builder](/web-tools/http-request-builder/), test against your TLS endpoint
+- [Hash Generator](/security-tools/hash-generator/), for cert pinning SPKI hashes

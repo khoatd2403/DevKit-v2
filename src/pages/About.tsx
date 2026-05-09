@@ -4,7 +4,7 @@ export default function About() {
   return (
     <LegalLayout
       title="About DevTools Online"
-      description="DevTools Online is a free, privacy-first collection of 120+ developer utilities. Every tool runs entirely in your browser — no sign-up, no tracking, no data sent to a server."
+      description="DevTools Online is a free collection of 120+ developer utilities. Every tool processes your data locally in the browser — no sign-up, no input data sent to our servers."
       path="/about/"
     >
       <p>
@@ -17,8 +17,10 @@ export default function About() {
       <h2>What makes it different</h2>
       <ul>
         <li>
-          <strong>Runs entirely in your browser.</strong> JSON, SQL, JWT, hashes, certificates —
-          nothing you paste leaves your device.
+          <strong>Tools run entirely in your browser.</strong> JSON, SQL, JWT, hashes, certificates —
+          the data you paste into a tool is processed locally and never sent to our servers. (The
+          website itself uses standard analytics and advertising — see our{' '}
+          <a href="/privacy/">Privacy Policy</a> for details.)
         </li>
         <li>
           <strong>No sign-up, no paywall.</strong> Every tool is available immediately and free of

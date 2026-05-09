@@ -14,20 +14,20 @@ tags:
   - Encoding
   - Reference
 cover: "/og-image.svg"
-excerpt: "Base64 is the duct tape of the web. It's everywhere, almost nobody understands it, and engineers keep using it for the wrong reasons. Here's what it actually is."
+excerpt: "Stop using Base64 to 'hide' your API keys. It's not encryption. It's not compression. It's a 33% size penalty in exchange for ASCII safety, and that's all it'll ever be."
 ---
 
-Base64 is one of those technologies you use every day and never think about. JWTs are Base64. Email attachments are Base64. Data URLs in CSS are Base64. The first 100KB of every embedded image you've ever inlined was Base64.
+I have read variations of this Slack message about a hundred times: *"I'm Base64-encoding the API key in the env var so it's not exposed in plain text."* And I think, every time: please stop. Base64 has zero cryptographic properties. Anyone with the encoded value can decode it in one second. You haven't hidden anything. You've just made it slightly less googlable.
 
-It's also one of the most misunderstood. About once a quarter, someone asks if Base64 will "encrypt" their secrets. It won't. About once a year, someone uses Base64 to "compress" a payload. It does the opposite — it makes data 33% larger.
+The other one I get: *"I'm Base64-encoding the JSON before sending it, to save bandwidth."* This is even worse, because Base64 makes your payload **larger by 33%**. The exact opposite of compression. Whoever told you Base64 saves bandwidth was, charitably, mistaken.
 
-What Base64 actually does, what it's good for, and where it sneaks in unexpectedly — that's the rest of this post.
+This post is the closure on both myths, plus the actual cases where Base64 is the right tool. Spoiler: there are fewer than you think.
 
-## What Base64 is, in one paragraph
+## What Base64 is, exactly
 
 Base64 takes binary data — any sequence of bytes — and re-encodes it as a string of 64 ASCII characters: `A-Z`, `a-z`, `0-9`, `+`, and `/`. Three input bytes (24 bits) become four output characters (4 × 6 bits = 24 bits). The output is **bigger** than the input by a factor of 4/3 (≈33%), padded with `=` if the input length isn't a multiple of 3.
 
-That's it. It's a 1:1 reversible mapping from arbitrary bytes to a safe-to-transmit string. There's no compression, no encryption, no integrity check. The only purpose is **transport through systems that only handle text**.
+That's the whole thing. A 1:1 reversible mapping from arbitrary bytes to a safe-to-transmit string. No compression. No encryption. No integrity check. The only purpose is **transport through systems that only handle text**. If you're using it for anything else, you're holding it wrong.
 
 ## When Base64 is the right tool
 
@@ -62,7 +62,7 @@ For tiny inline images in CSS or HTML:
 }
 ```
 
-Inlining saves an HTTP request. The 33% bloat is fine for small icons (<2KB). For anything larger, ship the file separately — the savings flip.
+Inlining saves an HTTP request. The 33% bloat is fine for small icons (<2KB). For anything larger, ship the file separately, the savings flip.
 
 ### 3. URL-safe identifiers
 
@@ -76,11 +76,11 @@ Three Base64URL segments separated by dots. The middle segment, decoded, is your
 
 ### 4. Email attachments (MIME)
 
-Every attachment in every email since 1996 has been Base64-encoded. RFC 2045 defines this. You don't need to do anything yourself — `nodemailer`, `smtplib`, every email library handles it — but if you're ever debugging a raw email, the giant blob at the bottom is Base64.
+Every attachment in every email since 1996 has been Base64-encoded. RFC 2045 defines this. You don't need to do anything yourself — `nodemailer`, `smtplib`, every email library handles it, but if you're ever debugging a raw email, the giant blob at the bottom is Base64.
 
 ### 5. Basic authentication
 
-`Authorization: Basic dXNlcjpwYXNz` is **`user:pass` in Base64**. Not encryption. Not even mild obfuscation — anyone with the request can decode it in 0.1 seconds. Basic Auth is only safe over HTTPS.
+`Authorization: Basic dXNlcjpwYXNz` is **`user:pass` in Base64**. Not encryption. Not even mild obfuscation, anyone with the request can decode it in 0.1 seconds. Basic Auth is only safe over HTTPS.
 
 ## When Base64 is the wrong tool
 
@@ -92,13 +92,13 @@ People reach for Base64 in three situations where it's actively harmful:
 
 It's still exposed. `echo "QUJDREVGRw==" | base64 -d` reverses it in a millisecond. Base64 has zero cryptographic properties. If you want to hide a value, encrypt it.
 
-This is so common that some compliance tools flag Base64-looking strings near words like "key" or "secret" as a **false positive obfuscation attempt** — i.e., "this looks like someone tried to hide a secret with Base64, please stop."
+This is so common that some compliance tools flag Base64-looking strings near words like "key" or "secret" as a **false positive obfuscation attempt**: i.e., "this looks like someone tried to hide a secret with Base64, please stop."
 
 ### Wrong: to "compress" data
 
 > "Let's Base64 the JSON before sending it, to save bandwidth."
 
-This makes the payload **larger by 33%**. You're confusing "encoding" (reversible byte transformation) with "compression" (smaller representation). For real compression: gzip, brotli, zstd. If you want a smaller text representation of structured data, look at MessagePack, CBOR, or Protocol Buffers — but those aren't Base64.
+This makes the payload **larger by 33%**. You're confusing "encoding" (reversible byte transformation) with "compression" (smaller representation). For real compression: gzip, brotli, zstd. If you want a smaller text representation of structured data, look at MessagePack, CBOR, or Protocol Buffers, but those aren't Base64.
 
 ### Wrong: as a database storage format
 
@@ -145,14 +145,14 @@ Base64 operates on **bytes**, not characters. To Base64 a UTF-8 string, you enco
 // Wrong — atob/btoa only work on Latin-1
 btoa("Xin chào")  // throws InvalidCharacterError
 
-// Right — encode to UTF-8 bytes first
+// Right, encode to UTF-8 bytes first
 btoa(unescape(encodeURIComponent("Xin chào")))  // works, but ugly
 
 // Modern way
 new TextEncoder().encode("Xin chào")  // → Uint8Array
 ```
 
-Use [Base64 Encode / Decode](/encoding-tools/base64-encode-decode/) for ad-hoc conversion — it handles UTF-8 correctly.
+Use [Base64 Encode / Decode](/encoding-tools/base64-encode-decode/) for ad-hoc conversion, it handles UTF-8 correctly.
 
 ## Image-to-Base64 in practice
 
@@ -160,11 +160,11 @@ Inlining images as Base64 used to be popular for "performance." It's now a mixed
 
 | Image size | Inline as Base64? |
 |---|---|
-| < 1 KB | Yes — saves an HTTP round trip |
-| 1-5 KB | Maybe — if many images on the page, they all decode CPU |
-| > 5 KB | No — separate file, leverage HTTP/2 multiplexing and caching |
+| < 1 KB | Yes, saves an HTTP round trip |
+| 1-5 KB | Maybe, if many images on the page, they all decode CPU |
+| > 5 KB | No, separate file, leverage HTTP/2 multiplexing and caching |
 
-HTTP/2 and HTTP/3 mostly killed the "save an HTTP request" argument. Cache-busting is also harder with inlined data — change one byte, the entire CSS file has to re-download.
+HTTP/2 and HTTP/3 mostly killed the "save an HTTP request" argument. Cache-busting is also harder with inlined data, change one byte, the entire CSS file has to re-download.
 
 For tiny icons in design systems, [Image to Base64](/encoding-tools/image-to-base64/) is still convenient. Just don't reach for it as a default.
 
@@ -182,7 +182,7 @@ The cleanest mental model: Base64 is **ASCII armor**. It's a way to make bytes s
 
 **Related tools on DevTools Online:**
 
-- [Base64 Encode / Decode](/encoding-tools/base64-encode-decode/) — paste, encode or decode, in your browser
-- [Image to Base64](/encoding-tools/image-to-base64/) — for inlining images as data URLs
-- [JWT Decoder](/encoding-tools/jwt-decoder/) — Base64URL of a token, decoded
-- [URL Encoder / Decoder](/encoding-tools/url-encode-decode/) — when Base64 needs further escaping for URLs
+- [Base64 Encode / Decode](/encoding-tools/base64-encode-decode/), paste, encode or decode, in your browser
+- [Image to Base64](/encoding-tools/image-to-base64/), for inlining images as data URLs
+- [JWT Decoder](/encoding-tools/jwt-decoder/). Base64URL of a token, decoded
+- [URL Encoder / Decoder](/encoding-tools/url-encode-decode/), when Base64 needs further escaping for URLs

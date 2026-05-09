@@ -1,7 +1,7 @@
 ---
 title: "Cron Expressions Decoded: Reading 0 0 * * * Without Cheat Sheets"
 slug: "cron-expressions-decoded"
-description: "What each of the five cron fields means, the special values that trip people up, and the modern alternatives — Quartz, systemd timers, k8s CronJobs — that smooth over cron's rough edges."
+description: "What each of the five cron fields means, the special values that trip people up, and the modern alternatives. Quartz, systemd timers, k8s CronJobs, that smooth over cron's rough edges."
 date: "2026-05-09"
 author: "DevTools Online Team"
 keywords:
@@ -17,9 +17,9 @@ cover: "/og-image.svg"
 excerpt: "Cron is the scheduling syntax that survived 50 years because it's compact and ubiquitous. Once you know the five fields and three special characters, you can read any cron line at a glance."
 ---
 
-Cron is from 1975. Every Unix machine has it. Every CI system, every container scheduler, every "run a job daily" feature ends up speaking some dialect of cron. And yet, most developers reach for a cheat sheet every time they need to write `0 9 * * 1`.
+Years ago, an oncall page woke me at 4am because a "daily at midnight" job had run twice. The cron line was `0 0 * * *`, the system clock was UTC, the box was healthy. It still ran twice. Took us most of the day to figure out: someone had set the server's TZ to America/Chicago in `/etc/profile`, and the daylight-saving fall-back hour repeats. Cron, doing exactly what it was told, fired at 1am CST, then fired again at 1am CST. We'd run the same idempotent-ish ETL twice, double-charged a few hundred customers, and spent the rest of the week refunding them.
 
-The format is small enough to memorize. Once you do, you'll read cron lines without thinking. Here's the practical version.
+I have a list of cron gotchas like that, accumulated from a decade of running scheduled jobs. The format itself is fifty years old and small enough to fit on a postcard. The traps in it are the kind that seem absurd until you've been bitten. This post is both: the format, in five fields and three special characters, plus every weird edge case I've collected since 2014.
 
 ## The five fields
 
@@ -35,7 +35,7 @@ The format is small enough to memorize. Once you do, you'll read cron lines with
 
 That's the entire format. Five fields, separated by whitespace, in the order minute → hour → day-of-month → month → day-of-week.
 
-A `*` in any field means "every value." So `* * * * *` is "every minute, every hour, every day, every month, every day-of-week" — i.e., every minute.
+A `*` in any field means "every value." So `* * * * *` is "every minute, every hour, every day, every month, every day-of-week", i.e., every minute.
 
 [Cron Parser](/datetime-tools/cron-parser/) decodes any cron expression into human-readable English and shows the next 10 fire times.
 
@@ -57,21 +57,21 @@ The `*/N` syntax is "every N units." So `*/5` in the minute field is "every 5 mi
 
 ## The four special values
 
-### `*` — every
+### `*`, every
 
 `* * * * *` runs every minute. `0 * * * *` runs at minute 0 of every hour.
 
-### `,` — list
+### `,`, list
 
 `0 9,12,15 * * *` runs at 9 AM, 12 PM, and 3 PM. Use commas to specify discrete values.
 
-### `-` — range
+### `-`, range
 
 `0 9-17 * * *` runs every hour from 9 AM to 5 PM. Useful for business-hours jobs.
 
-### `/` — step
+### `/`, step
 
-`*/15 * * * *` runs at minutes 0, 15, 30, 45 — every 15 minutes. Steps work with ranges too: `0-30/5 * * * *` runs at minutes 0, 5, 10, 15, 20, 25, 30.
+`*/15 * * * *` runs at minutes 0, 15, 30, 45, every 15 minutes. Steps work with ranges too: `0-30/5 * * * *` runs at minutes 0, 5, 10, 15, 20, 25, 30.
 
 ## Day of week is annoying
 
@@ -130,7 +130,7 @@ Two awkward cases per year:
 - **Spring forward**: 2:30 AM doesn't exist on the day clocks jump from 2 AM to 3 AM. A job scheduled for 2:30 AM will be skipped.
 - **Fall back**: 2:30 AM exists twice. Some cron implementations run the job twice; others run it once.
 
-For jobs that must run exactly once, schedule them outside the DST transition window — e.g., 4 AM is safer than 2:30 AM.
+For jobs that must run exactly once, schedule them outside the DST transition window, e.g., 4 AM is safer than 2:30 AM.
 
 For "run hourly" jobs (`0 * * * *`), the same hour fires twice on fall-back day. Idempotency is your friend.
 
@@ -171,9 +171,9 @@ Or run via a system that handles logging (systemd timers log to journald, k8s Cr
 Adds:
 
 - **6th field**: seconds (or 7th: year)
-- **`L`** — last (last day of month, last weekday)
-- **`#`** — Nth occurrence (e.g., `2#1` = first Monday)
-- **`?`** — "no specific value" (used in day-of-month or day-of-week to disambiguate)
+- **`L`**: last (last day of month, last weekday)
+- **`#`**: Nth occurrence (e.g., `2#1` = first Monday)
+- **`?`**: "no specific value" (used in day-of-month or day-of-week to disambiguate)
 
 ```
 0 0 9 ? * MON#1     First Monday of every month at 9 AM
@@ -192,7 +192,7 @@ OnCalendar=Mon..Fri 09:00
 Persistent=true
 ```
 
-`OnCalendar` syntax is more readable than cron. `Persistent=true` runs missed jobs after sleep/downtime — the standard cron doesn't do this.
+`OnCalendar` syntax is more readable than cron. `Persistent=true` runs missed jobs after sleep/downtime, the standard cron doesn't do this.
 
 ### Kubernetes CronJobs
 
@@ -258,7 +258,7 @@ Cron fires in server local time. If you migrate the server to a new region, your
 
 If a job pings an API every minute, you've got 1,440 requests per day. For most "check for new work" jobs, every 5 minutes (288 requests) is plenty.
 
-For real-time work, don't use cron — use a queue or webhook-triggered worker.
+For real-time work, don't use cron, use a queue or webhook-triggered worker.
 
 ## Recommended workflow
 
@@ -266,7 +266,7 @@ For real-time work, don't use cron — use a queue or webhook-triggered worker.
 2. **Writing a new schedule**: start with the closest example you know, modify. Test the next 10 fire times before deploy.
 3. **Time zones**: explicit in modern systems (k8s, systemd). Default to UTC on bare cron.
 4. **Long-running jobs**: prevent overlap with `flock` or a job runner.
-5. **Beyond cron**: for "first Monday" or other advanced rules, use Quartz or systemd timers — don't try to encode in standard cron.
+5. **Beyond cron**: for "first Monday" or other advanced rules, use Quartz or systemd timers, don't try to encode in standard cron.
 
 The takeaway: cron is older than most engineers using it. The format is compact, the gotchas are well-known, and once you've read 20 cron lines fluently, you'll read any cron line fluently. The path to fluency is just looking at fewer cheat sheets and more actual expressions.
 
@@ -274,7 +274,7 @@ The takeaway: cron is older than most engineers using it. The format is compact,
 
 **Related tools on DevTools Online:**
 
-- [Cron Parser](/datetime-tools/cron-parser/) — paste expression, see schedule + next fire times
-- [Unix Timestamp](/datetime-tools/unix-timestamp/) — for converting cron times to UTC
-- [HTTP Request Builder](/web-tools/http-request-builder/) — test what your cron job calls
-- [JSON Formatter](/json-tools/json-formatter/) — for inspecting cron job logs
+- [Cron Parser](/datetime-tools/cron-parser/), paste expression, see schedule + next fire times
+- [Unix Timestamp](/datetime-tools/unix-timestamp/), for converting cron times to UTC
+- [HTTP Request Builder](/web-tools/http-request-builder/), test what your cron job calls
+- [JSON Formatter](/json-tools/json-formatter/), for inspecting cron job logs

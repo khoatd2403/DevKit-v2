@@ -1,7 +1,7 @@
 ---
-title: "JSON Formatting in 2026 — Online vs IDE vs CLI Tools Compared"
+title: "JSON Formatting in 2026: Online vs IDE vs CLI Tools Compared"
 slug: "json-formatting-2026"
-description: "A practical comparison of how to format and validate JSON in 2026 — online formatters, IDE plugins, and CLI tools — with recommendations for each workflow."
+description: "A practical comparison of how to format and validate JSON in 2026, online formatters, IDE plugins, and CLI tools, with recommendations for each workflow."
 date: "2026-05-08"
 author: "DevTools Online Team"
 keywords:
@@ -19,13 +19,13 @@ cover: "/og-image.svg"
 excerpt: "Three ways to format JSON in 2026: online formatters, IDE plugins, and CLI tools. Each has trade-offs around privacy, speed, and integration. Here's when to use which."
 ---
 
-JSON looks simple — until you paste 12 KB of unindented payload into a Slack thread and have to find the one missing comma. Every developer has been there. The good news: in 2026, formatting and validating JSON is a solved problem with three perfectly good answers. The right one depends on **where the JSON came from**, **how sensitive it is**, and **how often you need to do it**.
+JSON looks simple, until you paste 12 KB of unindented payload into a Slack thread and have to find the one missing comma. Every developer has been there. The good news: in 2026, formatting and validating JSON is a solved problem with three perfectly good answers. The right one depends on **where the JSON came from**, **how sensitive it is**, and **how often you need to do it**.
 
 ## TL;DR
 
 | Tool type | Best for | Watch out for |
 |---|---|---|
-| **Online formatter** | One-off pastes, sharing with teammates, mobile | Privacy — most ship your data to a server |
+| **Online formatter** | One-off pastes, sharing with teammates, mobile | Privacy, most ship your data to a server |
 | **IDE plugin** | JSON files inside a repo you're already editing | Per-IDE setup, not portable |
 | **CLI tool (`jq`)** | Pipelines, automation, large files | Steep learning curve for queries |
 
@@ -33,17 +33,17 @@ If you remember nothing else: for ad-hoc JSON, use a **client-side online format
 
 ## 1. Online formatters: the fastest path
 
-Pasting JSON into a web tool is the fastest way to format it — you don't install anything, it works on any device, and the result is one click away. The catch: most online formatters are JavaScript apps that run **server-side**. Your JSON gets POSTed to their backend, processed, and returned. If that JSON contains an API key, customer data, or anything sensitive, you've just leaked it.
+Pasting JSON into a web tool is the fastest way to format it, you don't install anything, it works on any device, and the result is one click away. The catch: most online formatters are JavaScript apps that run **server-side**. Your JSON gets POSTed to their backend, processed, and returned. If that JSON contains an API key, customer data, or anything sensitive, you've just leaked it.
 
 The fix is to use a **client-side formatter**, where parsing and formatting happen entirely in your browser via `JSON.parse` + `JSON.stringify`. Nothing is uploaded.
 
-[**DevTools Online's JSON Formatter**](/json-tools/json-formatter/) is a client-side example: open the page, paste your JSON, and it formats locally. The same applies to its [JSON Validator](/json-tools/json-formatter/) and [JSON Diff](/json-tools/json-diff/) — your data never leaves the page.
+[**DevTools Online's JSON Formatter**](/json-tools/json-formatter/) is a client-side example: open the page, paste your JSON, and it formats locally. The same applies to its [JSON Validator](/json-tools/json-formatter/) and [JSON Diff](/json-tools/json-diff/), your data never leaves the page.
 
 When picking an online tool, check the network tab in DevTools. If you see a `POST` request after pasting, the tool is server-side. If you see nothing, you're safe.
 
 ## 2. IDE plugins: zero context-switching
 
-For JSON that already lives in your project — `package.json`, `tsconfig.json`, fixture files — your IDE is the right home. You don't break flow, you don't paste anywhere, and you get syntax checking, schema validation, and "format on save" for free.
+For JSON that already lives in your project — `package.json`, `tsconfig.json`, fixture files, your IDE is the right home. You don't break flow, you don't paste anywhere, and you get syntax checking, schema validation, and "format on save" for free.
 
 The standard combos in 2026:
 
@@ -51,7 +51,7 @@ The standard combos in 2026:
 - **JetBrains IDEs**: WebStorm, IntelliJ, PyCharm all ship with JSON support. `Ctrl+Alt+L` reformats. Add the **Prettier** plugin to share formatting rules with the team.
 - **Neovim**: `prettier` via `null-ls` or `conform.nvim`, or `jq` via `vim-plugin-jq`. Both work; `prettier` is more JSON-spec-compliant.
 
-The downside: every machine, every dev, every project needs the same setup. Drift is real — that's why tooling like `.editorconfig` and `package.json#prettier` exist. Commit your config, stop arguing in code review.
+The downside: every machine, every dev, every project needs the same setup. Drift is real, that's why tooling like `.editorconfig` and `package.json#prettier` exist. Commit your config, stop arguing in code review.
 
 ## 3. `jq`: when JSON is part of a pipeline
 
@@ -74,13 +74,13 @@ cat orders.json | jq '.[] | select(.status == "pending")'
 2. **Querying**: extract fields without parsing the whole document into memory.
 3. **Streaming**: handle gigabyte JSON files without OOM.
 
-The downside is the learning curve. The query language is small but unfamiliar — chained selectors, pipes, and constructors. Spend an afternoon with the [jq manual](https://jqlang.github.io/jq/manual/) and you'll never write `python -c "import json; ..."` again.
+The downside is the learning curve. The query language is small but unfamiliar, chained selectors, pipes, and constructors. Spend an afternoon with the [jq manual](https://jqlang.github.io/jq/manual/) and you'll never write `python -c "import json; ..."` again.
 
-For browsing the output of `jq` interactively, pair it with [`fx`](https://fx.wtf/) — a TUI JSON viewer that lets you click through the structure.
+For browsing the output of `jq` interactively, pair it with [`fx`](https://fx.wtf/), a TUI JSON viewer that lets you click through the structure.
 
 ## What about `JSON.stringify(obj, null, 2)`?
 
-In Node and the browser, the built-in formatter is `JSON.stringify(value, null, 2)` — second arg is a replacer (use `null` for none), third arg is the indentation. It's enough for 90% of one-off needs:
+In Node and the browser, the built-in formatter is `JSON.stringify(value, null, 2)`, second arg is a replacer (use `null` for none), third arg is the indentation. It's enough for 90% of one-off needs:
 
 ```js
 JSON.stringify(payload, null, 2)
@@ -88,8 +88,8 @@ JSON.stringify(payload, null, 2)
 
 The two things it doesn't do:
 
-- **Validate** — it'll happily output `JSON.stringify(undefined)` (which returns `undefined`, not the string `"undefined"` you might expect).
-- **Sort keys** — by default, the order is the insertion order of the object. To sort, you need a recursive walker, or:
+- **Validate**: it'll happily output `JSON.stringify(undefined)` (which returns `undefined`, not the string `"undefined"` you might expect).
+- **Sort keys**: by default, the order is the insertion order of the object. To sort, you need a recursive walker, or:
 
   ```js
   JSON.stringify(payload, Object.keys(payload).sort(), 2)
@@ -100,9 +100,9 @@ If you need stable output (e.g., for content-addressed hashing), use a library l
 
 ## A few JSON gotchas worth knowing
 
-- **Trailing commas are not valid JSON** — they're valid JSON5. If your formatter accepts them, it's parsing JSON5, not JSON.
-- **NaN and Infinity are not valid JSON** — `JSON.stringify({x: NaN})` returns `{"x":null}`. Surprises debugger.
-- **Numbers larger than `Number.MAX_SAFE_INTEGER` lose precision** — IDs from databases like Twitter's snowflake should be transmitted as strings.
+- **Trailing commas are not valid JSON**: they're valid JSON5. If your formatter accepts them, it's parsing JSON5, not JSON.
+- **NaN and Infinity are not valid JSON**: `JSON.stringify({x: NaN})` returns `{"x":null}`. Surprises debugger.
+- **Numbers larger than `Number.MAX_SAFE_INTEGER` lose precision**: IDs from databases like Twitter's snowflake should be transmitted as strings.
 - **Duplicate keys are technically allowed by the spec** but every parser keeps only the last one. Don't rely on this.
 
 ## Recommended workflow
@@ -120,7 +120,7 @@ This is the boring answer, but JSON formatting is the kind of problem where bori
 
 **Related tools on DevTools Online:**
 
-- [JSON Formatter](/json-tools/json-formatter/) — paste + format, fully client-side
-- [JSON Diff](/json-tools/json-diff/) — compare two JSON objects
-- [JSON to TypeScript](/json-tools/json-to-typescript/) — generate interfaces
-- [JSON to CSV](/json-tools/json-to-csv/) — flatten nested JSON for spreadsheets
+- [JSON Formatter](/json-tools/json-formatter/), paste + format, fully client-side
+- [JSON Diff](/json-tools/json-diff/), compare two JSON objects
+- [JSON to TypeScript](/json-tools/json-to-typescript/), generate interfaces
+- [JSON to CSV](/json-tools/json-to-csv/), flatten nested JSON for spreadsheets

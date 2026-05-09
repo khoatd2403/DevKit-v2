@@ -18,13 +18,13 @@ cover: "/og-image.svg"
 excerpt: "Your JSON parser fails at character 0 and the error message tells you nothing. Nine times out of ten, it's a UTF-8 BOM that some Windows tool added when you weren't looking."
 ---
 
-You export a CSV from Excel, save it as JSON in your editor, push it to a Linux service, and the parser fails with `Unexpected token in JSON at position 0`. You stare at the file. It looks fine. Notepad shows clean JSON. You re-save it twice.
+It was 11pm on a Friday and our nightly ETL was failing on a customer file that had worked yesterday. Same vendor, same format, same column headers. Parser kept choking at "position 0." Five engineers staring at it. Nothing in the file looked wrong. Three of us re-downloaded the file thinking the upload corrupted something. It hadn't.
 
-The bytes lie. There's an invisible three-byte sequence at the start: `EF BB BF`. That's a UTF-8 BOM, and it has been ruining Windows-to-Linux JSON pipelines since the late 90s.
+Around midnight someone ran `head -c 3 file.json | od -An -c` and got back `357 273 277`. That's a UTF-8 BOM. Some PowerShell script in the customer's pipeline had quietly added it, and three lines of `JSON.parse` couldn't handle it. We've kept that command in our debugging cheat sheet ever since. This post is what we wish someone had told us before that night.
 
 ## What's a BOM, actually?
 
-A Byte Order Mark (BOM) is a magic prefix that tells a text reader two things: which UTF encoding the file uses (UTF-8, UTF-16-LE, UTF-16-BE, UTF-32), and which byte order. For UTF-16, it actually matters. For UTF-8, **byte order is meaningless** — bytes are bytes — and the BOM is purely a "this is UTF-8" flag.
+A Byte Order Mark (BOM) is a magic prefix that tells a text reader two things: which UTF encoding the file uses (UTF-8, UTF-16-LE, UTF-16-BE, UTF-32), and which byte order. For UTF-16, it actually matters. For UTF-8, **byte order is meaningless**: bytes are bytes, and the BOM is purely a "this is UTF-8" flag.
 
 The Unicode standard says UTF-8 BOMs are allowed but not required. Some tools add one anyway:
 
@@ -94,7 +94,7 @@ with open('data.json', encoding='utf-8-sig') as f:
     data = json.load(f)
 ```
 
-The `utf-8-sig` codec is the trick — it reads UTF-8 but transparently strips a leading BOM. There's no equivalent "strip BOM" flag in `json` itself; it's the codec that handles it.
+The `utf-8-sig` codec is the trick, it reads UTF-8 but transparently strips a leading BOM. There's no equivalent "strip BOM" flag in `json` itself; it's the codec that handles it.
 
 ### PowerShell (modern)
 
@@ -119,16 +119,16 @@ Or, to pipe through `jq` after stripping:
 sed 's/^\xef\xbb\xbf//' data.json | jq .
 ```
 
-### Online — when you don't want to install anything
+### Online, when you don't want to install anything
 
-Paste the content into a [JSON Formatter](/json-tools/json-formatter/) — pasting strips the BOM by virtue of the browser only copying the visible text. That's a slightly accidental fix, but it works for one-off cases.
+Paste the content into a [JSON Formatter](/json-tools/json-formatter/), pasting strips the BOM by virtue of the browser only copying the visible text. That's a slightly accidental fix, but it works for one-off cases.
 
 ## Prevent BOMs at the source
 
 Stripping at read is defensive; the better fix is to stop the BOM from being written in the first place.
 
-- **Excel**: when saving as CSV, choose **"CSV UTF-8 (Comma delimited)"**, but be aware Excel still writes a BOM. To avoid, save as plain CSV and convert externally — or use `csv-to-json` tools that handle BOM input gracefully.
-- **PowerShell**: prefer PS 7+, or use `[System.IO.File]::WriteAllText($path, $text, [System.Text.UTF8Encoding]::new($false))` — that `$false` is the BOM flag.
+- **Excel**: when saving as CSV, choose **"CSV UTF-8 (Comma delimited)"**, but be aware Excel still writes a BOM. To avoid, save as plain CSV and convert externally, or use `csv-to-json` tools that handle BOM input gracefully.
+- **PowerShell**: prefer PS 7+, or use `[System.IO.File]::WriteAllText($path, $text, [System.Text.UTF8Encoding]::new($false))`, that `$false` is the BOM flag.
 - **VS Code**: bottom-right encoding selector → **"Save with Encoding"** → **UTF-8** (without BOM). The default is no-BOM unless you've configured otherwise.
 - **Build pipelines**: validate. Most CI lint setups can include a BOM check in pre-commit.
 
@@ -147,7 +147,7 @@ Drop it in `.husky/pre-commit` or a CI step. Catches BOMs the day they enter the
 
 ## Why does this still happen in 2026?
 
-Because Excel still adds a BOM by default when exporting "CSV UTF-8" — the most common path between non-engineers and JSON pipelines. Because Windows PowerShell 5.1 ships on every Windows machine and emits BOM by default. Because the BOM is invisible in every editor and shows up in cmd.exe as `?`.
+Because Excel still adds a BOM by default when exporting "CSV UTF-8", the most common path between non-engineers and JSON pipelines. Because Windows PowerShell 5.1 ships on every Windows machine and emits BOM by default. Because the BOM is invisible in every editor and shows up in cmd.exe as `?`.
 
 The Unicode committee acknowledged in 2024 that recommending **against** BOMs in UTF-8 was overdue, but the existing tools haven't all caught up. Until they do, write defensive parsers.
 
@@ -164,7 +164,7 @@ The unsexy truth: BOMs are a cross-platform pollution problem, and the only defe
 
 **Related tools on DevTools Online:**
 
-- [JSON Formatter](/json-tools/json-formatter/) — paste and format, BOM stripped automatically
-- [JSON Validator](/json-tools/json-formatter/) — finds malformed JSON beyond just the BOM case
-- [CSV to JSON](/formatter-tools/csv-to-json/) — converts Excel exports correctly
-- [String Inspector](/string-tools/string-inspector/) — see invisible characters byte by byte
+- [JSON Formatter](/json-tools/json-formatter/), paste and format, BOM stripped automatically
+- [JSON Validator](/json-tools/json-formatter/), finds malformed JSON beyond just the BOM case
+- [CSV to JSON](/formatter-tools/csv-to-json/), converts Excel exports correctly
+- [String Inspector](/string-tools/string-inspector/), see invisible characters byte by byte

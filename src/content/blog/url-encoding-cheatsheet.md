@@ -19,9 +19,19 @@ cover: "/og-image.svg"
 excerpt: "URL encoding looks like one rule until you realize space is %20 in paths and + in query strings, and there are four different JavaScript functions and they all do slightly different things."
 ---
 
-URL encoding is one of those topics where you think you understand it, then you spend two hours debugging why your Vietnamese search query breaks on Safari but works on Chrome, and you realize you don't.
+URL encoding rules in one screen:
 
-The rules are not that hard. They're just nowhere written in a single place. This post is that place.
+| Character | In path | In query value | In query value (form-style) |
+|---|---|---|---|
+| Space | `%20` | `%20` | `+` |
+| `+` | `+` literal | `%2B` | `%2B` |
+| `&` | `&` literal | `%26` | `%26` |
+| `/` | `/` literal | `%2F` | `%2F` |
+| `?` | `%3F` | `?` separator | `?` separator |
+| `#` | `%23` | `#` fragment | `#` fragment |
+| Vietnamese `à` | `%C3%A0` | `%C3%A0` | `%C3%A0` |
+
+The rules behind that table are short. Three character classes, four JavaScript functions, two flavors of "encode a space." Once you've seen them in one place, the unexpected behaviors stop being unexpected.
 
 ## TL;DR
 
@@ -36,7 +46,7 @@ In modern code: just use `URLSearchParams` and `URL`. They handle encoding corre
 
 ## What is URL encoding, actually
 
-URLs use a restricted character set: ASCII letters, digits, and a handful of safe punctuation (`-_.~`). Anything else — spaces, accented letters, emoji, query separators inside values — has to be **percent-encoded**: each byte represented as `%` followed by two hex digits.
+URLs use a restricted character set: ASCII letters, digits, and a handful of safe punctuation (`-_.~`). Anything else, spaces, accented letters, emoji, query separators inside values, has to be **percent-encoded**: each byte represented as `%` followed by two hex digits.
 
 A space (byte `0x20`) becomes `%20`. The Vietnamese letter `à` is two UTF-8 bytes (`0xC3 0xA0`), so it becomes `%C3%A0`. Multiplied across a 100-character query string in Vietnamese, this is why URLs in `google.com.vn` look like a wall of percent signs.
 
@@ -71,8 +81,8 @@ Encoded as `%HH` where `HH` is the hex value of the byte (or, for non-ASCII, eac
 
 This is the famous one. **Space can be encoded two ways**:
 
-- `%20` — works everywhere
-- `+` — works **only in query strings and form bodies**
+- `%20`, works everywhere
+- `+`, works **only in query strings and form bodies**
 
 The reason is historical: HTML form submissions (`application/x-www-form-urlencoded`) use `+` for space. The W3C spec for forms predates and conflicts with the URI spec. Both rules survive in 2026 because changing either would break the web.
 
@@ -99,7 +109,7 @@ JavaScript has **four** URL-related encoding functions. They differ in which cha
 |---|---|
 | `encodeURI` | Everything except gen-delims, sub-delims, and unreserved |
 | `encodeURIComponent` | Everything except unreserved (most aggressive) |
-| `escape` (deprecated) | Don't use — uses `%uHHHH` for non-ASCII, not UTF-8 |
+| `escape` (deprecated) | Don't use, uses `%uHHHH` for non-ASCII, not UTF-8 |
 | `URLSearchParams.toString()` | Form-urlencoded (space → `+`) |
 
 You almost always want **`encodeURIComponent`** for user-supplied values:
@@ -110,7 +120,7 @@ const url = `https://example.com/search?q=${encodeURIComponent(query)}`
 // → https://example.com/search?q=c%C3%A1%20kho%20t%E1%BB%99
 ```
 
-Or — better — use `URLSearchParams`:
+Or, better, use `URLSearchParams`:
 
 ```js
 const params = new URLSearchParams({ q: 'cá kho tộ' })
@@ -181,7 +191,7 @@ q := r.URL.Query().Get("q")  // already decoded
 
 ### Non-ASCII bytes in the URL host
 
-The hostname has different rules — it uses **Punycode**, not percent-encoding. `häagen-dazs.com` becomes `xn--hagen-dazs-1ab.com`. Browsers handle this automatically, but if you're constructing URLs in code, use the URL constructor:
+The hostname has different rules, it uses **Punycode**, not percent-encoding. `häagen-dazs.com` becomes `xn--hagen-dazs-1ab.com`. Browsers handle this automatically, but if you're constructing URLs in code, use the URL constructor:
 
 ```js
 new URL('https://häagen-dazs.com').hostname  // → "xn--hagen-dazs-1ab.com"
@@ -216,13 +226,13 @@ decodeURIComponent('c%C3%A1%20kho%20t%E1%BB%99')
 4. **Inspecting an unfamiliar URL**: paste into [URL Encoder / Decoder](/encoding-tools/url-encode-decode/) to see the structure.
 5. **Debugging non-ASCII issues**: check that the source is UTF-8 (not Latin-1 or UTF-16).
 
-The mental model that fixes 90% of bugs: **percent-encoding is a byte-level escape, not a character-level escape**. Once you internalize that — and stop hand-concatenating URLs — most of the strange behaviors stop making sense. They start having boring, mechanical reasons you can predict.
+The mental model that fixes 90% of bugs: **percent-encoding is a byte-level escape, not a character-level escape**. Once you internalize that, and stop hand-concatenating URLs, most of the strange behaviors stop making sense. They start having boring, mechanical reasons you can predict.
 
 ---
 
 **Related tools on DevTools Online:**
 
-- [URL Encoder / Decoder](/encoding-tools/url-encode-decode/) — paste, encode or decode
-- [HTML Entity Encoder](/encoding-tools/html-encode-decode/) — different encoding, same idea
-- [Base64 Encode / Decode](/encoding-tools/base64-encode-decode/) — when URL-encoded isn't enough
-- [JWT Decoder](/encoding-tools/jwt-decoder/) — Base64URL is a sibling encoding
+- [URL Encoder / Decoder](/encoding-tools/url-encode-decode/), paste, encode or decode
+- [HTML Entity Encoder](/encoding-tools/html-encode-decode/), different encoding, same idea
+- [Base64 Encode / Decode](/encoding-tools/base64-encode-decode/), when URL-encoded isn't enough
+- [JWT Decoder](/encoding-tools/jwt-decoder/). Base64URL is a sibling encoding

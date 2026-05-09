@@ -1,7 +1,7 @@
 ---
 title: "Validating JSON in 2026: JSON Schema, AJV, and the Browser-Native Approach"
 slug: "json-validation-2026"
-description: "Three layers of JSON validation — syntax, schema, and business rules — and which library to reach for. With code samples for AJV, Zod, and the runtime checks browsers added in 2024."
+description: "Three layers of JSON validation, syntax, schema, and business rules, and which library to reach for. With code samples for AJV, Zod, and the runtime checks browsers added in 2024."
 date: "2026-05-09"
 author: "DevTools Online Team"
 keywords:
@@ -19,13 +19,17 @@ cover: "/og-image.svg"
 excerpt: "Compile-time TypeScript types catch the typos. Runtime validators catch what the API actually sent. The trick is knowing which validator to reach for, and when validation belongs at the boundary."
 ---
 
-TypeScript is wonderful at catching typos. It is useless at catching the API that decided to send you `null` instead of `0`, or the user who pasted a 700KB JSON object into a form that expected 5KB. For that, you need runtime validation.
+JSON validation in 2026, at a glance:
 
-In 2026 there are three layers of JSON validation, each catching a different class of bug:
+| Layer | What it catches | Tools |
+|---|---|---|
+| 1. Syntactic | malformed JSON | `JSON.parse`, `jsonc-parser` |
+| 2. Schema | structure mismatch | AJV, Zod, Valibot, io-ts |
+| 3. Business | domain rule violation | hand-written, Zod refinements |
 
-1. **Syntactic validation** — is this even valid JSON?
-2. **Schema validation** — does the structure match what we expect?
-3. **Business validation** — does the content make sense for our domain?
+Most production bugs that "shouldn't happen" are layer-2 failures: the API said `null` instead of `0`, the user pasted a 700KB object into a 5KB-expecting form, the third-party service started returning a string ID where it used to be a number. TypeScript catches none of these — it's compile-time, those values arrive at runtime.
+
+This is the reference for which validator to reach for, in which layer.
 
 Skip any layer and the bugs fall through to wherever they fit. Let's look at when to use what.
 
@@ -41,7 +45,7 @@ try {
 }
 ```
 
-`JSON.parse` is fine for syntax. The error messages are **infamously bad** — "Unexpected token at position 47" doesn't tell you which line, doesn't show context, doesn't suggest a fix.
+`JSON.parse` is fine for syntax. The error messages are **infamously bad**: "Unexpected token at position 47" doesn't tell you which line, doesn't show context, doesn't suggest a fix.
 
 For developer-facing tooling, use a library like `jsonc-parser` (Microsoft's, used by VS Code) or `jsonlint`:
 
@@ -53,13 +57,13 @@ parse(input, errors, { allowTrailingComma: false })
 // errors → array of { error, offset, length }, with named codes
 ```
 
-For end-user-facing tools, paste into [JSON Formatter](/json-tools/json-formatter/) — the validator highlights the offending line with context, no scripting needed.
+For end-user-facing tools, paste into [JSON Formatter](/json-tools/json-formatter/), the validator highlights the offending line with context, no scripting needed.
 
 ## Layer 2: Schema validation
 
 Once the JSON parses, you need to verify its shape. This is where most of the interesting choices live, and the right answer depends on whether you have a **schema** to validate against.
 
-### If you have a JSON Schema document — AJV
+### If you have a JSON Schema document. AJV
 
 JSON Schema is the spec. AJV is the implementation everyone uses. It compiles a schema to a JIT-optimized validator that's roughly as fast as hand-rolled checks.
 
@@ -93,12 +97,12 @@ if (!validate(data)) {
 AJV is the right answer when:
 
 - You already have a JSON Schema (from OpenAPI, from the API team, from a published spec)
-- You want bidirectional usage — same schema generates [TypeScript types](/json-tools/json-to-typescript/) AND validates at runtime
-- Performance matters — the JIT'd validator is fast
+- You want bidirectional usage, same schema generates [TypeScript types](/json-tools/json-to-typescript/) AND validates at runtime
+- Performance matters, the JIT'd validator is fast
 
 You can also paste your schema and a sample into [JSON Schema Validator](/json-tools/json-schema-validator/) to test interactively before wiring AJV into code.
 
-### If you don't have a schema — Zod (or Valibot)
+### If you don't have a schema. Zod (or Valibot)
 
 Most TypeScript codebases don't start with JSON Schema. They start with `interface User { ... }` and validation is an afterthought. Zod is built for this:
 
@@ -132,13 +136,13 @@ Zod is the right answer when:
 
 Valibot is a smaller alternative (~5x smaller bundle) for browser-heavy apps. Same idea, different ergonomics.
 
-### If you're really minimal — io-ts or Yup
+### If you're really minimal, io-ts or Yup
 
 Both predate Zod. io-ts is more functional, Yup is more form-focused. Both are still maintained. If you have one in the codebase, keep it. For new code, Zod is the default.
 
 ## Layer 3: Business validation
 
-Schema says "age is between 0 and 150." Business says "users under 13 can't sign up without parental consent." That's not in the schema — it's in your domain.
+Schema says "age is between 0 and 150." Business says "users under 13 can't sign up without parental consent." That's not in the schema, it's in your domain.
 
 Don't try to encode this in JSON Schema. The spec supports `if/then/else` and `dependencies`, but readability collapses fast. Two clean approaches:
 
@@ -204,7 +208,7 @@ Some rough numbers for 1KB payloads on a 2024 M1 Mac:
 | Zod (typical schema) | ~80,000 |
 | Hand-rolled if-checks | ~1,000,000 |
 
-Translation: validators are not the bottleneck for 99% of systems. Pick for ergonomics, not speed. If you really need the last 10× of performance, AJV with `allErrors: false` is the standard answer — but you've probably got bigger fish to fry.
+Translation: validators are not the bottleneck for 99% of systems. Pick for ergonomics, not speed. If you really need the last 10× of performance, AJV with `allErrors: false` is the standard answer, but you've probably got bigger fish to fry.
 
 ## Recommended workflow
 
@@ -220,7 +224,7 @@ The mistake nobody warns about: writing your own validator. Loops of `if (typeof
 
 **Related tools on DevTools Online:**
 
-- [JSON Schema Validator](/json-tools/json-schema-validator/) — paste schema + data, see errors
-- [JSON Formatter](/json-tools/json-formatter/) — syntactic validation with line context
-- [JSON to TypeScript](/json-tools/json-to-typescript/) — generate types to pair with your validator
-- [JSON Diff](/json-tools/json-diff/) — compare expected vs actual when validation fails
+- [JSON Schema Validator](/json-tools/json-schema-validator/), paste schema + data, see errors
+- [JSON Formatter](/json-tools/json-formatter/), syntactic validation with line context
+- [JSON to TypeScript](/json-tools/json-to-typescript/), generate types to pair with your validator
+- [JSON Diff](/json-tools/json-diff/), compare expected vs actual when validation fails

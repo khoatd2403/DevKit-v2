@@ -18,19 +18,19 @@ cover: "/og-image.svg"
 excerpt: "The User-Agent string is a 30-year-old archaeology site. Every browser still claims to be Mozilla 5.0. Chrome claims to be Safari. The reasons are historical and the parsing is a tax we still pay."
 ---
 
-Here's a User-Agent string from a 2026 Chrome on a 2026 MacBook:
+Look at this User-Agent string. It is from Chrome 130 on a 2026 MacBook running macOS 14:
 
 ```
 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36
 ```
 
-Read it carefully. It claims to be Mozilla. It mentions AppleWebKit. It says "like Gecko" (Gecko is Firefox's engine). It says it's Safari. And, at the end, it admits to being Chrome.
+It is not Mozilla. It is not Apple WebKit (well, technically Blink, a fork). It is not "like Gecko" (Gecko is Firefox). It is *certainly* not Safari. The MacBook is Apple Silicon, not Intel, and macOS isn't 10.15.
 
-Every word in this string except "Chrome" is a lie. They're all there because removing any of them would break some website that does crude string matching. This is the User-Agent string. It is broken by design and the design is fixed.
+**Every word except "Chrome" is a lie.** And we keep all the lies because if we removed any of them, websites with crude string matching would break. This is the most embarrassing string in HTTP, and we still ship it on every request, in 2026, three decades after the original sin. The reason we still parse it is because nobody has agreed on a replacement that's also widely deployed. Welcome.
 
 ## A quick history
 
-In 1993, Netscape (a.k.a. Mozilla) was the popular browser. Servers checked the UA for "Mozilla" and served fancy frames. When Microsoft launched IE in 1995, IE wanted to load those same fancy pages — so IE's UA included "Mozilla."
+In 1993, Netscape (a.k.a. Mozilla) was the popular browser. Servers checked the UA for "Mozilla" and served fancy frames. When Microsoft launched IE in 1995, IE wanted to load those same fancy pages, so IE's UA included "Mozilla."
 
 Then Safari came along, wanting to be served the JavaScript that IE got. So Safari claimed to be "like Gecko" (Mozilla's rendering engine).
 
@@ -38,7 +38,7 @@ Then Chrome came along. Chrome is built on WebKit (originally), then Blink (fork
 
 The result: every browser carries 30 years of identifier baggage to be backward-compatible with sniffing code that nobody maintains.
 
-You can see your own UA in [User-Agent Parser](/web-tools/user-agent-parser/) — paste the raw string and see the parsed components.
+You can see your own UA in [User-Agent Parser](/web-tools/user-agent-parser/), paste the raw string and see the parsed components.
 
 ## The structure
 
@@ -78,16 +78,16 @@ Edge claims to be Chrome which claims to be Safari which claims to be Mozilla. E
 
 Despite the chaos, parsers can pull out:
 
-- **Browser name** (Chrome, Firefox, Safari, Edge, etc.) — match the **last** identifier
-- **Browser version** — match the version after the browser name
-- **Operating system** (macOS, Windows, iOS, Android, Linux) — pattern match the system info section
-- **Device type** (desktop, mobile, tablet) — heuristic from "Mobile" / "Tablet" tokens
+- **Browser name** (Chrome, Firefox, Safari, Edge, etc.), match the **last** identifier
+- **Browser version**: match the version after the browser name
+- **Operating system** (macOS, Windows, iOS, Android, Linux), pattern match the system info section
+- **Device type** (desktop, mobile, tablet), heuristic from "Mobile" / "Tablet" tokens
 
 What you **can't** reliably extract:
 
-- **OS version on iOS** — Safari on iPhone reports `iPhone OS 17_5`, but iPad Safari may report `Mac OS X` (since iPadOS 13)
-- **CPU architecture** — `Intel Mac OS X 10_15_7` is a Chrome lie. Apple Silicon Macs all report Intel for compatibility
-- **Specific iPhone model** — `iPhone15,2` doesn't appear; only "iPhone"
+- **OS version on iOS**: Safari on iPhone reports `iPhone OS 17_5`, but iPad Safari may report `Mac OS X` (since iPadOS 13)
+- **CPU architecture**: `Intel Mac OS X 10_15_7` is a Chrome lie. Apple Silicon Macs all report Intel for compatibility
+- **Specific iPhone model**: `iPhone15,2` doesn't appear; only "iPhone"
 - **Whether the user is in private mode**
 
 ## Use a library, never a regex
@@ -95,7 +95,7 @@ What you **can't** reliably extract:
 User-Agent parsing is the kind of thing that looks easy and is full of edge cases. Don't roll your own:
 
 - **JavaScript**: `ua-parser-js` is the standard. Maintained, ~50KB.
-- **Python**: `user-agents` (Pelle Krøgh) — wraps the same regexes used by `ua-parser-js`.
+- **Python**: `user-agents` (Pelle Krøgh), wraps the same regexes used by `ua-parser-js`.
 - **Go**: `mileusna/useragent` is small and fast.
 - **Server-side log analysis**: most analytics tools (GA, Plausible) parse for you.
 
@@ -134,7 +134,7 @@ Accept-CH: Sec-CH-UA-Platform-Version, Sec-CH-UA-Arch
 
 Subsequent requests include those headers.
 
-In 2026, Chrome / Edge / Brave support Client Hints fully. Firefox and Safari are partial. The User-Agent string has been gradually frozen — Chrome no longer puts the minor OS version there, for instance — to push developers to Client Hints.
+In 2026, Chrome / Edge / Brave support Client Hints fully. Firefox and Safari are partial. The User-Agent string has been gradually frozen. Chrome no longer puts the minor OS version there, for instance, to push developers to Client Hints.
 
 Practical take: read Client Hints if available, fall back to UA parsing for older clients. Most modern analytics libraries do this transparently.
 
@@ -217,7 +217,7 @@ The summary: User-Agent is a 30-year accumulation of compatibility hacks. It's l
 
 **Related tools on DevTools Online:**
 
-- [User-Agent Parser](/web-tools/user-agent-parser/) — paste UA, see parsed structure
-- [HTTP Request Builder](/web-tools/http-request-builder/) — send custom UA strings for testing
+- [User-Agent Parser](/web-tools/user-agent-parser/), paste UA, see parsed structure
+- [HTTP Request Builder](/web-tools/http-request-builder/), send custom UA strings for testing
 - [HTTP Security Headers](/web-tools/http-headers-builder/) — `Accept-CH` and Client Hints
-- [DNS Lookup](/web-tools/dns-lookup/) — for resolving hosts under different UA contexts
+- [DNS Lookup](/web-tools/dns-lookup/), for resolving hosts under different UA contexts

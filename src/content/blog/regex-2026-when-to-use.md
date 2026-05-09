@@ -18,9 +18,11 @@ cover: "/og-image.svg"
 excerpt: "If you've ever spent two days debugging a regex that 'worked on the test cases,' this post is for you. Regex has a sweet spot. Outside it, every problem is harder than the regex you're tempted to write."
 ---
 
-A timeless internet artifact: someone asks how to parse HTML with regex. Someone else replies with a Stack Overflow answer that has become folklore — a deranged-looking ASCII art that depicts the original asker descending into madness. The lesson is correct: don't parse HTML with regex.
+There is a specific kind of regex bug I have learned to recognize. It always shows up in PR review. The author has a 200-character regex with three nested lookaheads, and the description says *"matches all valid email addresses."* I have one comment for these PRs, and it has been the same comment for years: **delete this and use a library**.
 
-The lesson is also incomplete. Regex is the right tool for many things. It's the wrong tool for many others. The line is the difference between "ten-minute fix" and "we've been chasing this bug for three days."
+The regex usually does technically match the test cases. It also fails on the next email address you throw at it, because email addresses are stupid (RFC 5321 allows `"Mr.\ \"Jones\""@example.com` and yes that's valid) and because regex is the wrong tool for "validate this complex grammar." But people keep trying, because regex looks like the cool tool, and "I wrote it myself" feels like victory.
+
+This post is the line between regex's actual sweet spot and the territory where every engineer eventually loses. Knowing the line is the only thing that prevents the 200-character lookahead PR.
 
 ## TL;DR
 
@@ -58,7 +60,7 @@ const match = text.match(/Order #(\d+) placed on (\d{4}-\d{2}-\d{2})/)
 // match[1] = "12345", match[2] = "2026-05-09"
 ```
 
-For pulling fixed-pattern data out of strings, regex is the right tool. Build patterns interactively in [Regex Tester](/web-tools/regex-tester/) — paste text, write pattern, see matches and groups in real time.
+For pulling fixed-pattern data out of strings, regex is the right tool. Build patterns interactively in [Regex Tester](/web-tools/regex-tester/), paste text, write pattern, see matches and groups in real time.
 
 ### Find-and-replace
 
@@ -79,7 +81,7 @@ When the substitution rule fits a regex, regex is concise and readable.
 "a, b, \"c, d\", e".split(/,\s*/)
 ```
 
-Wait — that example **doesn't work** for quoted fields. That's the segue.
+Wait, that example **doesn't work** for quoted fields. That's the segue.
 
 ## What regex is bad at
 
@@ -141,7 +143,7 @@ Even simple "rename `foo` to `bar`" can break with regex if `foo` appears in str
 
 ### Free-form natural language
 
-Phone numbers in text? Sometimes. Names? "John Smith" works; "李小龙" doesn't fit your `[A-Za-z]+` regex. Addresses? Forget it — they're a tar pit of country-specific formats.
+Phone numbers in text? Sometimes. Names? "John Smith" works; "李小龙" doesn't fit your `[A-Za-z]+` regex. Addresses? Forget it, they're a tar pit of country-specific formats.
 
 For natural language tasks, NLP libraries (or LLMs) are the answer. Regex breaks on the first edge case.
 
@@ -159,7 +161,7 @@ The big trap: **regex isn't one language**. JavaScript, Python, .NET, PCRE, Go, 
 
 A regex written in PCRE that uses recursion **won't work** in JavaScript. A regex that uses lookbehind **won't work in Go**. Test in the actual flavor you'll deploy with.
 
-[Regex Tester](/web-tools/regex-tester/) tests JavaScript regex specifically — the most common in browsers and Node. For Python regex, use `regex101.com` with the Python flavor selected.
+[Regex Tester](/web-tools/regex-tester/) tests JavaScript regex specifically, the most common in browsers and Node. For Python regex, use `regex101.com` with the Python flavor selected.
 
 ## Performance pitfalls
 
@@ -172,7 +174,7 @@ A regex written in PCRE that uses recursion **won't work** in JavaScript. A rege
 
 For 27 'a's followed by '!', this regex takes seconds (or hangs forever). Each `a+` can match in many ways; trying all combinations is exponential.
 
-In production, this is **ReDoS** (Regex Denial of Service) — feeding a malicious regex input causes the server to hang. NPM's `safe-regex` package can help spot vulnerable patterns:
+In production, this is **ReDoS** (Regex Denial of Service), feeding a malicious regex input causes the server to hang. NPM's `safe-regex` package can help spot vulnerable patterns:
 
 ```bash
 npm install -g safe-regex
@@ -315,7 +317,7 @@ The summary: regex is a sharp tool. It does some things faster and more concisel
 
 **Related tools on DevTools Online:**
 
-- [Regex Tester](/web-tools/regex-tester/) — interactive testing with highlights and groups
-- [Text Diff](/string-tools/text-diff/) — for "regex matched the wrong thing" debugging
-- [String Inspector](/string-tools/string-inspector/) — see invisible characters that mess with patterns
-- [JSON Formatter](/json-tools/json-formatter/) — when regex is the wrong tool for JSON
+- [Regex Tester](/web-tools/regex-tester/), interactive testing with highlights and groups
+- [Text Diff](/string-tools/text-diff/), for "regex matched the wrong thing" debugging
+- [String Inspector](/string-tools/string-inspector/), see invisible characters that mess with patterns
+- [JSON Formatter](/json-tools/json-formatter/), when regex is the wrong tool for JSON

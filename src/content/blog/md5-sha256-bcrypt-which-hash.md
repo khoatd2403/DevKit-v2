@@ -1,7 +1,7 @@
 ---
-title: "MD5 Is Dead. SHA-256, SHA-512, BCrypt — Picking the Right Hash for the Job"
+title: "MD5 Is Dead. SHA-256, SHA-512, BCrypt. Picking the Right Hash for the Job"
 slug: "md5-sha256-bcrypt-which-hash"
-description: "Hashes for passwords, hashes for integrity, hashes for deduplication — all different requirements, all different algorithms. Here's the matrix."
+description: "Hashes for passwords, hashes for integrity, hashes for deduplication, all different requirements, all different algorithms. Here's the matrix."
 date: "2026-05-09"
 author: "DevTools Online Team"
 keywords:
@@ -16,10 +16,12 @@ tags:
   - Crypto
   - Comparison
 cover: "/og-image.svg"
-excerpt: "MD5 still has uses in 2026. Hashing passwords isn't one of them. Pick the algorithm based on what you're protecting against — collisions, brute force, or just integrity."
+excerpt: "MD5 still has uses in 2026. Hashing passwords isn't one of them. Pick the algorithm based on what you're protecting against, collisions, brute force, or just integrity."
 ---
 
-A new engineer asks: "Which hash should I use?" The honest answer is "It depends on what you're trying to do." That answer never satisfies anyone, so here's the practical version: a matrix that maps your problem to the right algorithm.
+"MD5 is broken, use SHA-256" gets repeated like scripture. It's also wrong half the time it's said. MD5 is fine for cache keys, file deduplication, and checksums against transmission errors. SHA-256 is wrong for password storage. The "use this, never that" rules of thumb skip the actual question, which is: **what are you protecting against?**
+
+The honest answer to "which hash should I use" depends on whether you're worried about (a) random bit-flips, (b) someone crafting a malicious file with the same hash as a benign one, or (c) someone with a GPU farm trying to brute-force passwords from a leaked database. Different threats, different algorithms. Below is the matrix that actually maps to those threats.
 
 ## TL;DR matrix
 
@@ -42,14 +44,14 @@ There are three things people call "hashing" that are actually different:
 
 Designed to be fast, irreversible, and collision-resistant. Use for:
 
-- **Integrity checks** — does this download match what I expected?
-- **Commitments** — I won't reveal X yet, but here's its hash to prove it later.
-- **HMAC** — message authentication.
-- **Block chains** — content addressing.
+- **Integrity checks**: does this download match what I expected?
+- **Commitments**: I won't reveal X yet, but here's its hash to prove it later.
+- **HMAC**: message authentication.
+- **Block chains**: content addressing.
 
 ### 2. Password hashes (bcrypt, argon2, scrypt)
 
-Designed to be **slow** — slow enough that brute-forcing is impractical even with a GPU farm. They use salts, iteration counts, and (for argon2 and scrypt) memory hardness.
+Designed to be **slow**: slow enough that brute-forcing is impractical even with a GPU farm. They use salts, iteration counts, and (for argon2 and scrypt) memory hardness.
 
 Use for:
 
@@ -57,13 +59,13 @@ Use for:
 
 ### 3. Non-cryptographic hashes (xxHash, MurmurHash)
 
-Designed for speed in hash tables and dedup keys. **Not collision-resistant for adversaries** — but very fast for honest workloads.
+Designed for speed in hash tables and dedup keys. **Not collision-resistant for adversaries**: but very fast for honest workloads.
 
 Use for:
 
 - **Hash tables**, **bloom filters**, **sharding**.
 
-If you mix these up — say, use SHA-256 for password storage, or xxHash for integrity — you get a system that's correct in the abstract but wrong for your threat model.
+If you mix these up, say, use SHA-256 for password storage, or xxHash for integrity, you get a system that's correct in the abstract but wrong for your threat model.
 
 ## Why MD5 is dead (for security)
 
@@ -74,9 +76,9 @@ MD5 was state of the art in 1992. By 2005, researchers could generate two differ
 
 What MD5 is still fine for in 2026:
 
-- **Cache keys** — collisions happen by accident roughly never; for cache invalidation, fine.
-- **Checksums against transmission errors** — random bit flips, fine.
-- **Internal dedup IDs** — if no adversary can craft inputs.
+- **Cache keys**: collisions happen by accident roughly never; for cache invalidation, fine.
+- **Checksums against transmission errors**: random bit flips, fine.
+- **Internal dedup IDs**: if no adversary can craft inputs.
 
 What it is **not** fine for: passwords, signatures, downloads from untrusted sources, anything where someone might benefit from a collision.
 
@@ -86,12 +88,12 @@ SHA-256 is part of the SHA-2 family. It's:
 
 - **Standardized** (NIST, FIPS 180-4)
 - **Fast on modern CPUs** (~500 MB/s on a 2024 laptop, faster with hardware acceleration)
-- **Collision-free in practice** — no real attack has been published
-- **Universally supported** — every language, every platform
+- **Collision-free in practice**: no real attack has been published
+- **Universally supported**: every language, every platform
 
 SHA-512 is essentially the same algorithm with larger internal state. It's slightly faster than SHA-256 on 64-bit machines (because of 64-bit operations) and slightly slower on 32-bit. The output is twice as long. Pick SHA-256 unless you specifically need 512 bits (rare).
 
-[Hash Generator](/security-tools/hash-generator/) supports MD5, SHA-1, SHA-256, SHA-512, and BCrypt — paste a string and get all of them at once.
+[Hash Generator](/security-tools/hash-generator/) supports MD5, SHA-1, SHA-256, SHA-512, and BCrypt, paste a string and get all of them at once.
 
 ## Why bcrypt is the default for passwords
 
@@ -126,7 +128,7 @@ bcrypt has two well-known issues:
 - **72-byte limit**: any password longer than 72 bytes is silently truncated. If your "password" is a passphrase or a long random string, this matters. Workaround: pre-hash with SHA-256 and Base64 the result, then bcrypt that.
 - **Not memory-hard**: GPU brute-force is faster against bcrypt than against argon2 or scrypt because GPUs do many parallel hash computations. For very high-value targets, **argon2id** is preferred.
 
-For new systems in 2026, **argon2id is arguably the better default**. We've written a [direct comparison](/blog/bcrypt-vs-argon2/). bcrypt remains the safe choice for stability — argon2 is slightly newer and library support, while widespread, isn't quite as universal.
+For new systems in 2026, **argon2id is arguably the better default**. We've written a [direct comparison](/blog/bcrypt-vs-argon2/). bcrypt remains the safe choice for stability, argon2 is slightly newer and library support, while widespread, isn't quite as universal.
 
 ## Salts: yes, you need them. No, you don't generate them.
 
@@ -168,17 +170,17 @@ Note the cliff: cryptographic hashes are millions of times faster than password 
 2. **Verifying file integrity**: SHA-256. Most package registries publish SHA-256 hashes.
 3. **API request signing**: HMAC-SHA256 with a per-client secret.
 4. **Quick "is this the same"**: SHA-256 (or MD5 if not adversarial).
-5. **Hash table internals**: xxHash64 — faster than cryptographic, fine for non-adversarial inputs.
+5. **Hash table internals**: xxHash64, faster than cryptographic, fine for non-adversarial inputs.
 
 The mistake: using a cryptographic hash for passwords. SHA-256 is too fast. A modern GPU does 10 billion SHA-256 hashes per second. Even with a salt, your users' passwords aren't safe under SHA-256. Always use a password-specific algorithm.
 
-For ad-hoc work, [Hash Generator](/security-tools/hash-generator/) and [bcrypt](/security-tools/bcrypt/) both run in your browser — no input leaves the page.
+For ad-hoc work, [Hash Generator](/security-tools/hash-generator/) and [bcrypt](/security-tools/bcrypt/) both run in your browser, no input leaves the page.
 
 ---
 
 **Related tools on DevTools Online:**
 
-- [Hash Generator](/security-tools/hash-generator/) — MD5, SHA-1, SHA-256, SHA-512 in one place
-- [bcrypt](/security-tools/bcrypt/) — generate and verify bcrypt hashes
-- [Password Generator](/security-tools/password-generator/) — for generating high-entropy inputs
-- [HMAC Generator](/security-tools/hash-generator/) — for API signing
+- [Hash Generator](/security-tools/hash-generator/). MD5, SHA-1, SHA-256, SHA-512 in one place
+- [bcrypt](/security-tools/bcrypt/), generate and verify bcrypt hashes
+- [Password Generator](/security-tools/password-generator/), for generating high-entropy inputs
+- [HMAC Generator](/security-tools/hash-generator/), for API signing

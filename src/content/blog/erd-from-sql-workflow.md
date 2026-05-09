@@ -1,5 +1,5 @@
 ---
-title: "Generating ER Diagrams from SQL Schemas — A 2026 Workflow"
+title: "Generating ER Diagrams from SQL Schemas: A 2026 Workflow"
 slug: "erd-from-sql-workflow"
 description: "Modern teams skip the diagram-first design phase and generate ER diagrams from CREATE TABLE statements. Here's how to do it well, and when to draw by hand instead."
 date: "2026-05-09"
@@ -18,31 +18,29 @@ cover: "/og-image.svg"
 excerpt: "Database design used to start with a hand-drawn ER diagram. In 2026, most teams write SQL first and generate the diagram. Both approaches work. Knowing when to use which is the trick."
 ---
 
-In college, the textbook way to design a database starts with an Entity-Relationship diagram. You sit down with rectangles and diamonds, sketch out users, orders, products, and the relationships between them. Then you translate to SQL.
+When we onboarded our last batch of contractors, we asked each of them to walk us through how they design a new database table. Five out of six described the same workflow we use: write the migration, run it, generate the ER diagram from the resulting schema, commit the diagram. Zero started with a hand-drawn ERD on a whiteboard. The sixth one had been doing it the textbook way and switched mid-sprint when she saw how much faster the rest of us shipped.
 
-In real teams, almost nobody does this anymore. They write `CREATE TABLE` statements directly, and generate the ER diagram from the schema **after** as documentation. The textbooks haven't caught up, but the tooling has.
-
-This is when each approach makes sense, and how to do the generation step well.
+We've been running schema-first for about three years now. The ER diagram still exists, it's just downstream — generated from `CREATE TABLE` statements, committed alongside the migration, automatically updated on every schema change. Below is the workflow we settled on, what we tried before, and the cases where we still draw the diagram first.
 
 ## When to draw the ERD first
 
 The diagram-first approach (sometimes called "data modeling") is still right for:
 
-- **Greenfield database** with complex domain logic — finance, healthcare, e-commerce with many entities.
+- **Greenfield database** with complex domain logic, finance, healthcare, e-commerce with many entities.
 - **Early-stage product** where requirements are unclear and visualizing helps stakeholders argue.
-- **Migrating from another system** — the source schema is already an ERD, you redesign on paper.
+- **Migrating from another system**: the source schema is already an ERD, you redesign on paper.
 - **Educational settings** where you're learning normalization.
 
-For these, draw on a whiteboard or in [Mermaid Diagram Creator](/dotnet-tools/diagram-creator/) using the `erDiagram` syntax. Iterate, then translate to SQL.
+For these, draw on a whiteboard or in [Mermaid Diagram Creator](/misc-tools/diagram-creator/) using the `erDiagram` syntax. Iterate, then translate to SQL.
 
 ## When to write SQL first
 
 For most teams, most of the time:
 
-- **Adding to an existing schema** — there are already 50 tables; you're adding a new feature.
-- **Microservices** with small per-service databases — typically 5-10 tables, easy to keep in your head.
-- **Schema migrations** — you're writing migrations directly anyway, the migration files **are** the source of truth.
-- **ORM-defined schemas** — Prisma, Drizzle, TypeORM — the schema is in code; the SQL is generated.
+- **Adding to an existing schema**: there are already 50 tables; you're adding a new feature.
+- **Microservices** with small per-service databases, typically 5-10 tables, easy to keep in your head.
+- **Schema migrations**: you're writing migrations directly anyway, the migration files **are** the source of truth.
+- **ORM-defined schemas**: Prisma, Drizzle, TypeORM — the schema is in code; the SQL is generated.
 
 In these cases, drawing first adds friction. Write the migration, generate a diagram for documentation.
 
@@ -91,17 +89,17 @@ Get an interactive diagram with arrows showing FK relationships. Drag tables aro
 
 A useful generated diagram should:
 
-- **Group related tables visually** — users + orders + order_items should cluster, not scatter.
-- **Show cardinality** — one-to-many vs many-to-many.
-- **Indicate primary and foreign keys** — usually with PK / FK markers.
-- **Distinguish nullable vs required FKs** — a NOT NULL FK is a required relationship.
+- **Group related tables visually**: users + orders + order_items should cluster, not scatter.
+- **Show cardinality**: one-to-many vs many-to-many.
+- **Indicate primary and foreign keys**: usually with PK / FK markers.
+- **Distinguish nullable vs required FKs**: a NOT NULL FK is a required relationship.
 
 What it usually doesn't show, and what you should add by hand:
 
 - **Soft-delete columns** (e.g., `deleted_at`) and what they imply for queries.
-- **Domain meaning** — "this enum is the order status state machine."
-- **Performance hints** — which columns are indexed, which queries are hot.
-- **Cross-database relationships** — foreign keys to tables in other services.
+- **Domain meaning**: "this enum is the order status state machine."
+- **Performance hints**: which columns are indexed, which queries are hot.
+- **Cross-database relationships**: foreign keys to tables in other services.
 
 For these, supplement the auto-generated diagram with notes or a separate "data dictionary" document.
 
@@ -144,10 +142,10 @@ erDiagram
 
 Cardinality notation:
 
-- `||--||` — exactly one to exactly one
-- `||--o{` — exactly one to zero-or-more (the most common)
-- `||--|{` — exactly one to one-or-more
-- `}o--o{` — zero-or-more to zero-or-more (junction table)
+- `||--||`, exactly one to exactly one
+- `||--o{`, exactly one to zero-or-more (the most common)
+- `||--|{`, exactly one to one-or-more
+- `}o--o{`, zero-or-more to zero-or-more (junction table)
 
 The advantage of Mermaid ERDs over screenshot-style diagrams: it's text. Diff-friendly, git-friendly, AI-friendly.
 
@@ -245,7 +243,7 @@ Tables only, key relationships only. Save the full ERD for engineering docs.
 ## Recommended workflow
 
 1. **For new schemas**: write SQL migrations directly. Generate diagrams from the result.
-2. **For ad-hoc visualization**: paste schema into [ERD Diagram](/dotnet-tools/erd-diagram/) — interactive, drag-friendly.
+2. **For ad-hoc visualization**: paste schema into [ERD Diagram](/dotnet-tools/erd-diagram/), interactive, drag-friendly.
 3. **For repo-bound docs**: Mermaid `erDiagram` syntax. Commit alongside migrations.
 4. **For ORM-managed schemas**: use the ORM's diagram generator (`prisma-erd-generator`, `dbml-renderer`).
 5. **For stakeholder communication**: draw a simplified version by hand. Don't show them the 30-table production ERD.
@@ -256,7 +254,7 @@ The principle: diagrams are most valuable when they're cheap to keep current. Au
 
 **Related tools on DevTools Online:**
 
-- [ERD Diagram](/dotnet-tools/erd-diagram/) — paste SQL, see ERD
-- [SQL Formatter](/formatter-tools/sql-formatter/) — format your CREATE TABLE before pasting
-- [Mermaid Diagram Creator](/dotnet-tools/diagram-creator/) — for hand-edited ERDs
-- [SQL Plan Viewer](/dotnet-tools/sql-plan-viewer/) — for query optimization on the same schema
+- [ERD Diagram](/dotnet-tools/erd-diagram/), paste SQL, see ERD
+- [SQL Formatter](/formatter-tools/sql-formatter/), format your CREATE TABLE before pasting
+- [Mermaid Diagram Creator](/misc-tools/diagram-creator/), for hand-edited ERDs
+- [SQL Plan Viewer](/dotnet-tools/sql-plan-viewer/), for query optimization on the same schema

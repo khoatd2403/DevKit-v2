@@ -26,8 +26,8 @@ SQL is a real programming language, and it deserves the same formatting hygiene 
 
 A few historical reasons, none good:
 
-1. **GUI clients don't format.** SSMS, MySQL Workbench, DBeaver — most have a "format" button buried in a menu, and most users never find it.
-2. **Strings in code don't get formatted.** SQL embedded in Java, Python, Node — the formatter for the host language doesn't touch SQL strings.
+1. **GUI clients don't format.** SSMS, MySQL Workbench, DBeaver, most have a "format" button buried in a menu, and most users never find it.
+2. **Strings in code don't get formatted.** SQL embedded in Java, Python, Node, the formatter for the host language doesn't touch SQL strings.
 3. **AI-generated SQL is one-line.** Copy-paste from ChatGPT often loses formatting.
 4. **No standard.** Unlike JavaScript (Prettier) or Python (Black), SQL doesn't have a single "this is the format" tool everyone agrees on.
 
@@ -56,12 +56,12 @@ LIMIT 100;
 
 The rules:
 
-- **Keywords UPPERCASE.** `SELECT`, `FROM`, `WHERE`, `JOIN` — always uppercase. Identifiers (`users`, `o.user_id`) lowercase.
+- **Keywords UPPERCASE.** `SELECT`, `FROM`, `WHERE`, `JOIN`, always uppercase. Identifiers (`users`, `o.user_id`) lowercase.
 - **One column per line in SELECT** when more than 2-3 columns.
 - **Each major clause on its own line** at the same indent level (`FROM`, `JOIN`, `WHERE`, `GROUP BY`, etc.).
 - **JOIN conditions indented** one level deeper than the JOIN keyword.
 - **WHERE and JOIN conditions, one per line** when more than 2.
-- **Aliases short and lowercase** — `u` for users, not `users_alias`.
+- **Aliases short and lowercase**: `u` for users, not `users_alias`.
 
 It looks vertical. That's the point. A 50-line vertical query is readable; a 5-line horizontal query of the same content is not.
 
@@ -142,8 +142,8 @@ For complex queries with 3+ CTEs, name them by what they represent (`recent_orde
 
 Fast, no install, paste-and-format:
 
-- [SQL Formatter](/formatter-tools/sql-formatter/) — DevTools Online's formatter, browser-side
-- `sqlformat.org`, `poorsql.com` — alternatives, similar features
+- [SQL Formatter](/formatter-tools/sql-formatter/). DevTools Online's formatter, browser-side
+- `sqlformat.org`, `poorsql.com`, alternatives, similar features
 
 For one-off queries, this is the simplest path.
 
@@ -151,10 +151,10 @@ For one-off queries, this is the simplest path.
 
 For code in version control, you want a formatter that can run on save or in CI:
 
-- **`sqlfluff`** — Python-based, supports multiple SQL dialects, has a linter mode too. The standard for serious SQL projects in 2026.
-- **`pgFormatter`** — Perl, focused on PostgreSQL, very fast.
-- **DBeaver / DataGrip / pgAdmin** — built-in formatters, configurable.
-- **Prettier** with the `prettier-plugin-sql` plugin — works for embedded SQL strings, but not as nuanced as `sqlfluff`.
+- **`sqlfluff`**: Python-based, supports multiple SQL dialects, has a linter mode too. The standard for serious SQL projects in 2026.
+- **`pgFormatter`**: Perl, focused on PostgreSQL, very fast.
+- **DBeaver / DataGrip / pgAdmin**: built-in formatters, configurable.
+- **Prettier** with the `prettier-plugin-sql` plugin, works for embedded SQL strings, but not as nuanced as `sqlfluff`.
 
 ```bash
 # Install sqlfluff
@@ -212,7 +212,7 @@ FROM users u
 JOIN orders o ON o.user_id = u.id
 ```
 
-Single-letter aliases for every table. Even if a query has only one table, alias it — refactoring is easier when columns are always qualified.
+Single-letter aliases for every table. Even if a query has only one table, alias it, refactoring is easier when columns are always qualified.
 
 ### `INNER JOIN` over `JOIN`
 
@@ -227,18 +227,18 @@ In an exploratory query, fine. In application code, never. `SELECT *` breaks whe
 - The order of columns changes
 - The query joins multiple tables and a column name collides
 
-List the columns explicitly. If you're querying 20 columns, that's a sign — maybe the table needs splitting, or the query needs to use a more focused subquery.
+List the columns explicitly. If you're querying 20 columns, that's a sign, maybe the table needs splitting, or the query needs to use a more focused subquery.
 
 ### Don't put logic in `WHERE` that belongs in `JOIN`
 
 ```sql
--- Confusing — moves a join condition to WHERE
+-- Confusing, moves a join condition to WHERE
 SELECT u.id, o.id
 FROM users u
 LEFT JOIN orders o ON o.user_id = u.id
 WHERE o.status = 'completed';  -- effectively turns LEFT JOIN into INNER JOIN
 
--- Clear — keeps join logic in JOIN
+-- Clear, keeps join logic in JOIN
 SELECT u.id, o.id
 FROM users u
 LEFT JOIN orders o
@@ -246,13 +246,13 @@ LEFT JOIN orders o
     AND o.status = 'completed';  -- preserves NULL rows from u
 ```
 
-The first version surprises reviewers (the `LEFT JOIN` is a lie — the `WHERE` filters out NULLs). The second is honest about the intent.
+The first version surprises reviewers (the `LEFT JOIN` is a lie, the `WHERE` filters out NULLs). The second is honest about the intent.
 
 ## When SQL is in code
 
 If your query is a string in TypeScript or Python, formatting depends on your stack:
 
-- **Inline strings** in code — write them properly indented:
+- **Inline strings** in code, write them properly indented:
 
   ```ts
   const sql = `
@@ -264,11 +264,11 @@ If your query is a string in TypeScript or Python, formatting depends on your st
   `
   ```
 
-- **External `.sql` files** — let `sqlfluff` format them. Your editor opens them as SQL, you get syntax highlighting and formatting for free.
+- **External `.sql` files**: let `sqlfluff` format them. Your editor opens them as SQL, you get syntax highlighting and formatting for free.
 
-- **ORMs and query builders** (Prisma, Drizzle, Knex) — they generate SQL for you; readability is on them. Inspect generated SQL with the ORM's debug output.
+- **ORMs and query builders** (Prisma, Drizzle, Knex), they generate SQL for you; readability is on them. Inspect generated SQL with the ORM's debug output.
 
-- **dbt models** — `.sql` files with Jinja templating. `sqlfluff` supports them with the `jinja` templater.
+- **dbt models**: `.sql` files with Jinja templating. `sqlfluff` supports them with the `jinja` templater.
 
 ## Recommended workflow
 
@@ -284,7 +284,7 @@ The takeaway: SQL is code. Treat it like code. Format it like code. Review it li
 
 **Related tools on DevTools Online:**
 
-- [SQL Formatter](/formatter-tools/sql-formatter/) — paste, format, copy
-- [SQL to LINQ](/dotnet-tools/sql-to-linq/) — for .NET teams converting SQL to ORM
-- [ERD Diagram](/dotnet-tools/erd-diagram/) — visualize schema
-- [SQL Plan Viewer](/dotnet-tools/sql-plan-viewer/) — for query optimization
+- [SQL Formatter](/formatter-tools/sql-formatter/), paste, format, copy
+- [SQL to LINQ](/dotnet-tools/sql-to-linq/), for .NET teams converting SQL to ORM
+- [ERD Diagram](/dotnet-tools/erd-diagram/), visualize schema
+- [SQL Plan Viewer](/dotnet-tools/sql-plan-viewer/), for query optimization

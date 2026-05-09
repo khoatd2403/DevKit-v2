@@ -19,9 +19,9 @@ cover: "/og-image.svg"
 excerpt: "A JWT is three Base64URL strings separated by dots. The first two are JSON. The third is a signature. About half the JWT bugs in production come from people forgetting that last detail."
 ---
 
-You receive a token. The API says "Invalid signature." The token looks fine, you've copied it correctly, the secret is right. But the API is firm: invalid.
+2:47am, on-call. Auth gateway is rejecting tokens. Logs say `JsonWebTokenError: invalid signature`. Same secret as yesterday. Same code. Same client. Three engineers on the bridge call. We added more logging. We re-deployed. We rotated the key. We rolled it back. At 4am someone pasted a token into a decoder and noticed a stray `\n` at the end of the secret read from a file. We had been signing with `secret` and verifying with `secret\n`. Three hours, gone.
 
-Welcome to debugging JWT. This is the post that gets you out of that loop.
+I have a list of every weird way JWT signature verification has failed on me over six years on-call. There are about ten of them and they always come back. This post is that list, in order, so the next 2am you have, you walk through it instead of guessing.
 
 ## What's actually in a JWT
 
@@ -33,9 +33,9 @@ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0In0.dBjftJeZ4CVP-mB92K27uhbUJU1p
        Header                Payload                      Signature
 ```
 
-Each part is **Base64URL-encoded** (not Base64 — note the `-` and `_` instead of `+` and `/`, and no padding). The first two parts decode back to JSON. The third is a binary signature, encoded.
+Each part is **Base64URL-encoded** (not Base64, note the `-` and `_` instead of `+` and `/`, and no padding). The first two parts decode back to JSON. The third is a binary signature, encoded.
 
-Decode the header — `{"alg":"HS256"}` — and the payload — `{"sub":"1234"}` — and you've got everything except the cryptographic check. Paste your token into [JWT Decoder](/encoding-tools/jwt-decoder/) and you'll see this in two seconds.
+Decode the header — `{"alg":"HS256"}`, and the payload, `{"sub":"1234"}`, and you've got everything except the cryptographic check. Paste your token into [JWT Decoder](/encoding-tools/jwt-decoder/) and you'll see this in two seconds.
 
 ## What "Invalid signature" actually means
 
@@ -61,7 +61,7 @@ Most common. Worth ruling out first. The secret you used to sign and the secret 
 
 ### 2. The token was modified
 
-JWTs are signed, not encrypted. Changing one character in the payload — even adding a space — invalidates the signature. If you copied a token and editor word-wrap split it across lines, you may have introduced a newline. Strip whitespace and try again.
+JWTs are signed, not encrypted. Changing one character in the payload, even adding a space, invalidates the signature. If you copied a token and editor word-wrap split it across lines, you may have introduced a newline. Strip whitespace and try again.
 
 ### 3. Algorithm mismatch
 
@@ -75,7 +75,7 @@ jwt.verify(token, secret, { algorithms: ['HS256'] })
 
 ### 4. HS256 vs RS256 secret confusion
 
-`HS256` uses a shared secret (HMAC). `RS256` uses an RSA key pair — sign with the private key, verify with the public key. Mixing these:
+`HS256` uses a shared secret (HMAC). `RS256` uses an RSA key pair, sign with the private key, verify with the public key. Mixing these:
 
 - "I'm using the public key to verify HS256" → fails (HS256 is symmetric, no public key)
 - "I'm using the private key for HS256" → works as a string, but the value should be a high-entropy random secret, not your RSA private key
@@ -147,13 +147,13 @@ When you get "Invalid signature":
 
 ### "JWTs are encrypted"
 
-They're not. JWTs are **signed** by default. The payload is plain Base64URL — anyone with the token can read it. If you put sensitive data in a JWT, **anyone with the token can see it**.
+They're not. JWTs are **signed** by default. The payload is plain Base64URL, anyone with the token can read it. If you put sensitive data in a JWT, **anyone with the token can see it**.
 
-If you need encryption, use **JWE** (JSON Web Encryption) — a separate spec that encrypts the payload. Most apps don't, and shouldn't use JWE unless they have a specific reason.
+If you need encryption, use **JWE** (JSON Web Encryption), a separate spec that encrypts the payload. Most apps don't, and shouldn't use JWE unless they have a specific reason.
 
 ### "Long secrets are always better"
 
-For HS256, the secret should be at least 256 bits (32 bytes) of randomness. Beyond that, more length doesn't help. Don't use a passphrase like `"my-secret-key"` — that's about 5 bits of entropy, trivially brute-forceable. Generate a secret:
+For HS256, the secret should be at least 256 bits (32 bytes) of randomness. Beyond that, more length doesn't help. Don't use a passphrase like `"my-secret-key"`, that's about 5 bits of entropy, trivially brute-forceable. Generate a secret:
 
 ```bash
 openssl rand -base64 32
@@ -179,7 +179,7 @@ Despite the gotchas, JWT works well when:
 - **Cross-service auth** where the verifier shouldn't have to call back to the issuer (RS256 + JWKS)
 - **OIDC ID tokens** where the spec mandates JWT format
 
-For session management with revocation needs, consider opaque tokens + a session store. JWT is a hammer — useful, but not for every nail.
+For session management with revocation needs, consider opaque tokens + a session store. JWT is a hammer, useful, but not for every nail.
 
 ## Recommended workflow
 
@@ -195,7 +195,7 @@ JWT is one of those technologies where 80% of the docs are about how to use it a
 
 **Related tools on DevTools Online:**
 
-- [JWT Decoder](/encoding-tools/jwt-decoder/) — paste a token, see header + payload
-- [Hash Generator](/security-tools/hash-generator/) — for testing HMAC-SHA256 manually
-- [Base64 Encode / Decode](/encoding-tools/base64-encode-decode/) — JWT parts are Base64URL
-- [Password Generator](/security-tools/password-generator/) — for generating signing secrets
+- [JWT Decoder](/encoding-tools/jwt-decoder/), paste a token, see header + payload
+- [Hash Generator](/security-tools/hash-generator/), for testing HMAC-SHA256 manually
+- [Base64 Encode / Decode](/encoding-tools/base64-encode-decode/). JWT parts are Base64URL
+- [Password Generator](/security-tools/password-generator/), for generating signing secrets

@@ -18,69 +18,69 @@ cover: "/og-image.svg"
 excerpt: "There are 60+ HTTP status codes. About 25 matter. About 10 are the difference between a clear API and a confusing one. Here's the practical map."
 ---
 
-The HTTP status code catalog is full of curiosities. 418 ("I'm a teapot") was an April Fool's joke and remains in the spec. 451 ("Unavailable For Legal Reasons") references Fahrenheit 451. 308 exists for "permanent redirects but POST stays POST" and almost nobody uses it.
+I have opinions about how many APIs handle status codes, and most of those opinions are *negative*. Returning `200 OK` with `{"status":"error"}` is not creative API design, it's a bug. Returning `500 Internal Server Error` for a validation failure isn't being concise, it's lying to ops. Putting `?` on every endpoint description because "we're not sure if it's idempotent" — please figure that out before you ship.
 
-Most of this trivia doesn't matter. The status codes that show up daily in real APIs are a much smaller set. This post is the practical map.
+There are roughly 60 HTTP status codes in the spec. About **25 matter**. About **10 are the difference** between an API a junior dev can integrate against on the first try and one that gets escalated to staff engineers because nothing makes sense. This post is the practical map, plus the calls I see APIs get wrong every week.
 
 ## The 25 codes that matter
 
 ### 2xx Success
 
-**200 OK** — generic success. The request worked, the response has the data.
+**200 OK**: generic success. The request worked, the response has the data.
 
-**201 Created** — used by POST when creating a resource. Convention: include a `Location` header pointing to the new resource. Many APIs use 200 here; 201 is more correct.
+**201 Created**: used by POST when creating a resource. Convention: include a `Location` header pointing to the new resource. Many APIs use 200 here; 201 is more correct.
 
-**202 Accepted** — request received, processing not yet complete. Useful for async operations: client gets a 202 with a job ID, polls another endpoint for status.
+**202 Accepted**: request received, processing not yet complete. Useful for async operations: client gets a 202 with a job ID, polls another endpoint for status.
 
-**204 No Content** — success, but nothing to send back. Common after DELETE or PUT. Don't include a body. Returning `200 OK` with `{}` is also fine; pick one and stick with it.
+**204 No Content**: success, but nothing to send back. Common after DELETE or PUT. Don't include a body. Returning `200 OK` with `{}` is also fine; pick one and stick with it.
 
-**206 Partial Content** — server is sending only part of the resource (Range request). Used for video streaming, large file downloads.
+**206 Partial Content**: server is sending only part of the resource (Range request). Used for video streaming, large file downloads.
 
 ### 3xx Redirection
 
-**301 Moved Permanently** — resource has a new URL, browsers and search engines should update bookmarks. Tells SEO crawlers "use the new URL going forward."
+**301 Moved Permanently**: resource has a new URL, browsers and search engines should update bookmarks. Tells SEO crawlers "use the new URL going forward."
 
-**302 Found** — temporary redirect. Use for "log in, then come back" flows.
+**302 Found**: temporary redirect. Use for "log in, then come back" flows.
 
-**304 Not Modified** — server confirms cached version is still fresh. Response has no body. Sent in response to `If-Modified-Since` or `If-None-Match` headers.
+**304 Not Modified**: server confirms cached version is still fresh. Response has no body. Sent in response to `If-Modified-Since` or `If-None-Match` headers.
 
-**307 Temporary Redirect** — like 302, but POSTs stay POSTs. 302 was historically loose — different clients converted POST to GET on redirect, others preserved the method. 307 is unambiguous.
+**307 Temporary Redirect**: like 302, but POSTs stay POSTs. 302 was historically loose, different clients converted POST to GET on redirect, others preserved the method. 307 is unambiguous.
 
-**308 Permanent Redirect** — like 301, method-preserving. Almost nobody uses it.
+**308 Permanent Redirect**: like 301, method-preserving. Almost nobody uses it.
 
 ### 4xx Client Errors
 
-**400 Bad Request** — malformed request. JSON parsing failed, required field missing. Generic for "this request is broken."
+**400 Bad Request**: malformed request. JSON parsing failed, required field missing. Generic for "this request is broken."
 
-**401 Unauthorized** — authentication required or failed. Misleadingly named; should be "Unauthenticated." If the user isn't logged in (or token is missing/invalid), this is the right code.
+**401 Unauthorized**: authentication required or failed. Misleadingly named; should be "Unauthenticated." If the user isn't logged in (or token is missing/invalid), this is the right code.
 
-**403 Forbidden** — user is authenticated but lacks permission. They're logged in, but they can't access this specific resource.
+**403 Forbidden**: user is authenticated but lacks permission. They're logged in, but they can't access this specific resource.
 
-**404 Not Found** — resource doesn't exist. Also used (correctly or not) when the user lacks permission and you don't want to acknowledge the resource exists at all.
+**404 Not Found**: resource doesn't exist. Also used (correctly or not) when the user lacks permission and you don't want to acknowledge the resource exists at all.
 
-**405 Method Not Allowed** — endpoint exists, but not for that method. POST to a GET-only endpoint. Response should include an `Allow` header listing the supported methods.
+**405 Method Not Allowed**: endpoint exists, but not for that method. POST to a GET-only endpoint. Response should include an `Allow` header listing the supported methods.
 
-**409 Conflict** — request can't be processed due to current state. Two writes racing on the same resource. The classic E-Tag optimistic locking case.
+**409 Conflict**: request can't be processed due to current state. Two writes racing on the same resource. The classic E-Tag optimistic locking case.
 
-**410 Gone** — resource existed but is permanently removed. Tells crawlers "stop asking for this."
+**410 Gone**: resource existed but is permanently removed. Tells crawlers "stop asking for this."
 
-**415 Unsupported Media Type** — request `Content-Type` isn't one this endpoint accepts. Send JSON to a `multipart/form-data` endpoint, get 415.
+**415 Unsupported Media Type**: request `Content-Type` isn't one this endpoint accepts. Send JSON to a `multipart/form-data` endpoint, get 415.
 
-**422 Unprocessable Entity** — request was syntactically valid (parsed correctly) but semantically wrong (validation failed). Common for form errors: "email format is invalid." Some APIs use 400 here; 422 is more specific.
+**422 Unprocessable Entity**: request was syntactically valid (parsed correctly) but semantically wrong (validation failed). Common for form errors: "email format is invalid." Some APIs use 400 here; 422 is more specific.
 
-**429 Too Many Requests** — rate limit hit. Usually paired with `Retry-After` header.
+**429 Too Many Requests**: rate limit hit. Usually paired with `Retry-After` header.
 
 ### 5xx Server Errors
 
-**500 Internal Server Error** — something broke on the server. Generic. Don't leak stack traces in 5xx responses.
+**500 Internal Server Error**: something broke on the server. Generic. Don't leak stack traces in 5xx responses.
 
-**502 Bad Gateway** — your reverse proxy (nginx, ALB, Cloudflare) couldn't reach the upstream server. Application is down or unhealthy.
+**502 Bad Gateway**: your reverse proxy (nginx, ALB, Cloudflare) couldn't reach the upstream server. Application is down or unhealthy.
 
-**503 Service Unavailable** — server is intentionally not handling requests. Maintenance mode, or load shed. Include `Retry-After`.
+**503 Service Unavailable**: server is intentionally not handling requests. Maintenance mode, or load shed. Include `Retry-After`.
 
-**504 Gateway Timeout** — proxy reached the upstream but the upstream took too long to respond. Default proxy timeout is often 60 seconds.
+**504 Gateway Timeout**: proxy reached the upstream but the upstream took too long to respond. Default proxy timeout is often 60 seconds.
 
-**507 Insufficient Storage** — used by some APIs (mostly storage services like S3) when a quota is exceeded.
+**507 Insufficient Storage**: used by some APIs (mostly storage services like S3) when a quota is exceeded.
 
 ## The 10 that distinguish good APIs from bad
 
@@ -170,7 +170,7 @@ If your service depends on another service that's down:
 - Use **502** if you're acting as a proxy
 - Use **503** if you're an app whose dependency is down
 
-Don't return 500. 500 implies "we don't know what happened." You know what happened — your DB is down. Be specific.
+Don't return 500. 500 implies "we don't know what happened." You know what happened, your DB is down. Be specific.
 
 ### Async operation: 202 + status endpoint
 
@@ -239,7 +239,7 @@ A JSON API client expects JSON. Returning a 404 HTML page on a missing endpoint 
   304  not modified (cache)
   307  temporary, preserve method
 
-4xx — Client error
+4xx, Client error
   400  bad request (parse error)
   401  not authenticated
   403  authenticated, not allowed
@@ -251,7 +251,7 @@ A JSON API client expects JSON. Returning a 404 HTML page on a missing endpoint 
   422  validation error
   429  rate limited
 
-5xx — Server error
+5xx, Server error
   500  generic, don't know what
   502  bad gateway (upstream down)
   503  service unavailable (maintenance)
@@ -263,7 +263,7 @@ A JSON API client expects JSON. Returning a 404 HTML page on a missing endpoint 
 1. **For client code**: handle 401 differently from 403. Trigger retries on 5xx, not 4xx. Show validation errors from 422.
 2. **For server code**: use the most specific status code that fits. Don't reach for 500 unless something is genuinely broken.
 3. **For ad-hoc reference**: paste a number into [HTTP Status Codes](/web-tools/http-status-codes/) for the official meaning.
-4. **For testing APIs**: [HTTP Request Builder](/web-tools/http-request-builder/) — send a request and inspect the actual status code returned.
+4. **For testing APIs**: [HTTP Request Builder](/web-tools/http-request-builder/), send a request and inspect the actual status code returned.
 5. **For documentation**: list expected status codes per endpoint. Don't make clients guess.
 
 The summary, after years of debugging APIs: getting status codes right is one of those things that costs nothing once and saves hours later.
@@ -272,7 +272,7 @@ The summary, after years of debugging APIs: getting status codes right is one of
 
 **Related tools on DevTools Online:**
 
-- [HTTP Status Codes](/web-tools/http-status-codes/) — searchable reference for all codes
-- [HTTP Request Builder](/web-tools/http-request-builder/) — test endpoints, see real status codes
-- [HTTP Security Headers](/web-tools/http-headers-builder/) — pair with proper status codes for full HTTP hygiene
-- [User-Agent Parser](/web-tools/user-agent-parser/) — for understanding which clients are seeing your responses
+- [HTTP Status Codes](/web-tools/http-status-codes/), searchable reference for all codes
+- [HTTP Request Builder](/web-tools/http-request-builder/), test endpoints, see real status codes
+- [HTTP Security Headers](/web-tools/http-headers-builder/), pair with proper status codes for full HTTP hygiene
+- [User-Agent Parser](/web-tools/user-agent-parser/), for understanding which clients are seeing your responses

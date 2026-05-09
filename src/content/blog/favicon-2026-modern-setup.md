@@ -18,9 +18,9 @@ cover: "/og-image.svg"
 excerpt: "A single 16x16 ICO file used to be enough. Now you need PNG, SVG, multiple sizes, manifest entries, and a dark-mode variant. The good news: it's still ten lines of HTML."
 ---
 
-The `/favicon.ico` file dates from 1999. For 20 years, dropping a 16x16 ICO at the root was the entire favicon setup. By 2026 that's not enough — modern browsers want SVG for scaling, iOS wants Apple Touch Icons, Android wants manifest icons, and dark mode users would like a logo that doesn't disappear on a dark tab bar.
+Stop using "favicon generator" sites that output a folder of 16 PNG files. It is **2026**. We have SVG. We have *one* image format that scales infinitely, weighs 1KB, and supports dark mode via CSS media queries. And yet half the sites I open are still loading 9 different rasterized icon sizes because someone clicked "Generate" on a tool from 2014 that hasn't been updated.
 
-The good news: the modern setup is still small. The bad news: 90% of "favicon generator" tools online produce a 1990s-shaped file dump that doesn't take advantage of any of it.
+The modern favicon stack is **five `<link>` tags** and a `manifest.json`. Not 30 tags. Not a folder of 47 PNG files. Five. Below is the setup, what each line does, and which obsolete advice you should ignore.
 
 ## The minimum 2026 favicon stack
 
@@ -36,14 +36,14 @@ Inside `<head>`:
 
 Files at the root:
 
-- `/favicon.svg` — modern browsers use this
-- `/favicon-32.png` and `/favicon-16.png` — fallbacks for browsers that don't support SVG icons
-- `/apple-touch-icon.png` — 180×180, for iOS home screen
-- `/manifest.json` — PWA-style icon manifest
+- `/favicon.svg`, modern browsers use this
+- `/favicon-32.png` and `/favicon-16.png`, fallbacks for browsers that don't support SVG icons
+- `/apple-touch-icon.png`, 180×180, for iOS home screen
+- `/manifest.json`, PWA-style icon manifest
 
 That's the whole setup. Five files, five `<link>` tags.
 
-Generate the entire bundle from a single image with [Favicon Generator](/generator-tools/favicon-generator/) — uploads stay in your browser, output is downloadable as a zip.
+Generate the entire bundle from a single image with [Favicon Generator](/generator-tools/favicon-generator/), uploads stay in your browser, output is downloadable as a zip.
 
 ## Why SVG matters
 
@@ -51,7 +51,7 @@ SVG icons:
 
 - **Scale to any size** without loss
 - **Support dark mode** via `prefers-color-scheme` media queries
-- **Are tiny** — usually 1-3KB
+- **Are tiny**: usually 1-3KB
 
 Browser support since 2022 is universal in modern browsers (Chrome 80+, Firefox 41+, Safari 16.4+). For older browsers, the PNG fallback handles them.
 
@@ -133,7 +133,7 @@ iOS doesn't use the manifest as much (Safari has its own conventions). For iOS h
 
 180×180 is the right size for iPhone. iPad uses 152×152, but 180 scales down fine.
 
-iOS doesn't honor SVG for touch icons. PNG only. iOS also applies a rounded-corner mask automatically — make your design with that in mind. Don't add rounded corners yourself; iOS will add them, and you'll get double rounding.
+iOS doesn't honor SVG for touch icons. PNG only. iOS also applies a rounded-corner mask automatically, make your design with that in mind. Don't add rounded corners yourself; iOS will add them, and you'll get double rounding.
 
 ## Browser tab quirks
 
@@ -158,7 +158,7 @@ Windows tile icons (for "pin to taskbar / start menu"):
 
 Largely legacy (Windows 8 era), but still respected by Edge for some integrations. Skip unless you have specific Windows users.
 
-## Sizes — what's actually used in 2026
+## Sizes, what's actually used in 2026
 
 Forget the old "20 favicon sizes" generator output. Here's what each size is actually for:
 
@@ -172,7 +172,7 @@ Forget the old "20 favicon sizes" generator output. Here's what each size is act
 | 512×512 | PWA splash, Android | Yes (manifest) |
 | SVG | Modern browsers | Yes (universal) |
 
-Six sizes. The old advice to provide 16, 32, 48, 96, 144, 152, 192, 256, 512 + ICO is obsolete — modern systems pick from the 6 above.
+Six sizes. The old advice to provide 16, 32, 48, 96, 144, 152, 192, 256, 512 + ICO is obsolete, modern systems pick from the 6 above.
 
 ## .ICO is mostly historical
 
@@ -209,7 +209,7 @@ Without a manifest, "add to home screen" produces a generic icon. With one, the 
 
 ### Using PNG only, no SVG
 
-PNG looks crisp at one size only. On high-DPI screens, larger tab sizes, or split-screen views, the icon gets pixelated. SVG fixes this — it's tiny, modern, and supported.
+PNG looks crisp at one size only. On high-DPI screens, larger tab sizes, or split-screen views, the icon gets pixelated. SVG fixes this, it's tiny, modern, and supported.
 
 ### Including a `<link rel="shortcut icon">`
 
@@ -231,8 +231,8 @@ Before launching:
 ## Recommended workflow
 
 1. **Design once** at 512×512 (Figma, Illustrator, anything). Export as SVG and PNG.
-2. **Generate the bundle** with [Favicon Generator](/generator-tools/favicon-generator/) — upload your SVG, get all sizes.
-3. **Wire 5 link tags** in `<head>`. Don't add 30 — the modern stack is smaller.
+2. **Generate the bundle** with [Favicon Generator](/generator-tools/favicon-generator/), upload your SVG, get all sizes.
+3. **Wire 5 link tags** in `<head>`. Don't add 30, the modern stack is smaller.
 4. **Add a manifest.json** with at least 192 and 512 icons.
 5. **Test dark mode** by toggling browser theme. Adjust SVG colors if needed.
 
@@ -242,7 +242,7 @@ The takeaway: the favicon is the smallest visible piece of your brand, and most 
 
 **Related tools on DevTools Online:**
 
-- [Favicon Generator](/generator-tools/favicon-generator/) — generate the full bundle
-- [Color Converter](/color-tools/color-converter/) — pick brand colors for theme-color
-- [SVG Previewer](/web-tools/svg-icons/) — preview SVG icons before deploy
-- [HTML Minifier](/formatter-tools/html-minifier/) — minify the final markup
+- [Favicon Generator](/generator-tools/favicon-generator/), generate the full bundle
+- [Color Converter](/color-tools/color-converter/), pick brand colors for theme-color
+- [SVG Previewer](/web-tools/svg-icons/), preview SVG icons before deploy
+- [HTML Minifier](/formatter-tools/html-minifier/), minify the final markup

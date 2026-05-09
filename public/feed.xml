@@ -5,7 +5,7 @@
     <link>https://devtoolsonline.dev/blog/</link>
     <description>Tutorials, guides, and deep dives on JSON, SQL, JWT, encoding, security, and the developer tools we build.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 09 May 2026 04:42:17 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 09 May 2026 09:01:26 GMT</lastBuildDate>
     <atom:link href="https://devtoolsonline.dev/feed.xml" rel="self" type="application/rss+xml" />
 
     <item>
@@ -24,7 +24,7 @@
       <link>https://devtoolsonline.dev/blog/uuid-v4-vs-v7/</link>
       <guid isPermaLink="true">https://devtoolsonline.dev/blog/uuid-v4-vs-v7/</guid>
       <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
-      <description>UUID v4 dominated for 15 years because it was &apos;good enough.&apos; UUID v7 fixes the one real problem v4 had — random UUIDs are terrible primary keys. The migration is overdue.</description>
+      <description>UUID v4 dominated for 15 years because it was &apos;good enough.&apos; UUID v7 fixes the one real problem v4 had, random UUIDs are terrible primary keys. The migration is overdue.</description>
       <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
       <category>Identifiers</category>
       <category>Database</category>
@@ -57,7 +57,7 @@
       <link>https://devtoolsonline.dev/blog/totp-2fa-explained/</link>
       <guid isPermaLink="true">https://devtoolsonline.dev/blog/totp-2fa-explained/</guid>
       <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
-      <description>TOTP looks like magic — six digits that match between your phone and the server, refreshing every 30 seconds. The actual algorithm fits in 20 lines of code, and the failure modes are surprisingly mundane.</description>
+      <description>TOTP looks like magic, six digits that match between your phone and the server, refreshing every 30 seconds. The actual algorithm fits in 20 lines of code, and the failure modes are surprisingly mundane.</description>
       <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
       <category>Security</category>
       <category>Crypto</category>
@@ -111,7 +111,7 @@
       <link>https://devtoolsonline.dev/blog/qr-codes-for-developers/</link>
       <guid isPermaLink="true">https://devtoolsonline.dev/blog/qr-codes-for-developers/</guid>
       <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
-      <description>QR codes are everywhere, and most teams generate them with no thought. The defaults are usually fine. The 5% of cases where you need to think — printed labels, branded codes, dynamic redirects — is where this post earns its keep.</description>
+      <description>QR codes are everywhere, and most teams generate them with no thought. The defaults are usually fine. The 5% of cases where you need to think, printed labels, branded codes, dynamic redirects, is where this post earns its keep.</description>
       <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
       <category>QR Codes</category>
       <category>Generators</category>
@@ -140,11 +140,11 @@
       <category>Tutorial</category>
     </item>
     <item>
-      <title>MD5 Is Dead. SHA-256, SHA-512, BCrypt — Picking the Right Hash for the Job</title>
+      <title>MD5 Is Dead. SHA-256, SHA-512, BCrypt. Picking the Right Hash for the Job</title>
       <link>https://devtoolsonline.dev/blog/md5-sha256-bcrypt-which-hash/</link>
       <guid isPermaLink="true">https://devtoolsonline.dev/blog/md5-sha256-bcrypt-which-hash/</guid>
       <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
-      <description>MD5 still has uses in 2026. Hashing passwords isn&apos;t one of them. Pick the algorithm based on what you&apos;re protecting against — collisions, brute force, or just integrity.</description>
+      <description>MD5 still has uses in 2026. Hashing passwords isn&apos;t one of them. Pick the algorithm based on what you&apos;re protecting against, collisions, brute force, or just integrity.</description>
       <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
       <category>Security</category>
       <category>Crypto</category>
@@ -177,7 +177,7 @@
       <link>https://devtoolsonline.dev/blog/json-to-typescript-interfaces/</link>
       <guid isPermaLink="true">https://devtoolsonline.dev/blog/json-to-typescript-interfaces/</guid>
       <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
-      <description>Hand-typing TypeScript interfaces from a 4KB API payload is the work of a punished engineer. There are three good ways to skip that — pick the one that fits your trust level for the upstream API.</description>
+      <description>Hand-typing TypeScript interfaces from a 4KB API payload is the work of a punished engineer. There are three good ways to skip that, pick the one that fits your trust level for the upstream API.</description>
       <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
       <category>JSON</category>
       <category>TypeScript</category>
@@ -228,7 +228,7 @@
       <category>Tutorial</category>
     </item>
     <item>
-      <title>Generating ER Diagrams from SQL Schemas — A 2026 Workflow</title>
+      <title>Generating ER Diagrams from SQL Schemas: A 2026 Workflow</title>
       <link>https://devtoolsonline.dev/blog/erd-from-sql-workflow/</link>
       <guid isPermaLink="true">https://devtoolsonline.dev/blog/erd-from-sql-workflow/</guid>
       <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
@@ -307,7 +307,7 @@
       <link>https://devtoolsonline.dev/blog/base64-demystified/</link>
       <guid isPermaLink="true">https://devtoolsonline.dev/blog/base64-demystified/</guid>
       <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
-      <description>Base64 is the duct tape of the web. It&apos;s everywhere, almost nobody understands it, and engineers keep using it for the wrong reasons. Here&apos;s what it actually is.</description>
+      <description>Stop using Base64 to &apos;hide&apos; your API keys. It&apos;s not encryption. It&apos;s not compression. It&apos;s a 33% size penalty in exchange for ASCII safety, and that&apos;s all it&apos;ll ever be.</description>
       <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
       <category>Encoding</category>
       <category>Reference</category>
@@ -317,14 +317,14 @@
       <link>https://devtoolsonline.dev/blog/aes-encryption-explained/</link>
       <guid isPermaLink="true">https://devtoolsonline.dev/blog/aes-encryption-explained/</guid>
       <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
-      <description>AES is the symmetric encryption standard. AES-256-GCM is what you should reach for. The math is hard, the usage is short — half a dozen rules and you&apos;ll avoid the classic mistakes.</description>
+      <description>AES is the symmetric encryption standard. AES-256-GCM is what you should reach for. The math is hard, the usage is short, half a dozen rules and you&apos;ll avoid the classic mistakes.</description>
       <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
       <category>Security</category>
       <category>Crypto</category>
       <category>Tutorial</category>
     </item>
     <item>
-      <title>JSON Formatting in 2026 — Online vs IDE vs CLI Tools Compared</title>
+      <title>JSON Formatting in 2026: Online vs IDE vs CLI Tools Compared</title>
       <link>https://devtoolsonline.dev/blog/json-formatting-2026/</link>
       <guid isPermaLink="true">https://devtoolsonline.dev/blog/json-formatting-2026/</guid>
       <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
