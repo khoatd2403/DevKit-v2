@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DevTools Online Blog</title>
+    <link>https://devtoolsonline.dev/blog/</link>
+    <description>Tutorials, guides, and deep dives on JSON, SQL, JWT, encoding, security, and the developer tools we build.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 09 May 2026 04:42:17 GMT</lastBuildDate>
+    <atom:link href="https://devtoolsonline.dev/feed.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>WCAG Color Contrast: Passing AA, AAA, and What Designers Get Wrong</title>
+      <link>https://devtoolsonline.dev/blog/wcag-color-contrast-aa-aaa/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/wcag-color-contrast-aa-aaa/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Light grey on white is the most common accessibility failure. Twenty percent of users can&apos;t read it. The fix is a 30-second check, but you have to know what to check for.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Accessibility</category>
+      <category>Color</category>
+      <category>Reference</category>
+    </item>
+    <item>
+      <title>UUID v4 vs v7: Why You Probably Want v7 in New Code</title>
+      <link>https://devtoolsonline.dev/blog/uuid-v4-vs-v7/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/uuid-v4-vs-v7/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>UUID v4 dominated for 15 years because it was &apos;good enough.&apos; UUID v7 fixes the one real problem v4 had — random UUIDs are terrible primary keys. The migration is overdue.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Identifiers</category>
+      <category>Database</category>
+      <category>Comparison</category>
+    </item>
+    <item>
+      <title>User-Agent Strings Are a Mess: Parsing Them Without Pulling Your Hair Out</title>
+      <link>https://devtoolsonline.dev/blog/user-agent-strings-mess/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/user-agent-strings-mess/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>The User-Agent string is a 30-year-old archaeology site. Every browser still claims to be Mozilla 5.0. Chrome claims to be Safari. The reasons are historical and the parsing is a tax we still pay.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>HTTP</category>
+      <category>Web</category>
+      <category>Problem-solving</category>
+    </item>
+    <item>
+      <title>URL Encoding Cheatsheet: %20 vs +, Percent-Encoding, Common Pitfalls</title>
+      <link>https://devtoolsonline.dev/blog/url-encoding-cheatsheet/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/url-encoding-cheatsheet/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>URL encoding looks like one rule until you realize space is %20 in paths and + in query strings, and there are four different JavaScript functions and they all do slightly different things.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Encoding</category>
+      <category>Web</category>
+      <category>Reference</category>
+    </item>
+    <item>
+      <title>TOTP and 2FA: How 6-Digit Codes That Refresh Every 30 Seconds Work</title>
+      <link>https://devtoolsonline.dev/blog/totp-2fa-explained/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/totp-2fa-explained/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>TOTP looks like magic — six digits that match between your phone and the server, refreshing every 30 seconds. The actual algorithm fits in 20 lines of code, and the failure modes are surprisingly mundane.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Security</category>
+      <category>Crypto</category>
+      <category>Tutorial</category>
+    </item>
+    <item>
+      <title>SSL/TLS Certificate Chains: Why Your Cert Works in Chrome but Fails in curl</title>
+      <link>https://devtoolsonline.dev/blog/ssl-certificate-chains-debugging/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/ssl-certificate-chains-debugging/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Browsers fix incomplete certificate chains for you. curl, Java, Python, and most server-to-server tools don&apos;t. Half the &apos;TLS works in browser but fails everywhere else&apos; bugs trace back to a missing intermediate cert.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>TLS</category>
+      <category>Networking</category>
+      <category>Problem-solving</category>
+    </item>
+    <item>
+      <title>SQL Formatting: From Unreadable Queries to Pull-Request-Ready Code</title>
+      <link>https://devtoolsonline.dev/blog/sql-formatting-readable-queries/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/sql-formatting-readable-queries/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Most SQL is unreadable because nobody formats it. Run it through a formatter once, agree on a style, and your team&apos;s queries become reviewable code instead of write-only blobs.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>SQL</category>
+      <category>Formatting</category>
+      <category>Tutorial</category>
+    </item>
+    <item>
+      <title>Generating Secure Passwords: Entropy, Length, and the Math That Matters</title>
+      <link>https://devtoolsonline.dev/blog/secure-password-entropy/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/secure-password-entropy/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Your password isn&apos;t secure because it&apos;s long. It&apos;s secure because it&apos;s unguessable. The math that connects &apos;unguessable&apos; to &apos;how many characters&apos; is simpler than you&apos;d think.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Security</category>
+      <category>Reference</category>
+    </item>
+    <item>
+      <title>Regex in 2026: When to Use It, When You Should Have Used a Parser</title>
+      <link>https://devtoolsonline.dev/blog/regex-2026-when-to-use/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/regex-2026-when-to-use/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>If you&apos;ve ever spent two days debugging a regex that &apos;worked on the test cases,&apos; this post is for you. Regex has a sweet spot. Outside it, every problem is harder than the regex you&apos;re tempted to write.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Regex</category>
+      <category>Programming</category>
+      <category>Comparison</category>
+    </item>
+    <item>
+      <title>QR Codes for Developers: Error Correction, SVG vs PNG, and the Math Inside</title>
+      <link>https://devtoolsonline.dev/blog/qr-codes-for-developers/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/qr-codes-for-developers/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>QR codes are everywhere, and most teams generate them with no thought. The defaults are usually fine. The 5% of cases where you need to think — printed labels, branded codes, dynamic redirects — is where this post earns its keep.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>QR Codes</category>
+      <category>Generators</category>
+      <category>Reference</category>
+    </item>
+    <item>
+      <title>Prettier vs ESLint: Stop Confusing Formatting with Linting</title>
+      <link>https://devtoolsonline.dev/blog/prettier-vs-eslint/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/prettier-vs-eslint/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Prettier and ESLint do different jobs. Half the JavaScript ecosystem treats them as alternatives. The other half configures both badly and they fight. Here&apos;s how to wire them up so they don&apos;t.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Tooling</category>
+      <category>Formatting</category>
+      <category>Comparison</category>
+    </item>
+    <item>
+      <title>Mermaid Diagrams in Documentation: Beyond ASCII Art</title>
+      <link>https://devtoolsonline.dev/blog/mermaid-diagrams-docs/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/mermaid-diagrams-docs/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>ASCII art belongs in 1995. Mermaid diagrams are real diagrams, written as text, rendered automatically by GitHub, GitLab, Notion, and every modern docs platform. Here&apos;s the practical guide.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Documentation</category>
+      <category>Tools</category>
+      <category>Tutorial</category>
+    </item>
+    <item>
+      <title>MD5 Is Dead. SHA-256, SHA-512, BCrypt — Picking the Right Hash for the Job</title>
+      <link>https://devtoolsonline.dev/blog/md5-sha256-bcrypt-which-hash/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/md5-sha256-bcrypt-which-hash/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>MD5 still has uses in 2026. Hashing passwords isn&apos;t one of them. Pick the algorithm based on what you&apos;re protecting against — collisions, brute force, or just integrity.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Security</category>
+      <category>Crypto</category>
+      <category>Comparison</category>
+    </item>
+    <item>
+      <title>JWT Decoded: How Tokens Work and Why Invalid Signature Happens</title>
+      <link>https://devtoolsonline.dev/blog/jwt-decoded-debugging/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/jwt-decoded-debugging/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>A JWT is three Base64URL strings separated by dots. The first two are JSON. The third is a signature. About half the JWT bugs in production come from people forgetting that last detail.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Encoding</category>
+      <category>Security</category>
+      <category>Problem-solving</category>
+    </item>
+    <item>
+      <title>Validating JSON in 2026: JSON Schema, AJV, and the Browser-Native Approach</title>
+      <link>https://devtoolsonline.dev/blog/json-validation-2026/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/json-validation-2026/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Compile-time TypeScript types catch the typos. Runtime validators catch what the API actually sent. The trick is knowing which validator to reach for, and when validation belongs at the boundary.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>JSON</category>
+      <category>Validation</category>
+      <category>Tutorial</category>
+    </item>
+    <item>
+      <title>JSON to TypeScript: Generating Type-Safe Interfaces from API Responses</title>
+      <link>https://devtoolsonline.dev/blog/json-to-typescript-interfaces/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/json-to-typescript-interfaces/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Hand-typing TypeScript interfaces from a 4KB API payload is the work of a punished engineer. There are three good ways to skip that — pick the one that fits your trust level for the upstream API.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>JSON</category>
+      <category>TypeScript</category>
+      <category>Tutorial</category>
+    </item>
+    <item>
+      <title>Why Your JSON Has a BOM (Byte Order Mark) and How to Strip It</title>
+      <link>https://devtoolsonline.dev/blog/json-bom-byte-order-mark/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/json-bom-byte-order-mark/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Your JSON parser fails at character 0 and the error message tells you nothing. Nine times out of ten, it&apos;s a UTF-8 BOM that some Windows tool added when you weren&apos;t looking.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>JSON</category>
+      <category>Encoding</category>
+      <category>Problem-solving</category>
+    </item>
+    <item>
+      <title>HTTP Status Codes: The Ones You Actually Need to Know in 2026</title>
+      <link>https://devtoolsonline.dev/blog/http-status-codes-2026/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/http-status-codes-2026/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>There are 60+ HTTP status codes. About 25 matter. About 10 are the difference between a clear API and a confusing one. Here&apos;s the practical map.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>HTTP</category>
+      <category>Web</category>
+      <category>Reference</category>
+    </item>
+    <item>
+      <title>HTML Entity Encoding: A Practical Guide to Avoiding XSS</title>
+      <link>https://devtoolsonline.dev/blog/html-entity-encoding-xss/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/html-entity-encoding-xss/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Modern frameworks escape HTML for you in JSX, templates, and components. They don&apos;t escape it in URL attributes, inline styles, or anything you build with innerHTML. That&apos;s where XSS lives.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Encoding</category>
+      <category>Security</category>
+      <category>Tutorial</category>
+    </item>
+    <item>
+      <title>Favicon in 2026: Why /favicon.ico Isn&apos;t Enough Anymore</title>
+      <link>https://devtoolsonline.dev/blog/favicon-2026-modern-setup/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/favicon-2026-modern-setup/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>A single 16x16 ICO file used to be enough. Now you need PNG, SVG, multiple sizes, manifest entries, and a dark-mode variant. The good news: it&apos;s still ten lines of HTML.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Web</category>
+      <category>Generators</category>
+      <category>Tutorial</category>
+    </item>
+    <item>
+      <title>Generating ER Diagrams from SQL Schemas — A 2026 Workflow</title>
+      <link>https://devtoolsonline.dev/blog/erd-from-sql-workflow/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/erd-from-sql-workflow/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Database design used to start with a hand-drawn ER diagram. In 2026, most teams write SQL first and generate the diagram. Both approaches work. Knowing when to use which is the trick.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>SQL</category>
+      <category>Documentation</category>
+      <category>Tutorial</category>
+    </item>
+    <item>
+      <title>Reading DNS Records Like a Sysadmin: A, AAAA, CNAME, MX, TXT Explained</title>
+      <link>https://devtoolsonline.dev/blog/dns-records-explained/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/dns-records-explained/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>DNS isn&apos;t black magic. It&apos;s a public lookup table with a dozen record types, each answering a specific question. If you know which question each one answers, you can debug 90% of DNS issues.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>DNS</category>
+      <category>Networking</category>
+      <category>Reference</category>
+    </item>
+    <item>
+      <title>CSV vs JSON: When to Use Which for Data Exchange</title>
+      <link>https://devtoolsonline.dev/blog/csv-vs-json/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/csv-vs-json/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Engineers love JSON. Analysts ask for CSV. Both groups are right, for different reasons. Here&apos;s how to pick the format that won&apos;t waste anyone&apos;s afternoon.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>JSON</category>
+      <category>CSV</category>
+      <category>Comparison</category>
+    </item>
+    <item>
+      <title>CSS Gradients Beyond linear-gradient(): Conic, Radial, and Color Spaces</title>
+      <link>https://devtoolsonline.dev/blog/css-gradients-modern/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/css-gradients-modern/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>linear-gradient() is the gradient most teams know about. CSS has three more gradient types and a new color-space system that produces dramatically smoother gradients. Most teams don&apos;t use them.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>CSS</category>
+      <category>Color</category>
+      <category>Tutorial</category>
+    </item>
+    <item>
+      <title>Cron Expressions Decoded: Reading 0 0 * * * Without Cheat Sheets</title>
+      <link>https://devtoolsonline.dev/blog/cron-expressions-decoded/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/cron-expressions-decoded/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Cron is the scheduling syntax that survived 50 years because it&apos;s compact and ubiquitous. Once you know the five fields and three special characters, you can read any cron line at a glance.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Scheduling</category>
+      <category>Reference</category>
+    </item>
+    <item>
+      <title>CIDR Notation Explained: /24, /16, and the IP Math You Forgot</title>
+      <link>https://devtoolsonline.dev/blog/cidr-notation-explained/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/cidr-notation-explained/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>CIDR is just IP address ranges in shorthand. /24 means 256 addresses, /16 means 65,536, and the math for everything in between is the same boring power of two.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Networking</category>
+      <category>Reference</category>
+    </item>
+    <item>
+      <title>BCrypt vs Argon2: Password Hashing in 2026</title>
+      <link>https://devtoolsonline.dev/blog/bcrypt-vs-argon2/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/bcrypt-vs-argon2/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Both algorithms are good. The choice in 2026 is less about cryptographic merit and more about library maturity, parameter tuning, and whether you&apos;re willing to migrate an existing user base.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Security</category>
+      <category>Crypto</category>
+      <category>Comparison</category>
+    </item>
+    <item>
+      <title>Base64 Demystified: When to Use It, When NOT to Use It</title>
+      <link>https://devtoolsonline.dev/blog/base64-demystified/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/base64-demystified/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>Base64 is the duct tape of the web. It&apos;s everywhere, almost nobody understands it, and engineers keep using it for the wrong reasons. Here&apos;s what it actually is.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Encoding</category>
+      <category>Reference</category>
+    </item>
+    <item>
+      <title>AES Encryption Explained for Developers Who Don&apos;t Want a PhD in Math</title>
+      <link>https://devtoolsonline.dev/blog/aes-encryption-explained/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/aes-encryption-explained/</guid>
+      <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+      <description>AES is the symmetric encryption standard. AES-256-GCM is what you should reach for. The math is hard, the usage is short — half a dozen rules and you&apos;ll avoid the classic mistakes.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>Security</category>
+      <category>Crypto</category>
+      <category>Tutorial</category>
+    </item>
+    <item>
+      <title>JSON Formatting in 2026 — Online vs IDE vs CLI Tools Compared</title>
+      <link>https://devtoolsonline.dev/blog/json-formatting-2026/</link>
+      <guid isPermaLink="true">https://devtoolsonline.dev/blog/json-formatting-2026/</guid>
+      <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
+      <description>Three ways to format JSON in 2026: online formatters, IDE plugins, and CLI tools. Each has trade-offs around privacy, speed, and integration. Here&apos;s when to use which.</description>
+      <author>noreply@devtoolsonline.dev (DevTools Online Team)</author>
+      <category>JSON</category>
+      <category>Tools</category>
+      <category>Tutorial</category>
+    </item>
+  </channel>
+</rss>
