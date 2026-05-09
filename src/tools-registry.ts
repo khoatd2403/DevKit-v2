@@ -217,11 +217,11 @@ export const tools: Tool[] = [
     description: 'Test and debug regular expressions with live highlighting online',
     category: 'string',
     icon: '🎯',
-    tags: ['regex', 'regexp', 'test', 'pattern', 'match', 'online'],
+    tags: ['regex', 'regexp', 'test', 'pattern', 'match', 'online', 'javascript', 'js', 'tester', 'capture group', 'flags'],
     popular: true,
     supportsShare: true,
-    seoTitle: 'Regex Tester — Test Regular Expressions Live | DevTools Online',
-    seoDescription: 'Test and debug regular expressions online with real-time match highlighting. Supports flags, capture groups, replace preview — free, no signup.',
+    seoTitle: 'JavaScript Regex Tester Online — Live Match & Capture Groups | DevTools Online',
+    seoDescription: 'Test JavaScript regex patterns instantly in your browser. Live match highlighting, named capture groups, replace preview, all flags. Works with Unicode and Vietnamese characters. Free, no signup.',
   },
 
   // Number
@@ -379,10 +379,10 @@ export const tools: Tool[] = [
     description: 'Format and beautify SQL queries online — free SQL formatter',
     category: 'formatter',
     icon: '🗄️',
-    tags: ['sql', 'format', 'query', 'database', 'online', 'beautify'],
+    tags: ['sql', 'format', 'query', 'database', 'online', 'beautify', 'mysql', 'postgresql', 'tsql', 'sql server', 'beautifier'],
     supportsShare: true,
-    seoTitle: 'SQL Formatter & Beautifier | DevTools Online',
-    seoDescription: 'Format and beautify SQL queries online — supports MySQL, PostgreSQL, SQL Server, T-SQL. Configurable indentation, keyword case — free, no signup.',
+    seoTitle: 'SQL Formatter Online — MySQL, PostgreSQL, T-SQL Free | DevTools Online',
+    seoDescription: 'Format SQL in 1 second, right in your browser. Supports MySQL, PostgreSQL, SQL Server and T-SQL. Configurable indent and keyword case. Your queries never leave your device. Free, no signup.',
   },
   {
     id: 'xml-formatter',
