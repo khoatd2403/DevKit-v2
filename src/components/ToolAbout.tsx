@@ -13,9 +13,10 @@ interface ToolAboutProps {
   onSupport?: () => void;
   howToUse?: string;
   commonErrors?: string;
+  longDescription?: string;
 }
 
-export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category, onSupport, howToUse, commonErrors }) => {
+export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category, onSupport, howToUse, commonErrors, longDescription }) => {
   const { t, lang } = useLang();
   const [userRating, setUserRating] = usePersistentState<number>(`devkit-rating-${toolId}`, 0);
 
@@ -91,7 +92,11 @@ export const ToolAbout: React.FC<ToolAboutProps> = ({ toolId, toolName, category
     };
   };
 
-  const content = specificContent || getGenericContent();
+  const genericContent = getGenericContent();
+  const content = specificContent || {
+    ...genericContent,
+    ...(longDescription ? { what: longDescription } : {}),
+  };
 
   return (
     <div className="mt-16 pt-12 border-t border-gray-200 dark:border-gray-800">

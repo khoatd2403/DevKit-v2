@@ -407,6 +407,7 @@ export default function ToolPage({ onFeedback }: { onFeedback: (name?: string) =
                   category={toolMeta.category}
                   howToUse={toolMeta.howToUse}
                   commonErrors={toolMeta.commonErrors}
+                  longDescription={toolMeta.longDescription}
                   onSupport={() => onFeedback(toolMeta.name)}
                 />
               </div>

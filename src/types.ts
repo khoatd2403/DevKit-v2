@@ -20,6 +20,8 @@ export interface Tool {
   suggestedTools?: string[];
   howToUse?: string;
   commonErrors?: string;
+  /** 2–3 sentence unique description for the "What is X?" section on the tool page. */
+  longDescription?: string;
 }
 
 export interface Category {

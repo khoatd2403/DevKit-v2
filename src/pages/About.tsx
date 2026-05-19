@@ -82,53 +82,29 @@ export default function About() {
       <h2>Who builds it</h2>
       <p>
         DevTools Online is an independent project maintained by a small team of working software
-        engineers. We started building these tools to solve our own problems — formatting JSON in a
-        meeting, decoding a JWT during an incident, generating a UUID for a migration script — and
-        decided to keep them free for everyone.
+        engineers based in Vietnam. We started building these tools to solve our own daily problems
+        — formatting JSON in a meeting, decoding a JWT during an incident, generating a UUID for a
+        migration script — and decided to keep them free and open for every developer.
       </p>
       <p>
-        Source code, issues, and contributions are welcome on{' '}
-        <a
-          href="https://github.com/khoatd2403/DevKit-v2"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub
-        </a>
-        .
+        The project launched in 2024 and has grown to 125+ tools across 16 categories, used by
+        tens of thousands of developers each month. Every tool is hand-crafted, tested, and
+        documented by our team before release.
       </p>
 
       <h2>How it's funded</h2>
       <p>
-        The Service is funded primarily by:
-      </p>
-      <ul>
-        <li>
-          <strong>Display advertising</strong> — non-intrusive ads on listing and landing pages
-          (never inside the tool workspace).
-        </li>
-        <li>
-          <strong>Voluntary support</strong> — readers who want to help can{' '}
-          <a
-            href="https://paypal.me/tranphu0ng"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            support the project on PayPal
-          </a>
-          .
-        </li>
-      </ul>
-      <p>
-        Funding from advertising lets us keep every tool free and avoid building paywalls,
-        registrations, or upsells.
+        The Service is funded primarily by <strong>display advertising</strong> — non-intrusive ads
+        on listing and landing pages, never inside the tool workspace itself.
+        Funding from advertising lets us keep every tool free and avoid paywalls, account
+        requirements, or upsells of any kind.
       </p>
 
       <h2>Get in touch</h2>
       <p>
-        Found a bug, have an idea for a tool, or want to say hi? Visit our{' '}
-        <a href="/contact/">contact page</a> — open a GitHub issue or send feedback right from the
-        app (Ctrl + Shift + F).
+        Found a bug, have a tool idea, or want to say hi? Email us at{' '}
+        <a href="mailto:support@devtoolsonline.dev">support@devtoolsonline.dev</a> or visit
+        our <a href="/contact/">contact page</a> for more options.
       </p>
     </LegalLayout>
   )
